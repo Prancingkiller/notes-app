@@ -12,7 +12,7 @@
 <script>
 import { ref,onMounted } from 'vue'
 import BaseInput from '../components/BaseInput'
-import LogMethods from '../api/resources/NotesMethods'
+import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 export default{
