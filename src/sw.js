@@ -1,3 +1,4 @@
+let db = null;
 const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 const cacheFiles = [
@@ -25,9 +26,9 @@ self.addEventListener('install', evt =>{
                             title: "note1",
                             text: "this is a note"
                         }*/
-                        const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
+                        /* const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
                         const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
-                        const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
+                        const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true}) */
                        //alert(`upgrade is called database name: ${db.name} version : ${db.version}`)
     
                     }
@@ -38,7 +39,7 @@ self.addEventListener('install', evt =>{
                     }
                     //on error
                     request.onerror = e => {
-                        //alert(`error: ${e.target.error} was found `)
+                        alert(`error: ${e.target.error} was found `)
                          
                     }
     });
@@ -75,12 +76,13 @@ caches
 // general strategy when making a request (eg if online try to fetch it
 // from the network with a timeout, if something fails serve from cache)
 self.addEventListener('fetch', evt => {
-  type = evt.request.method;
+  var type = evt.request.method;
 evt.respondWith(
   fromNetwork(evt.request, 10000)
   .catch(() => fromCache(evt.request).then(console.log("da cache")))
 );
 if(type == "GET"){
 evt.waitUntil(update(evt.request))
-};
+}
 });
+console.log(db);
