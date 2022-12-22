@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 self.__WB_MANIFEST
+console.log("aa")
 //Only if you use google analytics and wants to send the offline views
 workbox.googleAnalytics.initialize()
 
