@@ -1,5 +1,5 @@
 let db = null;
-// the cache version gets updated every time there is a new deployment
+self.__WB_MANIFEST
 const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
