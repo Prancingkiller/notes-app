@@ -1,8 +1,8 @@
 <template>
   <h1>Notes!</h1>
   <div class="notesForm">
-    <BaseInput v-model="note.title" label="Title"/>
-    <BaseInput v-model="note.text" label="Text" />
+    <BaseInput v-model="note[0].title" label="Title"/>
+    <BaseInput v-model="note[0].text" label="Text" />
     <button class="btn btn-primary" @click="PostNote">Add Note</button>
     <p>{{ notes }}</p>
     <p>{{ note }}</p>
