@@ -41,7 +41,7 @@ export default{
               
             }
       console.log(db.value);
-      notes.value = await LogMethods.getNotes();
+      notes.value = await LogMethods.getNotes(db.value);
       console.log("online data: "+notes.value)
       const OfflineNotes = await indexedMethods.getDataDb(db.value);
       console.log("offline data: "+OfflineNotes)
