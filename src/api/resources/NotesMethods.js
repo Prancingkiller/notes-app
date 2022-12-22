@@ -16,9 +16,6 @@ export default {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',	
-            headers: {
-              'Content-Type': 'application/json'
-            },	
             contentType: 'application/json',
             body: JSON.stringify(data)
         })
