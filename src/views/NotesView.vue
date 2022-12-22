@@ -12,14 +12,18 @@
   </div>
 </template>
 <script>
-import { ref,onMounted } from 'vue'
+import { ref,onMounted,reactive } from 'vue'
 import BaseInput from '../components/BaseInput'
 import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 export default{
    setup(){
-    const note = ref([{
+    /* const note = ref({
+      title:'',
+      text:''
+    }) */
+    const note = reactive([{
       title:'',
       text:''
     }])
