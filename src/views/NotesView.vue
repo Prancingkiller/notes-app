@@ -43,7 +43,7 @@ export default{
       console.log(db);
       notes.value = await NotesMethods.getNotes();
       console.log("online data: "+notes.value)
-      const OfflineNotes = indexedMethods.getDataDb(db);
+      const OfflineNotes = await indexedMethods.getDataDb(db);
       console.log("offline data: "+OfflineNotes)
       Array.prototype.push.apply(notes.value,JSON.parse(OfflineNotes));
       notes.value = JSON.stringify(notes.value);
