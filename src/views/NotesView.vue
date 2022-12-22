@@ -26,7 +26,20 @@ export default{
     onMounted(WriteNotes)
 
     async function WriteNotes(){
-      db.value = indexedMethods.initiate();
+        const dbName = "notes";
+        const dbVersion = 1;
+        const request = indexedDB.open(dbName,dbVersion);
+         request.onupgradeneeded = e => {
+              db.value = e.target.result
+              const pNotes = db.value.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
+                        const dNotes = db.value.createObjectStore("notes_remove", {keyPath: "toRemove"})
+                        const eventStore = db.value.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
+                
+              }
+        request.onsuccess = e => {
+              db.value = e.target.result
+              
+            }
       console.log(db.value);
       notes.value = await LogMethods.getNotes();
       console.log("online data: "+notes.value)
