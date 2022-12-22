@@ -23,6 +23,7 @@ export default{
     })
     const notes = ref([]);
     const db = indexedMethods.initiate();
+    console.log(db);
     onMounted(WriteNotes)
 
     async function WriteNotes(){
@@ -35,7 +36,7 @@ export default{
       console.log(notes.value)
     }
 
-    return{note,notes,db}
+    return{note,notes}
   },
   components:{
     BaseInput,
