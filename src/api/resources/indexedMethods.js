@@ -1,6 +1,6 @@
 export default{
     name:"indexedMethods",
-    async initiate(){
+    initiate(){
         var db = null;
         const dbName = "notes";
         const dbVersion = 1;
@@ -16,7 +16,6 @@ export default{
               db = e.target.result
               
             }
-            return db;
     },
     getDataDb(db){
       return new Promise((resolve,reject)=>{

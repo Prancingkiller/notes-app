@@ -22,15 +22,15 @@ export default{
       text:''
     })
     const notes = ref([]); 
-    let db;
+    const db = ref({});
     onMounted(WriteNotes)
 
     async function WriteNotes(){
-      db = await indexedMethods.initiate();
-      console.log(db);
+      db.value = indexedMethods.initiate();
+      console.log(db.value);
       notes.value = await LogMethods.getNotes();
       console.log("online data: "+notes.value)
-      const OfflineNotes = await indexedMethods.getDataDb(db);
+      const OfflineNotes = await indexedMethods.getDataDb(db.value);
       console.log("offline data: "+OfflineNotes)
       Array.prototype.push.apply(notes.value,JSON.parse(OfflineNotes));
       notes.value = JSON.stringify(notes.value);
