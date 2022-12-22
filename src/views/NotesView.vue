@@ -18,10 +18,10 @@ import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 export default{
    setup(){
-    const note = ref({
+    const note = ref([{
       title:'',
       text:''
-    })
+    }])
     const notes = ref([]); 
     onMounted(ShowNotes)
 
@@ -37,7 +37,7 @@ export default{
     }
     async function PostNote(){
 
-      if(await NotesMethods.postNote(note.value)==false){
+      if(await NotesMethods.postNote(note.value[0])==false){
         console.log("sei offline!")
       }
       else {
