@@ -9,5 +9,23 @@ export default {
         });
         const result = await response.json();
         return result;
+    },
+
+    async postNotes(data){
+        const response  = await fetch('api/add2', {
+            method: 'POST',	
+            headers: {
+              'Content-Type': 'application/json'
+            },	
+            contentType: 'application/json',
+            body: JSON.stringify(data)
+        })
+        if(response.ok){
+            const result = await response.json();
+            return result;
+        }
+        else{
+            return false;
+        }
     }
 }

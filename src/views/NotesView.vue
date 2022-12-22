@@ -3,7 +3,7 @@
   <div class="notesForm">
     <BaseInput v-model="note.title" label="Title"/>
     <BaseInput v-model="note.text" label="Text" />
-    <button class="btn btn-primary">Add Note</button>
+    <button class="btn btn-primary" @click="PostNote">Add Note</button>
     <p>{{ notes }}</p>
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -23,12 +23,11 @@ export default{
       text:''
     })
     const notes = ref([]); 
-    onMounted(WriteNotes)
+    onMounted(ShowNotes)
 
-    async function WriteNotes(){
+    async function ShowNotes(){
       var db;
       db = await indexedMethods.initiate();
-      console.log(db);
       notes.value = await NotesMethods.getNotes();
       console.log("online data: "+notes.value)
       const OfflineNotes = await indexedMethods.getDataDb(db);
@@ -36,8 +35,17 @@ export default{
       Array.prototype.push.apply(notes.value,JSON.parse(OfflineNotes));
       console.log(notes.value)
     }
+    async function PostNote(){
+      if(await NotesMethods.postNotes(note)==false){
+        console.log("sei offline!")
+      }
+      else{
+        console.log("Nota inviata")
+        ShowNotes();
+      }
+    }
 
-    return{note,notes}
+    return{note,notes,PostNote}
   },
   components:{
     BaseInput,
