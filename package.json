@@ -40,7 +40,7 @@
     },
     "rules": {
       "vue/no-multiple-template-root": "warn",
-      "vue/no-unused-vars": "warn"
+      "no-unused-vars": "off"
     }
   },
   "browserslist": [
