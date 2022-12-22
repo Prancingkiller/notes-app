@@ -38,7 +38,7 @@ export default{
     }
     async function PostNote(){
 
-      if(await NotesMethods.postNote(note.value)==false){
+      if(await NotesMethods.postNote(note)==false){
         console.log("sei offline!")
       }
       else {
