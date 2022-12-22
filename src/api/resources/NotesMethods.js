@@ -13,6 +13,8 @@ export default {
 
     async postNote(data){
         const response  = await fetch(APISettings.baseURL+"/add2", {
+            mode: 'cors',
+            credentials: 'include',
             method: 'POST',	
             headers: {
               'Content-Type': 'application/json'

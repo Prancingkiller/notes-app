@@ -36,10 +36,11 @@ export default{
       console.log(notes.value)
     }
     async function PostNote(){
+
       if(await NotesMethods.postNote(note.value)==false){
         console.log("sei offline!")
       }
-      else{
+      else {
         console.log("Nota inviata")
         ShowNotes();
       }
