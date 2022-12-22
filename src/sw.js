@@ -133,7 +133,7 @@ async function backgroundSync(){
   var dataEvents = await addData('events_add');
   if(Object.keys(data).length != 0){ //controllo che ho dati nel db offline
     console.log("Got data from offlinedb notes:"+Object.keys(data).length);
-    var response  = await 	fetch('api/add', {
+    var response  = await 	fetch('api/add2', {
     method: 'POST',	
     headers: {
       'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ async function backgroundSync(){
     })
   }
   if(Object.keys(dataEvents).length != 0){
-    var responseEvents  = await 	fetch('api/eventsAdd', {
+    var responseEvents  = await 	fetch('api/eventsAdd2', {
     method: 'POST',	
     headers: {
       'Content-Type': 'application/json'
@@ -230,7 +230,7 @@ function clearStore(syncData)
 
 function addContent(newdata){
 
-  fetch('api/add', {
+  fetch('api/add2', {
     method: 'POST',	
   headers: {
       'Content-Type': 'application/json'

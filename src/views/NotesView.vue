@@ -14,7 +14,7 @@ import { ref,onMounted } from 'vue'
 import BaseInput from '../components/BaseInput'
 import LogMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
-
+import indexedMethods from "../api/resources/indexedMethods"
 export default{
   setup(){
     const note = ref({
@@ -22,15 +22,20 @@ export default{
       text:''
     })
     const notes = ref([]);
-
+    const db = indexedMethods.initiate();
     onMounted(WriteNotes)
 
     async function WriteNotes(){
-      notes.value =  await LogMethods.getNotes();
+      notes.value = await LogMethods.getNotes();
+      console.log("online data: "+notes.value)
+      const OfflineNotes = await indexedMethods.getDataDb(db);
+      console.log("offline data: "+OfflineNotes)
+      Array.prototype.push.apply(notes.value,JSON.parse(OfflineNotes));
+      notes.value = JSON.stringify(notes.value);
       console.log(notes.value)
     }
 
-    return{note,notes}
+    return{note,notes,db}
   },
   components:{
     BaseInput,

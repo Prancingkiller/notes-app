@@ -8,11 +8,16 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import indexedMethods from "../api/resources/indexedMethods"
 
 export default {
   name: 'HomeView',
   components: {
     HelloWorld
-  }
+  },
+  setup(){
+		const db = indexedMethods.initiate();
+		return{db}
+	}
 }
 </script>
