@@ -22,7 +22,7 @@ export default{
       text:''
     })
     const notes = ref([]); 
-    const db = ref({});
+    var db = null;
     onMounted(WriteNotes)
 
     async function WriteNotes(){
@@ -30,20 +30,20 @@ export default{
         const dbVersion = 1;
         const request = indexedDB.open(dbName,dbVersion);
          request.onupgradeneeded = e => {
-              db.value = e.target.result
+              db = e.target.result
               const pNotes = db.value.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
                         const dNotes = db.value.createObjectStore("notes_remove", {keyPath: "toRemove"})
                         const eventStore = db.value.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
                 
               }
         request.onsuccess = e => {
-              db.value = e.target.result
+              db = e.target.result
               
             }
-      console.log(db.value);
-      notes.value = await LogMethods.getNotes(db.value);
+      console.log(db);
+      notes.value = await NotesMethods.getNotes();
       console.log("online data: "+notes.value)
-      const OfflineNotes = await indexedMethods.getDataDb(db.value);
+      const OfflineNotes = indexedMethods.getDataDb(db);
       console.log("offline data: "+OfflineNotes)
       Array.prototype.push.apply(notes.value,JSON.parse(OfflineNotes));
       notes.value = JSON.stringify(notes.value);
