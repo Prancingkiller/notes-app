@@ -16,17 +16,17 @@ import LogMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 export default{
-  setup(){
+   setup(){
     const note = ref({
       title:'',
       text:''
     })
-    const notes = ref([]);
-    const db = indexedMethods.initiate();
-    console.log(db);
+    const notes = ref([]); 
     onMounted(WriteNotes)
 
     async function WriteNotes(){
+      const db = await indexedMethods.initiate();
+      console.log(db);
       notes.value = await LogMethods.getNotes();
       console.log("online data: "+notes.value)
       const OfflineNotes = await indexedMethods.getDataDb(db);
