@@ -123,6 +123,9 @@ self.addEventListener('sync', function(event) {
     }
 });
 
+self.addEventListener('message', function(event) {
+  console.log(event.data)
+})
 
 async function backgroundSync(){
   console.log("Backend sync request received");
