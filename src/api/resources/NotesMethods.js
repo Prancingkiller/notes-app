@@ -18,7 +18,7 @@ export default {
             method: 'POST',	
             contentType: 'application/json',
             body: JSON.stringify(data)
-        })
+        }).catch(()=>{return false})
         if(response.ok){
             const result = await response.json();
             return result;
