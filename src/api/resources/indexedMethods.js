@@ -1,7 +1,7 @@
 export default{
     name:"indexedMethods",
-    initiate(){
-        let db;
+    async initiate(){
+        var db = null;
         const dbName = "notes";
         const dbVersion = 1;
         const request = indexedDB.open(dbName,dbVersion);
@@ -10,12 +10,13 @@ export default{
               const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
                         const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
                         const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
-                return db;
+                
               }
         request.onsuccess = e => {
               db = e.target.result
-              return db;
+              
             }
+            return db;
     },
     getDataDb(db){
       return new Promise((resolve,reject)=>{

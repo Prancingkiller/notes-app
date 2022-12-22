@@ -26,7 +26,7 @@ export default{
     onMounted(WriteNotes)
 
     async function WriteNotes(){
-      db = indexedMethods.initiate();
+      db = await indexedMethods.initiate();
       console.log(db);
       notes.value = await LogMethods.getNotes();
       console.log("online data: "+notes.value)
