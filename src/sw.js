@@ -1,4 +1,8 @@
-
+const CACHE_VERSION = 10;
+const CURRENT_CACHE = `main-${CACHE_VERSION}`;
+const cacheFiles = [
+    'index.html'
+    ];
 self.__WB_MANIFEST
 console.log("aa")
 
