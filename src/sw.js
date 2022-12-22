@@ -4,7 +4,7 @@ const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
 const cacheFiles = [
-'index.php'
+'index.html'
 ];
 
 self.addEventListener('install', evt =>{
