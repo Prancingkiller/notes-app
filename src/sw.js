@@ -14,21 +14,21 @@ evt.waitUntil(self.skipWaiting());
       return cache.addAll(cacheFiles);
     })
   )
-			const dbName = "notes";
+      const dbName = "notes";
             const dbVersion = 1;
 
             const request = indexedDB.open(dbName,dbVersion)
 
                 //on upgrade needed
                 request.onupgradeneeded = e => {
-                    db = e.target.result
+                  db = e.target.result
                    /* note = {
                         title: "note1",
                         text: "this is a note"
                     }*/
                     const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
-					const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
-					const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
+          const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
+          const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
                    //alert(`upgrade is called database name: ${db.name} version : ${db.version}`)
 
                 }
@@ -59,7 +59,7 @@ self.addEventListener('activate', evt =>{
       );
     })
   ) 
-			const dbName = "notes";
+      const dbName = "notes";
             const dbVersion = 1;
 
             const request = indexedDB.open(dbName,dbVersion)
@@ -90,7 +90,7 @@ const fromCache = request =>
         .match(request)
         .then(matching => matching || cache.match('/offline/'))
     );
-	
+  
 // cache the current page to make it available for offline
 const update = request =>
   caches
@@ -98,100 +98,100 @@ const update = request =>
     .then(cache =>
       fetch(request).then(response => cache.put(request, response))
     );
-	
+  
 // general strategy when making a request (eg if online try to fetch it
 // from the network with a timeout, if something fails serve from cache)
 self.addEventListener('fetch', evt => {
-	type = evt.request.method;
+  var type = evt.request.method;
   evt.respondWith(
     fromNetwork(evt.request, 10000)
-	.catch(() => fromCache(evt.request).then(console.log("da cache")))
+  .catch(() => fromCache(evt.request).then(console.log("da cache")))
   );
   if(type == "GET"){
   evt.waitUntil(update(evt.request))
-  };
+  }
 });
 
 self.addEventListener('sync', function(event) {
-	//console.log("sync event", event);
+  //console.log("sync event", event);
     if (event.tag === 'notes_add') {
         event.waitUntil(backgroundSync())
     }
-	if (event.tag === 'notes_delete') {
+  if (event.tag === 'notes_delete') {
         event.waitUntil(removeData('notes_remove'))
-		console.log("Backend sync request received (delete)");
+    console.log("Backend sync request received (delete)");
     }
 });
 
 
 async function backgroundSync(){
-	console.log("Backend sync request received");
-	data = await addData('notes_add');
-	dataEvents = await addData('events_add');
-	if(Object.keys(data).length != 0){ //controllo che ho dati nel db offline
-		console.log("Got data from offlinedb notes:"+Object.keys(data).length);
-		response  = await 	fetch('api/add', {
-		method: 'POST',	
-		headers: {
-		  'Content-Type': 'application/json'
-		},	
-		contentType: 'application/json',
-		body: JSON.stringify(data)
-	})	
-		dataStatus = await response.json();
-		if(dataStatus.status == true){
-				console.log("Data sent to server, sent " +dataStatus.notesInserted+" notes!");
-				await clearStore('notes_add');
-				clie = await self.clients.matchAll();
-				clie.forEach(client => client.postMessage({store:'notes_add'}));
-				console.log("sync complete")
-		}
-		else{	
-		clie = await self.clients.matchAll();
-		clie.forEach(client => {client.postMessage({store:'notes_add'});
-		client.postMessage("loginCheck");
-		}
-		);
-		return;
-		}
-	}
-	else
-	{
-		console.log("No data in offline DB");
-		clie = await self.clients.matchAll();
-		clie.forEach(client => {client.postMessage({store:'notes_add'});
-		})
-	}
-	if(Object.keys(dataEvents).length != 0){
-		responseEvents  = await 	fetch('api/eventsAdd', {
-		method: 'POST',	
-		headers: {
-		  'Content-Type': 'application/json'
-		},	
-		contentType: 'application/json',
-		body: JSON.stringify(dataEvents)
-		})	
-		dataEventsStatus = await responseEvents.json();
-		if(dataEventsStatus.status == true){
-			await clearStore('events_add');
-			clie = await self.clients.matchAll();
-			clie.forEach(client => client.postMessage({store:'events_add'}));
-		}
-		else{
-		clie = await self.clients.matchAll();
-		clie.forEach(client => client.postMessage({store:'events_add'}));	
-		client.postMessage("loginCheck");	
-		}
-	}
-	
+  console.log("Backend sync request received");
+  var data = await addData('notes_add');
+  var dataEvents = await addData('events_add');
+  if(Object.keys(data).length != 0){ //controllo che ho dati nel db offline
+    console.log("Got data from offlinedb notes:"+Object.keys(data).length);
+    var response  = await 	fetch('api/add', {
+    method: 'POST',	
+    headers: {
+      'Content-Type': 'application/json'
+    },	
+    contentType: 'application/json',
+    body: JSON.stringify(data)
+  })	
+    var dataStatus = await response.json();
+    if(dataStatus.status == true){
+        console.log("Data sent to server, sent " +dataStatus.notesInserted+" notes!");
+        await clearStore('notes_add');
+        clie = await self.clients.matchAll();
+        clie.forEach(client => client.postMessage({store:'notes_add'}));
+        console.log("sync complete")
+    }
+    else{	
+    clie = await self.clients.matchAll();
+    clie.forEach(client => {client.postMessage({store:'notes_add'});
+    client.postMessage("loginCheck");
+    }
+    );
+    return;
+    }
+  }
+  else
+  {
+    console.log("No data in offline DB");
+    var clie = await self.clients.matchAll();
+    clie.forEach(client => {client.postMessage({store:'notes_add'});
+    })
+  }
+  if(Object.keys(dataEvents).length != 0){
+    var responseEvents  = await 	fetch('api/eventsAdd', {
+    method: 'POST',	
+    headers: {
+      'Content-Type': 'application/json'
+    },	
+    contentType: 'application/json',
+    body: JSON.stringify(dataEvents)
+    })	
+    var dataEventsStatus = await responseEvents.json();
+    if(dataEventsStatus.status == true){
+      await clearStore('events_add');
+      clie = await self.clients.matchAll();
+      clie.forEach(client => client.postMessage({store:'events_add'}));
+    }
+    else{
+    clie = await self.clients.matchAll();
+    clie.forEach(client => {client.postMessage({store:'events_add'});	
+    client.postMessage("loginCheck")});	
+    }
+  }
+  
 }
 
 function addData(syncData)
 {
-	return new Promise((resolve,reject)=>{
-		const dbName = "notes";
-		const dbVersion = 1;
-		const dbb = indexedDB.open(dbName,dbVersion)
+  return new Promise((resolve,reject)=>{
+    const dbName = "notes";
+    const dbVersion = 1;
+    const dbb = indexedDB.open(dbName,dbVersion)
 
                 //on upgrade needed
                 dbb.onsuccess = e => {
@@ -199,61 +199,61 @@ function addData(syncData)
                     const tx = db.transaction(syncData,"readwrite")
             const pNotes = tx.objectStore(syncData)
             //const request = pNotes.openCursor()
-			const request = pNotes.getAll()
-			request.onsuccess = e => {
-				resolve(request.result);
-				//console.log("Got data from offlinedb "+request.result.lenght);
+      const request = pNotes.getAll()
+      request.onsuccess = e => {
+        resolve(request.result);
+        //console.log("Got data from offlinedb "+request.result.lenght);
         }}	
-	})
+  })
 }
 function clearStore(syncData)
 {
-		return new Promise((resolve,reject)=>{
-		const dbName = "notes";
-		const dbVersion = 1;
-		const dbb = indexedDB.open(dbName,dbVersion)
+    return new Promise((resolve,reject)=>{
+    const dbName = "notes";
+    const dbVersion = 1;
+    const dbb = indexedDB.open(dbName,dbVersion)
 
                 //on upgrade needed
                 dbb.onsuccess = e => {
                 db = e.target.result
-				const tx = db.transaction(syncData,"readwrite")
-				const pNotes = tx.objectStore(syncData)
-				pNotes.clear();
-				console.log("Store Pulito");
-				resolve();
-				}
+        const tx = db.transaction(syncData,"readwrite")
+        const pNotes = tx.objectStore(syncData)
+        pNotes.clear();
+        console.log("Store Pulito");
+        resolve();
+        }
 })
 }
 
 function addContent(newdata){
 
-	fetch('api/add', {
+  fetch('api/add', {
     method: 'POST',	
-	headers: {
+  headers: {
       'Content-Type': 'application/json'
     },	
-	contentType: 'application/json',
+  contentType: 'application/json',
     body: JSON.stringify(newdata)
 })
 }
 
 async function complete(syncData){
-			
+      
 }
 
 
 function removeData(syncData)
 {
-		    const tx = db.transaction(syncData,"readwrite")
+        const tx = db.transaction(syncData,"readwrite")
             const pNotes = tx.objectStore(syncData)
             //const request = pNotes.openCursor()
-			const request = pNotes.getAll()
-			request.onsuccess = e => {
-			//console.log(request.result);
-			 self.clients.matchAll().then(clients => {
-			 clients.forEach(client => client.postMessage({store:syncData,content:request.result}));
-			})
-			pNotes.clear();
-			console.log("Backend sync request responded (delete)");
+      const request = pNotes.getAll()
+      request.onsuccess = e => {
+      //console.log(request.result);
+       self.clients.matchAll().then(clients => {
+       clients.forEach(client => client.postMessage({store:syncData,content:request.result}));
+      })
+      pNotes.clear();
+      console.log("Backend sync request responded (delete)");
         }
 }
