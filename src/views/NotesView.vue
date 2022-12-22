@@ -19,10 +19,6 @@ import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 export default{
    setup(){
-    /* const note = ref({
-      title:'',
-      text:''
-    }) */
     const note = reactive([{
       title:'',
       text:''
@@ -42,7 +38,7 @@ export default{
     }
     async function PostNote(){
 
-      if(await NotesMethods.postNote(note.value[0])==false){
+      if(await NotesMethods.postNote(note.value)==false){
         console.log("sei offline!")
       }
       else {
