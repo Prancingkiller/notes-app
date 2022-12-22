@@ -11,13 +11,12 @@ export default{
               const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
                         const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
                         const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
-                
+                        resolve(db);
               }
         request.onsuccess = e => {
               db = e.target.result
-              
+              resolve(db);
             }
-        resolve(db);
       })
        
     },
