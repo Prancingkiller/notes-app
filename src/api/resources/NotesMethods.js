@@ -11,7 +11,7 @@ export default {
         return result;
     },
 
-    async postNotes(data){
+    async postNote(data){
         const response  = await fetch(APISettings.baseURL+"/add2", {
             method: 'POST',	
             headers: {
