@@ -12,7 +12,7 @@ export default {
     },
 
     async postNotes(data){
-        const response  = await fetch('api/add2', {
+        const response  = await fetch(APISettings.baseURL+"/add2", {
             method: 'POST',	
             headers: {
               'Content-Type': 'application/json'
