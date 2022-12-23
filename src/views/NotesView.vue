@@ -58,10 +58,8 @@ export default{
 		}
 		navigator.serviceWorker.addEventListener('message', function(event) {
 			if(event.data.store=="notes_add"){
-				if(event.data.newData == false){}
-				else{
+				if(event.data.newData != false){
 					ShowNotes();
-				}
 			}
 		})
 
