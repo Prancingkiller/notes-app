@@ -7,7 +7,8 @@
         <p class="card-text">{{note.text}}</p>
       </div>
       <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small v-if="note.temp==true" class="text-muted">Not Synced...</small>
+        <small v-else class="text-muted">Online</small>
       </div>
     </div>
   </div>
