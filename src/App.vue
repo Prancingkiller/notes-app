@@ -25,13 +25,32 @@
 <script>
 import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm"
-import swCalls from "../api/resources/swCalls"
 	export default{
 	components:{
 		LoginForm
 	},
 	setup(){
-		onMounted(swCalls.setTimer(),10000)
+
+		function registerSyncP(){
+			if(localStorage.getItem("logged")){
+			navigator.serviceWorker.ready.then((registration) => {
+				registration.sync.getTags().then((tags) => {
+				if (tags.includes("notes_add")){
+					console.log("Sync already registered");
+				}
+				else{
+					registration.sync.register("notes_add");
+					console.log("Periodic background sync registered!");
+				}
+				setTimer();
+				});
+			});
+			}else{setTimer();}
+    	}
+     	function setTimer(){
+        setTimeout(registerSyncP(), 10000);
+    	}
+		onMounted(setTimer)
 	}
 
 }
