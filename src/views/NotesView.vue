@@ -8,7 +8,7 @@
 		<p>{{ note }}</p>
 	</div>
 	<div style="max-width:600px;margin:auto" class="card-group">
-		<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete(event)" />
+		<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
 	</div>
 </template>
 <script>
