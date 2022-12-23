@@ -18,7 +18,7 @@ import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 export default{
-	 setup(){
+	setup(){
 		const note = reactive([{
 			title:'',
 			text:''
