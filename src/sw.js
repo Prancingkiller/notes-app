@@ -113,7 +113,7 @@ self.addEventListener('fetch', evt => {
 });
 
 self.addEventListener('sync', function(event) {
-  //console.log("sync event", event);
+  console.log("aaa")
     if (event.tag === 'notes_add') {
         console.log("aaa")
         event.waitUntil(backgroundSync())
