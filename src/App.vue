@@ -23,14 +23,13 @@
 	<router-view/>
 </template>
 <script>
-import { onMounted } from 'vue'
+//import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm"
 	export default{
 	components:{
 		LoginForm
 	},
 	setup(){
-
 		function registerSyncP(){
 			if(localStorage.getItem("logged")){
 			navigator.serviceWorker.ready.then((registration) => {
@@ -50,7 +49,7 @@ import LoginForm from "./components/LoginForm"
 		function setTimer(){
 		setTimeout(registerSyncP(), 10000);
 		}
-		onMounted(setTimer)
+		setTimer()
 	}
 
 }
