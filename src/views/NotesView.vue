@@ -17,6 +17,7 @@ import BaseInput from '../components/BaseInput'
 import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
+import swCalls from "../api/resources/swCalls"
 export default{
 	setup(){
 		const note = reactive([{
@@ -47,6 +48,7 @@ export default{
 					temp:true
 			}];
 				await indexedMethods.saveNote(indexedDB.value,object)
+				swCalls.registersync("notes_add")
 			}
 			else {
 				console.log("Nota inviata")
