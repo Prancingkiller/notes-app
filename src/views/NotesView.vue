@@ -49,6 +49,7 @@ export default{
 			}];
 				await indexedMethods.saveNote(indexedDB.value,object)
 				swCalls.registersync("notes_add")
+				ShowNotes();
 			}
 			else {
 				console.log("Nota inviata")
