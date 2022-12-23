@@ -32,7 +32,7 @@ import swCalls from "../api/resources/swCalls"
 	},
 	setup(){
 		function setTimer(){
-			setTimeout(swCalls.registerSyncP(), 10000);
+			setTimeout(swCalls.registerSyncP(setTimer), 10000);
 		}
 		onMounted(setTimer)
 	}

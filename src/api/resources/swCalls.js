@@ -8,7 +8,7 @@ export default {
             }
             )
     },
-     registerSyncP(){
+     registerSyncP(call){
         if(localStorage.getItem("logged")){
         navigator.serviceWorker.ready.then((registration) => {
             registration.sync.getTags().then((tags) => {
@@ -19,9 +19,9 @@ export default {
                 registration.sync.register("notes_add");
                 console.log("Periodic background sync registered!");
             }
-            setTimer();
+            call();
             });
         });
-    }else{setTimer();}
+    }else{call();}
     }
 }
