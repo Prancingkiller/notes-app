@@ -29,11 +29,6 @@ export default {
     },
 
     async deleteNote(data){
-        if(data[0].temp != null){
-            console.log("è una nota temporanea, not handled")
-        }
-        else{
-            console.log("è una nota online")
             const response  = await fetch(APISettings.baseURL+"/delete2", {
                 mode: 'cors',
                 credentials: 'include',
@@ -49,5 +44,4 @@ export default {
                 return false;
             } 
         }
-    }
-}
+ }
