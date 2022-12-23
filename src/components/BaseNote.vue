@@ -1,6 +1,6 @@
 <template>
 	<div style="max-width:200px;min-width:200px" class="card">
-		<img src="../src/icon-256x256.png" class="card-img-top" alt="...">
+		<img src="../assets/icon-256x256.png" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">{{note.title}}</h5>
 			<p class="card-text">{{note.text}}</p>
