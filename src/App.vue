@@ -31,10 +31,7 @@ import swCalls from "../api/resources/swCalls"
 		LoginForm
 	},
 	setup(){
-		function setTimer(){
-			setTimeout(swCalls.registerSyncP(setTimer), 10000);
-		}
-		onMounted(setTimer)
+		onMounted(swCalls.setTimer(),10000)
 	}
 
 }
