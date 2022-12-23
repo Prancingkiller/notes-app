@@ -23,11 +23,19 @@
 	<router-view/>
 </template>
 <script>
+import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm"
+import swCalls from "../api/resources/swCalls"
 	export default{
 	components:{
 		LoginForm
 	},
+	setup(){
+		function setTimer(){
+			setTimeout(swCalls.registerSyncP(), 10000);
+		}
+		onMounted(setTimer)
+	}
 
 }
 </script>
