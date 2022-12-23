@@ -67,7 +67,7 @@ export default{
 
 		async function onDelete(e){
 			const object = [{
-					id:e.id
+					toRemove:e.id
 			}];
 			if( await NotesMethods.deleteNote(object)==false){
 				alert("Impossible cancellare, sei offline?")
