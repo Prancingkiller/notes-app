@@ -29,7 +29,7 @@ export default {
     },
 
     async deleteNote(data){
-        if(data.temp != null){
+        if(data[0].temp != null){
             console.log("è una nota temporanea, not handled")
         }
         else{
