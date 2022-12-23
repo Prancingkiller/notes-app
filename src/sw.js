@@ -134,11 +134,10 @@ async function backgroundSync(){
   if(Object.keys(data).length != 0){ //controllo che ho dati nel db offline
     console.log("Got data from offlinedb notes:"+Object.keys(data).length);
     var response  = await 	fetch('api/add2', {
-    method: 'POST',	
-    headers: {
-      'Content-Type': 'application/json'
-    },	
-    contentType: 'application/json',
+      mode: 'cors',
+      credentials: 'include',
+      method: 'POST',	
+      contentType: 'application/json',
     body: JSON.stringify(data)
   })	
     var dataStatus = await response.json();
