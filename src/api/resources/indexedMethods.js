@@ -43,5 +43,14 @@ export default{
 				})
 				resolve();
       })
+    },
+    async deleteNote(db,id){
+      try{
+        await db.transaction("notes_add", "readwrite").objectStore("notes_add").delete(+id);
+        console.log("Temporary object deleted");
+      }
+      catch(id){
+      alert("Error, you can delete this but something happened")
+      }
     }
   }

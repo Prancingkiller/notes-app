@@ -67,7 +67,7 @@ export default{
 
 		async function onDelete(e){
 			if(e.temp == true){
-				alert("nota offline!")
+				indexedMethods.deleteNote(indexedDB.value,e.id)
 			}
 			else{
 				const object = [{
