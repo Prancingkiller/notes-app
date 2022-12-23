@@ -39,7 +39,7 @@ export default {
                 credentials: 'include',
                 method: 'DELETE',	
                 contentType: 'application/json',
-                body: JSON.stringify(data.id)
+                body: JSON.stringify(data)
             }).catch(()=>{return false})
             if(response.ok){
                 const result = await response.json();
