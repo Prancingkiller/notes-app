@@ -5,10 +5,12 @@
 			<h5 class="card-title">{{note.title}}</h5>
 			<p class="card-text">{{note.text}}</p>
 		<button class="btn btn-danger">Cancella</button>
+	</div>
+	<div class="card-footer">
 			<p class="card-text">
 				<small v-if="note.temp==true" class="text-muted">Not Synced...</small>
 				<small v-else class="text-muted">Online</small></p>
-		</div>
+	</div>
 	</div>
 </template>
 <script>
