@@ -8,7 +8,7 @@
 		<p>{{ note }}</p>
 	</div>
 	<div class="row row-cols-1 row-cols-md-3 g-4">
-		<BaseNote v-for="note in notes" :key="note.id" :title="note.title" :text="note.text" />
+		<BaseNote v-for="note in notes" :key="note.id" :note="note" />
 	</div>
 </template>
 <script>
