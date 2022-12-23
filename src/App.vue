@@ -46,10 +46,10 @@ import LoginForm from "./components/LoginForm"
 				});
 			});
 			}else{setTimer();}
-    	}
-     	function setTimer(){
-        setTimeout(registerSyncP(), 10000);
-    	}
+		}
+		function setTimer(){
+		setTimeout(registerSyncP(), 10000);
+		}
 		onMounted(setTimer)
 	}
 
