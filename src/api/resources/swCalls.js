@@ -1,6 +1,5 @@
 export default {
     name:"swCalls",
-
     registersync(syncObj){
         navigator.serviceWorker.ready.then(
             swRegistration=>{
