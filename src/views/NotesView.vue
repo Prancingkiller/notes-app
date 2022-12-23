@@ -39,10 +39,9 @@ export default{
       console.log(notes.value)
     }
     async function PostNote(){
-
       if(await NotesMethods.postNote(note)==false){
         console.log("sei offline!")
-        object = [{
+        const object = [{
 			    title:note[0].title,
 			    text:note[0].text,
 			    temp:true
