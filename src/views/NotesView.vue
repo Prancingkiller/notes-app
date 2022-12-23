@@ -60,6 +60,7 @@ export default{
 			if(event.data.store=="notes_add"){
 				if(event.data.newData != false){
 					ShowNotes();
+				}
 			}
 		})
 
