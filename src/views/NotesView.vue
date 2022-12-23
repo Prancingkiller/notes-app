@@ -7,7 +7,7 @@
 		<p>{{ notes }}</p>
 		<p>{{ note }}</p>
 	</div>
-	<div style="max-width:600px" class="card-group">
+	<div style="max-width:600px;margin:auto" class="card-group">
 		<BaseNote v-for="note in notes" :key="note.id" :note="note" />
 	</div>
 </template>
