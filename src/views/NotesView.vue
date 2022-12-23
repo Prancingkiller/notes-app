@@ -65,8 +65,14 @@ export default{
 			}
 		})
 
-		function onDelete(e){
-			console.log(e);
+		async function onDelete(e){
+			if( await NotesMethods.deleteNote(e)==false){
+				alert("Impossible cancellare, sei offline?")
+			}
+			else{
+				console.log("nota cancellata")
+				ShowNotes();
+			}
 		}
 		return{note,notes,PostNote,onDelete}
 	},

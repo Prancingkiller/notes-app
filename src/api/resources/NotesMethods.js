@@ -26,5 +26,28 @@ export default {
         else{
             return false;
         }
+    },
+
+    async deleteNote(data){
+        if(data.temp == null){
+            console.log("è una nota temporanea, not handled")
+        }
+        else{
+            console.log("è una nota online")
+            const response  = await fetch(APISettings.baseURL+"/delete2", {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'DELETE',	
+                contentType: 'application/json',
+                body: JSON.stringify(data.id)
+            }).catch(()=>{return false})
+            if(response.ok){
+                const result = await response.json();
+                return result;
+            }
+            else{
+                return false;
+            } 
+        }
     }
 }
