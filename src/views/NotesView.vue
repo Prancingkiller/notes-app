@@ -18,7 +18,7 @@ import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
-import e from 'express'
+
 export default{
 	setup(){
 		const note = reactive([{
@@ -68,8 +68,7 @@ export default{
 		function onDelete(e){
 			console.log(e);
 		}
-
-		return{note,notes,PostNote}
+		return{note,notes,PostNote,onDelete}
 	},
 	components:{
 		BaseInput,
