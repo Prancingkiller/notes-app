@@ -42,7 +42,7 @@ export default{
 
       if(await NotesMethods.postNote(note)==false){
         console.log("sei offline!")
-        console.log(note);
+        console.log(note.value);
         //await indexedMethods.saveNote(indexedDB.value,note)
       }
       else {
