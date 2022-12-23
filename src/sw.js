@@ -114,9 +114,7 @@ self.addEventListener('fetch', evt => {
 });
 
 self.addEventListener('sync', function(event) {
-  console.log("aaa")
     if (event.tag === 'notes_add') {
-        console.log("aaa")
         event.waitUntil(backgroundSync())
     }
   if (event.tag === 'notes_delete') {
