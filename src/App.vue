@@ -23,7 +23,7 @@
 	<router-view/>
 </template>
 <script>
-//import { onMounted } from 'vue'
+import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm"
 	export default{
 	components:{
@@ -47,9 +47,9 @@ import LoginForm from "./components/LoginForm"
 			}else{setTimer();}
 		}
 		function setTimer(){
-		setTimeout(registerSyncP(), 10000);
+		setTimeout(registerSyncP, 10000);
 		}
-		setTimer()
+		onMounted(setTimer)
 	}
 
 }
