@@ -23,15 +23,17 @@ export default{
       title:'',
       text:''
     }])
-    const notes = ref([]); 
+    const notes = ref([]);
+    const indexedDB = ref({}); 
     onMounted(ShowNotes)
 
     async function ShowNotes(){
       var db;
       db = await indexedMethods.initiate();
+      indexedDB.value = db;
       notes.value = await NotesMethods.getNotes();
       console.log("online data: "+notes.value)
-      const OfflineNotes = await indexedMethods.getDataDb(db);
+      const OfflineNotes = await indexedMethods.getDataDb(indexedDB.value);
       console.log("offline data: "+OfflineNotes)
       Array.prototype.push.apply(notes.value,JSON.parse(OfflineNotes));
       console.log(notes.value)
@@ -40,6 +42,7 @@ export default{
 
       if(await NotesMethods.postNote(note)==false){
         console.log("sei offline!")
+        await indexedMethods.saveNote(indexedDB.value,note)
       }
       else {
         console.log("Nota inviata")

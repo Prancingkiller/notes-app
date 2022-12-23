@@ -32,5 +32,16 @@ export default{
           resolve(JSON.stringify(request.result));		
             }
       })
+    },
+    saveNote(db,data){
+      return new Promise((resolve,reject)=>{
+				const tx = db.transaction("notes_add", "readwrite")
+				tx.onerror = e => alert( ` Error! ${e.target.error}  `)
+				const pNotes = tx.objectStore("notes_add")
+				data.forEach((element) => {
+					pNotes.put(element)
+				})
+				resolve();
+      })
     }
-}
+  }
