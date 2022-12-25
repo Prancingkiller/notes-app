@@ -18,7 +18,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div id="dayBody"></div>
+            <div id="dayBody">
+              <p v-for="dayEvent in dayEvents" :key="dayEvent.id">{{dayEvent.time_start}} - {{ dayEvent.time_finish }}</p>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Add New</button>
@@ -83,7 +85,7 @@ setup(){
 			console.log(dayEvents.value)
 		}
 
-  return{pickedDay,onDayChange,modalRef,onShowModal}
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents}
 },
 components:{
   BaseCalendar,
