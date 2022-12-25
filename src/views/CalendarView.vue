@@ -2,30 +2,67 @@
     <h1>Calendar</h1>
     <div class="col-md-10 text-center">
           <h2 class="mb-5 text-center">Seleziona la Data</h2>
+          <p></p>
           <input type="hidden" class="form-control w-25 mx-auto mb-3" id="result" placeholder="" disabled="">
           <form action="#" class="row">
             <div class="col-md-12">
-              <div id="inline_cal"></div>
+              <BaseCalendar @updateModal="onDayChange" @showModal="onShowModal" />
             </div>
           </form>
-     </div>
+    </div>
+    <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Giorno: {{ pickedDay }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="dayBody"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Add New</button>
+            <button type="button" class="btn btn-success">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+          
+      
 </template>
-<script>
-import { onMounted } from 'vue' 
-import { Rome } from '@bevacqua/rome'
-import { moment } from 'moment'
-export default{
-    setup(){
-        onMounted(loadCalendar)
+<script> 
+import BaseCalendar from '../components/BaseCalendar';
 
-        function loadCalendar() {
-            Rome('inline_cal', {time: false, inputFormat: 'YYYY-MM-DD', dateValidator: function (d) {
-            return moment(d).day();
-            }}).on('data', function (value) {
-            var pickedDay = value;
-            })
-        }
+import{ref,onMounted} from 'vue'
+import  {Modal}  from 'bootstrap'
+export default {
+
+setup(){
+  const modalRef = ref(null)
+  let modal = Modal ;
+  onMounted(() => {
+    if (modalRef.value) {
+    modal = new Modal(modalRef.value)
     }
+  })
+  function launchModal() {
+    modal.show()
+  }
+  const pickedDay = ref();
+  function onDayChange(e){
+    pickedDay.value=e
+  }
+  function onShowModal(e){
+    pickedDay.value=e
+    launchModal()
+  }
+
+  return{pickedDay,onDayChange,modalRef,onShowModal}
+},
+components:{
+  BaseCalendar,
+  
+}
 }
 </script>
 <style>

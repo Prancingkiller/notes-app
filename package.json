@@ -8,16 +8,19 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.3",
     "core-js": "^3.8.3",
     "moment": "^2.29.4",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
+    "vue-bs-modal": "^0.7.9",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
-    "@bevacqua/rome": "^3.0.4",
+    "@bevacqua/rome": "github:bevacqua/rome",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
