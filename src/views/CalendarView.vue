@@ -67,6 +67,7 @@ setup(){
   }
 
   async function loadEvents(){
+      dayEvents.value = [];
 			var object = {
 				month:pickedMonth.value,
 				year:pickedYear.value
@@ -76,7 +77,6 @@ setup(){
 		}
 
     function loadDay(){
-      dayEvents.value = [];
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
 					dayEvents.value.push(element)
