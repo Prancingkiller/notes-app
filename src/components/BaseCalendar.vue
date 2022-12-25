@@ -57,12 +57,12 @@ export default{
 		}
 
 		function loadDay(){
-			events.forEach(element =>{
-				if(element.date == pickedDay){
-					dayEvents.push(element)
+			events.value.forEach(element =>{
+				if(element.date == pickedDay.value){
+					dayEvents.value.push(element)
 				}
 			})
-			console.log(dayEvents)
+			console.log(dayEvents.value)
 		}
 
 		return{calendar,pickedDay,clicked,dayEvents}
