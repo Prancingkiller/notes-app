@@ -61,10 +61,6 @@ setup(){
     loadEvents();
   }
   function onShowModal(e){
-    pickedDay.value=e.pickedDay
-    pickedMonth.value = e.pickedMonth
-    pickedYear.value = e.pickedYear
-    loadEvents();
     launchModal()
   }
 
