@@ -74,6 +74,7 @@ setup(){
 		}
 
     function loadDay(){
+      dayEvents.value = [];
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
 					dayEvents.value.push(element)
