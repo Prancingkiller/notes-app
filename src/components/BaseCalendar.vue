@@ -14,6 +14,7 @@ export default{
 		var pickedMonth = ref({});
 		var pickedYear = ref({});
 		var events = ref({});
+		var dayEvents = ref([]);
 		const calendar = ref(null)
 		const rome = require("../../node_modules/@bevacqua/rome/")
 
@@ -29,6 +30,9 @@ export default{
 			.on('month', function (value) {
 				pickedMonth.value = value+1;
 				loadEvents();
+			})
+			.on('year', function (value) {
+				pickedYear.value = value;
 			})
 			.on('ready', function (value) {
 				pickedDay.value = moment().locale("Europe/Rome").format("YYYY-MM-DD");
@@ -49,10 +53,19 @@ export default{
 				year:pickedYear.value
 			}
 			events.value = await EventsMethods.loadEvents(object);
-			console.log(events.value)
+			loadDay();
 		}
 
-		return{calendar,pickedDay,clicked}
+		function loadDay(){
+			events.forEach(element =>{
+				if(element.date == pickedDay){
+					dayEvents.push(element)
+				}
+			})
+			console.log(dayEvents)
+		}
+
+		return{calendar,pickedDay,clicked,dayEvents}
 	},
 }
 </script>
