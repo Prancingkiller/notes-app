@@ -32,13 +32,19 @@
 </template>
 <script> 
 import BaseCalendar from '../components/BaseCalendar';
+import EventsMethods from '../api/resources/EventsMethods'
 
 import{ref,onMounted} from 'vue'
 import  {Modal}  from 'bootstrap'
 export default {
 
 setup(){
+  var events = ref({});
+	var dayEvents = ref([]);
   const modalRef = ref(null)
+  var pickedDay = ref();
+  var pickedMonth = ref({});
+	var pickedYear = ref({});
   let modal = Modal ;
   onMounted(() => {
     if (modalRef.value) {
@@ -48,14 +54,37 @@ setup(){
   function launchModal() {
     modal.show()
   }
-  const pickedDay = ref();
   function onDayChange(e){
-    pickedDay.value=e
+    pickedDay.value=e.pickedDay
+    pickedMonth.value = e.pickedMonth
+    pickedYear.value = e.pickedYear
+    loadEvents();
   }
   function onShowModal(e){
-    pickedDay.value=e
+    pickedDay.value=e.pickedDay
+    pickedMonth.value = e.pickedMonth
+    pickedYear.value = e.pickedYear
+    loadEvents();
     launchModal()
   }
+
+  async function loadEvents(){
+			var object = {
+				month:pickedMonth.value,
+				year:pickedYear.value
+			}
+			events.value = await EventsMethods.loadEvents(object);
+			loadDay();
+		}
+
+    function loadDay(){
+			events.value.forEach(element =>{
+				if(element.date == pickedDay.value){
+					dayEvents.value.push(element)
+				}
+			})
+			console.log(dayEvents.value)
+		}
 
   return{pickedDay,onDayChange,modalRef,onShowModal}
 },

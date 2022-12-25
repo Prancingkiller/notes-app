@@ -1,5 +1,4 @@
 <template>
-	<p>{{ pickedDay }}</p>
 	<div ref="calendar" @click="clicked"></div>
 </template>
 <script>
@@ -10,6 +9,11 @@ export default{
 	emits: ['updateModal','showModal'],
 	name:"BaseCalendar",
 	setup(props,context){
+		var toParent = ref({
+			pickedDay : "",
+			pickedMonth : "",
+			pickedYear : ""
+		});
 		var pickedDay = ref({});
 		var pickedMonth = ref({});
 		var pickedYear = ref({});
@@ -24,48 +28,29 @@ export default{
 			rome(calendar.value,{time: false, inputFormat: 'YYYY-MM-DD', dateValidator: function (d) {
 			return moment(d).day();
 			}}).on('data', function (value) {
-				pickedDay.value = value;
-				context.emit('updateModal',pickedDay.value)
+				toParent.value.pickedDay = value;
+				context.emit('updateModal',toParent.value)
 			})
 			.on('month', function (value) {
-				pickedMonth.value = value+1;
-				loadEvents();
+				toParent.value.pickedMonth = value+1;
 			})
 			.on('year', function (value) {
-				pickedYear.value = value;
+				toParent.value.pickedYear = value;
 			})
 			.on('ready', function (value) {
-				pickedDay.value = moment().locale("Europe/Rome").format("YYYY-MM-DD");
-				pickedMonth.value = moment().locale("Europe/Rome").format("MM");
-				pickedYear.value = moment().locale("Europe/Rome").format("YYYY");
-				loadEvents();
+				toParent.value.pickedDay = moment().locale("Europe/Rome").format("YYYY-MM-DD");
+				toParent.value.pickedMonth = moment().locale("Europe/Rome").format("MM");
+				toParent.value.pickedYear = moment().locale("Europe/Rome").format("YYYY");
 			})
 		}
 		function clicked(event){
 			if(event.target.className == "rd-day-body rd-day-selected"){
-				context.emit('showModal',pickedDay.value)
+				context.emit('showModal',toParent.value)
 			}
 		}
 
-		async function loadEvents(){
-			var object = {
-				month:pickedMonth.value,
-				year:pickedYear.value
-			}
-			events.value = await EventsMethods.loadEvents(object);
-			loadDay();
-		}
 
-		function loadDay(){
-			events.value.forEach(element =>{
-				if(element.date == pickedDay.value){
-					dayEvents.value.push(element)
-				}
-			})
-			console.log(dayEvents.value)
-		}
-
-		return{calendar,pickedDay,clicked,dayEvents}
+		return{calendar,pickedDay,clicked}
 	},
 }
 </script>
