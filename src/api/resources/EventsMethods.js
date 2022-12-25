@@ -3,7 +3,7 @@ export default {
     name:"EventsMethods",
 
     async loadEvents(data){
-        const response = await fetch(APISettings.baseURL+"/events2?"+ new URLSearchParams({data}),{
+        const response = await fetch(APISettings.baseURL+"/events2?"+ new URLSearchParams(data),{
             mode: 'cors',
             credentials: 'include',
             method: 'GET',
