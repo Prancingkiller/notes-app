@@ -41,6 +41,7 @@ export default{
 				toParent.value.pickedDay = moment().locale("Europe/Rome").format("YYYY-MM-DD");
 				toParent.value.pickedMonth = moment().locale("Europe/Rome").format("MM");
 				toParent.value.pickedYear = moment().locale("Europe/Rome").format("YYYY");
+				context.emit('updateModal',toParent.value)
 			})
 		}
 		function clicked(event){
