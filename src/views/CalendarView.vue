@@ -73,6 +73,10 @@ setup(){
     launchModal()
   }
   async function loadEvents(){
+      var db;
+			db = await indexedMethods.initiate();
+			indexedDB.value = db;
+
       dayEvents.value = [{
         time_start:"Loading..."
       }];
@@ -81,6 +85,10 @@ setup(){
 				year:pickedYear.value
 			}
 			events.value = await EventsMethods.loadEvents(object);
+      const offlineEvents = JSON.parse(await indexedMethods(db,"events_add"))
+      var ids = new Set(offlineEvents.map(d=>d.id));
+      const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
+      events.value = JSON.stringify(merged)
 			loadDay();
 		}
     function loadDay(){
