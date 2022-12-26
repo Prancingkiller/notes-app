@@ -42,12 +42,12 @@ export default{
 		}
 		async function PostNote(){
 			if(await NotesMethods.postNote(note)==false){
-				console.log("sei offline!")
 				const object = [{
 					title:note[0].title,
 					text:note[0].text,
 					temp:true
 			}];
+			console.log(object)
 				await indexedMethods.saveData(indexedDB.value,object,'notes_add')
 				swCalls.registersync("notes_add")
 				ShowNotes();
