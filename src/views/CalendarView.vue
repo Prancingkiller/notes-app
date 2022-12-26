@@ -174,7 +174,7 @@ setup(){
       return ((time_end - time_start)/3600000) // hours
     }
     function calculateMonth(month){
-      const total = 0;
+      var total = 0;
       events.value.forEach(element=>{
         var parts = element.date.split('-');
         if(parts[1]==pickedMonth)
