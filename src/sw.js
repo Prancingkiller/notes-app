@@ -165,7 +165,7 @@ async function backgroundSync(){
     })
   }
   if(Object.keys(dataEvents).length != 0){
-    var responseEvents  = await 	fetch('https://ftptest.altervista.org/pwa/api/add2', {
+    var responseEvents  = await 	fetch('https://ftptest.altervista.org/pwa/api/eventsAdd2', {
     method: 'POST',	
     headers: {
       'Content-Type': 'application/json'
