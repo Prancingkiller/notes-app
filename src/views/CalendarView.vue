@@ -127,7 +127,7 @@ setup(){
   }
 
     async function PostEvent(){
-      if(await EventsMethods.postEvent(dayEvents)==false){
+      if(await EventsMethods.postEvent(dayEvents.value)==false){
       console.log("Sei offline!")
       // AGGIUNGERE INDEXEDDB
       }
