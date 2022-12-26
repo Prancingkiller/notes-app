@@ -24,7 +24,8 @@
                   <tr v-for="event in dayEvents" :key="event.id">
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
-                  </tr>
+                  <td><button @click="eventDelete(event)">Delete</button></td>
+                </tr>
                 </table>
             </div>
           </div>
@@ -104,9 +105,27 @@ setup(){
     function addNewEvent(){
       const object = [];
       dayEvents.value.push(object)
-  }
+   }
+   
+   async function eventDelete(event){
+    if(event.temp == true){
 
-  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent}
+    }
+    else{
+      const obj = [{
+        id : event.id
+      }]
+      if( await EventsMethods.deleteEvent(obj)==false){
+				alert("Impossible cancellare, sei offline?")
+				}
+				else{
+				console.log("Evento cancellato")
+				loadEvents();
+				}
+    }
+   }
+
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete}
 },
 components:{
   BaseCalendar,
