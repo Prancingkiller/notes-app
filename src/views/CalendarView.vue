@@ -26,7 +26,7 @@
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
                   <td v-if="event.temp==true"><p>Not Sync...</p></td>
-                  <td><button @click="eventDelete(event)">Delete</button></td>
+                  <td><button @click="eventDelete(event,i)">Delete</button></td>
                 </tr>
                 </table>
             </div>
@@ -116,10 +116,10 @@ setup(){
       dayEvents.value.push(object)
    }
 
-   async function eventDelete(event){
+   async function eventDelete(event,arrayPos){
     if(event.temp == true){
       if(event.idIndexed == undefined){
-        dayEvents.value.splice(event.$vnode.key,1)
+        dayEvents.value.splice(arrayPos,1)
       }
       else{
         console.log("evento temporaneo!")
