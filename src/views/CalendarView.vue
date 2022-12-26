@@ -106,10 +106,10 @@ setup(){
       const object = [];
       dayEvents.value.push(object)
    }
-   
+
    async function eventDelete(event){
     if(event.temp == true){
-
+      console.log("evento temporaneo!")
     }
     else{
       const obj = [{
