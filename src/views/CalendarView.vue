@@ -137,8 +137,9 @@ setup(){
     async function PostEvent(){
       if(await EventsMethods.postEvent(dayEvents.value)==false){
       console.log("Sei offline!")
-      console.log(dayEvents.value)
-      await indexedMethods.saveData(indexedDB.value,dayEvents.value,'events_add')
+      const object = [dayEvents.value]
+      console.log(object)
+      await indexedMethods.saveData(indexedDB.value,object,'events_add')
       }
       else {
 				console.log("Eventi salvati")
