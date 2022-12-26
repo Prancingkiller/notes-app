@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Add New</button>
+            <button type="button" class="btn btn-primary" @click="addNewEvent">Add New</button>
             <button type="button" class="btn btn-success">Save changes</button>
           </div>
         </div>
