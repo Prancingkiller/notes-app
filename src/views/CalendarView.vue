@@ -119,7 +119,8 @@ setup(){
    async function eventDelete(event,arrayPos){
     if(event.temp == true){
       if(event.idIndexed == undefined){
-        dayEvents.value.splice(arrayPos,1)
+        console.log(arrayPos)
+        //dayEvents.value.splice(arrayPos,1)
       }
       else{
         console.log("evento temporaneo!")
