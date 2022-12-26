@@ -19,25 +19,11 @@
           </div>
           <div class="modal-body">
             <div id="dayBody">
-              <table>
-                <thead>
-                  <td>
-                    Events for Today:
-                  </td>
-                </thead>
-                <tr>
-                  <td>
-                    Time Start:
-                  </td>
-                  <td>
-                    Time Finish:
-                  </td>
-                </tr>
-                  <form class="eventForm tr" v-for="dayEvent in dayEvents" :key="dayEvent.id">
-                    <span class="td"><input type="time" :value="dayEvent.time_start"></span>
-                    <span class="td"><input type="time" :value="dayEvent.time_finish"></span>
-                  </form>
-              </table>
+              <p>Events for Today:</p>
+                  <div v-for="event in dayEvents" :key="event.id">
+                    <BaseInput type="time" :value="event.time_start"/>
+                    <BaseInput type="time" :value="event.time_finish"/>
+                  </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -52,8 +38,8 @@
 </template>
 <script> 
 import BaseCalendar from '../components/BaseCalendar';
+import BaseInput from '../components/BaseInput.vue';
 import EventsMethods from '../api/resources/EventsMethods'
-
 import{ref,onMounted} from 'vue'
 import  {Modal}  from 'bootstrap'
 export default {
@@ -110,7 +96,7 @@ setup(){
 },
 components:{
   BaseCalendar,
-  
+  BaseInput
 }
 }
 </script>
