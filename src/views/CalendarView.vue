@@ -22,12 +22,17 @@
               <table>
                 <thead>
                   <td>
-                    Time Start
-                  </td>
-                  <td>
-                    Time Finish
+                    Events for Today:
                   </td>
                 </thead>
+                <tr>
+                  <td>
+                    Time Start:
+                  </td>
+                  <td>
+                    Time Finish:
+                  </td>
+                </tr>
                 <tr v-for="dayEvent in dayEvents" :key="dayEvent.id">
                   <form class="eventForm">
                     <input type="time" :value="dayEvent.time_start">
