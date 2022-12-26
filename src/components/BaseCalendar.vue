@@ -29,10 +29,11 @@ export default{
 			return moment(d).day();
 			}}).on('data', function (value) {
 				toParent.value.pickedDay = value;
-				context.emit('updateModal',toParent.value)
+				
 			})
 			.on('month', function (value) {
 				toParent.value.pickedMonth = value+1;
+				context.emit('updateModal',toParent.value)
 			})
 			.on('year', function (value) {
 				toParent.value.pickedYear = value;
