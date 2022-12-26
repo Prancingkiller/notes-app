@@ -88,7 +88,7 @@ setup(){
       const offlineEvents = JSON.parse(await indexedMethods.getDataDb(db,"events_add"))
       var ids = new Set(offlineEvents.map(d=>d.id));
       const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
-      events.value = JSON.stringify(merged)
+      events.value = merged
 			loadDay();
 		}
     function loadDay(){
