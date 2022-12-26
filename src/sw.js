@@ -29,7 +29,7 @@ evt.waitUntil(self.skipWaiting());
                     }*/
                     const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
                     const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
-                    const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
+                    const eventStore = db.createObjectStore("events_add", {keyPath: "idIndexed", autoIncrement:true})
                    //alert(`upgrade is called database name: ${db.name} version : ${db.version}`)
 
                 }
