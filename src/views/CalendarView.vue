@@ -150,13 +150,13 @@ setup(){
       }
       else {
 				console.log("Eventi salvati")
-				loadEvents();
+				loadDay();
 			}
     }
     navigator.serviceWorker.addEventListener('message', function(event) {
 			if(event.data.store=="events_add"){
 				if(event.data.newData != false){
-					loadDay();
+					loadEvents();
 				}
 			}
 		})  
