@@ -22,19 +22,19 @@ export default{
     },
     getDataDb(db,store){
       return new Promise((resolve,reject)=>{
-        const tx = db.transaction('notes_add',"readwrite")
-                const pNotes = tx.objectStore('notes_add')
+        const tx = db.transaction(store,"readwrite")
+                const pNotes = tx.objectStore(store)
           const request = pNotes.getAll()
           request.onsuccess = e => {
           resolve(JSON.stringify(request.result));		
             }
       })
     },
-    saveNote(db,data){
+    saveData(db,data,store){
       return new Promise((resolve,reject)=>{
-				const tx = db.transaction("notes_add", "readwrite")
+				const tx = db.transaction(store, "readwrite")
 				tx.onerror = e => alert( ` Error! ${e.target.error}  `)
-				const pNotes = tx.objectStore("notes_add")
+				const pNotes = tx.objectStore(store)
 				data.forEach((element) => {
 					pNotes.put(element)
 				})

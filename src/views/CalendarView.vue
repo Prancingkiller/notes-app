@@ -25,6 +25,7 @@
                   <tr v-for="event in dayEvents" :key="event.id">
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
+                  <td v-if="event.temp==true"><p>Not Sync...</p></td>
                   <td><button @click="eventDelete(event)">Delete</button></td>
                 </tr>
                 </table>
@@ -64,6 +65,9 @@ setup(){
   })
   function launchModal() {
     modal.show()
+  }
+  function closeModal() {
+    modal.hide()
   }
   function onDayChange(e){
     pickedDay.value=e.pickedDay
@@ -134,7 +138,7 @@ setup(){
     async function PostEvent(){
       if(await EventsMethods.postEvent(dayEvents.value)==false){
       console.log("Sei offline!")
-      // AGGIUNGERE INDEXEDDB
+      await indexedMethods.saveData(indexedDB.value,dayEvents.value,'events_add')
       }
       else {
 				console.log("Eventi salvati")

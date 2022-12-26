@@ -48,7 +48,7 @@ export default{
 					text:note[0].text,
 					temp:true
 			}];
-				await indexedMethods.saveNote(indexedDB.value,object)
+				await indexedMethods.saveData(indexedDB.value,object,'notes_add')
 				swCalls.registersync("notes_add")
 				ShowNotes();
 			}
