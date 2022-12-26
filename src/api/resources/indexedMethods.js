@@ -41,9 +41,9 @@ export default{
 				resolve();
       })
     },
-    async deleteNote(db,id){
+    async deleteNote(db,id,store){
       try{
-        await db.transaction("notes_add", "readwrite").objectStore("notes_add").delete(+id);
+        await db.transaction(store, "readwrite").objectStore(store).delete(+id);
         console.log("Temporary object deleted");
       }
       catch(id){

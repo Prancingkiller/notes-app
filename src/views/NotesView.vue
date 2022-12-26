@@ -67,7 +67,7 @@ export default{
 
 		async function onDelete(e){
 			if(e.temp == true){
-				indexedMethods.deleteNote(indexedDB.value,e.id)
+				indexedMethods.deleteNote(indexedDB.value,e.id,"notes_add")
 				ShowNotes();
 			}
 			else{
