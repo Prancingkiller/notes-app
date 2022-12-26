@@ -120,7 +120,6 @@ setup(){
     if(event.temp == true){
       if(event.idIndexed == undefined){
         dayEvents.value.splice(event.key,1)
-        loadDay();
       }
       else{
         console.log("evento temporaneo!")
