@@ -20,10 +20,10 @@
           <div class="modal-body">
             <div id="dayBody">
               <p>Events for Today:</p>
-              <table>
+              <table style="margin:auto">
                   <tr v-for="event in dayEvents" :key="event.id">
-                  <td><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
-                  <td><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
+                  <td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
+                  <td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
                   </tr>
                 </table>
             </div>
@@ -71,7 +71,6 @@ setup(){
   function onShowModal(e){
     launchModal()
   }
-
   async function loadEvents(){
       dayEvents.value = [{
         time_start:"Loading..."
@@ -83,7 +82,6 @@ setup(){
 			events.value = await EventsMethods.loadEvents(object);
 			loadDay();
 		}
-
     function loadDay(){
       dayEvents.value=[];
 			events.value.forEach(element =>{
@@ -93,6 +91,11 @@ setup(){
 			})
 			console.log(dayEvents.value)
 		}
+    
+    function addNewEvent(){
+      const object = [];
+      dayEvents.value.push(object)
+  }
 
   return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents}
 },
