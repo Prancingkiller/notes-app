@@ -46,7 +46,7 @@ import BaseCalendar from '../components/BaseCalendar';
 import BaseInput from '../components/BaseInput.vue';
 import EventsMethods from '../api/resources/EventsMethods'
 import indexedMethods  from '@/api/resources/indexedMethods';
-import{ref,onMounted} from 'vue'
+import{ref,onMounted,toRaw} from 'vue'
 import  {Modal}  from 'bootstrap'
 export default {
 
@@ -137,7 +137,7 @@ setup(){
     async function PostEvent(){
       if(await EventsMethods.postEvent(dayEvents.value)==false){
       console.log("Sei offline!")
-      const object = [dayEvents.value]
+      const object = toRaw(dayEvents.value)
       console.log(object)
       await indexedMethods.saveData(indexedDB.value,object,'events_add')
       }
