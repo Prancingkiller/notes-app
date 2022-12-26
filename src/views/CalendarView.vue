@@ -31,7 +31,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" @click="addNewEvent">Add New</button>
-            <button type="button" class="btn btn-success">Save changes</button>
+            <button type="button" class="btn btn-success" @click="PostEvent">Save changes</button>
           </div>
         </div>
       </div>
@@ -110,6 +110,7 @@ setup(){
    async function eventDelete(event){
     if(event.temp == true){
       console.log("evento temporaneo!")
+      // AGGIUNGERE RIMOZIONE EVENTO TEMPORANEO!!
     }
     else{
       const obj = [{
@@ -123,15 +124,27 @@ setup(){
 				loadEvents();
 				}
     }
-   }
+  }
 
-  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete}
+    async function PostEvent(){
+      if(await EventsMethods.postEvent(dayEvents)==false){
+      console.log("Sei offline!")
+      // AGGIUNGERE INDEXEDDB
+      }
+      else {
+				console.log("Eventi salvati")
+				loadDay();
+			}
+    }
+
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent}
 },
 components:{
   BaseCalendar,
   BaseInput
 }
 }
+
 </script>
 <style>
 .rd-container {
