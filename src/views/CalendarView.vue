@@ -138,7 +138,7 @@ setup(){
       if(await EventsMethods.postEvent(dayEvents.value)==false){
       console.log("Sei offline!")
       console.log(dayEvents.value)
-      //await indexedMethods.saveData(indexedDB.value,dayEvents.value,'events_add')
+      await indexedMethods.saveData(indexedDB.value,dayEvents.value,'events_add')
       }
       else {
 				console.log("Eventi salvati")
