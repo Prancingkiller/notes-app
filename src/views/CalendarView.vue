@@ -97,7 +97,7 @@ setup(){
       dayEvents.value.push(object)
   }
 
-  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents}
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent}
 },
 components:{
   BaseCalendar,
