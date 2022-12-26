@@ -119,7 +119,6 @@ setup(){
    async function eventDelete(event,arrayPos){
     if(event.temp == true){
       if(event.idIndexed == undefined){
-        console.log(arrayPos)
         dayEvents.value.splice(arrayPos,1)
       }
       else{
