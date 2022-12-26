@@ -85,7 +85,7 @@ setup(){
 				year:pickedYear.value
 			}
 			events.value = await EventsMethods.loadEvents(object);
-      const offlineEvents = JSON.parse(await indexedMethods(db,"events_add"))
+      const offlineEvents = JSON.parse(await indexedMethods.getDataDb(db,"events_add"))
       var ids = new Set(offlineEvents.map(d=>d.id));
       const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
       events.value = JSON.stringify(merged)
