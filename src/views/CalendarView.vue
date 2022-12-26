@@ -109,7 +109,6 @@ setup(){
     
     function addNewEvent(){
       const object = {
-        id:0,
         date:pickedDay.value,
         temp:true
       };
