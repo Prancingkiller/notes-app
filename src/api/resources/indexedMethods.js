@@ -10,7 +10,7 @@ export default{
               db = e.target.result
               const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
                         const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
-                        const eventStore = db.createObjectStore("events_add", {keyPath: "id", autoIncrement:true})
+                        const eventStore = db.createObjectStore("events_add", {keyPath: "idIndexed", autoIncrement:true})
                         resolve(db);
               }
         request.onsuccess = e => {
