@@ -58,7 +58,7 @@ setup(){
   var pickedDay = ref();
   var pickedMonth = ref({});
 	var pickedYear = ref({});
-  var HrMonth = ref({});
+  var HrMonth = ref(null);
   let modal = Modal ;
   onMounted(() => {
     if (modalRef.value) {
@@ -177,7 +177,7 @@ setup(){
       var total = 0;
       events.value.forEach(element=>{
         var parts = element.date.split('-');
-        if(parts[1]==pickedMonth)
+        if(parts[1]==month)
         {
           total += calculateDiff(element.time_start,element.time_finish)
         }
@@ -185,7 +185,7 @@ setup(){
       return total;
     }
     function calculation(){
-      HrMonth.value = calculateMonth(pickedMonth);
+      HrMonth.value = calculateMonth(pickedMonth.value);
     }
 
   return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth}
