@@ -20,10 +20,12 @@
           <div class="modal-body">
             <div id="dayBody">
               <p>Events for Today:</p>
-                  <div v-for="event in dayEvents" :key="event.id">
-                    <BaseInput type="time" v-model="event.time_start" label="Time Start" />
-                    <BaseInput type="time" v-model="event.time_finish" label="Time Finish" />
-                  </div>
+              <table>
+                  <tr v-for="event in dayEvents" :key="event.id">
+                  <td><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
+                  <td><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
+                  </tr>
+                </table>
             </div>
           </div>
           <div class="modal-footer">
