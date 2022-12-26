@@ -63,6 +63,7 @@ setup(){
   onMounted(() => {
     if (modalRef.value) {
     modal = new Modal(modalRef.value)
+    loadEvents();
     }
   })
   function launchModal() {
