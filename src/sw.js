@@ -185,6 +185,9 @@ async function backgroundSync(){
     client.postMessage("loginCheck")});	
     }
   }
+  else{
+    console.log("No Events in OfflineDB!")
+  }
   
 }
 
