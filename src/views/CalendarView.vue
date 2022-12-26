@@ -33,12 +33,10 @@
                     Time Finish:
                   </td>
                 </tr>
-                <tr v-for="dayEvent in dayEvents" :key="dayEvent.id">
-                  <form class="eventForm">
-                    <input type="time" :value="dayEvent.time_start">
-                    <input type="time" :value="dayEvent.time_finish">
+                  <form class="eventForm tr" v-for="dayEvent in dayEvents" :key="dayEvent.id">
+                    <span class="td"><input type="time" :value="dayEvent.time_start"></span>
+                    <span class="td"><input type="time" :value="dayEvent.time_finish"></span>
                   </form>
-                </tr>
               </table>
             </div>
           </div>
