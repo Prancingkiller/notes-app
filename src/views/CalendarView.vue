@@ -19,10 +19,22 @@
           </div>
           <div class="modal-body">
             <div id="dayBody">
-              <form v-for="dayEvent in dayEvents" :key="dayEvent.id">
-                <input type="time" :value="dayEvent.time_start">
-                <input type="time" :value="dayEvent.time_finish">
-              </form>
+              <table>
+                <thead>
+                  <td>
+                    Time Start
+                  </td>
+                  <td>
+                    Time Finish
+                  </td>
+                </thead>
+                <tr v-for="dayEvent in dayEvents" :key="dayEvent.id">
+                  <form class="eventForm">
+                    <input type="time" :value="dayEvent.time_start">
+                    <input type="time" :value="dayEvent.time_finish">
+                  </form>
+                </tr>
+              </table>
             </div>
           </div>
           <div class="modal-footer">
