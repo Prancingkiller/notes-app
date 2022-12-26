@@ -104,7 +104,9 @@ setup(){
 		}
     
     function addNewEvent(){
-      const object = [];
+      const object = {
+        temp:true
+      };
       dayEvents.value.push(object)
    }
 
