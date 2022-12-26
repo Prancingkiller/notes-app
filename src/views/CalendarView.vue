@@ -20,6 +20,7 @@
           <div class="modal-body">
             <div id="dayBody">
               <p>Events for Today:</p>
+              <p>{{ dayEvents }}</p>
               <table style="margin:auto">
                   <tr v-for="event in dayEvents" :key="event.id">
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
