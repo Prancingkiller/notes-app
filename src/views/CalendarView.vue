@@ -1,6 +1,7 @@
 <template>
     <h1>Calendar</h1>
     <div class="col-md-10 text-center">
+          <h3>Totale ore mese: {{ HrMonth }}</h3>
           <h2 class="mb-5 text-center">Seleziona la Data</h2>
           <p></p>
           <input type="hidden" class="form-control w-25 mx-auto mb-3" id="result" placeholder="" disabled="">
@@ -57,6 +58,7 @@ setup(){
   var pickedDay = ref();
   var pickedMonth = ref({});
 	var pickedYear = ref({});
+  var HrMonth = ref({});
   let modal = Modal ;
   onMounted(() => {
     if (modalRef.value) {
@@ -96,6 +98,7 @@ setup(){
       const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
       events.value = merged
 			loadDay();
+      calculation();
 		}
     function loadDay(){
       dayEvents.value=[];
@@ -161,7 +164,31 @@ setup(){
 			}
 		})  
 
-  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent}
+    function calculateDiff(startTime,finishTime){
+      var time_start = new Date();
+      var time_end = new Date();
+      var value_start = startTime.concat(":00").split(':');
+      var value_end = finishTime.concat(":00").split(':');
+      time_start.setHours(value_start[0], value_start[1], value_start[2], 0)
+      time_end.setHours(value_end[0], value_end[1], value_end[2], 0);
+      return ((time_end - time_start)/3600000) // hours
+    }
+    function calculateMonth(month){
+      const total = 0;
+      events.value.forEach(element=>{
+        var parts = element.date.split('-');
+        if(parts[1]==pickedMonth)
+        {
+          total += calculateDiff(element.time_start,element.time_finish)
+        }
+      })
+      return total;
+    }
+    function calculation(){
+      HrMonth.value = calculateMonth(pickedMonth);
+    }
+
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth}
 },
 components:{
   BaseCalendar,
