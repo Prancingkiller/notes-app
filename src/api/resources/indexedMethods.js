@@ -20,15 +20,12 @@ export default{
       })
        
     },
-    getDataDb(db){
+    getDataDb(db,store){
       return new Promise((resolve,reject)=>{
         const tx = db.transaction('notes_add',"readwrite")
                 const pNotes = tx.objectStore('notes_add')
-                //const request = pNotes.openCursor()
           const request = pNotes.getAll()
           request.onsuccess = e => {
-          //console.log(request.result);
-          console.log("Loading data from offline DB");
           resolve(JSON.stringify(request.result));		
             }
       })
