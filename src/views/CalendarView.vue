@@ -119,7 +119,7 @@ setup(){
    async function eventDelete(event){
     if(event.temp == true){
       if(event.idIndexed == undefined){
-        dayEvents.value.splice(event.key,1)
+        dayEvents.value.splice(event.$vnode.key,1)
       }
       else{
         console.log("evento temporaneo!")
