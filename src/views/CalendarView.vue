@@ -118,9 +118,14 @@ setup(){
 
    async function eventDelete(event){
     if(event.temp == true){
-      console.log("evento temporaneo!")
-      indexedMethods.deleteNote(indexedDB.value,event.idIndexed,"events_add")
-      loadEvents();
+      if(event.idIndexed == undefined){
+        loadDay();
+      }
+      else{
+        console.log("evento temporaneo!")
+        indexedMethods.deleteNote(indexedDB.value,event.idIndexed,"events_add")
+        loadEvents();
+      }
     }
     else{
       const obj = [{
@@ -147,7 +152,6 @@ setup(){
 				console.log("Eventi salvati")
 				loadDay();
 			}
-      closeModal()
     }
 
   return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent}
