@@ -21,8 +21,8 @@
             <div id="dayBody">
               <p>Events for Today:</p>
                   <div v-for="event in dayEvents" :key="event.id">
-                    <BaseInput type="time" :value="event.time_start"/>
-                    <BaseInput type="time" :value="event.time_finish"/>
+                    <BaseInput type="time" value="event.time_start"/>
+                    <BaseInput type="time" value="event.time_finish"/>
                   </div>
             </div>
           </div>
