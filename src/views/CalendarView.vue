@@ -120,7 +120,7 @@ setup(){
     if(event.temp == true){
       if(event.idIndexed == undefined){
         console.log(arrayPos)
-        //dayEvents.value.splice(arrayPos,1)
+        dayEvents.value.splice(arrayPos,1)
       }
       else{
         console.log("evento temporaneo!")
