@@ -150,7 +150,7 @@ setup(){
       }
       else {
 				console.log("Eventi salvati")
-				loadDay();
+				loadEvents();
 			}
     }
     navigator.serviceWorker.addEventListener('message', function(event) {
