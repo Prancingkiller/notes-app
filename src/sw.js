@@ -166,11 +166,10 @@ async function backgroundSync(){
   }
   if(Object.keys(dataEvents).length != 0){
     var responseEvents  = await 	fetch('https://ftptest.altervista.org/pwa/api/eventsAdd2', {
-    method: 'POST',	
-    headers: {
-      'Content-Type': 'application/json'
-    },	
-    contentType: 'application/json',
+      mode: 'cors',
+      credentials: 'include',
+      method: 'POST',	
+      contentType: 'application/json',
     body: JSON.stringify(dataEvents)
     })	
     var dataEventsStatus = await responseEvents.json();
