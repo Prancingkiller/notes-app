@@ -12,21 +12,15 @@ export default {
     },
 
     async postNote(data){
-        const dataa = new FormData();
-        let csrfToken = null;
-        let cookieValue = `; ${document.cookie}`;
-        let parts = cookieValue.split(`; safeapptoken=`); // This needs to match the value set in csrf_config.php file
-        if (parts.length === 2) {
-            csrfToken = parts.pop().split(';').shift();
-        }
-        dataa.append('data', data)
-        dataa.append('safeapptoken', csrfToken)
         const response  = await fetch(APISettings.baseURL+"/add2", {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',	
+            headers: {
+                'Trusted': 'yes'
+              },
             contentType: 'application/json',
-            body: JSON.stringify(dataa)
+            body: JSON.stringify(data)
         }).catch(()=>{return false})
         if(response.ok){
             const result = await response.json();
