@@ -46,4 +46,14 @@ export default {
         }
     },
 
+    async getAverageSalary(){
+        const response = await fetch(APISettings.baseURL+"/salaryGetAverage2",{
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+        });
+        const result = await response.json();
+        return result.value;
+    }
+
 }

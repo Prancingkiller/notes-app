@@ -2,6 +2,7 @@
     <h1>Calendar</h1>
     <div class="col-md-10 text-center">
           <h3>Totale ore mese: {{ HrMonth }}</h3>
+          <h3>Previsione Stipendio: {{ PrevisionSalary }}</h3>
           <h2 class="mb-5 text-center">Seleziona la Data</h2>
           <p></p>
           <input type="hidden" class="form-control w-25 mx-auto mb-3" id="result" placeholder="" disabled="">
@@ -59,6 +60,8 @@ setup(){
   var pickedMonth = ref({});
 	var pickedYear = ref({});
   var HrMonth = ref(null);
+  var AverageSalary = ref(null);
+  var PrevisionSalary = ref(null);
   let modal = Modal ;
   onMounted(() => {
     if (modalRef.value) {
@@ -184,11 +187,19 @@ setup(){
       })
       return total;
     }
-    function calculation(){
-      HrMonth.value = calculateMonth(pickedMonth.value);
+
+    async function calculateSalary(){
+      AverageSalary.value = await EventsMethods.getAverageSalary();
+      PrevisionSalary.value = AverageSalary.value*HrMonth.value;
     }
 
-  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth}
+
+    function calculation(){
+      HrMonth.value = calculateMonth(pickedMonth.value);
+      calculateSalary();
+    }
+
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth,PrevisionSalary}
 },
 components:{
   BaseCalendar,
