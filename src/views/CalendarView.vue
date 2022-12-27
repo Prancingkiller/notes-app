@@ -99,6 +99,7 @@ setup(){
 			await getRealSalary();
 			loadDay();
 			calculation();
+			postNewAverage()
 		}
 		function loadDay(){
 			events.value.forEach(element =>{
@@ -139,7 +140,6 @@ setup(){
 				else{
 				console.log("Evento cancellato")
 				loadEvents();
-				postNewAverage()
 				}
 		}
 	}
@@ -154,7 +154,6 @@ setup(){
 			else {
 				console.log("Eventi salvati")
 				loadEvents();
-				postNewAverage()
 			}
 		}
 		navigator.serviceWorker.addEventListener('message', function(event) {
@@ -192,7 +191,6 @@ setup(){
 		}
 
 		async function postNewAverage(){
-			calculation();
 			const object = {
 				actualMonth:pickedMonth.value,
 				actualHours:HrMonth.value,
