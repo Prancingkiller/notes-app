@@ -192,6 +192,7 @@ setup(){
 		}
 
 		async function postNewAverage(){
+			calculation();
 			const object = {
 				actualMonth:pickedMonth.value,
 				actualHours:HrMonth.value,
