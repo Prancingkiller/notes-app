@@ -126,7 +126,6 @@ setup(){
 			else{
 				console.log("evento temporaneo!")
 				indexedMethods.deleteNote(indexedDB.value,event.idIndexed,"events_add")
-				//await post new average
 				loadEvents();
 			}
 		}
@@ -139,7 +138,7 @@ setup(){
 				}
 				else{
 				console.log("Evento cancellato")
-				//await post new average
+				await postNewAverage()
 				loadEvents();
 				}
 		}
@@ -154,7 +153,7 @@ setup(){
 			}
 			else {
 				console.log("Eventi salvati")
-				//await post new average
+				await postNewAverage()
 				loadEvents();
 			}
 		}
@@ -199,6 +198,7 @@ setup(){
 				actualYear:pickedYear.value,
 				actualSalary:realSalary.value
 			}
+			await EventsMethods.postNewAverage(object);
 		}
 
 		async function getRealSalary(){
