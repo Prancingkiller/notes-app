@@ -198,7 +198,7 @@ setup(){
 				actualYear:pickedYear.value,
 				actualSalary:realSalary.value
 			}
-			await EventsMethods.postNewAverage(object);
+			await EventsMethods.postAverage(object);
 		}
 
 		async function getRealSalary(){
