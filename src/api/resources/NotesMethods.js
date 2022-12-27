@@ -2,13 +2,6 @@ import { APISettings } from '../config.js';
 export default {
     name:"LogMethods",
     async getNotes(){
-        let csrfToken = null;
-        let cookieValue = `; ${document.cookie}`;
-        let parts = cookieValue.split(`; safeapptoken=`); // This needs to match the value set in csrf_config.php file
-        if (parts.length === 2) {
-            csrfToken = parts.pop().split(';').shift();
-        }
-        
         const response = await fetch(APISettings.baseURL+"/index2",{
             mode: 'cors',
             credentials: 'include',

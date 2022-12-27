@@ -30,6 +30,13 @@ export default{
 		onMounted(ShowNotes)
 
 		async function ShowNotes(){
+			let csrfToken = null;
+			let cookieValue = `; ${document.cookie}`;
+			let parts = cookieValue.split(`; safeapptoken=`); // This needs to match the value set in csrf_config.php file
+			if (parts.length === 2) {
+				csrfToken = parts.pop().split(';').shift();
+			}
+
 			var db;
 			db = await indexedMethods.initiate();
 			indexedDB.value = db;
