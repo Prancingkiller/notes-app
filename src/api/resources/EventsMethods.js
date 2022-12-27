@@ -80,7 +80,7 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        return result;
+        return result.value;
     }
 
 }
