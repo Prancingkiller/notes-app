@@ -99,7 +99,6 @@ setup(){
 			await getRealSalary();
 			loadDay();
 			calculation();
-			postNewAverage()
 		}
 		function loadDay(){
 			events.value.forEach(element =>{
@@ -127,7 +126,8 @@ setup(){
 			else{
 				console.log("evento temporaneo!")
 				indexedMethods.deleteNote(indexedDB.value,event.idIndexed,"events_add")
-				loadEvents();
+				await loadEvents();
+				await postNewAverage();
 			}
 		}
 		else{
@@ -139,7 +139,8 @@ setup(){
 				}
 				else{
 				console.log("Evento cancellato")
-				loadEvents();
+				await loadEvents();
+				await postNewAverage();
 				}
 		}
 	}
@@ -153,7 +154,8 @@ setup(){
 			}
 			else {
 				console.log("Eventi salvati")
-				loadEvents();
+				await loadEvents();
+				await postNewAverage();
 			}
 		}
 		navigator.serviceWorker.addEventListener('message', function(event) {
