@@ -210,6 +210,9 @@ setup(){
 			if (sal != null){
 				realSalary.value = sal
 			}
+			else{
+				realSalary.value = null
+			}
 		}
 
 		function calculation(){
