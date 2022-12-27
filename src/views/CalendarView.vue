@@ -2,7 +2,8 @@
     <h1>Calendar</h1>
     <div class="col-md-10 text-center">
           <h3>Totale ore mese: {{ HrMonth }}</h3>
-          <h3>Previsione Stipendio: {{ PrevisionSalary }}</h3>
+          <h3 v-if="realSalary == null">Previsione Stipendio: {{ PrevisionSalary }}</h3>
+          <h3 v-else>Stipendio ricevuto: {{ realSalary }}</h3>
           <input type="hidden" class="form-control w-25 mx-auto mb-3" id="result" placeholder="" disabled="">
           <form action="#" class="row">
             <div class="col-md-12">
@@ -56,6 +57,7 @@ setup(){
   var pickedDay = ref();
   var pickedMonth = ref({});
 	var pickedYear = ref({});
+  var realSalary = ref(null);
   var HrMonth = ref(null);
   var AverageSalary = ref(null);
   var PrevisionSalary = ref(null);
@@ -89,11 +91,12 @@ setup(){
 				month:pickedMonth.value,
 				year:pickedYear.value
 			}
-			events.value = await EventsMethods.loadEvents(object);
+			events.value = await EventsMethods.loadEvents(object); 
       const offlineEvents = JSON.parse(await indexedMethods.getDataDb(db,"events_add"))
       var ids = new Set(offlineEvents.map(d=>d.id));
       const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
       events.value = merged
+      await getRealSalary();
 			loadDay();
       calculation();
 		}
@@ -123,6 +126,7 @@ setup(){
       else{
         console.log("evento temporaneo!")
         indexedMethods.deleteNote(indexedDB.value,event.idIndexed,"events_add")
+        //await post new average
         loadEvents();
       }
     }
@@ -135,6 +139,7 @@ setup(){
 				}
 				else{
 				console.log("Evento cancellato")
+        //await post new average
 				loadEvents();
 				}
     }
@@ -149,7 +154,8 @@ setup(){
       }
       else {
 				console.log("Eventi salvati")
-				loadDay();
+        //await post new average
+				loadEvents();
 			}
     }
     navigator.serviceWorker.addEventListener('message', function(event) {
@@ -186,13 +192,32 @@ setup(){
       PrevisionSalary.value = (AverageSalary.value*HrMonth.value).toFixed(2);
     }
 
+    async function postNewAverage(){
+      const object = {
+        actualMonth:pickedMonth.value,
+			  actualHours:HrMonth.value,
+			  actualYear:pickedYear.value,
+		  	actualSalary:realSalary.value
+      }
+    }
+
+    async function getRealSalary(){
+      const object = {
+        year:pickedYear.value,
+		    month:pickedMonth.value
+      }
+      var sal = EventsMethods.getSalaryAmount(object);
+      if (sal != null){
+        realSalary.value = sal
+      }
+    }
 
     function calculation(){
       HrMonth.value = calculateMonth(pickedMonth.value);
       calculateSalary();
     }
 
-  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth,PrevisionSalary}
+  return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth,PrevisionSalary,realSalary}
 },
 components:{
   BaseCalendar,
