@@ -183,7 +183,7 @@ setup(){
 
     async function calculateSalary(){
       AverageSalary.value = await EventsMethods.getAverageSalary();
-      PrevisionSalary.value = AverageSalary.value*HrMonth.value;
+      PrevisionSalary.value = (AverageSalary.value*HrMonth.value).toFixed(2);
     }
 
 
