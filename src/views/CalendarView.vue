@@ -3,8 +3,6 @@
     <div class="col-md-10 text-center">
           <h3>Totale ore mese: {{ HrMonth }}</h3>
           <h3>Previsione Stipendio: {{ PrevisionSalary }}</h3>
-          <h2 class="mb-5 text-center">Seleziona la Data</h2>
-          <p></p>
           <input type="hidden" class="form-control w-25 mx-auto mb-3" id="result" placeholder="" disabled="">
           <form action="#" class="row">
             <div class="col-md-12">
@@ -22,7 +20,6 @@
           <div class="modal-body">
             <div id="dayBody">
               <p>Events for Today:</p>
-              <p>{{ dayEvents }}</p>
               <table style="margin:auto">
                   <tr v-for="(event,i) in dayEvents" :key="i">
                   <td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
@@ -87,10 +84,7 @@ setup(){
       var db;
 			db = await indexedMethods.initiate();
 			indexedDB.value = db;
-
-      dayEvents.value = [{
-        time_start:"Loading..."
-      }];
+      dayEvents.value=[];
 			var object = {
 				month:pickedMonth.value,
 				year:pickedYear.value
@@ -104,7 +98,6 @@ setup(){
       calculation();
 		}
     function loadDay(){
-      dayEvents.value=[];
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
 					dayEvents.value.push(element)
