@@ -206,7 +206,7 @@ setup(){
 				year:pickedYear.value,
 				month:pickedMonth.value
 			}
-			var sal = EventsMethods.getSalaryAmount(object);
+			var sal = await EventsMethods.getSalaryAmount(object);
 			if (sal != null){
 				realSalary.value = sal
 			}
