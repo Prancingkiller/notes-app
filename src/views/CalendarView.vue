@@ -138,8 +138,8 @@ setup(){
 				}
 				else{
 				console.log("Evento cancellato")
-				await postNewAverage()
 				loadEvents();
+				postNewAverage()
 				}
 		}
 	}
@@ -153,8 +153,8 @@ setup(){
 			}
 			else {
 				console.log("Eventi salvati")
-				await postNewAverage()
 				loadEvents();
+				postNewAverage()
 			}
 		}
 		navigator.serviceWorker.addEventListener('message', function(event) {
