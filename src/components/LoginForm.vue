@@ -1,6 +1,6 @@
 <template>
-    <span style="color:white">Ciao {{ username }}, {{ company }} </span>
     <div v-if="logged">
+        <span style="color:white">Ciao {{ username }}, {{ company }} </span>
         <button class="btn btn-outline-success" type="button" @click.prevent="logout">Logout</button>
     </div>
     <div v-else>
