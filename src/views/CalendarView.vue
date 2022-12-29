@@ -21,8 +21,17 @@
 					<div class="modal-body">
 						<div id="dayBody">
 							<p>Events for Today:</p>
-							<table style="margin:auto">
+								<table style="margin:auto">
 									<tr v-for="(event,i) in dayEvents" :key="i">
+									<td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
+									<td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
+									<td v-if="event.temp==true"><p>Not Sync...</p></td>
+									<td><button @click="eventDelete(event,i)">Delete</button></td>
+								</tr>
+								</table>
+							<p>To add:</p>
+								<table style="margin:auto">
+									<tr v-for="(event,i) in newEvents" :key="i">
 									<td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
 									<td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
 									<td v-if="event.temp==true"><p>Not Sync...</p></td>
@@ -53,7 +62,8 @@ export default {
 setup(){
 	var events = ref({});
 	var dayEvents = ref([]);
-	const modalRef = ref(null)
+	var newEvents = ref(null);
+	const modalRef = ref(null);
 	var pickedDay = ref();
 	var pickedMonth = ref({});
 	var pickedYear = ref({});
@@ -115,13 +125,13 @@ setup(){
 				date:pickedDay.value,
 				temp:true
 			};
-			dayEvents.value.push(object)
+			newEvents.value.push(object)
 		}
 
 		async function eventDelete(event,arrayPos){
 		if(event.temp == true){
 			if(event.idIndexed == undefined){
-				dayEvents.value.splice(arrayPos,1)
+				newEvents.value.splice(arrayPos,1)
 			}
 			else{
 				console.log("evento temporaneo!")
@@ -229,7 +239,7 @@ setup(){
 			calculateSalary();
 		}
 
-	return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth,PrevisionSalary,realSalary}
+	return{pickedDay,onDayChange,modalRef,onShowModal,dayEvents,addNewEvent,eventDelete,PostEvent,HrMonth,PrevisionSalary,realSalary,newEvents}
 },
 components:{
 	BaseCalendar,
