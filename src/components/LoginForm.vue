@@ -47,9 +47,8 @@ export default{
             }
         }
         async function logout(){
-            
             const response = await LogMethods.Logout();
-            if(response.login == "success"){
+            if(response.logout == "success"){
                 localStorage.clear();
                 logged.value=false;
             }
