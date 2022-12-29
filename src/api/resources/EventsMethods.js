@@ -34,6 +34,9 @@ export default {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',	
+            headers: {
+                'Trusted': 'yes'
+            },
             contentType: 'application/json',
             body: JSON.stringify(data)
         }).catch(()=>{return false})
@@ -61,6 +64,9 @@ export default {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',	
+            headers: {
+                'Trusted': 'yes'
+            },
             contentType: 'application/json',
             body: JSON.stringify(data)
         }).catch(()=>{return false})

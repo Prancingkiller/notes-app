@@ -130,8 +130,9 @@ self.addEventListener('message', function(event) {
 async function backgroundSync(){
   const PromiseNotes = syncThing('notes_add',"add2")
   const PromiseEvents = syncThing('events_add',"eventsAdd2")
+  const PromiseSalary = syncThing('salary_add',"salaryNewAverage2")
 
-  Promise.all([PromiseNotes, PromiseEvents]).then((values) => {
+  Promise.all([PromiseNotes, PromiseEvents, PromiseSalary]).then((values) => {
     console.log("sync complete");
   });
 }

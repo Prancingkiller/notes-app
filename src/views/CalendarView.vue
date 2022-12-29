@@ -199,7 +199,12 @@ setup(){
 				actualYear:pickedYear.value,
 				actualSalary:realSalary.value
 			}
-			await EventsMethods.postAverage(object);
+			if(await EventsMethods.postAverage(object)==false){
+			await indexedMethods.saveData(indexedDB.value,object,'salary_add')
+			}
+			else {
+				console.log("Salaries salvati")
+			}
 		}
 
 		async function getRealSalary(){
