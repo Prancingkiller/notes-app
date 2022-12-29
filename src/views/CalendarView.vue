@@ -109,6 +109,7 @@ setup(){
 		}
 		
 		function addNewEvent(){
+			dayEvents.value = []
 			const object = {
 				id:0,
 				date:pickedDay.value,
