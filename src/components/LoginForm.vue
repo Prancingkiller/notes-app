@@ -47,10 +47,13 @@ export default{
             }
         }
         async function logout(){
-            localStorage.clear();
-            logged.value=false;
+            
             const response = await LogMethods.Logout();
-            return response;
+            if(response.login == "success"){
+                localStorage.clear();
+                logged.value=false;
+            }
+            CheckLogged()
         }
 
         return{logged,formData,login,logout,username,company}
