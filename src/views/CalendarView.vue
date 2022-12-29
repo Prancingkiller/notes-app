@@ -176,7 +176,7 @@ setup(){
 
 		navigator.serviceWorker.addEventListener('message', function(event) {
 			if(event.data.store=="events_add"){
-				if(newEvents.value != []){
+				if(newEvents.value == []){
 					loadEvents();
 				}
 			}
