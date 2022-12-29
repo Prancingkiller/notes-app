@@ -29,6 +29,7 @@
 									<td><button @click="eventDelete(event,i)">Delete</button></td>
 								</tr>
 								</table>
+							<p>To add:</p>
 								<table style="margin:auto">
 									<tr v-for="(event,i) in newEvents" :key="i">
 									<td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
@@ -100,7 +101,6 @@ setup(){
 				year:pickedYear.value
 			}
 			events.value = await EventsMethods.loadEvents(object); 
-			newEvents.value.forEach(element=>{events.value.push(element)})
 			const offlineEvents = JSON.parse(await indexedMethods.getDataDb(db,"events_add"))
 			var ids = new Set(offlineEvents.map(d=>d.id));
 			const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
