@@ -101,6 +101,7 @@ setup(){
 				year:pickedYear.value
 			}
 			events.value = await EventsMethods.loadEvents(object); 
+			newEvents.value.forEach(element=>{events.value.push(element)})
 			const offlineEvents = JSON.parse(await indexedMethods.getDataDb(db,"events_add"))
 			var ids = new Set(offlineEvents.map(d=>d.id));
 			const merged = [...offlineEvents,...events.value.filter(d=>!ids.has(d.id))];
@@ -157,7 +158,7 @@ setup(){
 	}
 
 		async function PostEvent(){
-			newEvents.value.forEach(element=>{dayEvents.push(element)})
+			newEvents.value.forEach(element=>{dayEvents.value.push(element)})
 			newEvents.value = [];
 			if(await EventsMethods.postEvent(dayEvents.value)==false){
 			console.log("Sei offline!")
