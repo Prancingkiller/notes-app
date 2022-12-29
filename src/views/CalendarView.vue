@@ -100,13 +100,11 @@ setup(){
 			calculation();
 		}
 		function loadDay(){
-			var refreshedDay = [];
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
-					refreshedDay.push(element)
+					dayEvents.value.push(element)
 				}
 			})
-			dayEvents.value = refreshedDay;
 			console.log(dayEvents.value)
 		}
 		
@@ -116,8 +114,7 @@ setup(){
 				date:pickedDay.value,
 				temp:true
 			};
-			events.value.push(object)
-			loadDay();
+			dayEvents.value.push(object)
 		}
 
 		async function eventDelete(event,arrayPos){
