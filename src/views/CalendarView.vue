@@ -116,7 +116,7 @@ setup(){
 				date:pickedDay.value,
 				temp:true
 			};
-			dayEvents.value.push(object)
+			events.value.push(object)
 		}
 
 		async function eventDelete(event,arrayPos){
