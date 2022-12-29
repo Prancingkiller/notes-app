@@ -26,10 +26,10 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col-6">
-												<BaseInput type="time" v-model="event.time_start" label="Time Start" />
+												<BaseInput style="max-width:80px" type="time" v-model="event.time_start" label="Time Start" />
 											</div>
 											<div class="col-6">
-												<BaseInput type="time" v-model="event.time_finish" label="Time Finish" />
+												<BaseInput style="max-width:80px" type="time" v-model="event.time_finish" label="Time Finish" />
 											</div>
 											<p v-if="event.temp==true">Not Sync...</p>
 										</div>
@@ -45,10 +45,10 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col-6">
-												<BaseInput type="time" v-model="event.time_start" label="Time Start" />
+												<BaseInput style="max-width:80px" type="time" v-model="event.time_start" label="Time Start" />
 											</div>
 											<div class="col-6">
-												<BaseInput type="time" v-model="event.time_finish" label="Time Finish" />
+												<BaseInput style="max-width:80px" type="time" v-model="event.time_finish" label="Time Finish" />
 											</div>
 											<p v-if="event.temp==true">Not Sync...</p>
 										</div>
