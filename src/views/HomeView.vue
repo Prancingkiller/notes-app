@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <div class="container">
     <div class="row">
       <div class="col-6">
-        <font-awesome-icon icon="notesticky" class="fa-10x" />
+        <font-awesome-icon icon="note-sticky" class="fa-10x" />
       </div>
       <div class="col-6">
         <font-awesome-icon icon="calendar" class="fa-10x" />
