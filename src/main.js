@@ -10,4 +10,4 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 library.add(faUserSecret)
 
-createApp(App).use(router).use(Modal).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).use(Modal).mount('#app')
