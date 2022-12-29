@@ -22,7 +22,7 @@
 						<div id="dayBody">
 							<p>Events for Today:</p>
 							<div>
-								<div class="card" style="width: 18rem;">
+								<div class="card" style="width: 14rem;">
 									<div v-for="(event,i) in dayEvents" :key="i" class="card-body">
 										<div class="row">
 											<div class="col-6">
@@ -34,7 +34,7 @@
 											<p v-if="event.temp==true">Not Sync...</p>
 										</div>
 										<div class="row">
-											<button @click="eventDelete(event,i)">Delete</button>
+											<button style="width:8rem;margin:auto;margin-top:5px" @click="eventDelete(event,i)">Delete</button>
 										</div>
 									</div>
 									</div>
