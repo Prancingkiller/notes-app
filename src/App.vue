@@ -14,9 +14,7 @@
 					<router-link class="nav-link" to="/calendar">Calendar</router-link>
 				</li>
 			</ul>
-			<form id="authForm" class="d-flex" style="flex-wrap: wrap;flex-direction: column;">
 				<LoginForm />
-			</form>
 		</div>
 	</div>
 </nav>

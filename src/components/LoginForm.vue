@@ -1,5 +1,5 @@
 <template>
-    {{ logged }}
+    Ciao {{ username }}, {{ company }}
     <div v-if="logged">
         <button class="btn btn-outline-success" type="button" @click.prevent="logout">Logout</button>
     </div>
@@ -16,14 +16,18 @@ import LogMethods from '../api/resources/LogMethods';
 export default{
     name:"LoginForm",
     setup(){
-      const formData = ref({
+        const formData = ref({
             email:'',
             password:''
         });
         const logged = ref(false);
+        const username = ref(null);
+        const company = ref(null);
         function CheckLogged(){
             if(localStorage.getItem("logged")){
                 logged.value=true;
+                username.value = localStorage.getItem("username")
+                company.value = localStorage.getItem("company")
             }
         }
         onMounted(CheckLogged);
@@ -49,7 +53,7 @@ export default{
             return response;
         }
 
-        return{logged,formData,login,logout}
+        return{logged,formData,login,logout,username,company}
     },
 
     components:{
