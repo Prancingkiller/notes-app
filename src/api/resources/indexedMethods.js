@@ -9,10 +9,10 @@ export default{
          request.onupgradeneeded = e => {
               db = e.target.result
               const pNotes = db.createObjectStore("notes_add", {keyPath: "id", autoIncrement:true})
-                        const dNotes = db.createObjectStore("notes_remove", {keyPath: "toRemove"})
-                        const eventStore = db.createObjectStore("events_add", {keyPath: "idIndexed", autoIncrement:true})
-                        resolve(db);
-              }
+              const salaryStore = db.createObjectStore("salary_add", {keyPath: "idIndexed", autoIncrement:true})
+              const eventStore = db.createObjectStore("events_add", {keyPath: "idIndexed", autoIncrement:true})
+              resolve(db);
+        }
         request.onsuccess = e => {
               db = e.target.result
               resolve(db);

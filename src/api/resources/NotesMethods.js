@@ -18,7 +18,7 @@ export default {
             method: 'POST',	
             headers: {
                 'Trusted': 'yes'
-              },
+            },
             contentType: 'application/json',
             body: JSON.stringify(data)
         }).catch(()=>{return false})
