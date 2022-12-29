@@ -8,6 +8,6 @@ import "bootstrap"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faNotes,faCalendar } from '@fortawesome/free-solid-svg-icons'
-library.add(faNotes)
+library.add(faNotes,faCalendar)
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).use(Modal).mount('#app')

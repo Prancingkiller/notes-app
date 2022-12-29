@@ -2,10 +2,10 @@
   <div class="home">
     <div class="row">
       <div class="col-6">
-        <font-awesome-icon icon="fa-solid fa-notes" class="fa-10x" />
+        <font-awesome-icon icon="notes" class="fa-10x" />
       </div>
       <div class="col-6">
-        <font-awesome-icon icon="fa-solid fa-calendar" class="fa-10x" />
+        <font-awesome-icon icon="calendar" class="fa-10x" />
       </div>
     </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
