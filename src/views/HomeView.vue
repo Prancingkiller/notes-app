@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row" style="max-width:500px">
+    <div class="row" style="max-width:500px;margin:auto">
       <div class="col-6">
         <font-awesome-icon icon="note-sticky" class="fa-10x" @click="goNotes" />
       </div>
