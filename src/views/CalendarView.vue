@@ -151,11 +151,13 @@ setup(){
 			const object = toRaw(dayEvents.value)
 			console.log(object)
 			await indexedMethods.saveData(indexedDB.value,object,'events_add')
+			await loadEvents();
+			await postNewAverage();
 			}
 			else {
 				console.log("Eventi salvati")
 				await loadEvents();
-				postNewAverage();
+				await postNewAverage();
 			}
 		}
 
