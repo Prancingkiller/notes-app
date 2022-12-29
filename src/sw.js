@@ -128,12 +128,20 @@ self.addEventListener('message', function(event) {
 })
 
 async function backgroundSync(){
+  const PromiseNotes = syncThing('notes_add',"add2")
+  const PromiseEvents = syncThing('events_add',"eventsAdd2")
+
+  Promise.all([PromiseNotes, PromiseEvents]).then((values) => {
+    console.log("sync complete");
+  });
+}
+
+async function syncThing(indexedStore,apiName){
   console.log("Backend sync request received");
-  var data = await addData('notes_add');
-  var dataEvents = await addData('events_add');
+  var data = await addData(indexedStore);
   if(Object.keys(data).length != 0){ //controllo che ho dati nel db offline
-    console.log("Got data from offlinedb notes:"+Object.keys(data).length);
-    var response  = await 	fetch('https://ftptest.altervista.org/pwa/api/add2', {
+    //console.log("Got data from offlinedb notes:"+Object.keys(data).length);
+    var response  = await 	fetch('https://ftptest.altervista.org/pwa/api/'+apiName, {
       mode: 'cors',
       credentials: 'include',
       method: 'POST',	
@@ -142,15 +150,13 @@ async function backgroundSync(){
   })	
     var dataStatus = await response.json();
     if(dataStatus.status == true){
-        console.log("Data sent to server, sent " +dataStatus.notesInserted+" notes!");
-        await clearStore('notes_add');
+        await clearStore(indexedStore);
         clie = await self.clients.matchAll();
-        clie.forEach(client => client.postMessage({store:'notes_add'}));
-        console.log("sync complete")
+        clie.forEach(client => client.postMessage({store:indexedStore}));
     }
     else{	
     clie = await self.clients.matchAll();
-    clie.forEach(client => {client.postMessage({store:'notes_add'});
+    clie.forEach(client => {client.postMessage({store:indexedStore});
     client.postMessage("loginCheck");
     }
     );
@@ -161,34 +167,12 @@ async function backgroundSync(){
   {
     console.log("No data in offline DB");
     var clie = await self.clients.matchAll();
-    clie.forEach(client => {client.postMessage({store:'notes_add'});
+    clie.forEach(client => {client.postMessage({store: indexedStore});
     })
   }
-  if(Object.keys(dataEvents).length != 0){
-    var responseEvents  = await 	fetch('https://ftptest.altervista.org/pwa/api/eventsAdd2', {
-      mode: 'cors',
-      credentials: 'include',
-      method: 'POST',	
-      contentType: 'application/json',
-    body: JSON.stringify(dataEvents)
-    })	
-    var dataEventsStatus = await responseEvents.json();
-    if(dataEventsStatus.status == true){
-      await clearStore('events_add');
-      clie = await self.clients.matchAll();
-      clie.forEach(client => client.postMessage({store:'events_add'}));
-    }
-    else{
-    clie = await self.clients.matchAll();
-    clie.forEach(client => {client.postMessage({store:'events_add'});	
-    client.postMessage("loginCheck")});	
-    }
-  }
-  else{
-    console.log("No Events in OfflineDB!")
-  }
-  
 }
+
+
 
 function addData(syncData)
 {
