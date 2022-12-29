@@ -62,7 +62,7 @@ export default {
 setup(){
 	var events = ref({});
 	var dayEvents = ref([]);
-	var newEvents = ref(null);
+	var newEvents = ref([]);
 	const modalRef = ref(null);
 	var pickedDay = ref();
 	var pickedMonth = ref({});
