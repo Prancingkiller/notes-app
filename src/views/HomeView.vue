@@ -1,12 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Notes App" src="../assets/icon-256x256.png">
     <div class="row">
       <div class="col-6">
-        <font-awesome-icon icon="fa-solid fa-notes" />
+        <FontAwesomeIcon icon="fa-solid fa-notes" />
       </div>
       <div class="col-6">
-        <font-awesome-icon icon="fa-solid fa-calendar" />
+        <FontAwesomeIcon icon="fa-solid fa-calendar" />
       </div>
     </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
@@ -17,11 +16,13 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import indexedMethods from "../api/resources/indexedMethods"
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    HelloWorld,
+    FontAwesomeIcon
   },
   setup(){
 		const db = indexedMethods.initiate();
