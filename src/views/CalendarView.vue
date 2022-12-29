@@ -22,8 +22,8 @@
 						<div id="dayBody">
 							<p>Events for Today:</p>
 							<div>
-								<div class="card" style="width: 14rem;">
-									<div v-for="(event,i) in dayEvents" :key="i" class="card-body">
+								<div v-for="(event,i) in dayEvents" :key="i" class="card" style="width: 14rem;">
+									<div class="card-body">
 										<div class="row">
 											<div class="col-6">
 												<BaseInput type="time" v-model="event.time_start" label="Time Start" />
@@ -41,8 +41,8 @@
 							</div>
 							<p>New events:</p>
 							<div>
-								<div class="card" style="width: 14rem;">
-									<div v-for="(event,i) in newEvents" :key="i" class="card-body">
+								<div v-for="(event,i) in newEvents" :key="i" class="card" style="width: 14rem;">
+									<div class="card-body">
 										<div class="row">
 											<div class="col-6">
 												<BaseInput type="time" v-model="event.time_start" label="Time Start" />
