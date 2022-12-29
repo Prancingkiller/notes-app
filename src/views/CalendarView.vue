@@ -21,23 +21,43 @@
 					<div class="modal-body">
 						<div id="dayBody">
 							<p>Events for Today:</p>
-								<table style="margin:auto">
-									<tr v-for="(event,i) in dayEvents" :key="i">
-									<td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
-									<td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
-									<td v-if="event.temp==true"><p>Not Sync...</p></td>
-									<td><button @click="eventDelete(event,i)">Delete</button></td>
-								</tr>
-								</table>
-							<p>To add:</p>
-								<table style="margin:auto">
-									<tr v-for="(event,i) in newEvents" :key="i">
-									<td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
-									<td style="padding:10px"><BaseInput type="time" v-model="event.time_finish" label="Time Finish" /></td>
-									<td v-if="event.temp==true"><p>Not Sync...</p></td>
-									<td><button @click="eventDelete(event,i)">Delete</button></td>
-								</tr>
-								</table>
+							<div>
+								<div class="card" style="width: 18rem;">
+									<div v-for="(event,i) in dayEvents" :key="i" class="card-body">
+										<div class="row">
+											<div class="col-6">
+												<BaseInput type="time" v-model="event.time_start" label="Time Start" />
+											</div>
+											<div class="col-6">
+												<BaseInput type="time" v-model="event.time_finish" label="Time Finish" />
+											</div>
+											<p v-if="event.temp==true">Not Sync...</p>
+										</div>
+										<div class="row">
+											<button @click="eventDelete(event,i)">Delete</button>
+										</div>
+									</div>
+									</div>
+							</div>
+							<p>New events:</p>
+							<div>
+								<div class="card" style="width: 18rem;">
+									<div v-for="(event,i) in newEvents" :key="i" class="card-body">
+										<div class="row">
+											<div class="col-6">
+												<BaseInput type="time" v-model="event.time_start" label="Time Start" />
+											</div>
+											<div class="col-6">
+												<BaseInput type="time" v-model="event.time_finish" label="Time Finish" />
+											</div>
+											<p v-if="event.temp==true">Not Sync...</p>
+										</div>
+										<div class="row">
+											<button @click="eventDelete(event,i)">Delete</button>
+										</div>
+									</div>
+								</div>
+							</div>		
 						</div>
 					</div>
 					<div class="modal-footer">
