@@ -86,7 +86,6 @@ setup(){
 			var db;
 			db = await indexedMethods.initiate();
 			indexedDB.value = db;
-			dayEvents.value=[];
 			var object = {
 				month:pickedMonth.value,
 				year:pickedYear.value
@@ -101,6 +100,7 @@ setup(){
 			calculation();
 		}
 		function loadDay(){
+			dayEvents.value=[];
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
 					dayEvents.value.push(element)
