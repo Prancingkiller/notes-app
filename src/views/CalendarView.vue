@@ -21,7 +21,7 @@
 					<div class="modal-body">
 						<div id="dayBody">
 							<p>Events for Today:</p>
-							<div>
+							<div style="display:flex;flex-wrap:wrap">
 								<div v-for="(event,i) in dayEvents" :key="i" class="card" style="width: 14rem;">
 									<div class="card-body">
 										<div class="row">
@@ -40,7 +40,7 @@
 									</div>
 							</div>
 							<p>New events:</p>
-							<div>
+							<div style="display:flex;flex-wrap:wrap">
 								<div v-for="(event,i) in newEvents" :key="i" class="card" style="width: 14rem;">
 									<div class="card-body">
 										<div class="row">
