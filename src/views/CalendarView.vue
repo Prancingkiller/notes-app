@@ -100,6 +100,7 @@ setup(){
 			calculation();
 		}
 		function loadDay(){
+			dayEvents.value = []
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
 					dayEvents.value.push(element)
@@ -109,7 +110,6 @@ setup(){
 		}
 		
 		function addNewEvent(){
-			dayEvents.value = []
 			const object = {
 				id:0,
 				date:pickedDay.value,
