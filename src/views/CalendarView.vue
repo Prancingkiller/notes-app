@@ -111,6 +111,7 @@ setup(){
 		}
 		function loadDay(){
 			dayEvents.value = []
+			newEvents.value = []
 			events.value.forEach(element =>{
 				if(element.date == pickedDay.value){
 					dayEvents.value.push(element)
@@ -156,6 +157,8 @@ setup(){
 	}
 
 		async function PostEvent(){
+			newEvents.value.forEach(element=>{dayEvents.push(element)})
+			newEvents = [];
 			if(await EventsMethods.postEvent(dayEvents.value)==false){
 			console.log("Sei offline!")
 			const object = toRaw(dayEvents.value)
