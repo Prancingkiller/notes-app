@@ -25,7 +25,7 @@ export default{
 		onMounted(init)
 
 		function init(){
-			rome(calendar.value,{time: false,weekStart:1, inputFormat: 'YYYY-MM-DD', dateValidator: function (d) {
+			rome(calendar.value,{time: false,weekStart:1,weekdayFormat:["Dom","Lun","Mar","Mer","Gio","Ven","Sab"], inputFormat: 'YYYY-MM-DD', dateValidator: function (d) {
 			return moment(d).day();
 			}}).on('data', function (value) {
 				toParent.value.pickedDay = value;
