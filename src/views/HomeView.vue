@@ -2,7 +2,7 @@
   <div class="home">
     <div class="row">
       <div class="col-6">
-        <font-awesome-icon icon="notes" class="fa-10x" />
+        <font-awesome-icon icon="NoteSticky" class="fa-10x" />
       </div>
       <div class="col-6">
         <font-awesome-icon icon="calendar" class="fa-10x" />
