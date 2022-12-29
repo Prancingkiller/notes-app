@@ -145,6 +145,9 @@ async function syncThing(indexedStore,apiName){
       mode: 'cors',
       credentials: 'include',
       method: 'POST',	
+      headers: {
+        'Trusted': 'yes'
+    },
       contentType: 'application/json',
     body: JSON.stringify(data)
   })	
