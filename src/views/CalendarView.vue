@@ -155,9 +155,10 @@ setup(){
 			else {
 				console.log("Eventi salvati")
 				await loadEvents();
-				await postNewAverage();
+				postNewAverage();
 			}
 		}
+
 		navigator.serviceWorker.addEventListener('message', function(event) {
 			if(event.data.store=="events_add"){
 				if(event.data.newData != false){
