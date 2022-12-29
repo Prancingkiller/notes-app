@@ -30,7 +30,6 @@
 								</tr>
 								</table>
 							<p>To add:</p>
-							{{ newEvents }}
 								<table style="margin:auto">
 									<tr v-for="(event,i) in newEvents" :key="i">
 									<td style="padding:10px"><BaseInput type="time" v-model="event.time_start" label="Time Start" /></td>  
