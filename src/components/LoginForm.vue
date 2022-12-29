@@ -40,7 +40,7 @@ export default{
                 localStorage.setItem('username', response.username);
                 localStorage.setItem('email', response.email);
                 localStorage.setItem('company', response.company_name);
-                logged.value = true
+                CheckLogged()
             }
             else{
                 alert("error")

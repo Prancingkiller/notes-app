@@ -4,8 +4,6 @@
 		<BaseInput v-model="note[0].title" label="Title"/>
 		<BaseInput v-model="note[0].text" label="Text" />
 		<button class="btn btn-primary" @click="PostNote">Add Note</button>
-		<p>{{ notes }}</p>
-		<p>{{ note }}</p>
 	</div>
 	<div style="max-width:600px;margin:auto" class="card-group">
 		<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
