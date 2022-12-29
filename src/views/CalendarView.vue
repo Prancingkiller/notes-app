@@ -117,6 +117,7 @@ setup(){
 				temp:true
 			};
 			events.value.push(object)
+			loadDay();
 		}
 
 		async function eventDelete(event,arrayPos){
