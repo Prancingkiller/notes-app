@@ -158,7 +158,7 @@ setup(){
 
 		async function PostEvent(){
 			newEvents.value.forEach(element=>{dayEvents.push(element)})
-			newEvents = [];
+			newEvents.value = [];
 			if(await EventsMethods.postEvent(dayEvents.value)==false){
 			console.log("Sei offline!")
 			const object = toRaw(dayEvents.value)
