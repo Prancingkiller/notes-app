@@ -52,6 +52,9 @@ import LoginForm from "./components/LoginForm"
 				setTimer()
 			} else {
 				console.error('Background sync not supported');
+				navigator.serviceWorker.ready.then((registration) => {
+					navigator.serviceWorker.controller.postMessage("pushOffline")
+				})
 			}
 		}
 		onMounted(handlerSync)
