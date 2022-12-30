@@ -32,7 +32,15 @@ const routes = [
   {
     path: '/calendar',
     name: 'calendar',
-    component: CalendarView
+    component: CalendarView,
+    beforeEnter: (to, from) => {
+      if(checkLog()){
+        return true;
+      }
+      else{
+        return false;
+      }
+    },
   }
 ]
 
