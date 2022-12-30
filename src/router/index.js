@@ -21,11 +21,11 @@ const routes = [
     name: 'notes',
     component: NotesView,
     beforeEnter: (to, from) => {
-      if(checkLog){
+      if(checkLog()){
         return true;
       }
       else{
-        return false
+        return false;
       }
     },
   },
