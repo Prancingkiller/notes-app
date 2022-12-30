@@ -47,7 +47,14 @@ import LoginForm from "./components/LoginForm"
 		function setTimer(){
 		setTimeout(registerSyncP, 10000);
 		}
-		onMounted(setTimer)
+		function handlerSync(){
+			if ('serviceWorker' in navigator && 'SyncManager' in window) {
+				setTimer()
+			} else {
+				console.error('Background sync not supported');
+			}
+		}
+		onMounted(handlerSync)
 	}
 
 }
