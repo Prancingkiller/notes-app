@@ -7,6 +7,7 @@ function checkLog(){
     return true;
   }
   else{
+    console.log("login first!")
     return false;
   }
 }
