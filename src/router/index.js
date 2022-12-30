@@ -2,7 +2,14 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import NotesView from '../views/NotesView.vue'
 import CalendarView from '../views/CalendarView.vue'
-
+function checkLog(){
+  if(localStorage.getItem("logged")){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 const routes = [
   {
     path: '/',
@@ -12,7 +19,15 @@ const routes = [
   {
     path: '/notes',
     name: 'notes',
-    component: NotesView
+    component: NotesView,
+    beforeEnter: (to, from) => {
+      if(checkLog){
+        return true;
+      }
+      else{
+        return false
+      }
+    },
   },
   {
     path: '/calendar',
