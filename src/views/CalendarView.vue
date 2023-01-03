@@ -1,5 +1,5 @@
 <template>
-		<h1>Calendar</h1>
+		<h1>Calendar {{ newEvents.lenght }}</h1>
 		<div class="col-md-10 text-center">
 					<h3>Totale ore mese: {{ HrMonth }}</h3>
 					<h3 v-if="realSalary == null">Previsione Stipendio: {{ PrevisionSalary }}</h3>
@@ -196,9 +196,9 @@ setup(){
 
 		navigator.serviceWorker.addEventListener('message', function(event) {
 			if(event.data.store=="events_add"){
-				
+				if(newEvents.lenght == 0){
 					loadEvents();
-				
+				}
 			}
 		})  
 
