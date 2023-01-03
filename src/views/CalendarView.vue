@@ -1,5 +1,5 @@
 <template>
-		<h1>Calendar {{ newEvents.length }}</h1>
+		<h1>Calendar</h1>
 		<div class="col-md-10 text-center">
 					<h3>Totale ore mese: {{ HrMonth }}</h3>
 					<h3 v-if="realSalary == null">Previsione Stipendio: {{ PrevisionSalary }}</h3>
