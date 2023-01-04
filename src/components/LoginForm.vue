@@ -29,6 +29,9 @@ export default{
                 username.value = localStorage.getItem("username")
                 company.value = localStorage.getItem("company")
             }
+            else{
+                logged.value = false;
+            }
         }
         onMounted(CheckLogged);
 
@@ -50,7 +53,6 @@ export default{
             const response = await LogMethods.Logout();
             if(response.logout == "success"){
                 localStorage.clear();
-                logged.value=false;
             }
             CheckLogged()
         }
