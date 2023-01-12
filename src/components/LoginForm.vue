@@ -43,7 +43,6 @@ export default{
                 localStorage.setItem('username', response.username);
                 localStorage.setItem('email', response.email);
                 localStorage.setItem('company', response.company_name);
-                localStorage.setItem('csrf', response.csrf);
                 CheckLogged()
             }
             else{
