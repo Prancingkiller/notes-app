@@ -61,6 +61,7 @@ export default{
             const data = JSON.stringify(formData.value)
             const response = await LogMethods.recover(data)
             if(response.restore == "success"){
+                alert("check email")
             }
             else{
                 alert("email not valid")
