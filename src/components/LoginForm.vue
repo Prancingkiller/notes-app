@@ -7,6 +7,7 @@
         <BaseInput label="email" v-model="formData.email" />
         <BaseInput label="password" v-model="formData.password" type="password" />
         <button class="btn btn-outline-success" type="button" @click.prevent="login">Login</button>
+        <button class="btn btn-sm btn-secondary" @click.prevent="recover">Recover</button>
     </div>
 </template>
 <script>
@@ -56,8 +57,17 @@ export default{
             }
             CheckLogged()
         }
+        async function recover(){
+            const data = JSON.stringify(formData.value)
+            const response = await LogMethods.recover(data)
+            if(response.restore == "success"){
+            }
+            else{
+                alert("email not valid")
+            }
+        }
 
-        return{logged,formData,login,logout,username,company}
+        return{logged,formData,login,logout,username,company,recover}
     },
 
     components:{
