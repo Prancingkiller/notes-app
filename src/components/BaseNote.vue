@@ -4,7 +4,7 @@
 		<div class="card-body">
 			<h5 class="card-title">{{note.title}}</h5>
 			<p class="card-text">{{note.text}}</p>
-		<button class="btn btn-danger" @click.native="$emit('delete', note)" >Cancella</button>
+		<button class="btn btn-danger" v-on:click.native="$emit('delete', note)" >Cancella</button>
 	</div>
 	<div class="card-footer">
 			<p class="card-text">
