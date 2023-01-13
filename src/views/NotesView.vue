@@ -5,11 +5,9 @@
 		<BaseInput v-model="note[0].text" label="Text" />
 		<button class="btn btn-primary" @click="PostNote">Add Note</button>
 	</div>
-	<div style="max-width:600px;margin:auto" class="card-group">
-		<draggable class="dragArea list-group w-full" :list="notes" @change="log">
+		<draggable class="dragArea list-group w-full card-group" style="margin:auto" :list="notes" @change="log">
 			<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
 		</draggable>
-	</div>
 </template>
 <script>
 import { ref,onMounted,reactive } from 'vue'
