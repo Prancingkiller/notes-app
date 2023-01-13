@@ -6,7 +6,9 @@
 		<button class="btn btn-primary" @click="PostNote">Add Note</button>
 	</div>
 	<div style="max-width:600px;margin:auto" class="card-group">
-		<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
+		<draggable class="dragArea list-group w-full" :list="notes" @change="log">
+			<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
+		</draggable>
 	</div>
 </template>
 <script>
@@ -16,7 +18,7 @@ import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
-
+import { VueDraggableNext } from 'vue-draggable-next'
 export default{
 	setup(){
 		const note = reactive([{
@@ -86,7 +88,8 @@ export default{
 	},
 	components:{
 		BaseInput,
-		BaseNote
+		BaseNote,
+		draggable: VueDraggableNext
 	}
 }
 </script>

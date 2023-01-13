@@ -12,10 +12,8 @@
 </template>
 
 <script>
-
 import indexedMethods from "../api/resources/indexedMethods"
 import { useRouter, useRoute } from 'vue-router'
-
 
 export default {
   name: 'HomeView',
