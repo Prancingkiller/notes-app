@@ -30,7 +30,25 @@ export default {
             return false;
         }
     },
-
+    async reorder(data){
+        const response  = await fetch(APISettings.baseURL+"/reorder", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',	
+            headers: {
+                'Trusted': 'yes'
+            },
+            contentType: 'application/json',
+            body: JSON.stringify(data)
+        }).catch(()=>{return false})
+        if(response.ok){
+            const result = await response.json();
+            return result;
+        }
+        else{
+            return false;
+        }
+    },
     async deleteNote(data){
             const response  = await fetch(APISettings.baseURL+"/delete2", {
                 mode: 'cors',
