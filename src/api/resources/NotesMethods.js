@@ -31,7 +31,7 @@ export default {
         }
     },
     async reorder(data){
-        const response  = await fetch(APISettings.baseURL+"/reorder", {
+        const response  = await fetch(APISettings.baseURL+"/reorderNotes", {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',	

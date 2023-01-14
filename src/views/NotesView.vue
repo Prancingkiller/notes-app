@@ -5,7 +5,7 @@
 		<BaseInput v-model="note[0].text" label="Text" />
 		<button class="btn btn-primary" @click="PostNote">Add Note</button>
 	</div>
-		<draggable class="dragArea list-group w-full card-group" style="margin: auto;justify-content: center;width: 60100%0px;display: flex;flex-wrap: wrap;flex-direction: row;" :list="notes" @change="testt">
+		<draggable class="dragArea list-group w-full card-group" style="margin: auto;justify-content: center;width: 60100%0px;display: flex;flex-wrap: wrap;flex-direction: row;" :list="notes" @change="reorder">
 			<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
 		</draggable>
 </template>
@@ -55,9 +55,6 @@ export default{
 				ShowNotes();
 			}
 		}
-		function testt(){
-			console.log("AAAAAAAAAA")
-		}
 		async function reorder(){
 			if(await NotesMethods.reorder(notes.value)==false){
 				console.log("sei offline, disabilitato")
@@ -93,7 +90,7 @@ export default{
 			}
 			
 		}
-		return{note,notes,PostNote,onDelete,testt}
+		return{note,notes,PostNote,onDelete,reorder}
 	},
 	components:{
 		BaseInput,
