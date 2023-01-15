@@ -23,7 +23,7 @@
 			<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
 		</draggable>
 	<div style="position:fixed;bottom:10px;right:10px">
-		<font-awesome-icon icon="circle-plus" @click="openModal" />
+		<font-awesome-icon icon="circle-plus" class="fa-5x" @click="openModal" />
 	</div>
 </template>
 <script>
