@@ -1,6 +1,5 @@
 # note-app-sw
-Test with Vue3 indexeddb and serviceworker
-
+Vue3 PWA with indexeddb for background sync
 ## Project setup
 ```
 npm install
