@@ -5,7 +5,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal"></button>
 					</div>
 					<div class="modal-body">
 						<div class="notesForm">
@@ -14,7 +14,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" @click="PostNote">Save changes</button>
+						<button type="button" class="btn btn-success" @click="PostNote">Add Note</button>
 					</div>
 				</div>
 			</div>
@@ -49,6 +49,9 @@ export default{
 		function openModal() {
 			modal.show()
 		}
+		function closeModal() {
+			modal.hide()
+		}
 		async function ShowNotes(){
 			modal = new Modal(modalRef.value)
 			var db;
@@ -77,6 +80,7 @@ export default{
 				console.log("Nota inviata")
 				ShowNotes();
 			}
+			closeModal()
 		}
 		async function reorder(){
 			if(await NotesMethods.reorder(notes.value)==false){
@@ -113,7 +117,7 @@ export default{
 			}
 			
 		}
-		return{note,notes,PostNote,onDelete,reorder,modalRef,openModal}
+		return{note,notes,PostNote,onDelete,reorder,modalRef,openModal,closeModal}
 	},
 	components:{
 		BaseInput,
