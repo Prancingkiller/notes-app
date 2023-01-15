@@ -1,13 +1,30 @@
 <template>
 	<h1>Notes!</h1>
-	<div class="notesForm">
-		<BaseInput v-model="note[0].title" label="Title"/>
-		<BaseInput v-model="note[0].text" label="Text" />
-		<button class="btn btn-primary" @click="PostNote">Add Note</button>
+	<div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="notesForm">
+							<BaseInput v-model="note[0].title" label="Title"/>
+							<BaseInput v-model="note[0].text" label="Text" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" @click="PostNote">Save changes</button>
+					</div>
+				</div>
+			</div>
 	</div>
 		<draggable class="dragArea list-group w-full card-group" style="margin: auto;justify-content: center;width: 60100%0px;display: flex;flex-wrap: wrap;flex-direction: row;" :list="notes" @change="reorder">
 			<BaseNote v-for="note in notes" :key="note.id" :note="note" @delete="onDelete" />
 		</draggable>
+	<div style="position:fixed;bottom:10px;right:10px">
+		<button @click="openModal">ADD</button>
+	</div>
 </template>
 <script>
 import { ref,onMounted,reactive } from 'vue'
@@ -17,6 +34,7 @@ import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
 import { VueDraggableNext } from 'vue-draggable-next'
+import  {Modal}  from 'bootstrap'
 export default{
 	setup(){
 		const note = reactive([{
@@ -25,9 +43,14 @@ export default{
 		}])
 		const notes = ref([]);
 		const indexedDB = ref({}); 
+		const modalRef = ref(null);
+		let modal = Modal ;
 		onMounted(ShowNotes)
-
+		function openModal() {
+			modal.show()
+		}
 		async function ShowNotes(){
+			modal = new Modal(modalRef.value)
 			var db;
 			db = await indexedMethods.initiate();
 			indexedDB.value = db;
@@ -90,7 +113,7 @@ export default{
 			}
 			
 		}
-		return{note,notes,PostNote,onDelete,reorder}
+		return{note,notes,PostNote,onDelete,reorder,openModal}
 	},
 	components:{
 		BaseInput,
