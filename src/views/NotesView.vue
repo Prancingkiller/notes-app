@@ -113,7 +113,7 @@ export default{
 			}
 			
 		}
-		return{note,notes,PostNote,onDelete,reorder,openModal}
+		return{note,notes,PostNote,onDelete,reorder,modalRef,openModal}
 	},
 	components:{
 		BaseInput,
