@@ -1,4 +1,5 @@
 # note-app-sw
+Test with Vue3 indexeddb and serviceworker
 
 ## Project setup
 ```
