@@ -57,7 +57,7 @@ export default{
 		}
 		async function reorder(){
 			if(await NotesMethods.reorder(notes.value)==false){
-				console.log("sei offline, disabilitato")
+				alert("Sei Offline! funzionalità non attiva")
 			}
 			else{
 				console.log("Note riordinate")
