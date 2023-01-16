@@ -1,7 +1,8 @@
 # note-app-sw
 Vue3 PWA with indexeddb for background sync, <br>
 it's hosted here https://whimsical-belekoy-5565ca.netlify.app <br>
-if you want to try with the api i configured you can access with login "user" and "userPassword123"
+if you want to try with the api i configured you can access with login "user" and "userPassword123" <br>
+if i did set cors correctly (hopefully..) you shouldn't be able to use the api from a different domain than the one i linked above
 ## Project setup
 ```
 npm install
