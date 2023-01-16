@@ -8,7 +8,7 @@ You can post notes and test the offline functionality,<br>
 if you're offline your notes will be saved in indexeddb and the background sync should post them on the server when your connection is back up,<br>
 same thing for the calendar page, you can create events and it should work same as the notes for the offline and background sync.<br>
 
-Every time you login you receive an http only cookie with a new key that will allow the requests to be verified from the api, you also receive a cookie that will be linked with the user and only the device with that cookie can login with that user.
+Every time you login you receive an http only cookie with a new key that will allow the requests to be verified from the api, you also receive a cookie with a code that will be linked with the user and only the device with that code can login with that user, logging out will un-link the user from that code.
 ## Project setup
 ```
 npm install
