@@ -1,5 +1,6 @@
 # note-app-sw
-Vue3 PWA with indexeddb for background sync
+Vue3 PWA with indexeddb for background sync,
+if you want to try with the api i configured you can access with login "user" and "userPassword123"
 ## Project setup
 ```
 npm install
