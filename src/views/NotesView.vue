@@ -44,7 +44,7 @@ export default{
 		const notes = ref([]);
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
-		let modal = Modal ;
+		const modal = Modal ;
 		onMounted(ShowNotes)
 		function openModal() {
 			modal.show()
