@@ -2,7 +2,7 @@ import { APISettings } from '../config.js';
 export default {
     name:"LogMethods",
     async getNotes(){
-        const response = await fetch(APISettings.baseURL+"/index2",{
+        const response = await fetch(APISettings.baseURL+"/index2.php",{
             mode: 'cors',
             credentials: 'include',
             method: 'GET',
