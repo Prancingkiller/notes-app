@@ -2,5 +2,5 @@ export const APISettings = {
     headers: new Headers({
         'Accept': 'application/json'
     }),
-    baseURL: 'https://notes-api.it/api',
+    baseURL: 'https://ftptest.altervista.org/pwa/api',
 }
