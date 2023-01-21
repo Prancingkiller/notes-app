@@ -38,7 +38,7 @@ import  {Modal}  from 'bootstrap'
 export default{
 	setup(){
 		var autobahn = require('autobahn');
-		var connection = new autobahn.Connection({url: 'wss://notes-api.it/bin/push-server', realm: 'realm1'});
+		var connection = new autobahn.Connection({url: 'wss://notes-api.it:8080'});
 		const note = reactive([{
 			title:'',
 			text:''
