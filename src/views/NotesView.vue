@@ -37,8 +37,6 @@ import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
 export default{
 	setup(){
-		var autobahn = require('autobahn');
-		var connection = new autobahn.Connection({url: 'wss://notes-api.it:8080'});
 		const note = reactive([{
 			title:'',
 			text:''
