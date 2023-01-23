@@ -142,7 +142,7 @@ async function syncThing(indexedStore,apiName){
   var data = await addData(indexedStore);
   if(Object.keys(data).length != 0){ //controllo che ho dati nel db offline
     //console.log("Got data from offlinedb notes:"+Object.keys(data).length);
-    var response  = await 	fetch('https://ftptest.altervista.org/pwa/api/'+apiName, {
+    var response  = await 	fetch('https://notes-api.it/api/'+apiName, {
       mode: 'cors',
       credentials: 'include',
       method: 'POST',	
