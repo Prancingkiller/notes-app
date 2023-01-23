@@ -37,7 +37,6 @@ import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
 export default{
 	setup(){
-		var autobahn = require('../../node_modules/autobahn/lib/autobahn');
 		const note = reactive([{
 			title:'',
 			text:''
