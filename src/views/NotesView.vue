@@ -1,4 +1,3 @@
-<script src="https://notes-api.it/autobahn.js"></script>
 <template>
 	<h1>Notes!</h1>
 	<div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
@@ -54,10 +53,15 @@ export default{
 			modal.hide()
 		}
 		async function ShowNotes(){
+
+			let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://notes-api.it/autobahn.js')
+      document.head.appendChild(recaptchaScript)
+
 			var conn = new ab.Session('wss://notes-api.it/wss2/',
         function() {
 		var a;
-		    conn._websocket.onopen = function(){
+		conn._websocket.onopen = function(){
 				console.log("connected")
 			}
             conn.subscribe('cat1', function(topic, data) {
@@ -74,7 +78,7 @@ export default{
         },
         {'skipSubprotocolCheck': true}
     );
-	
+
 			modal = new Modal(modalRef.value)
 			var db;
 			db = await indexedMethods.initiate();
