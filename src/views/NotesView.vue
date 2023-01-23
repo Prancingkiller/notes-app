@@ -65,6 +65,9 @@ export default{
 				conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
 				ShowNotes();
 				});
+			conn._websocket.onmessage = function(){
+				ShowNotes();
+			}
 			},
 			function() {
 				console.warn('WebSocket connection closed');
