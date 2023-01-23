@@ -37,6 +37,26 @@ import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
 export default{
 	setup(){
+		var conn = new ab.Session('wss://notes-api.it/wss2/',
+        function() {
+		var a;
+		    conn._websocket.onopen = function(){
+				console.log("connected")
+			}
+            conn.subscribe('cat1', function(topic, data) {
+			data.articles.forEach(element=>{
+				a += "<h1>"+element.title+"</h1><p>"+element.color+"</p>"
+			})
+                // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+				console.log(a)
+				a = "";
+            });
+        },
+        function() {
+            console.warn('WebSocket connection closed');
+        },
+        {'skipSubprotocolCheck': true}
+    );
 		const note = reactive([{
 			title:'',
 			text:''
