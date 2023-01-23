@@ -35,6 +35,7 @@ import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
 import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
+import VueWamp from 'vue-wamp'
 export default{
 	setup(){
 		const note = reactive([{

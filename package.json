@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "@popperjs/core": "^2.11.6",
+    "assert": "^2.0.0",
     "bootstrap": "^5.2.3",
     "core-js": "^3.27.2",
     "moment": "^2.29.4",
@@ -20,7 +21,8 @@
     "vue": "^3.2.13",
     "vue-bs-modal": "^0.7.9",
     "vue-draggable-next": "^2.1.1",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue-wamp": "^3.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -34,7 +36,6 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
-    "landstrasse": "^0.8.2",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0"
   },
