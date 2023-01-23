@@ -53,12 +53,7 @@ export default{
 			modal.hide()
 		}
 		async function ShowNotes(){
-
-			let recaptchaScript = document.createElement('script')
-      recaptchaScript.setAttribute('src', 'https://notes-api.it/autobahn.js')
-      document.head.appendChild(recaptchaScript)
-
-			var conn = new ab.Session('wss://notes-api.it/wss2/',
+		var conn = new window.ab.Session('wss://notes-api.it/wss2/',
         function() {
 		var a;
 		conn._websocket.onopen = function(){
