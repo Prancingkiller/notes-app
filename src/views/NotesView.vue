@@ -45,27 +45,31 @@ export default{
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
 		var modal = Modal ;
-		onMounted(ShowNotes)
+		onMounted(ShowNotes,socket)
 		function openModal() {
 			modal.show()
 		}
 		function closeModal() {
 			modal.hide()
 		}
-	var conn = new window.ab.Session('wss://notes-api.it/wss2/',
-        function() {
-		conn._websocket.onopen = function(){
-				console.log("connected")
-			}
-            conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
-			ShowNotes();
-            });
-        },
-        function() {
-            console.warn('WebSocket connection closed');
-        },
-        {'skipSubprotocolCheck': true}
-    );
+		function socket(){
+			var conn = new window.ab.Session('wss://notes-api.it/wss2/',
+			function() {
+			conn._websocket.onopen = function(){
+					console.log("connected")
+				}
+				conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
+				ShowNotes();
+				});
+			},
+			function() {
+				console.warn('WebSocket connection closed');
+				setTimeout(socket,5000)
+			},
+			{'skipSubprotocolCheck': true}
+			);
+		}
+	
 		async function ShowNotes(){
 			modal = new Modal(modalRef.value)
 			var db;
