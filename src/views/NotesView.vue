@@ -1,3 +1,4 @@
+<script src="https://notes-api.it/autobahn.js"></script>
 <template>
 	<h1>Notes!</h1>
 	<div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
@@ -37,7 +38,23 @@ import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
 export default{
 	setup(){
-		var conn = new ab.Session('wss://notes-api.it/wss2/',
+		const note = reactive([{
+			title:'',
+			text:''
+		}])
+		const notes = ref([]);
+		const indexedDB = ref({}); 
+		const modalRef = ref(null);
+		var modal = Modal ;
+		onMounted(ShowNotes)
+		function openModal() {
+			modal.show()
+		}
+		function closeModal() {
+			modal.hide()
+		}
+		async function ShowNotes(){
+			var conn = new ab.Session('wss://notes-api.it/wss2/',
         function() {
 		var a;
 		    conn._websocket.onopen = function(){
@@ -57,22 +74,7 @@ export default{
         },
         {'skipSubprotocolCheck': true}
     );
-		const note = reactive([{
-			title:'',
-			text:''
-		}])
-		const notes = ref([]);
-		const indexedDB = ref({}); 
-		const modalRef = ref(null);
-		var modal = Modal ;
-		onMounted(ShowNotes)
-		function openModal() {
-			modal.show()
-		}
-		function closeModal() {
-			modal.hide()
-		}
-		async function ShowNotes(){
+	
 			modal = new Modal(modalRef.value)
 			var db;
 			db = await indexedMethods.initiate();
