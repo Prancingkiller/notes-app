@@ -45,12 +45,16 @@ export default{
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
 		var modal = Modal ;
-		onMounted(ShowNotes,socket)
+		onMounted(init)
 		function openModal() {
 			modal.show()
 		}
 		function closeModal() {
 			modal.hide()
+		}
+		function init(){
+			ShowNotes();
+			socket();
 		}
 		function socket(){
 			var conn = new window.ab.Session('wss://notes-api.it/wss2/',
