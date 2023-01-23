@@ -35,7 +35,6 @@ import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
 import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
-import Landstrasse from 'landstrasse';
 export default{
 	setup(){
 		const note = reactive([{
@@ -54,10 +53,6 @@ export default{
 			modal.hide()
 		}
 		async function ShowNotes(){
-			const webSocket = new Landstrasse('wss://notes-api.it/wss2/', "wamp");
-			await webSocket.open();
-
-
 			modal = new Modal(modalRef.value)
 			var db;
 			db = await indexedMethods.initiate();
