@@ -52,28 +52,21 @@ export default{
 		function closeModal() {
 			modal.hide()
 		}
+	var conn = new window.ab.Session('wss://notes-api.it/wss2/',
+        function() {
+		conn._websocket.onopen = function(){
+				console.log("connected")
+			}
+            conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
+			ShowNotes();
+            });
+        },
+        function() {
+            console.warn('WebSocket connection closed');
+        },
+        {'skipSubprotocolCheck': true}
+    );
 		async function ShowNotes(){
-	// 	var conn = new window.ab.Session('wss://notes-api.it/wss2/',
-    //     function() {
-	// 	var a;
-	// 	conn._websocket.onopen = function(){
-	// 			console.log("connected")
-	// 		}
-    //         conn.subscribe('cat1', function(topic, data) {
-	// 		data.articles.forEach(element=>{
-	// 			a += "<h1>"+element.title+"</h1><p>"+element.color+"</p>"
-	// 		})
-    //             // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
-	// 			console.log(a)
-	// 			a = "";
-    //         });
-    //     },
-    //     function() {
-    //         console.warn('WebSocket connection closed');
-    //     },
-    //     {'skipSubprotocolCheck': true}
-    // );
-
 			modal = new Modal(modalRef.value)
 			var db;
 			db = await indexedMethods.initiate();
