@@ -65,8 +65,9 @@ export default{
 				conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
 				ShowNotes();
 				});
-			conn._websocket.onmessage = function(){
-				ShowNotes();
+			conn._websocket.onmessage = function(data){
+				//console.log(data.notes)
+				ShowNotes(data.notes);
 			}
 			},
 			function() {
@@ -77,12 +78,13 @@ export default{
 			);
 		}
 	
-		async function ShowNotes(){
+		async function ShowNotes(socketNotes){
 			modal = new Modal(modalRef.value)
 			var db;
 			db = await indexedMethods.initiate();
 			indexedDB.value = db;
-			notes.value = await NotesMethods.getNotes();
+			//notes.value = await NotesMethods.getNotes();
+			notes.value = socketNotes;
 			console.log("online data: "+notes.value)
 			const OfflineNotes = await indexedMethods.getDataDb(indexedDB.value,"notes_add");
 			console.log("offline data: "+OfflineNotes)
