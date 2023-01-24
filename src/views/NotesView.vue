@@ -53,7 +53,6 @@ export default{
 			modal.hide()
 		}
 		function init(){
-			ShowNotes();
 			socket();
 		}
 		function socket(){
@@ -63,7 +62,7 @@ export default{
 					console.log("connected")
 				}
 				conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
-				ShowNotes();
+				ShowNotes(data.notes);
 				});
 			conn._websocket.onmessage = function(data){
 				//console.log(data.notes)
