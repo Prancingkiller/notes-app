@@ -28,6 +28,21 @@ import LoginForm from "./components/LoginForm"
 		LoginForm
 	},
 	setup(){
+
+			var conn = new window.ab.Session('wss://notes-api.it/wss2/',
+			function() {
+			conn._websocket.onopen = function(){
+					console.log("connected")
+				}
+			},
+			function() {
+				console.warn('WebSocket connection closed');
+				setTimeout(socket,5000)
+			},
+			{'skipSubprotocolCheck': true}
+			);
+
+
 		function registerSyncP(){
 			if(localStorage.getItem("logged")){
 			navigator.serviceWorker.ready.then((registration) => {
