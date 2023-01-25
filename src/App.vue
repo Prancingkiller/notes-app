@@ -37,7 +37,6 @@ import LoginForm from "./components/LoginForm"
 			},
 			function() {
 				console.warn('WebSocket connection closed');
-				setTimeout(socket,5000)
 			},
 			{'skipSubprotocolCheck': true}
 			);
