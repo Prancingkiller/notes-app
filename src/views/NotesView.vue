@@ -27,7 +27,7 @@
 	</div>
 </template>
 <script>
-import { ref,onMounted,reactive } from 'vue'
+import { ref,onMounted,reactive,onBeforeUnmount } from 'vue'
 import BaseInput from '../components/BaseInput'
 import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
@@ -44,8 +44,10 @@ export default{
 		const notes = ref([]);
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
+		var conn;
 		var modal = Modal ;
 		onMounted(init)
+		onBeforeUnmount(closeSocket)
 		function openModal() {
 			modal.show()
 		}
@@ -57,7 +59,7 @@ export default{
 			socket();
 		}
 		function socket(){
-			var conn = new window.ab.Session('wss://notes-api.it/wss2/',
+			conn = new window.ab.Session('wss://notes-api.it/wss2/',
 			function() {
 			conn._websocket.onopen = function(){
 					console.log("connected")
@@ -75,6 +77,9 @@ export default{
 			},
 			{'skipSubprotocolCheck': true}
 			);
+		}
+		function closeSocket(){
+			conn.close();
 		}
 	
 		async function ShowNotes(){
