@@ -73,7 +73,14 @@ export default{
 			}
 			},
 			function() {
-				console.warn('WebSocket connection closed');
+				conn._websocket.onclose = function(){
+					console.warn('WebSocket connection closed');
+				}
+				conn._websocket.onerror = function(){
+					console.warn('WebSocket connection error, retrying');
+					timer = setTimeout(socket,5000)
+				}
+				//console.warn('WebSocket connection closed');
 				//timer = setTimeout(socket,5000)
 			},
 			{'skipSubprotocolCheck': true}
