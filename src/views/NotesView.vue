@@ -45,7 +45,7 @@ export default{
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
 		var conn;
-		var timer;
+		//var timer;
 		var modal = Modal ;
 		onMounted(init)
 		onUnmounted(closeSocket)
@@ -74,13 +74,13 @@ export default{
 			},
 			function() {
 				console.warn('WebSocket connection closed');
-				timer = setTimeout(socket,5000)
+				//timer = setTimeout(socket,5000)
 			},
 			{'skipSubprotocolCheck': true}
 			);
 		}
 		function closeSocket(){
-			clearTimeout(timer)
+			//clearTimeout(timer)
 			conn.close();
 		}
 	
