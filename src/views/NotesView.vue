@@ -70,6 +70,9 @@ export default{
 			conn._websocket.onmessage = function(){
 				ShowNotes();
 			}
+			conn._websocket.onerror = function(){
+				console.warn('Websocket error!!')
+			}
 			},
 			function() {
 				console.warn('WebSocket connection closed');
