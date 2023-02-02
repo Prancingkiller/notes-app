@@ -45,7 +45,7 @@ export default{
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
 		var conn;
-		//var timer;
+		var timer;
 		var modal = Modal ;
 		onMounted(init)
 		onUnmounted(closeSocket)
