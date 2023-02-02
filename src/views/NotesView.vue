@@ -27,7 +27,7 @@
 	</div>
 </template>
 <script>
-import { ref,onMounted,reactive,onUnmounted } from 'vue'
+import { ref,onMounted,reactive,onBeforeUnmount } from 'vue'
 import BaseInput from '../components/BaseInput'
 import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
@@ -45,10 +45,9 @@ export default{
 		const indexedDB = ref({}); 
 		const modalRef = ref(null);
 		var conn;
-		var timer;
 		var modal = Modal ;
 		onMounted(init)
-		onUnmounted(closeSocket)
+		onBeforeUnmount(closeSocket)
 		function openModal() {
 			modal.show()
 		}
@@ -73,21 +72,13 @@ export default{
 			}
 			},
 			function() {
-				conn._websocket.onclose = function(){
-					console.warn('WebSocket connection closed');
-				}
-				conn._websocket.onerror = function(){
-					console.warn('WebSocket connection error, retrying');
-					timer = setTimeout(socket,5000)
-				}
-				//console.warn('WebSocket connection closed');
-				//timer = setTimeout(socket,5000)
+				console.warn('WebSocket connection closed');
+				setTimeout(socket,5000)
 			},
 			{'skipSubprotocolCheck': true}
 			);
 		}
 		function closeSocket(){
-			//clearTimeout(timer)
 			conn.close();
 		}
 	
