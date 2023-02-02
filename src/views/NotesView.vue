@@ -61,7 +61,7 @@ export default{
 		function socket(){
 			conn = new window.ab.Session('wss://notes-api.it/wss2/',
 			function() {
-			conn.onopen = function(){
+			conn._websocket.onopen = function(){
 					console.log("connected")
 				}
 				conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
@@ -69,9 +69,6 @@ export default{
 				});
 			conn._websocket.onmessage = function(){
 				ShowNotes();
-			}
-			conn._websocket.onerror = function(){
-				console.warn('Websocket error!!')
 			}
 			},
 			function() {
