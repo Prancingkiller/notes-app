@@ -27,7 +27,7 @@
 	</div>
 </template>
 <script>
-import { ref,onMounted,reactive,onBeforeUnmount } from 'vue'
+import { ref,onMounted,reactive,onUnmounted } from 'vue'
 import BaseInput from '../components/BaseInput'
 import NotesMethods from '../api/resources/NotesMethods'
 import BaseNote from '../components/BaseNote'
@@ -48,7 +48,7 @@ export default{
 		var timer;
 		var modal = Modal ;
 		onMounted(init)
-		onBeforeUnmount(closeSocket)
+		onUnmounted(closeSocket)
 		function openModal() {
 			modal.show()
 		}
