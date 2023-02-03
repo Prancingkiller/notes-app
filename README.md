@@ -1,4 +1,5 @@
-# note-app-sw
+# notes pwa
+It's a simple multi-user PWA for storing notes and create events on a calendar based on groups of users.<br>
 Vue3 PWA with indexeddb for background sync, <br>
 it's hosted here https://whimsical-belekoy-5565ca.netlify.app <br>
 if you want to try with the api i configured you can access with login "user" and "userPassword123" <br>
