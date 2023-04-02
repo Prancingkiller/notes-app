@@ -35,6 +35,7 @@ import { useSocketIO } from "@/socket";
 			socket.emit('subscribe', localStorage.getItem("unique_id"));
 		})
 		const tryReconnect = () => {
+	console.log("websocket connection refused!")
   setTimeout(() => {
     socket.connect()
   }, 3000);
