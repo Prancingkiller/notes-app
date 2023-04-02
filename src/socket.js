@@ -2,6 +2,7 @@ import { io } from "socket.io-client";
 
 export const useSocketIO = () => {
   const socket = io('https://notes-api.it:8443',{
+    transports:['websocket'],
     forceNew:true
   })
   return {
