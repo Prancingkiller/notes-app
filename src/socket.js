@@ -12,7 +12,7 @@ export const socket = io("https://notes-api.it:8443",{
 
 socket.on("connect", () => {
   state.connected = true;
-  //socket.emit('subscribe', localStorage.getItem("unique_id"));
+  socket.emit('subscribe', localStorage.getItem("unique_id"));
 });
 
 socket.on("disconnect", () => {
