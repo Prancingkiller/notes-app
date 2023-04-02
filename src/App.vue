@@ -23,6 +23,7 @@
 <script>
 import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm"
+import { state } from "@/socket";
 	export default{
 	components:{
 		LoginForm
