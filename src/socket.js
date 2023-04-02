@@ -25,4 +25,4 @@ const tryReconnect = () => {
     }, 3000);
   }
 
-socket.io.on("close", tryReconnect);
+//socket.io.on("close", tryReconnect);
