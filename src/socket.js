@@ -1,15 +1,16 @@
 import { reactive } from "vue";
-import { io } from "socket.io-client";
+import { Manager  } from "socket.io-client";
 
 export const state = reactive({
   connected: false,
   NotesEvents: []
 });
 
-export const socket = io("https://notes-api.it:8443",{
+const manager = new Manager("https://notes-api.it:8443",{
     reconnection: false,
     forceNew: true
     });
+export const socket = manager.socket("/");
 
 socket.on("connect", () => {
   state.connected = true;
