@@ -32,6 +32,7 @@ import { useSocketIO } from "@/socket";
 		const { socket } = useSocketIO()
 		socket.on('connect',function(){
 			console.log("connected!")
+			socket.emit('subscribe', localStorage.getItem("unique_id"));
 		})
 		function registerSyncP(){
 			if(localStorage.getItem("logged")){
