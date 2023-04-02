@@ -7,7 +7,8 @@ export const state = reactive({
 });
 
 export const socket = io("https://notes-api.it:8443",{
-    reconnection: false
+    reconnection: false,
+    forceNew: true
     });
 
 socket.on("connect", () => {
