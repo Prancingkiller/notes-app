@@ -23,25 +23,12 @@
 <script>
 import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm"
-import { useSocketIO } from "@/socket";
+
 	export default{
 	components:{
 		LoginForm
 	},
 	setup(){
-		const { socket } = useSocketIO()
-		socket.on('connect',function(){
-			console.log("connected!")
-			socket.emit('subscribe', localStorage.getItem("unique_id"));
-		})
-		const tryReconnect = () => {
-	console.log("websocket connection refused!")
-  setTimeout(() => {
-    socket.connect()
-  }, 3000);
-}
-		socket.io.on("close", tryReconnect);
-
 		function registerSyncP(){
 			if(localStorage.getItem("logged")){
 			navigator.serviceWorker.ready.then((registration) => {

@@ -35,8 +35,22 @@ import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
 import { VueDraggableNext } from 'vue-draggable-next'
 import  {Modal}  from 'bootstrap'
+import { useSocketIO } from "@/socket";
 export default{
 	setup(){
+		const { socket } = useSocketIO()
+		socket.on('connect',function(){
+			console.log("connected!")
+			socket.emit('subscribe', localStorage.getItem("unique_id"));
+		})
+		const tryReconnect = () => {
+	console.log("websocket connection refused!")
+  setTimeout(() => {
+    socket.connect()
+  }, 3000);
+}
+		socket.io.on("close", tryReconnect);
+
 		const note = reactive([{
 			title:'',
 			text:''
