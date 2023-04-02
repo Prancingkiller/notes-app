@@ -17,6 +17,7 @@
     "core-js": "^3.27.2",
     "moment": "^2.29.4",
     "register-service-worker": "^1.7.2",
+    "socket.io": "^4.6.1",
     "vue": "^3.2.13",
     "vue-bs-modal": "^0.7.9",
     "vue-draggable-next": "^2.1.1",
