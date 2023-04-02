@@ -38,13 +38,18 @@ import  {Modal}  from 'bootstrap'
 import { useSocketIO } from "@/socket";
 export default{
 	setup(){
+		const { socket } = useSocketIO()
+		socket.on('connect',function(){
+			console.log("connected!")
+			socket.emit('subscribe', localStorage.getItem("unique_id"));
+		})
 		const tryReconnect = () => {
 	console.log("websocket connection refused!")
   setTimeout(() => {
     socket.connect()
   }, 3000);
 }
-		
+		socket.io.on("close", tryReconnect);
 
 		const note = reactive([{
 			title:'',
@@ -68,15 +73,27 @@ export default{
 			socket();
 		}
 		function socket(){
-			const { socket } = useSocketIO()
-		socket.on('connect',function(){
-			console.log("connected!")
-			socket.emit('subscribe', localStorage.getItem("unique_id"));
-		})
-		socket.io.on("close", tryReconnect);
-		socket.on('message', function(msg) {
-			ShowNotes()
-		})
+			conn = new window.ab.Session('wss://notes-api.it/wss2/',
+			function() {
+			conn._websocket.onopen = function(){
+					console.log("connected")
+				}
+				conn.subscribe(localStorage.getItem("unique_id"), function(topic, data) {
+				ShowNotes();
+				});
+			conn._websocket.onmessage = function(){
+				ShowNotes();
+			}
+			},
+			function() {
+				console.warn('WebSocket connection closed');
+				setTimeout(socket,5000)
+			},
+			{'skipSubprotocolCheck': true}
+			);
+		}
+		function closeSocket(){
+			conn.close();
 		}
 	
 		async function ShowNotes(){
