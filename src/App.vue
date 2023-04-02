@@ -34,6 +34,9 @@ import { useSocketIO } from "@/socket";
 			console.log("connected!")
 			socket.emit('subscribe', localStorage.getItem("unique_id"));
 		})
+		socket.io.on("close", function(){
+			console.log("disconnected")
+		});
 		function registerSyncP(){
 			if(localStorage.getItem("logged")){
 			navigator.serviceWorker.ready.then((registration) => {
