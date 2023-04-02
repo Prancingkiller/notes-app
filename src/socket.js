@@ -9,10 +9,10 @@ export const useSocketIO = () => {
   }
 }
 
-const tryReconnect = () => {
-    setTimeout(() => {
-      socket.connect()
-    }, 3000);
-  }
+// const tryReconnect = () => {
+//     setTimeout(() => {
+//       socket.connect()
+//     }, 3000);
+//   }
 
 //socket.io.on("close", tryReconnect);
