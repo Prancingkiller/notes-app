@@ -29,6 +29,10 @@ import { useSocketIO } from "@/socket";
 		LoginForm
 	},
 	setup(){
+		const { socket } = useSocketIO()
+		socket.on('connect',function(){
+			console.log("connected!")
+		})
 		function registerSyncP(){
 			if(localStorage.getItem("logged")){
 			navigator.serviceWorker.ready.then((registration) => {
