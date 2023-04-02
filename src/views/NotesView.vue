@@ -56,7 +56,7 @@ export default{
 		var conn;
 		var modal = Modal ;
 		onMounted(init)
-		onBeforeUnmount(closeSocket)
+		//onBeforeUnmount(closeSocket)
 		function openModal() {
 			modal.show()
 		}
