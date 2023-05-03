@@ -3,7 +3,7 @@ export default {
     name:"ManagerMethods",
 
     async makeShift(data){
-        const response = await fetch(APISettings.baseURL+"/shifts?"+ new URLSearchParams(data),{
+        const response = await fetch(APISettings.baseURL+"/shifts",{
             method: "POST",
             mode: "cors",
             cache: "no-cache",
