@@ -1,8 +1,13 @@
 <template>
 	<p>{{ selectedRows }}</p>
 	<button @click="makeShift">Make Shift</button>
-	<input type="checkbox" v-model="selectedRows" value="lun">
-	<input type="checkbox" v-model="selectedRows" value="mar">
+	<input type="checkbox" v-model="selectedRows" value="Lun" checked>
+	<input type="checkbox" v-model="selectedRows" value="Mar" checked>
+	<input type="checkbox" v-model="selectedRows" value="Mer" checked>
+	<input type="checkbox" v-model="selectedRows" value="Gio" checked>
+	<input type="checkbox" v-model="selectedRows" value="Ven" checked>
+	<input type="checkbox" v-model="selectedRows" value="Sab" checked>
+	<input type="checkbox" v-model="selectedRows" value="Dom" checked>
 	<div v-for="worker in workers" :key="worker.id">
 	<p>{{ worker.name }}</p>
 	</div>
