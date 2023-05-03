@@ -10,13 +10,13 @@
 	<input type="checkbox" v-model="days" value="Dom">
 	<div v-for="worker in workers" :key="worker.id">
 	<p>{{ worker.name }}</p>
-	Lun <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Lun" :value="slot">
-	Mar <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Mar" :value="slot">
-	Mer <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Mer" :value="slot">
-	Gio <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Gio" :value="slot">
-	Ven <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Ven" :value="slot">
-	Sab <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Sab" :value="slot">
-	Dom <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Dom" :value="slot">
+	<div>Lun <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Lun" :value="slot"></div>
+	<div>Mar <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Mar" :value="slot"></div>
+	<div>Mer <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Mer" :value="slot"></div>
+	<div>Gio <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Gio" :value="slot"></div>
+	<div>Ven <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Ven" :value="slot"></div>
+	<div>Sab <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Sab" :value="slot"></div>
+	<div>Dom <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Dom" :value="slot"></div>
 	</div>
 </template>
 <script>
