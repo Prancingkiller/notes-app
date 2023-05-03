@@ -1,4 +1,5 @@
 <template>
+	<p>{{ selectedRows }}</p>
 	<button @click="makeShift">Make Shift</button>
 	<input type="checkbox" v-model="selectedRows" value="lun">
 	<input type="checkbox" v-model="selectedRows" value="mar">
