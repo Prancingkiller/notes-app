@@ -1,5 +1,5 @@
 <template>
-	<button>Make Shift</button>
+	<button @click="makeShift">Make Shift</button>
 	<div v-for="worker in workers" :key="worker.id">{{ worker.name }}</div>
 </template>
 <script>
