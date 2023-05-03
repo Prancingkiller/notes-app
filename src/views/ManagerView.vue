@@ -3,6 +3,7 @@
 	<div v-for="worker in workers" :key="worker.id">{{ worker.name }}</div>
 </template>
 <script>
+import ManagerMethods from "@/api/resources/ManagerMethods";
 import {ref} from "vue"
 export default{
 	setup(){
@@ -39,9 +40,20 @@ export default{
 			const slots = ref([
 							{slotN:1,required:1},{slotN:2,required:1},{slotN:3,required:1},{slotN:4,required:1},{slotN:5,required:2},{slotN:6,required:2},{slotN:7,required:2},{slotN:8,required:3},{slotN:9,required:3},{slotN:10,required:3},{slotN:11,required:3},{slotN:12,required:3},{slotN:13,required:4},{slotN:14,required:4},{slotN:15,required:4},{slotN:16,required:4},{slotN:17,required:6},{slotN:18,required:6},{slotN:19,required:6},{slotN:20,required:7},{slotN:21,required:7},{slotN:22,required:8},{slotN:23,required:8},{slotN:24,required:8},{slotN:25,required:8},{slotN:26,required:7},{slotN:27,required:7},{slotN:28,required:6},{slotN:29,required:6},{slotN:30,required:5},{slotN:31,required:5},{slotN:32,required:4},{slotN:33,required:4},{slotN:34,required:5},{slotN:35,required:5},{slotN:36,required:5},{slotN:37,required:6},{slotN:38,required:6},{slotN:39,required:6},{slotN:40,required:7},{slotN:41,required:7},{slotN:42,required:8},{slotN:43,required:8},{slotN:44,required:7},{slotN:45,required:7},{slotN:46,required:7},{slotN:47,required:7},{slotN:48,required:7},{slotN:49,required:7},{slotN:50,required:6},{slotN:51,required:6},{slotN:52,required:5},{slotN:53,required:5},{slotN:54,required:4}
 							]);
-			const days = ref([]);
+			const days = ref(["Lun","Mar","Mer","Gio","Ven","Sab","Dom"]);
+			var data;
+			var shift;
+			function makeShift(){
+				data = JSON.stringify({
+					days:days.value,
+					slots:slots.value,
+					workers:workers.value
+				})
+				shift = ManagerMethods.makeShift(data)
+				console.log(shift);
+			}
 
-			return{workers,slots,days}
+			return{workers,slots,days,makeShift}
 	},
 	components:{
 		
