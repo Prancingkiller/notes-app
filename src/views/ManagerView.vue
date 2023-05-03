@@ -43,13 +43,13 @@ export default{
 			const days = ref(["Lun","Mar","Mer","Gio","Ven","Sab","Dom"]);
 			var data;
 			var shift;
-			function makeShift(){
+			async function makeShift(){
 				data = JSON.stringify({
 					days:days.value,
 					slots:slots.value,
 					workers:workers.value
 				})
-				shift = ManagerMethods.makeShift(data)
+				shift = await ManagerMethods.makeShift(data)
 				console.log(shift);
 			}
 
