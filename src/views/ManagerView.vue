@@ -60,7 +60,7 @@ export default{
 	}
 }
 </script>
-<style>
+<style scoped>
 td{
 	border-style: solid;
 	border-width:1px;
