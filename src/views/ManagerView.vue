@@ -11,6 +11,12 @@
 	<div v-for="worker in workers" :key="worker.id">
 	<p>{{ worker.name }}</p>
 	Lun <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Lun" :value="slot">
+	Mar <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Mar" :value="slot">
+	Mer <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Mer" :value="slot">
+	Gio <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Gio" :value="slot">
+	Ven <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Ven" :value="slot">
+	Sab <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Sab" :value="slot">
+	Dom <input v-for="(slot,i) in full" :key="i" type="checkbox" v-model="worker.SlotDays.Dom" :value="slot">
 	</div>
 </template>
 <script>
