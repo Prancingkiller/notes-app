@@ -9,7 +9,13 @@
       <div v-for="(element,i) in tasks" :key="i">
         <li>
           <p>{{ element.name }}</p>
-          <nested-draggable :tasks="element.tasks" />
+          <nested-draggable :tasks="element.Lun" />
+          <nested-draggable :tasks="element.Mar" />
+          <nested-draggable :tasks="element.Mer" />
+          <nested-draggable :tasks="element.Gio" />
+          <nested-draggable :tasks="element.Ven" />
+          <nested-draggable :tasks="element.Sab" />
+          <nested-draggable :tasks="element.Dom" />
         </li>
       </div>
     </draggable>
