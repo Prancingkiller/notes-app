@@ -1,6 +1,6 @@
 <template>
 	<button @click="makeShift">Make Shift</button>
-	<div ref="tableResult"></div>
+	<div ref="tableResult" class="tableResult"></div>
 	<input type="checkbox" v-model="days" value="Lun">
 	<input type="checkbox" v-model="days" value="Mar">
 	<input type="checkbox" v-model="days" value="Mer">
@@ -90,6 +90,19 @@ td{
 	border-style: solid;
 	border-width:1px;
 	border-color:black
+}
+
+.tableResult /deep/ .red{
+background-color:red;
+}
+.tableResult /deep/ .green{
+background-color:green;
+}
+.tableResult /deep/ .orange{
+background-color:orange;
+}
+.tableResult /deep/ .black{
+background-color:black;
 }
 .red{
 background-color:red;
