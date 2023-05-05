@@ -25,10 +25,10 @@
 	<div class="row">
     <div class="col-8">
       <h3>Nested draggable</h3>
-      <nested-draggable :tasks="shift.data[1]" />
+      <nested-draggable :tasks="list" />
     </div>
 
-    <rawDisplayer class="col-3" :value="shift.data[1]" title="Data" />
+    <rawDisplayer class="col-3" :value="list" title="Data" />
   </div>
 </template>
 <script>
@@ -86,8 +86,31 @@ export default{
 			console.log(shift.value);
 			tableResult.value.innerHTML = shift.value.data[0];
 		}
-
-		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult,shift}
+		const list = ref({list: [
+        {
+          name: "task 1",
+          tasks: [
+            {
+              name: "task 2",
+              tasks: []
+            }
+          ]
+        },
+        {
+          name: "task 3",
+          tasks: [
+            {
+              name: "task 4",
+              tasks: []
+            }
+          ]
+        },
+        {
+          name: "task 5",
+          tasks: []
+        }
+      ]})
+		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult,shift,list}
 	},
 	components:{
 		nestedDraggable
