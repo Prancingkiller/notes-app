@@ -86,7 +86,7 @@ export default{
 }
 </script>
 <style scoped>
-td{
+.tableResult /deep/ td{
 	border-style: solid;
 	border-width:1px;
 	border-color:black
