@@ -74,7 +74,7 @@ export default{
 		const minTimeBetweenShifts = ref(2);
 		const tableResult = ref(null);
 		var data;
-		const shift = ref({data:[]});
+		const shift = ref({data:[null,null]});
 		async function makeShift(){
 			data = JSON.stringify({
 				days:days.value,
