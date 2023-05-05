@@ -22,10 +22,19 @@
 		<h1>Options:</h1>
 		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
 	</div>
+	<div class="row">
+    <div class="col-8">
+      <h3>Nested draggable</h3>
+      <nested-draggable :tasks="shift" />
+    </div>
+
+    <rawDisplayer class="col-3" :value="shift" title="Data" />
+  </div>
 </template>
 <script>
 import ManagerMethods from "@/api/resources/ManagerMethods";
 import {ref} from "vue"
+import { VueDraggableNext } from 'vue-draggable-next'
 export default{
 	setup(){
 		var full = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
@@ -65,7 +74,7 @@ export default{
 		const minTimeBetweenShifts = ref(2);
 		const tableResult = ref(null);
 		var data;
-		var shift;
+		const shift = ref({});
 		async function makeShift(){
 			data = JSON.stringify({
 				days:days.value,
@@ -73,12 +82,12 @@ export default{
 				workers:workers.value,
 				minTimeBetweenShifts:(minTimeBetweenShifts.value*4)
 			})
-			shift = await ManagerMethods.makeShift(data)
-			console.log(shift);
+			shift.value = await ManagerMethods.makeShift(data)
+			console.log(shift.value);
 			tableResult.value.innerHTML = shift.data[0];
 		}
 
-		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult}
+		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult,shift}
 	},
 	components:{
 		
