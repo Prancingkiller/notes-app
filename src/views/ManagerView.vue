@@ -1,6 +1,6 @@
 <template>
-	<p>{{ days }}</p>
 	<button @click="makeShift">Make Shift</button>
+	<div ref="tableResult"></div>
 	<input type="checkbox" v-model="days" value="Lun">
 	<input type="checkbox" v-model="days" value="Mar">
 	<input type="checkbox" v-model="days" value="Mer">
@@ -63,6 +63,7 @@ export default{
 			]);
 		const days = ref(["Lun","Mar","Mer","Gio","Ven","Sab","Dom"]);
 		const minTimeBetweenShifts = ref(2);
+		const tableResult = ref(null);
 		var data;
 		var shift;
 		async function makeShift(){
@@ -74,9 +75,10 @@ export default{
 			})
 			shift = await ManagerMethods.makeShift(data)
 			console.log(shift);
+			tableResult.value.innerHTML = shift.data[0];
 		}
 
-		return{workers,slots,days,makeShift,full,minTimeBetweenShifts}
+		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult}
 	},
 	components:{
 		
