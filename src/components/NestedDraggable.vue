@@ -6,12 +6,12 @@
       :group="{ name: 'g1' }"
       item-key="name"
     >
-      <template #item="{ element }">
+      <div v-for="(element,i) in tasks" :key="i">
         <li>
           <p>{{ element.name }}</p>
           <nested-draggable :tasks="element.tasks" />
         </li>
-      </template>
+      </div>
     </draggable>
   </template>
   <script>
