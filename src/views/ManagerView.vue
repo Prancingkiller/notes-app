@@ -84,7 +84,7 @@ export default{
 			})
 			shift.value = await ManagerMethods.makeShift(data)
 			console.log(shift.value);
-			tableResult.value.innerHTML = shift.data[0];
+			tableResult.value.innerHTML = shift.value.data[0];
 		}
 
 		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult,shift}
