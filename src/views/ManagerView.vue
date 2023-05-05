@@ -20,7 +20,7 @@
 	</div>
 	<div>
 		<h1>Options:</h1>
-		<p>Minimum time between 2 shifts: <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
+		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
 	</div>
 </template>
 <script>
