@@ -110,7 +110,7 @@ export default{
           tasks: []
         }
       ]})
-	  console.log(list.value.list)
+		console.log(list.value.list)
 		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult,shift,list}
 	},
 	components:{
