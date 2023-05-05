@@ -15,7 +15,7 @@
     </draggable>
   </template>
   <script>
-  import draggable from "@/vuedraggable";
+  import { VueDraggableNext } from 'vue-draggable-next'
   export default {
     props: {
       tasks: {
@@ -24,7 +24,7 @@
       }
     },
     components: {
-      draggable
+        draggable: VueDraggableNext
     },
     name: "nested-draggable"
   };
