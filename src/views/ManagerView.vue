@@ -25,10 +25,10 @@
 	<div class="row">
     <div class="col-8">
       <h3>Nested draggable</h3>
-      <nested-draggable :tasks="shift.value.data[1]" />
+      <nested-draggable :tasks="shift.data[1]" />
     </div>
 
-    <rawDisplayer class="col-3" :value="shift.value.data[1]" title="Data" />
+    <rawDisplayer class="col-3" :value="shift.data[1]" title="Data" />
   </div>
 </template>
 <script>
