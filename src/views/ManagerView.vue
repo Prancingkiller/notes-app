@@ -24,7 +24,7 @@
 
 		<div v-for="(day,i) in days" :key="i">
 			<p>{{ day }}</p>
-			<div v-for="(slot,i) in slots.day" :key="i">
+			<div v-for="(slot,i) in slots.Lun" :key="i">
 				<p>Slot n. {{ slot.slotN }}</p> | <p> {{ slot.required }}</p>
 			</div>
 		</div>
