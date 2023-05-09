@@ -37,47 +37,15 @@
 				</thead>
 				<tr v-for="(slot,i) in fullTest" :key="i">
 					<td>{{slot}}</td>
-					<td><input type="number" v-model="slots.Lun[i].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Mar[i].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Mer[i].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Gio[i].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Ven[i].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Sab[i].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Dom[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Lun[i].required" style="width:40px;border:0px"></td>
+					<td><input type="number" v-model="slots.Mar[i].required" style="width:40px;border:0px"></td>
+					<td><input type="number" v-model="slots.Mer[i].required" style="width:40px;border:0px"></td>
+					<td><input type="number" v-model="slots.Gio[i].required" style="width:40px;border:0px"></td>
+					<td><input type="number" v-model="slots.Ven[i].required" style="width:40px;border:0px"></td>
+					<td><input type="number" v-model="slots.Sab[i].required" style="width:40px;border:0px"></td>
+					<td><input type="number" v-model="slots.Dom[i].required" style="width:40px;border:0px"></td>
 				</tr>
 			</table>
-			<p>Lunedì</p>
-			<div>
-			<span v-for="(slot,i) in slots.Lun" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-			</div>
-			<p>Martedì</p>
-			<span v-for="(slot,i) in slots.Mar" :key="i">
-			| Slot n. {{ slot.slotN }} - <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-			<p>Mercoledì</p>
-			<span v-for="(slot,i) in slots.Mer" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-			<p>Giovedì</p>
-			<span v-for="(slot,i) in slots.Gio" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-			<p>Venerdì</p>
-			<span v-for="(slot,i) in slots.Ven" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-			<p>Sabato</p>
-			<span v-for="(slot,i) in slots.Sab" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-			<p>Domenica</p>
-			<span v-for="(slot,i) in slots.Dom" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
-			</span>
-
-
 	</div>
 </template>
 <script>
@@ -88,7 +56,7 @@ export default{
 		var full = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const fullTest = ref([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54]);
 		var morning = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29];
-		var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
+		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const workers = ref([
 		{name:"Salome",id:1,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
 {name:"Stefano",id:2,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
