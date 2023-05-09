@@ -37,13 +37,13 @@
 				</thead>
 				<tr v-for="(slot,i) in fullTest" :key="i">
 					<td>{{slot}}</td>
-					<td><input type="number" v-model="slots.Lun[slot].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Mar[slot].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Mer[slot].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Gio[slot].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Ven[slot].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Sab[slot].required" style="width:40px"></td>
-					<td><input type="number" v-model="slots.Dom[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Lun[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Mar[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Mer[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Gio[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Ven[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Sab[i].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Dom[i].required" style="width:40px"></td>
 				</tr>
 			</table>
 			<p>Lunedì</p>
