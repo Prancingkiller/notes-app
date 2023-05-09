@@ -30,7 +30,7 @@
 			</div>
 			<p>Martedì</p>
 			<span v-for="(slot,i) in slots.Mar" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+			| Slot n. {{ slot.slotN }} - <input type="number" v-model="slot.required"> |
 			</span>
 			<p>Mercoledì</p>
 			<span v-for="(slot,i) in slots.Mer" :key="i">
