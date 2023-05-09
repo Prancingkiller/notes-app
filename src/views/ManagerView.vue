@@ -25,32 +25,32 @@
 			<p>Lunedì</p>
 			<div>
 			<span v-for="(slot,i) in slots.Lun" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 			</div>
 			<p>Martedì</p>
 			<span v-for="(slot,i) in slots.Mar" :key="i">
-			| Slot n. {{ slot.slotN }} - <input type="number" v-model="slot.required"> |
+			| Slot n. {{ slot.slotN }} - <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 			<p>Mercoledì</p>
 			<span v-for="(slot,i) in slots.Mer" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 			<p>Giovedì</p>
 			<span v-for="(slot,i) in slots.Gio" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 			<p>Venerdì</p>
 			<span v-for="(slot,i) in slots.Ven" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 			<p>Sabato</p>
 			<span v-for="(slot,i) in slots.Sab" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 			<p>Domenica</p>
 			<span v-for="(slot,i) in slots.Dom" :key="i">
-				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
 			</span>
 
 
