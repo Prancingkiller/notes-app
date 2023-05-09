@@ -22,7 +22,7 @@
 		<h1>Options:</h1>
 		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
 
-			<table>
+			<table class="tableResult">
 				<thead>
 					<tr>
 						<td></td>
@@ -49,32 +49,32 @@
 			<p>Lunedì</p>
 			<div>
 			<span v-for="(slot,i) in slots.Lun" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 			</div>
 			<p>Martedì</p>
 			<span v-for="(slot,i) in slots.Mar" :key="i">
-			| Slot n. {{ slot.slotN }} - <input type="number" v-model="slot.required" style="width:40px"> |
+			| Slot n. {{ slot.slotN }} - <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 			<p>Mercoledì</p>
 			<span v-for="(slot,i) in slots.Mer" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 			<p>Giovedì</p>
 			<span v-for="(slot,i) in slots.Gio" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 			<p>Venerdì</p>
 			<span v-for="(slot,i) in slots.Ven" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 			<p>Sabato</p>
 			<span v-for="(slot,i) in slots.Sab" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 			<p>Domenica</p>
 			<span v-for="(slot,i) in slots.Dom" :key="i">
-				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px"> |
+				| Slot n. {{ slot.slotN }} -  <input type="number" v-model="slot.required" style="width:40px;border:0px"> |
 			</span>
 
 
