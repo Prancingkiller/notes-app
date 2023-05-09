@@ -22,6 +22,30 @@
 		<h1>Options:</h1>
 		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
 
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td>Lunedì</td>
+						<td>Martedì</td>
+						<td>Mercoledì</td>
+						<td>Giovedì</td>
+						<td>Venerdì</td>
+						<td>Sabato</td>
+						<td>Domenica</td>
+					</tr>
+				</thead>
+				<tr v-for="(slot,i) in fullTest" :key="i">
+					<td>{{slot}}</td>
+					<td><input type="number" v-model="slots.Lun[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Mar[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Mer[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Gio[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Ven[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Sab[slot].required" style="width:40px"></td>
+					<td><input type="number" v-model="slots.Dom[slot].required" style="width:40px"></td>
+				</tr>
+			</table>
 			<p>Lunedì</p>
 			<div>
 			<span v-for="(slot,i) in slots.Lun" :key="i">
@@ -62,6 +86,7 @@ import {ref} from "vue"
 export default{
 	setup(){
 		var full = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
+		const fullTest = ref([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54]);
 		var morning = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29];
 		var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const workers = ref([
@@ -112,7 +137,7 @@ export default{
 			tableResult.value.innerHTML = shift.data[0];
 		}
 
-		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult}
+		return{workers,slots,days,makeShift,full,minTimeBetweenShifts,tableResult,fullTest}
 	},
 	components:{
 		
