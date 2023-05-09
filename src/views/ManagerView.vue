@@ -23,33 +23,35 @@
 		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
 
 			<p>Lunedì</p>
-			<div v-for="(slot,i) in slots.Lun" :key="i">
+			<div>
+			<span v-for="(slot,i) in slots.Lun" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
+			</span>
 			</div>
 			<p>Martedì</p>
-			<div v-for="(slot,i) in slots.Mar" :key="i">
+			<span v-for="(slot,i) in slots.Mar" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
-			</div>
+			</span>
 			<p>Mercoledì</p>
-			<div v-for="(slot,i) in slots.Mer" :key="i">
+			<span v-for="(slot,i) in slots.Mer" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
-			</div>
+			</span>
 			<p>Giovedì</p>
-			<div v-for="(slot,i) in slots.Gio" :key="i">
+			<span v-for="(slot,i) in slots.Gio" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
-			</div>
+			</span>
 			<p>Venerdì</p>
-			<div v-for="(slot,i) in slots.Ven" :key="i">
+			<span v-for="(slot,i) in slots.Ven" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
-			</div>
+			</span>
 			<p>Sabato</p>
-			<div v-for="(slot,i) in slots.Sab" :key="i">
+			<span v-for="(slot,i) in slots.Sab" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
-			</div>
+			</span>
 			<p>Domenica</p>
-			<div v-for="(slot,i) in slots.Dom" :key="i">
+			<span v-for="(slot,i) in slots.Dom" :key="i">
 				| Slot n. {{ slot.slotN }} -  {{ slot.required }} |
-			</div>
+			</span>
 
 
 	</div>
