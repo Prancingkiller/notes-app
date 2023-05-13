@@ -219,7 +219,7 @@ export default{
 			daysTest.value.forEach(element=>{
 				var fullDateStart = new Date(element.start)
 				var fullDateFinish = new Date(element.end)
-				var datePost = fullDateStart.getFullYear()+"-"+fullDateStart.getMonth()+1+"-"+fullDateStart.getDate()
+				var datePost = fullDateStart.getFullYear()+"-"+String(fullDateStart.getMonth()+1).padStart(2, "0")+"-"+fullDateStart.getDate()
 				var workerId = element.split;
 				var startTime = String(fullDateStart.getHours()).padStart(2, "0")+":"+String(fullDateStart.getMinutes()).padStart(2, "0");
 				var endTime = String(fullDateFinish.getHours()).padStart(2, "0")+":"+String(fullDateFinish.getMinutes()).padStart(2, "0");
