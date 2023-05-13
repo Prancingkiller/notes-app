@@ -102,7 +102,7 @@ export default{
 		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const workers = ref([
 		{name:"Salome",label:"Salome",id:21,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
-{name:"Stefano",label:"Stefano",id:22,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Stefano",label:"Stefano",id:4,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
 {name:"Marco",label:"Marco",id:23,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
 {name:"Luca",label:"Luca",id:24,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
 {name:"Diego",label:"Diego",id:25,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
