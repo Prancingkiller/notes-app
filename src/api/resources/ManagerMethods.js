@@ -32,7 +32,7 @@ export default {
             },
             contentType: 'application/json',
             body: JSON.stringify(data)
-        }).catch(()=>{return false})
+        }).catch((err)=>{console.log(err); return false})
         if(response.ok){
             const result = await response.json();
             return result;
