@@ -16,6 +16,8 @@
 	:min-split-width=70
 	locale="it"
 	:overlapsPerTimeStep = true
+	@event-drop="updateEvent(($event))"
+	@event-duration-change="updateEvent($event)"
 	>
 
 	</vue-cal>
@@ -161,6 +163,7 @@ export default{
 			var year = "2023";
 			var month = "05";
 			var day = "15";
+			var shiftId = 0;
 			daysTest.value = [];
 			for (const worker in shift.value.data[1]) {
 				for (const prop in shift.value.data[1][worker]) {
@@ -189,6 +192,7 @@ export default{
 						}
 						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
 						var shiftTest = {};
+						shiftTest.eventId = shiftId++;
 						shiftTest.workerId = worker;
 						shiftTest.start = year+"-"+month+"-"+ day+" "+shift.value.data[1][worker][prop][propp].start;
 						shiftTest.end = year+"-"+month+"-"+ day+" "+shift.value.data[1][worker][prop][propp].finish;
@@ -238,12 +242,19 @@ export default{
 				console.log("all ok");
 			}
 		}
-
+		function updateEvent(e){
+			daysTest.value.forEach(element=>{
+				if(element.eventId == e.event.eventId){
+					element.start = e.event.start.getFullYear()+"-"+String(e.event.start.getMonth()+1).padStart(2, "0")+"-"+e.event.start.getDate()+" "+String(e.event.start.getHours()).padStart(2, "0")+":"+String(e.event.start.getMinutes()).padStart(2, "0")
+					element.end = e.event.end.getFullYear()+"-"+String(e.event.end.getMonth()+1).padStart(2, "0")+"-"+e.event.end.getDate()+" "+String(e.event.end.getHours()).padStart(2, "0")+":"+String(e.event.start.getMinutes()).padStart(2, "0")
+				}
+			})
+		}
 
 		return{shift,workers,slots,days,makeShift,full,minTimeBetweenShifts,
 			tableResult,fullTest,options,showOptions,daysTest,
 			disabledViews,minEventWidth,selectedDay,
-			debugShift,postShift
+			debugShift,postShift,updateEvent
 		}
 	},
 	components:{
