@@ -21,6 +21,7 @@
     "socket.io-client": "^4.6.1",
     "vue": "^3.2.13",
     "vue-bs-modal": "^0.7.9",
+    "vue-cal": "^4.8.1",
     "vue-draggable-next": "^2.1.1",
     "vue-router": "^4.0.3"
   },

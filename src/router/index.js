@@ -48,14 +48,14 @@ const routes = [
     path: '/manager',
     name: 'manager',
     component: ManagerView,
-    beforeEnter: (to, from) => {
-      if(checkLog()){
-        return true;
-      }
-      else{
-        return false;
-      }
-    },
+    // beforeEnter: (to, from) => {
+    //   if(checkLog()){
+    //     return true;
+    //   }
+    //   else{
+    //     return false;
+    //   }
+    // },
   }
 ]
 

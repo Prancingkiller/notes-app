@@ -1,25 +1,16 @@
 <template>
 	<button @click="makeShift">Make Shift</button>
-	<button v-if="daysTest.length>1" @click="debugShift">Debug</button>
-	<button v-if="daysTest.length>1" @click="postShift">Submit Test</button>
-	<vue-cal 
-	:selected-date = "selectedDay"
-	:timeFrom=480
-	:timeTo=1290
+	<vue-cal style="height: 400px" 
+	:timeFrom="480" 
+	:timeTo="1290" 
 	:disableViews="disabledViews"
 	:events="daysTest"
-	:sticky-split-labels=true
-	:snapToTime=15
+	:min-event-width="minEventWidth"
+	snapToTime=15
 	editable-events
 	overlapEventStartOnly 
-	:split-days="workers"
-	:min-split-width=70
-	locale="it"
-	:overlapsPerTimeStep = true
-	>
-
-	</vue-cal>
-	<!-- <div class="row" style="display:none">
+	/>
+	<div class="row">
 		<div v-for="(day,i) in daysTest" :key="i" class="col">
 		<draggable
 		class="list-group"
@@ -27,18 +18,18 @@
 		group="people"
 		itemKey="start"
 		>
-		
+		<!-- <template #item="{ element, index }"> -->
 			<div v-for="(slot,i) in day" :key="i" style="border:solid">
 				<p>Worker ID: {{ slot.workerId }}</p>
 				<p>Start: <span><input type="time" v-model="slot.start"></span></p>
 				<p>Finish: <span><input type="time" v-model="slot.end"></span></p>
 			</div>
 
-		
+		<!-- </template> -->
 		</draggable>
 	</div>
-	</div> -->
-	<div ref="tableResult" class="tableResult" style="display:none"></div>
+	</div>
+	<div ref="tableResult" class="tableResult"></div>
 	
 	<h1 @click="showOptions">Options:</h1>
 	<div v-if="options">
@@ -101,31 +92,31 @@ export default{
 		var morning = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const workers = ref([
-		{name:"Salome",label:"Salome",id:1,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
-{name:"Stefano",label:"Stefano",id:2,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Marco",label:"Marco",id:3,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
-{name:"Luca",label:"Luca",id:4,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Diego",label:"Diego",id:5,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Luigi",label:"Luigi",id:6,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Francesca",label:"Francesca",id:7,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Elena",label:"Elena",id:8,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Roberta",label:"Roberta",id:9,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Giulia",label:"Giulia",id:10,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Giorgia",label:"Giorgia",id:11,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Simone",label:"Simone",id:12,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Francesco",label:"Francesco",id:13,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Ettore",label:"Ettore",id:14,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Matteo",label:"Matteo",id:15,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Chiara",label:"Chiara",id:16,hours:18,SlotDays:{Lun:morning,Mar:morning,Mer:morning,Gio:morning,Ven:morning,Sab:morning,Dom:morning}},
-{name:"Daniele",label:"Daniele",id:17,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Vittorio",label:"Vittorio",id:18,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Marika",label:"Marika",id:19,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Sergio",label:"Sergio",id:20,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Emanuele",label:"Emanuele",id:21,hours:22,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Flaminio",label:"Flaminio",id:22,hours:22,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
-{name:"Laura",label:"Laura",id:23,hours:40,SlotDays:{Lun:morning,Mar:morning,Mer:morning,Gio:morning,Ven:morning,Sab:morning,Dom:morning}},
-{name:"Giada",label:"Giada",id:24,hours:40,SlotDays:{Lun:morning,Mar:morning,Mer:morning,Gio:morning,Ven:morning,Sab:morning,Dom:morning}},
-{name:"Giovanni",label:"Giovanni",id:25,hours:32,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}}
+		{name:"Salome",id:1,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
+{name:"Stefano",id:2,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Marco",id:3,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full}},
+{name:"Luca",id:4,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Diego",id:5,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Luigi",id:6,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Francesca",id:7,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Elena",id:8,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Roberta",id:9,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Giulia",id:10,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Giorgia",id:11,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Simone",id:12,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Francesco",id:13,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Ettore",id:14,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Matteo",id:15,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Chiara",id:16,hours:18,SlotDays:{Lun:morning,Mar:morning,Mer:morning,Gio:morning,Ven:morning,Sab:morning,Dom:morning}},
+{name:"Daniele",id:17,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Vittorio",id:18,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Marika",id:19,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Sergio",id:20,hours:18,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Emanuele",id:21,hours:22,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Flaminio",id:22,hours:22,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}},
+{name:"Laura",id:23,hours:40,SlotDays:{Lun:morning,Mar:morning,Mer:morning,Gio:morning,Ven:morning,Sab:morning,Dom:morning}},
+{name:"Giada",id:24,hours:40,SlotDays:{Lun:morning,Mar:morning,Mer:morning,Gio:morning,Ven:morning,Sab:morning,Dom:morning}},
+{name:"Giovanni",id:25,hours:32,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full}}
 			]);
 		const slotsWeekend = ref([{slotN:1,required:2},{slotN:2,required:2},{slotN:3,required:3},{slotN:4,required:4},{slotN:5,required:4},{slotN:6,required:4},{slotN:7,required:4},{slotN:8,required:4},{slotN:9,required:4},{slotN:10,required:4},{slotN:11,required:4},{slotN:12,required:4},{slotN:13,required:5},{slotN:14,required:5},{slotN:15,required:5},{slotN:16,required:5},{slotN:17,required:7},{slotN:18,required:7},{slotN:19,required:7},{slotN:20,required:8},{slotN:21,required:8},{slotN:22,required:9},{slotN:23,required:9},{slotN:24,required:9},{slotN:25,required:9},{slotN:26,required:8},{slotN:27,required:8},{slotN:28,required:7},{slotN:29,required:7},{slotN:30,required:6},{slotN:31,required:6},{slotN:32,required:6},{slotN:33,required:6},{slotN:34,required:6},{slotN:35,required:6},{slotN:36,required:6},{slotN:37,required:7},{slotN:38,required:7},{slotN:39,required:7},{slotN:40,required:8},{slotN:41,required:8},{slotN:42,required:9},{slotN:43,required:9},{slotN:44,required:8},{slotN:45,required:8},{slotN:46,required:8},{slotN:47,required:8},{slotN:48,required:8},{slotN:49,required:8},{slotN:50,required:7},{slotN:51,required:7},{slotN:52,required:6},{slotN:53,required:6},{slotN:54,required:5}]);
 		const slotsNormal = ref([{slotN:1,required:1},{slotN:2,required:1},{slotN:3,required:1},{slotN:4,required:1},{slotN:5,required:2},{slotN:6,required:2},{slotN:7,required:2},{slotN:8,required:3},{slotN:9,required:3},{slotN:10,required:3},{slotN:11,required:3},{slotN:12,required:3},{slotN:13,required:4},{slotN:14,required:4},{slotN:15,required:4},{slotN:16,required:4},{slotN:17,required:6},{slotN:18,required:6},{slotN:19,required:6},{slotN:20,required:7},{slotN:21,required:7},{slotN:22,required:8},{slotN:23,required:8},{slotN:24,required:8},{slotN:25,required:8},{slotN:26,required:7},{slotN:27,required:7},{slotN:28,required:6},{slotN:29,required:6},{slotN:30,required:5},{slotN:31,required:5},{slotN:32,required:4},{slotN:33,required:4},{slotN:34,required:5},{slotN:35,required:5},{slotN:36,required:5},{slotN:37,required:6},{slotN:38,required:6},{slotN:39,required:6},{slotN:40,required:7},{slotN:41,required:7},{slotN:42,required:8},{slotN:43,required:8},{slotN:44,required:7},{slotN:45,required:7},{slotN:46,required:7},{slotN:47,required:7},{slotN:48,required:7},{slotN:49,required:7},{slotN:50,required:6},{slotN:51,required:6},{slotN:52,required:5},{slotN:53,required:5},{slotN:54,required:4}]);
@@ -147,7 +138,7 @@ export default{
 			}
 		}
 
-		const daysTest = ref([]);
+		const daysTest = ref({Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]});
 
 		async function makeShift(){
 			data = JSON.stringify({
@@ -157,97 +148,63 @@ export default{
 				minTimeBetweenShifts:(minTimeBetweenShifts.value*4)
 			})
 			shift.value = await ManagerMethods.makeShift(data)
+			console.log(shift.value.data[1]);
 			tableResult.value.innerHTML = shift.value.data[0];
 			var year = "2023";
 			var month = "05";
-			var day = "15";
-			daysTest.value = [];
+			var day = "7";
+			daysTest.value = {Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]};
 			for (const worker in shift.value.data[1]) {
 				for (const prop in shift.value.data[1][worker]) {
 					var inner = shift.value.data[1][worker][prop];
 					for (const propp in inner) {
 						if(prop == "Lun"){
-							day = selectedDay.getDate().toString()
+							day = "08";
 						}
 						else if(prop == "Mar"){
-							day = selectedDay.addDays(1).getDate().toString()
+							day = "09";
 						}
 						else if(prop == "Mer"){
-							day = selectedDay.addDays(2).getDate().toString()
+							day = "10";
 						}
 						else if(prop == "Gio"){
-							day = selectedDay.addDays(3).getDate().toString()
+							day = "11";
 						}
 						else if(prop == "Ven"){
-							day = selectedDay.addDays(4).getDate().toString()
+							day = "12";
 						}
 						else if(prop == "Sab"){
-							day = selectedDay.addDays(5).getDate().toString()
+							day = "13";
 						}
 						else if(prop == "Dom"){
-							day = selectedDay.addDays(6).getDate().toString()
+							day = "14";
 						}
 						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
 						var shiftTest = {};
 						shiftTest.workerId = worker;
 						shiftTest.start = year+"-"+month+"-"+ day+" "+shift.value.data[1][worker][prop][propp].start;
 						shiftTest.end = year+"-"+month+"-"+ day+" "+shift.value.data[1][worker][prop][propp].finish;
-						//shiftTest.title= 'Worker: '+worker,
-						shiftTest.split= parseInt(worker),
-						daysTest.value.push(shiftTest)
+						shiftTest.title= 'Worker: '+worker,
+						daysTest.value[prop].push(shiftTest)
 					}
 				}
 			}
-			daysTest.value.sort((a, b) => (a.start > b.start) ? 1 : -1)
-			// for (const day in daysTest.value) {
-			// 	daysTest.value[day].sort((a, b) => (a.start > b.start) ? 1 : -1)
-			// }
+			for (const day in daysTest.value) {
+				daysTest.value[day].sort((a, b) => (a.start > b.start) ? 1 : -1)
+			}
 			//console.log(daysTest.value)
 		}
-		
 
-		const disabledViews = ["years","year","month","week"];
+		const disabledViews = ["years","year","month"];
 		const minEventWidth = 0;
-		const selectedDay = new Date("2023-05-22");
-		Date.prototype.addDays=function(d){return new Date(this.valueOf()+864E5*d);};
-
-		function debugShift(){
-			console.log(daysTest.value)
-		}
-		async function postShift(){
-			var data = [];
-			daysTest.value.forEach(element=>{
-				var fullDateStart = new Date(element.start)
-				var fullDateFinish = new Date(element.end)
-				var datePost = fullDateStart.getFullYear()+"-"+fullDateStart.getMonth()+"-"+fullDateStart.getDate()
-				var workerId = element.split;
-				var startTime = String(fullDateStart.getHours()).padStart(2, "0")+":"+String(fullDateStart.getMinutes()).padStart(2, "0");
-				var endTime = String(fullDateFinish.getHours()).padStart(2, "0")+":"+String(fullDateFinish.getMinutes()).padStart(2, "0");
-				data.push({
-					id:0,
-					date:datePost,
-					time_start:startTime,
-					time_finish:endTime,
-					userId:workerId
-				})
-			})
-			if(await ManagerMethods.postEvent(data)==false){
-				console.log("error!");
-			}
-			else{
-				console.log("all ok");
-			}
-		}
-
 
 		return{shift,workers,slots,days,makeShift,full,minTimeBetweenShifts,
 			tableResult,fullTest,options,showOptions,daysTest,
-			disabledViews,minEventWidth,selectedDay,
-			debugShift,postShift
+			disabledViews,minEventWidth
 		}
 	},
 	components:{
-		//draggable: VueDraggableNext,
+		draggable: VueDraggableNext,
 		VueCal 
 		
 	}

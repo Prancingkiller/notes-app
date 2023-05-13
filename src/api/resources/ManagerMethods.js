@@ -20,6 +20,25 @@ export default {
         else{
             alert(result.data.status)
         }
-    }
+    },
+    async postEvent(data){
+        const response  = await fetch(APISettings.baseURL+"/eventsAddTest", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',	
+            headers: {
+                'Trusted': 'yes'
+            },
+            contentType: 'application/json',
+            body: JSON.stringify(data)
+        }).catch(()=>{return false})
+        if(response.ok){
+            const result = await response.json();
+            return result;
+        }
+        else{
+            return false;
+        }
+    },
 
 }
