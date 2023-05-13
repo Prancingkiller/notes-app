@@ -13,7 +13,7 @@ export default {
             },
             contentType: 'application/json',
             body:data
-            });
+            }).catch(err=>{console.log(err)});
         const result = await response.json();
         if(result.data.status == "allGood"){
             return(result);
