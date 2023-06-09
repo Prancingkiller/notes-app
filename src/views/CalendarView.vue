@@ -75,6 +75,7 @@ import BaseCalendar from '../components/BaseCalendar';
 import BaseInput from '../components/BaseInput.vue';
 import EventsMethods from '../api/resources/EventsMethods'
 import indexedMethods  from '@/api/resources/indexedMethods';
+import UsersMethods from '@/api/resources/UsersMethods';
 import{ref,onMounted,toRaw} from 'vue'
 import  {Modal}  from 'bootstrap'
 export default {
