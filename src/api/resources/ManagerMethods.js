@@ -3,7 +3,7 @@ export default {
     name:"ManagerMethods",
 
     async makeShift(data){
-        const response = await fetch(APISettings.baseURL+"/shifts",{
+        const response = await fetch("http://localhost/mc/shifts.php",{
             method: "POST",
             mode: "cors",
             cache: "no-cache",

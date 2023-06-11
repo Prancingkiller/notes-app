@@ -51,16 +51,19 @@
 		<input type="checkbox" v-model="days" value="Ven">
 		<input type="checkbox" v-model="days" value="Sab">
 		<input type="checkbox" v-model="days" value="Dom">
-		<div v-for="worker in workers" :key="worker.id">
+		<div v-for="(worker,ii) in workers" :key="worker.id">
 		<p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p> 
-		<div>Lun <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Lun" :value="slot"></div>
-		<div>Mar <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mar" :value="slot"></div>
-		<div>Mer <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mer" :value="slot"></div>
-		<div>Gio <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Gio" :value="slot"></div>
-		<div>Ven <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Ven" :value="slot"></div>
-		<div>Sab <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Sab" :value="slot"></div>
-		<div>Dom <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Dom" :value="slot"></div>
-		</div>
+		<button @click="togglePanel(ii)">Pannello orari</button>
+	<div v-if="worker.showDays">
+		<div>Lun <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Lun" :value="slot"><span @click="toggleAll(ii,'Lun')">All</span></div>
+		<div>Mar <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mar" :value="slot"><span @click="toggleAll(ii,'Mar')">All</span></div>
+		<div>Mer <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mer" :value="slot"><span @click="toggleAll(ii,'Mer')">All</span></div>
+		<div>Gio <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Gio" :value="slot"><span @click="toggleAll(ii,'Gio')">All</span></div>
+		<div>Ven <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Ven" :value="slot"><span @click="toggleAll(ii,'Ven')">All</span></div>
+		<div>Sab <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Sab" :value="slot"><span @click="toggleAll(ii,'Sab')">All</span></div>
+		<div>Dom <input v-for="(slot,i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Dom" :value="slot"><span @click="toggleAll(ii,'Dom')">All</span></div>
+	</div>	
+	</div>
 		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
 
 			<table class="tableResult" style="margin:auto">
@@ -104,8 +107,8 @@ export default{
 		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const workers = ref([
 		{name:"Salome",label:"Salome",id:21,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]}},
-{name:"Stefano",label:"Stefano",id:4,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]}},
-{name:"Marco",label:"Marco",id:23,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]}},
+{name:"Stefano",label:"Stefano",id:4,hours:21,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[1,2,3,4,5,6,7,8,9,10,11,12,13]}},
+{name:"Marco",label:"Marco",id:23,hours:18,SlotDays:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[1,2,3,4,5,6,7,8,9,10,11,12,13]}},
 {name:"Luca",label:"Luca",id:24,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]}},
 {name:"Diego",label:"Diego",id:25,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]}},
 {name:"Luigi",label:"Luigi",id:26,hours:24,SlotDays:{Lun:full,Mar:full,Mer:full,Gio:full,Ven:full,Sab:full,Dom:full},favouriteSlots:{Lun:[],Mar:[],Mer:[],Gio:[],Ven:[],Sab:[],Dom:[]}},
@@ -250,11 +253,31 @@ export default{
 				}
 			})
 		}
+		function togglePanel(index){
+			if(Object.hasOwn(workers.value[index], 'showDays')){
+				workers.value[index].showDays = !workers.value[index].showDays;
+			}
+			else{
+				workers.value[index].showDays = true;
+			}
+		}
+		function toggleAll(index,day){
+			for(let i=1;i<=54;i++){
+				if(!workers.value[index].SlotDays[day].includes(i)){
+					var added = true;
+					workers.value[index].SlotDays[day].push(i);
+				}
+			}
+			if(!added){
+				workers.value[index].SlotDays[day]=[];
+			}
+			
+		}
 
 		return{shift,workers,slots,days,makeShift,full,minTimeBetweenShifts,
 			tableResult,fullTest,options,showOptions,daysTest,
 			disabledViews,minEventWidth,selectedDay,
-			debugShift,postShift,updateEvent
+			debugShift,postShift,updateEvent,togglePanel,toggleAll
 		}
 	},
 	components:{
