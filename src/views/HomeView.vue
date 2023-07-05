@@ -18,21 +18,21 @@ import { useRouter, useRoute } from 'vue-router'
 export default {
   name: 'HomeView',
 
-  setup(){
+  setup() {
     const router = useRouter()
-		const db = indexedMethods.initiate();
+    const db = indexedMethods.initiate();
 
-    function goNotes(){
+    function goNotes() {
       router.push({
         name: 'notes'
       })
     }
-    function goCalendar(){
+    function goCalendar() {
       router.push({
         name: 'calendar'
       })
     }
-		return{db,goCalendar,goNotes}
-	}
+    return { db, goCalendar, goNotes }
+  }
 }
 </script>

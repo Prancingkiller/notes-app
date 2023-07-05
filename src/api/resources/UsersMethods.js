@@ -1,9 +1,9 @@
 import { APISettings } from '../config.js';
 export default {
-    name:"UsersMethods",
+    name: "UsersMethods",
 
-    async loadUsers(data=null){
-        const response = await fetch(APISettings.baseURL+"/events2?"+ new URLSearchParams(data),{
+    async loadUsers(data = null) {
+        const response = await fetch(APISettings.baseURL + "/events2?" + new URLSearchParams(data), {
             mode: 'cors',
             credentials: 'include',
             method: 'GET',

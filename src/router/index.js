@@ -4,11 +4,11 @@ import NotesView from '../views/NotesView.vue'
 import CalendarView from '../views/CalendarView.vue'
 import ManagerView from '../views/ManagerView.vue'
 import ManagerView24 from '../views/ManagerView24.vue'
-function checkLog(){
-  if(localStorage.getItem("logged")){
+function checkLog() {
+  if (localStorage.getItem("logged")) {
     return true;
   }
-  else{
+  else {
     console.log("login first!")
     return false;
   }
@@ -24,10 +24,10 @@ const routes = [
     name: 'notes',
     component: NotesView,
     beforeEnter: (to, from) => {
-      if(checkLog()){
+      if (checkLog()) {
         return true;
       }
-      else{
+      else {
         return false;
       }
     },
@@ -37,10 +37,10 @@ const routes = [
     name: 'calendar',
     component: CalendarView,
     beforeEnter: (to, from) => {
-      if(checkLog()){
+      if (checkLog()) {
         return true;
       }
-      else{
+      else {
         return false;
       }
     },
