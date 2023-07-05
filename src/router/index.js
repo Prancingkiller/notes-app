@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import NotesView from '../views/NotesView.vue'
 import CalendarView from '../views/CalendarView.vue'
 import ManagerView from '../views/ManagerView.vue'
+import ManagerView24 from '../views/ManagerView24.vue'
 function checkLog(){
   if(localStorage.getItem("logged")){
     return true;
@@ -48,6 +49,19 @@ const routes = [
     path: '/manager',
     name: 'manager',
     component: ManagerView,
+    // beforeEnter: (to, from) => {
+    //   if(checkLog()){
+    //     return true;
+    //   }
+    //   else{
+    //     return false;
+    //   }
+    // },
+  },
+  {
+    path: '/manager24',
+    name: 'manager24',
+    component: ManagerView24,
     // beforeEnter: (to, from) => {
     //   if(checkLog()){
     //     return true;

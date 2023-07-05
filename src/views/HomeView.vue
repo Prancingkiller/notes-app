@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import indexedMethods from "../api/resources/indexedMethods"
 import { useRouter, useRoute } from 'vue-router'
 
