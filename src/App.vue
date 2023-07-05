@@ -21,10 +21,20 @@
 	</nav>
 	<router-view />
 </template>
-<script>
+<script lang="ts">
 import { onMounted } from 'vue'
-import LoginForm from "./components/LoginForm"
+import LoginForm from "./components/LoginForm.vue"
 
+interface SyncManager {
+	getTags(): Promise<string[]>;
+	register(tag: string): Promise<void>;
+}
+
+declare global {
+	interface ServiceWorkerRegistration {
+		readonly sync: SyncManager;
+	}
+}
 export default {
 	components: {
 		LoginForm
@@ -54,8 +64,8 @@ export default {
 				setTimer()
 			} else {
 				console.error('Background sync not supported');
-				navigator.serviceWorker.ready.then((registration) => {
-					navigator.serviceWorker.controller.postMessage("pushOffline")
+				navigator.serviceWorker.ready.then(() => {
+						//navigator.serviceWorker.controller.postMessage("pushOffline")
 				})
 			}
 		}
