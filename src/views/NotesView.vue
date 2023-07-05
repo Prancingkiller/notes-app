@@ -29,30 +29,34 @@
 		<font-awesome-icon icon="circle-plus" class="fa-4x" @click="openModal" />
 	</div>
 </template>
-<script lang="ts">
-import { ref, onMounted, reactive } from 'vue'
-import BaseInput from '../components/BaseInput.vue'
+<script>
+import { ref, onMounted, reactive, onBeforeUnmount } from 'vue'
+import BaseInput from '../components/BaseInput'
 import NotesMethods from '../api/resources/NotesMethods'
-import BaseNote from '../components/BaseNote.vue'
+import BaseNote from '../components/BaseNote'
 import indexedMethods from "../api/resources/indexedMethods"
 import swCalls from "../api/resources/swCalls"
 import { VueDraggableNext } from 'vue-draggable-next'
 import { Modal } from 'bootstrap'
 import { useSocketIO } from "@/socket";
-import type { Ref } from 'vue'
 export default {
 	setup() {
-		const note:{title:string,text:string}[] = reactive([{
+		const tryReconnect = () => {
+			console.log("websocket connection refused!")
+			setTimeout(() => {
+				socket.connect()
+			}, 3000);
+		}
+
+
+		const note = reactive([{
 			title: '',
 			text: ''
 		}])
-		interface noteType{
-			title:string,
-			text:string
-		}
-		let notes:noteType[] = reactive([{title:"",text:""}]);
+		const notes = ref([]);
 		const indexedDB = ref({});
 		const modalRef = ref(null);
+		var conn;
 		var modal = Modal;
 		onMounted(init)
 		//onBeforeUnmount(closeSocket)
@@ -72,12 +76,7 @@ export default {
 				console.log("connected!")
 				socket.emit('subscribe', localStorage.getItem("unique_id"));
 			})
-			socket.io.on("close", () => {
-				console.log("websocket connection refused!")
-				setTimeout(() => {
-					socket.connect()
-				}, 3000);
-			});
+			socket.io.on("close", tryReconnect);
 			socket.on('message', function (msg) {
 				ShowNotes()
 			})
@@ -88,12 +87,12 @@ export default {
 			var db;
 			db = await indexedMethods.initiate();
 			indexedDB.value = db;
-			notes = await NotesMethods.getNotes();
-			console.log("online data: " + notes)
+			notes.value = await NotesMethods.getNotes();
+			console.log("online data: " + notes.value)
 			const OfflineNotes = await indexedMethods.getDataDb(indexedDB.value, "notes_add");
 			console.log("offline data: " + OfflineNotes)
-			Array.prototype.push.apply(notes, JSON.parse(OfflineNotes));
-			console.log(notes)
+			Array.prototype.push.apply(notes.value, JSON.parse(OfflineNotes));
+			console.log(notes.value)
 		}
 		async function PostNote() {
 			if (await NotesMethods.postNote(note) == false) {
@@ -114,7 +113,7 @@ export default {
 			closeModal()
 		}
 		async function reorder() {
-			if (await NotesMethods.reorder(notes) == false) {
+			if (await NotesMethods.reorder(notes.value) == false) {
 				alert("Sei Offline! funzionalità non attiva")
 			}
 			else {
@@ -128,6 +127,7 @@ export default {
 				}
 			}
 		})
+
 		async function onDelete(e) {
 			if (e.temp == true) {
 				indexedMethods.deleteNote(indexedDB.value, e.id, "notes_add")
