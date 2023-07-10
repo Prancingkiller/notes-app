@@ -1,4 +1,4 @@
-import { APISettings } from '../config.js';
+import { APISettings } from '../config.ts';
 export default {
     name: "LogMethods",
     async getNotes() {
