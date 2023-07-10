@@ -4,8 +4,7 @@
 	<button v-if="daysTest.length > 1" @click="postShift">Submit Test</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom=480 :timeTo=1290 :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
-		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))"
-		active-view="day"
+		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)">
 
 	</vue-cal>
@@ -94,15 +93,15 @@ import ManagerMethods from "@/api/resources/ManagerMethods";
 import { ref } from "vue"
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
-import type {workersData} from '../types/workers'
-import type {shiftsData,eventPHP} from '../types/shifts'
+import type { workersData } from '../types/workers'
+import type { shiftsData, eventPHP } from '../types/shifts'
 import { faHandshakeSimpleSlash } from "@fortawesome/free-solid-svg-icons";
 declare global {
-   interface Date {
-      addDays(days: number, useThis?: boolean): Date,
-   }
+	interface Date {
+		addDays(days: number, useThis?: boolean): Date,
+	}
 }
-Date.prototype.addDays = function (d:number) { return new Date(this.valueOf() + 864E5 * d); };
+Date.prototype.addDays = function (d: number) { return new Date(this.valueOf() + 864E5 * d); };
 export default {
 	setup() {
 		var full = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
@@ -112,31 +111,31 @@ export default {
 		var prefAfternoon = [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
 		const workers = ref<workersData>([
-			{ showDays:false,name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Stefano", label: "Stefano", id: 4, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Marco", label: "Marco", id: 23, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Luca", label: "Luca", id: 24, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Diego", label: "Diego", id: 25, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Luigi", label: "Luigi", id: 26, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Francesca", label: "Francesca", id: 27, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Elena", label: "Elena", id: 28, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Roberta", label: "Roberta", id: 29, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Giulia", label: "Giulia", id: 30, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Giorgia", label: "Giorgia", id: 31, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Simone", label: "Simone", id: 32, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Francesco", label: "Francesco", id: 33, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
-			{ showDays:false,name: "Ettore", label: "Ettore", id: 34, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Matteo", label: "Matteo", id: 35, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Chiara", label: "Chiara", id: 36, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Daniele", label: "Daniele", id: 37, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Vittorio", label: "Vittorio", id: 38, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Marika", label: "Marika", id: 39, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Sergio", label: "Sergio", id: 40, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Emanuele", label: "Emanuele", id: 41, hours: 22, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Flaminio", label: "Flaminio", id: 42, hours: 22, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Laura", label: "Laura", id: 43, hours: 40, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Giada", label: "Giada", id: 44, hours: 40, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
-			{ showDays:false,name: "Giovanni", label: "Giovanni", id: 45, hours: 32, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } }
+			{ showDays: false, name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Stefano", label: "Stefano", id: 4, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Marco", label: "Marco", id: 23, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Luca", label: "Luca", id: 24, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Diego", label: "Diego", id: 25, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Luigi", label: "Luigi", id: 26, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Francesca", label: "Francesca", id: 27, hours: 24, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Elena", label: "Elena", id: 28, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Roberta", label: "Roberta", id: 29, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Giulia", label: "Giulia", id: 30, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Giorgia", label: "Giorgia", id: 31, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Simone", label: "Simone", id: 32, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Francesco", label: "Francesco", id: 33, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Ettore", label: "Ettore", id: 34, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Matteo", label: "Matteo", id: 35, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Chiara", label: "Chiara", id: 36, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Daniele", label: "Daniele", id: 37, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Vittorio", label: "Vittorio", id: 38, hours: 21, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Marika", label: "Marika", id: 39, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Sergio", label: "Sergio", id: 40, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Emanuele", label: "Emanuele", id: 41, hours: 22, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Flaminio", label: "Flaminio", id: 42, hours: 22, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Laura", label: "Laura", id: 43, hours: 40, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Giada", label: "Giada", id: 44, hours: 40, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } },
+			{ showDays: false, name: "Giovanni", label: "Giovanni", id: 45, hours: 32, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefMorning, Mar: prefMorning, Mer: prefMorning, Gio: prefMorning, Ven: prefMorning, Sab: prefMorning, Dom: prefMorning } }
 		]);
 		const slotsWeekend = ref([{ slotN: 1, required: 2 }, { slotN: 2, required: 2 }, { slotN: 3, required: 3 }, { slotN: 4, required: 4 }, { slotN: 5, required: 4 }, { slotN: 6, required: 4 }, { slotN: 7, required: 4 }, { slotN: 8, required: 4 }, { slotN: 9, required: 4 }, { slotN: 10, required: 4 }, { slotN: 11, required: 4 }, { slotN: 12, required: 4 }, { slotN: 13, required: 5 }, { slotN: 14, required: 5 }, { slotN: 15, required: 5 }, { slotN: 16, required: 5 }, { slotN: 17, required: 7 }, { slotN: 18, required: 7 }, { slotN: 19, required: 7 }, { slotN: 20, required: 8 }, { slotN: 21, required: 8 }, { slotN: 22, required: 9 }, { slotN: 23, required: 9 }, { slotN: 24, required: 9 }, { slotN: 25, required: 9 }, { slotN: 26, required: 8 }, { slotN: 27, required: 8 }, { slotN: 28, required: 7 }, { slotN: 29, required: 7 }, { slotN: 30, required: 6 }, { slotN: 31, required: 6 }, { slotN: 32, required: 6 }, { slotN: 33, required: 6 }, { slotN: 34, required: 6 }, { slotN: 35, required: 6 }, { slotN: 36, required: 6 }, { slotN: 37, required: 7 }, { slotN: 38, required: 7 }, { slotN: 39, required: 7 }, { slotN: 40, required: 8 }, { slotN: 41, required: 8 }, { slotN: 42, required: 9 }, { slotN: 43, required: 9 }, { slotN: 44, required: 8 }, { slotN: 45, required: 8 }, { slotN: 46, required: 8 }, { slotN: 47, required: 8 }, { slotN: 48, required: 8 }, { slotN: 49, required: 8 }, { slotN: 50, required: 7 }, { slotN: 51, required: 7 }, { slotN: 52, required: 6 }, { slotN: 53, required: 6 }, { slotN: 54, required: 5 }]);
 		const slotsNormal = ref([{ slotN: 1, required: 1 }, { slotN: 2, required: 1 }, { slotN: 3, required: 1 }, { slotN: 4, required: 1 }, { slotN: 5, required: 2 }, { slotN: 6, required: 2 }, { slotN: 7, required: 2 }, { slotN: 8, required: 3 }, { slotN: 9, required: 3 }, { slotN: 10, required: 3 }, { slotN: 11, required: 3 }, { slotN: 12, required: 3 }, { slotN: 13, required: 4 }, { slotN: 14, required: 4 }, { slotN: 15, required: 4 }, { slotN: 16, required: 4 }, { slotN: 17, required: 6 }, { slotN: 18, required: 6 }, { slotN: 19, required: 6 }, { slotN: 20, required: 7 }, { slotN: 21, required: 7 }, { slotN: 22, required: 8 }, { slotN: 23, required: 8 }, { slotN: 24, required: 8 }, { slotN: 25, required: 8 }, { slotN: 26, required: 7 }, { slotN: 27, required: 7 }, { slotN: 28, required: 6 }, { slotN: 29, required: 6 }, { slotN: 30, required: 5 }, { slotN: 31, required: 5 }, { slotN: 32, required: 4 }, { slotN: 33, required: 4 }, { slotN: 34, required: 5 }, { slotN: 35, required: 5 }, { slotN: 36, required: 5 }, { slotN: 37, required: 6 }, { slotN: 38, required: 6 }, { slotN: 39, required: 6 }, { slotN: 40, required: 7 }, { slotN: 41, required: 7 }, { slotN: 42, required: 8 }, { slotN: 43, required: 8 }, { slotN: 44, required: 7 }, { slotN: 45, required: 7 }, { slotN: 46, required: 7 }, { slotN: 47, required: 7 }, { slotN: 48, required: 7 }, { slotN: 49, required: 7 }, { slotN: 50, required: 6 }, { slotN: 51, required: 6 }, { slotN: 52, required: 5 }, { slotN: 53, required: 5 }, { slotN: 54, required: 4 }]);
@@ -149,7 +148,7 @@ export default {
 		const tableResult = ref<HTMLDivElement>();
 		var data;
 		const shiftChange = ref([{ a: [] }, { b: [] }, { c: [] }]);
-		const shift = ref<{data:eventPHP[]}>({ data: [] });
+		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		function showOptions() {
 			if (options.value) {
@@ -185,59 +184,56 @@ export default {
 				testEfficency: false
 			})
 			shift.value = await ManagerMethods.makeShift(data)
-			if(tableResult.value != undefined){
-				//tableResult.value.innerHTML = shift.value.data[0];
-				var year = "2023";
-				var month = "05";
-				var day = "15";
-				var shiftId = 0;
-				daysTest.value = [];
-				for (const worker in shift.value.data[1]) {
-					for (const prop in shift.value.data[1][worker]) {
-						var inner = shift.value.data[1][worker][prop];
-						for (const propp in inner) {
-							if (prop == "Lun") {
-								day = selectedDay.getDate().toString()
-							}
-							else if (prop == "Mar") {
-								day = selectedDay.addDays(1).getDate().toString()
-							}
-							else if (prop == "Mer") {
-								day = selectedDay.addDays(2).getDate().toString()
-							}
-							else if (prop == "Gio") {
-								day = selectedDay.addDays(3).getDate().toString()
-							}
-							else if (prop == "Ven") {
-								day = selectedDay.addDays(4).getDate().toString()
-							}
-							else if (prop == "Sab") {
-								day = selectedDay.addDays(5).getDate().toString()
-							}
-							else if (prop == "Dom") {
-								day = selectedDay.addDays(6).getDate().toString()
-							}
-							//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
-							var shiftTest:eventPHP = {
-								eventId : 0,
-								workerId: "",
-								start: "",
-								end: "",
-								split: 0
-							};
-							shiftTest.eventId = shiftId++;
-							shiftTest.workerId = worker;
-							shiftTest.start = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].start;
-							shiftTest.end = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].finish;
-							//shiftTest.title= 'Worker: '+worker,
-							shiftTest.split = parseInt(worker),
-								daysTest.value.push(shiftTest)
+			var year = "2023";
+			var month = "05";
+			var day = "15";
+			var shiftId = 0;
+			daysTest.value = [];
+			for (const worker in shift.value.data[1]) {
+				for (const prop in shift.value.data[1][worker]) {
+					var inner = shift.value.data[1][worker][prop];
+					for (const propp in inner) {
+						if (prop == "Lun") {
+							day = selectedDay.getDate().toString()
 						}
+						else if (prop == "Mar") {
+							day = selectedDay.addDays(1).getDate().toString()
+						}
+						else if (prop == "Mer") {
+							day = selectedDay.addDays(2).getDate().toString()
+						}
+						else if (prop == "Gio") {
+							day = selectedDay.addDays(3).getDate().toString()
+						}
+						else if (prop == "Ven") {
+							day = selectedDay.addDays(4).getDate().toString()
+						}
+						else if (prop == "Sab") {
+							day = selectedDay.addDays(5).getDate().toString()
+						}
+						else if (prop == "Dom") {
+							day = selectedDay.addDays(6).getDate().toString()
+						}
+						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
+						var shiftTest: eventPHP = {
+							eventId: 0,
+							workerId: "",
+							start: "",
+							end: "",
+							split: 0
+						};
+						shiftTest.eventId = shiftId++;
+						shiftTest.workerId = worker;
+						shiftTest.start = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].start;
+						shiftTest.end = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].finish;
+						//shiftTest.title= 'Worker: '+worker,
+						shiftTest.split = parseInt(worker),
+							daysTest.value.push(shiftTest)
 					}
 				}
-				daysTest.value.sort((a, b) => (a.start > b.start) ? 1 : -1)
 			}
-			
+			daysTest.value.sort((a, b) => (a.start > b.start) ? 1 : -1)
+
 			// for (const day in daysTest.value) {
 			// 	daysTest.value[day].sort((a, b) => (a.start > b.start) ? 1 : -1)
 			// }
@@ -252,7 +248,7 @@ export default {
 			console.log(daysTest.value)
 		}
 		async function postShift() {
-			var data:shiftsData = [];
+			var data: shiftsData = [];
 			daysTest.value.forEach(element => {
 				var fullDateStart = new Date(element.start)
 				var fullDateFinish = new Date(element.end)
@@ -275,7 +271,7 @@ export default {
 				console.log("all ok");
 			}
 		}
-		function updateEvent(e:any) {
+		function updateEvent(e: any) {
 			daysTest.value.forEach(element => {
 				if (element.eventId == e.event.eventId) {
 					element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.getDate() + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
@@ -283,10 +279,10 @@ export default {
 				}
 			})
 		}
-		function togglePanel(index:number) {
-				workers.value[index].showDays = !workers.value[index].showDays;
+		function togglePanel(index: number) {
+			workers.value[index].showDays = !workers.value[index].showDays;
 		}
-		function toggleAll(index:number, day:string) {
+		function toggleAll(index: number, day: string) {
 			var added = false;
 			for (let i = 1; i <= 54; i++) {
 				if (!workers.value[index].SlotDays[day].includes(i)) {
