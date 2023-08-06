@@ -4,11 +4,10 @@ export default {
 
     async getWorkers() {
         const response = await fetch("https://notes-api.it:8443/workersData", {
-            mode: 'no-cors',
-            credentials: 'include',
-            method: 'GET',
+            mode: 'cors',
+            method: 'GET'
         });
-        const result =  response;
+        const result = await response.json();
         return result;
     },
 }
