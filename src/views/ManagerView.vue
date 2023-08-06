@@ -111,7 +111,7 @@ export default {
 		var prefMorning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 		var prefAfternoon = [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
-		const workers = ref([{ showDays: false, name: "", label: "", id: "", hours: "", SlotDays: { Lun: "", Mar: "", Mer: "", Gio: "", Ven: "", Sab: "", Dom: "" }, favouriteSlots: { Lun: "", Mar: "", Mer: "", Gio: "", Ven: "", Sab: "", Dom:  ""} },]);
+		const workers = ref([{ showDays: false, name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } }]);
 		
 		workers.value = await WorkersMethods.getWorkers();
 		
