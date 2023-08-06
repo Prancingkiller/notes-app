@@ -1,4 +1,4 @@
-import { APISettings } from '../config.ts';
+import { APISettings } from '../config.js';
 export default {
     name: "WorkersMethods",
 
