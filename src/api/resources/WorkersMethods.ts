@@ -8,7 +8,7 @@ export default {
             credentials: 'include',
             method: 'GET',
         });
-        const result = await response.json();
+        const result =  response;
         return result;
     },
 }
