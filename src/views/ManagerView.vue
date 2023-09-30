@@ -95,7 +95,7 @@ import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import type { workersData } from '../types/workers'
 import type { shiftsData, eventPHP } from '../types/shifts'
-import { faHandshakeSimpleSlash } from "@fortawesome/free-solid-svg-icons";
+
 declare global {
 	interface Date {
 		addDays(days: number, useThis?: boolean): Date,
@@ -128,7 +128,7 @@ export default {
 		const baseShift = ref(3);
 		const tableResult = ref<HTMLDivElement>();
 		var data;
-		const shiftChange = ref([{ a: [] }, { b: [] }, { c: [] }]);
+
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		function showOptions() {
@@ -224,7 +224,7 @@ export default {
 
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
-		const selectedDay = new Date("2023-05-22");
+		const selectedDay = new Date();
 		function debugShift() {
 			console.log(daysTest.value)
 		}
