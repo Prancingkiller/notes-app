@@ -162,7 +162,7 @@ export default {
 		async function makeShift() {
 			data = JSON.stringify({
 				days: days.value,
-				startingDate: selectedDay.value,
+				startingDate: selectedDay.value.toISOString().split('T')[0],
 				slots: slots.value,
 				workers: workers.value,
 				minTimeBetweenShifts: (minTimeBetweenShifts.value * 4),
@@ -257,8 +257,8 @@ export default {
 			})
 		}
 		function updateSelectedDay(e: any) {
-			// selectedDay.value = e.endDate;
-			console.log(e.endDate);
+			selectedDay.value = e.endDate;
+			console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
 			workers.value[index].showDays = !workers.value[index].showDays;
