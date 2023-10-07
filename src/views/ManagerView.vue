@@ -171,8 +171,8 @@ export default {
 				testEfficency: false
 			})
 			shift.value = await ManagerMethods.makeShift(data)
-			var year = "2023";
-			var month = "05";
+			var year = selectedMonday.value.getFullYear();
+			var month = selectedMonday.value.getMonth();
 			var day = "15";
 			var shiftId = 0;
 			daysTest.value = [];
@@ -181,25 +181,25 @@ export default {
 					var inner = shift.value.data[1][worker][prop];
 					for (const propp in inner) {
 						if (prop == "Lun") {
-							day = selectedDay.value.getDate().toString()
+							day = selectedMonday.value.getDate().toString()
 						}
 						else if (prop == "Mar") {
-							day = selectedDay.value.addDays(1).getDate().toString()
+							day = selectedMonday.value.addDays(1).getDate().toString()
 						}
 						else if (prop == "Mer") {
-							day = selectedDay.value.addDays(2).getDate().toString()
+							day = selectedMonday.value.addDays(2).getDate().toString()
 						}
 						else if (prop == "Gio") {
-							day = selectedDay.value.addDays(3).getDate().toString()
+							day = selectedMonday.value.addDays(3).getDate().toString()
 						}
 						else if (prop == "Ven") {
-							day = selectedDay.value.addDays(4).getDate().toString()
+							day = selectedMonday.value.addDays(4).getDate().toString()
 						}
 						else if (prop == "Sab") {
-							day = selectedDay.value.addDays(5).getDate().toString()
+							day = selectedMonday.value.addDays(5).getDate().toString()
 						}
 						else if (prop == "Dom") {
-							day = selectedDay.value.addDays(6).getDate().toString()
+							day = selectedMonday.value.addDays(6).getDate().toString()
 						}
 						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
 						var shiftTest: eventPHP = {
