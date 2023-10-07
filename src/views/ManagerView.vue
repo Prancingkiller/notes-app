@@ -257,7 +257,8 @@ export default {
 			})
 		}
 		function updateSelectedDay(e: any) {
-			selectedDay.value = e.startDate.toISOString().split('T')[0];
+			//selectedDay.value = e.startDate.toISOString().split('T')[0];
+			console.log(e.startDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
 			workers.value[index].showDays = !workers.value[index].showDays;
