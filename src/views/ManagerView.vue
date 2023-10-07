@@ -1,10 +1,8 @@
 <template>
-	{{ selectedDay }}
-	<div v-if="isMonday">
-		<button @click="makeShift">Make Shift</button>
-		<button v-if="daysTest.length > 1" @click="debugShift">Debug</button>
-		<button v-if="daysTest.length > 1" @click="postShift">Submit Test</button>
-	</div>
+	{{ selectedMonday }}
+	<button @click="makeShift">Make Shift</button>
+	<button v-if="daysTest.length > 1" @click="debugShift">Debug</button>
+	<button v-if="daysTest.length > 1" @click="postShift">Submit Test</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom=480 :timeTo=1290 :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
@@ -278,20 +276,16 @@ export default {
 			}
 
 		}
-
-		const isMonday = computed(()=>{
-			if(selectedDay.value.getDay()==1){
-				return true;
-			}
-			else{
-				return false;
-			}
+		const selectedMonday = computed(()=>{
+			let index = selectedDay.value.getDay();
+			let toRemove = index-1;
+			return selectedDay.value.addDays(toRemove);
 		})
 
 		return {
 			shift, workers, slots, days, makeShift, full, minTimeBetweenShifts, allowDoubleShifts, baseShift,
 			tableResult, fullTest, options, showOptions, daysTest,
-			disabledViews, minEventWidth, selectedDay,updateSelectedDay,isMonday,
+			disabledViews, minEventWidth, selectedDay,updateSelectedDay,selectedMonday,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll
 		}
 	},
