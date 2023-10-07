@@ -257,7 +257,7 @@ export default {
 			})
 		}
 		function updateSelectedDay(e: any) {
-			selectedDay.value = e.endDate;
+			// selectedDay.value = e.endDate;
 			console.log(e.endDate);
 		}
 		function togglePanel(index: number) {
