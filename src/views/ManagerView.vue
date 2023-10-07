@@ -127,8 +127,11 @@ export default {
 		const allowDoubleShifts = ref(true);
 		const baseShift = ref(3);
 		const tableResult = ref<HTMLDivElement>();
+			const daysTest = ref<eventPHP[]>([]);
 		var data;
-
+		const disabledViews = ["years", "year", "month", "week"];
+		const minEventWidth = 0;
+		const selectedDay = ref(new Date());
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		function showOptions() {
@@ -140,7 +143,6 @@ export default {
 			}
 		}
 
-		const daysTest = ref<eventPHP[]>([]);
 		async function testEfficency() {
 			data = JSON.stringify({
 				days: days.value,
@@ -157,6 +159,7 @@ export default {
 		async function makeShift() {
 			data = JSON.stringify({
 				days: days.value,
+				startingDate: selectedDay.value,
 				slots: slots.value,
 				workers: workers.value,
 				minTimeBetweenShifts: (minTimeBetweenShifts.value * 4),
@@ -175,25 +178,25 @@ export default {
 					var inner = shift.value.data[1][worker][prop];
 					for (const propp in inner) {
 						if (prop == "Lun") {
-							day = selectedDay.getDate().toString()
+							day = selectedDay.value.getDate().toString()
 						}
 						else if (prop == "Mar") {
-							day = selectedDay.addDays(1).getDate().toString()
+							day = selectedDay.value.addDays(1).getDate().toString()
 						}
 						else if (prop == "Mer") {
-							day = selectedDay.addDays(2).getDate().toString()
+							day = selectedDay.value.addDays(2).getDate().toString()
 						}
 						else if (prop == "Gio") {
-							day = selectedDay.addDays(3).getDate().toString()
+							day = selectedDay.value.addDays(3).getDate().toString()
 						}
 						else if (prop == "Ven") {
-							day = selectedDay.addDays(4).getDate().toString()
+							day = selectedDay.value.addDays(4).getDate().toString()
 						}
 						else if (prop == "Sab") {
-							day = selectedDay.addDays(5).getDate().toString()
+							day = selectedDay.value.addDays(5).getDate().toString()
 						}
 						else if (prop == "Dom") {
-							day = selectedDay.addDays(6).getDate().toString()
+							day = selectedDay.value.addDays(6).getDate().toString()
 						}
 						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
 						var shiftTest: eventPHP = {
@@ -214,17 +217,7 @@ export default {
 				}
 			}
 			daysTest.value.sort((a, b) => (a.start > b.start) ? 1 : -1)
-
-			// for (const day in daysTest.value) {
-			// 	daysTest.value[day].sort((a, b) => (a.start > b.start) ? 1 : -1)
-			// }
-			//console.log(daysTest.value)
 		}
-
-
-		const disabledViews = ["years", "year", "month", "week"];
-		const minEventWidth = 0;
-		const selectedDay = new Date();
 		function debugShift() {
 			console.log(daysTest.value)
 		}
