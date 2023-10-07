@@ -171,8 +171,8 @@ export default {
 				testEfficency: false
 			})
 			shift.value = await ManagerMethods.makeShift(data)
-			var year = selectedMonday.value.getFullYear();
-			var month = selectedMonday.value.getMonth();
+			var year = "2023";
+			var month = "10";
 			var day = "15";
 			var shiftId = 0;
 			daysTest.value = [];
