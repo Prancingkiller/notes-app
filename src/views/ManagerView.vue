@@ -134,7 +134,7 @@ export default {
 		var data;
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
-		const selectedDay = ref(new Date().toISOString().split('T')[0]);
+		const selectedDay = ref(new Date());
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		function showOptions() {
