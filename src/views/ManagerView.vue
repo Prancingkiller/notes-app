@@ -162,7 +162,7 @@ export default {
 		async function makeShift() {
 			data = JSON.stringify({
 				days: days.value,
-				startingDate: selectedDay.value.toISOString().split('T')[0],
+				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: slots.value,
 				workers: workers.value,
 				minTimeBetweenShifts: (minTimeBetweenShifts.value * 4),
