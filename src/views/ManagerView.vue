@@ -134,7 +134,7 @@ export default {
 		var data;
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
-		const selectedDay = ref(new Date());
+		const selectedDay = ref(new Date().toISOString().split('T')[0]);
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		function showOptions() {
@@ -162,7 +162,7 @@ export default {
 		async function makeShift() {
 			data = JSON.stringify({
 				days: days.value,
-				startingDate: selectedDay.value.toISOString().split('T')[0],
+				startingDate: selectedDay.value,
 				slots: slots.value,
 				workers: workers.value,
 				minTimeBetweenShifts: (minTimeBetweenShifts.value * 4),
