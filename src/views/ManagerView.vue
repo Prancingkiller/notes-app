@@ -278,7 +278,7 @@ export default {
 		}
 		const selectedMonday = computed(()=>{
 			let index = selectedDay.value.getDay();
-			let toRemove = index-1;
+			let toRemove = 0-(index-1);
 			return selectedDay.value.addDays(toRemove);
 		})
 
