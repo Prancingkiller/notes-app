@@ -138,12 +138,7 @@ export default {
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		function showOptions() {
-			if (options.value) {
-				options.value = false
-			}
-			else {
-				options.value = true
-			}
+			options.value = !options.value;
 		}
 
 		async function testEfficency() {
