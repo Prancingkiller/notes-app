@@ -61,9 +61,9 @@
 						:value="slot"><span @click="toggleAll(ii, 'Dom')">All</span></div>
 			</div>
 		</div>
-		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="minTimeBetweenShifts"></span></p>
-		<p>Allow double turns (even if not strictly needed):<input type="checkbox" v-model="allowDoubleShifts"></p>
-		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="baseShift"></p>
+		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="configuration.minTimeBetweenShifts"></span></p>
+		<p>Allow double turns (even if not strictly needed):<input type="checkbox" v-model="configuration.allowDoubleShifts"></p>
+		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.baseShift"></p>
 		<table class="tableResult" style="margin:auto">
 			<thead>
 				<tr>
@@ -93,7 +93,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref,computed } from "vue"
+import { ref,computed,onMounted } from "vue"
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import type { workersData } from '../types/workers'
@@ -116,19 +116,15 @@ export default {
 		const workers = ref<workersData>([
 			{ showDays: false, name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
 		]);	
-		(async () => {
-			data = await WorkersMethods.getWorkers();
-			console.log(data);
-			workers.value = data;
-		})();
+
 		const slotsWeekend = ref([{ slotN: 1, required: 2 }, { slotN: 2, required: 2 }, { slotN: 3, required: 3 }, { slotN: 4, required: 4 }, { slotN: 5, required: 4 }, { slotN: 6, required: 4 }, { slotN: 7, required: 4 }, { slotN: 8, required: 4 }, { slotN: 9, required: 4 }, { slotN: 10, required: 4 }, { slotN: 11, required: 4 }, { slotN: 12, required: 4 }, { slotN: 13, required: 5 }, { slotN: 14, required: 5 }, { slotN: 15, required: 5 }, { slotN: 16, required: 5 }, { slotN: 17, required: 7 }, { slotN: 18, required: 7 }, { slotN: 19, required: 7 }, { slotN: 20, required: 8 }, { slotN: 21, required: 8 }, { slotN: 22, required: 9 }, { slotN: 23, required: 9 }, { slotN: 24, required: 9 }, { slotN: 25, required: 9 }, { slotN: 26, required: 8 }, { slotN: 27, required: 8 }, { slotN: 28, required: 7 }, { slotN: 29, required: 7 }, { slotN: 30, required: 6 }, { slotN: 31, required: 6 }, { slotN: 32, required: 6 }, { slotN: 33, required: 6 }, { slotN: 34, required: 6 }, { slotN: 35, required: 6 }, { slotN: 36, required: 6 }, { slotN: 37, required: 7 }, { slotN: 38, required: 7 }, { slotN: 39, required: 7 }, { slotN: 40, required: 8 }, { slotN: 41, required: 8 }, { slotN: 42, required: 9 }, { slotN: 43, required: 9 }, { slotN: 44, required: 8 }, { slotN: 45, required: 8 }, { slotN: 46, required: 8 }, { slotN: 47, required: 8 }, { slotN: 48, required: 8 }, { slotN: 49, required: 8 }, { slotN: 50, required: 7 }, { slotN: 51, required: 7 }, { slotN: 52, required: 6 }, { slotN: 53, required: 6 }, { slotN: 54, required: 5 }]);
 		const slotsNormal = ref([{ slotN: 1, required: 1 }, { slotN: 2, required: 1 }, { slotN: 3, required: 1 }, { slotN: 4, required: 1 }, { slotN: 5, required: 2 }, { slotN: 6, required: 2 }, { slotN: 7, required: 2 }, { slotN: 8, required: 3 }, { slotN: 9, required: 3 }, { slotN: 10, required: 3 }, { slotN: 11, required: 3 }, { slotN: 12, required: 3 }, { slotN: 13, required: 4 }, { slotN: 14, required: 4 }, { slotN: 15, required: 4 }, { slotN: 16, required: 4 }, { slotN: 17, required: 6 }, { slotN: 18, required: 6 }, { slotN: 19, required: 6 }, { slotN: 20, required: 7 }, { slotN: 21, required: 7 }, { slotN: 22, required: 8 }, { slotN: 23, required: 8 }, { slotN: 24, required: 8 }, { slotN: 25, required: 8 }, { slotN: 26, required: 7 }, { slotN: 27, required: 7 }, { slotN: 28, required: 6 }, { slotN: 29, required: 6 }, { slotN: 30, required: 5 }, { slotN: 31, required: 5 }, { slotN: 32, required: 4 }, { slotN: 33, required: 4 }, { slotN: 34, required: 5 }, { slotN: 35, required: 5 }, { slotN: 36, required: 5 }, { slotN: 37, required: 6 }, { slotN: 38, required: 6 }, { slotN: 39, required: 6 }, { slotN: 40, required: 7 }, { slotN: 41, required: 7 }, { slotN: 42, required: 8 }, { slotN: 43, required: 8 }, { slotN: 44, required: 7 }, { slotN: 45, required: 7 }, { slotN: 46, required: 7 }, { slotN: 47, required: 7 }, { slotN: 48, required: 7 }, { slotN: 49, required: 7 }, { slotN: 50, required: 6 }, { slotN: 51, required: 6 }, { slotN: 52, required: 5 }, { slotN: 53, required: 5 }, { slotN: 54, required: 4 }]);
 
 		const slots = ref({ Lun: slotsNormal.value, Mar: slotsNormal.value, Mer: slotsNormal.value, Gio: slotsNormal.value, Ven: slotsNormal.value, Sab: slotsWeekend.value, Dom: slotsWeekend.value });
 		const days = ref(["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]);
-		const minTimeBetweenShifts = ref(2);
-		const allowDoubleShifts = ref(true);
-		const baseShift = ref(3);
+		// const minTimeBetweenShifts = ref(2);
+		// const allowDoubleShifts = ref(true);
+		// const baseShift = ref(3);
 		const tableResult = ref<HTMLDivElement>();
 			const daysTest = ref<eventPHP[]>([]);
 		var data;
@@ -137,6 +133,30 @@ export default {
 		const selectedDay = ref(new Date(new Date().setHours(12,0,0,0)));
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
+
+		const configuration = ref({
+			minTimeBetweenShifts:2,
+			allowDoubleShifts:true,
+			baseShift:3,
+		});
+		onMounted(init)
+
+		async function init(){
+			//loadOptions();
+			loadWokersData();
+		}
+
+		// async function loadOptions(){
+		// 	data = await ManagerMethods.getOptions();
+		// }
+
+		async function loadWokersData(){
+			data = await WorkersMethods.getWorkers();
+			console.log(data);
+			workers.value = data;
+		}
+
+
 		function showOptions() {
 			options.value = !options.value;
 		}
@@ -146,9 +166,9 @@ export default {
 				days: days.value,
 				slots: slots.value,
 				workers: workers.value,
-				minTimeBetweenShifts: (minTimeBetweenShifts.value * 4),
-				allowDoubles: allowDoubleShifts.value,
-				baseShift: baseShift.value,
+				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
+				allowDoubles: configuration.value.allowDoubleShifts,
+				baseShift: configuration.value.baseShift,
 				testEfficency: true
 			})
 			let result = await ManagerMethods.makeShift(data);
@@ -160,9 +180,9 @@ export default {
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: slots.value,
 				workers: workers.value,
-				minTimeBetweenShifts: (minTimeBetweenShifts.value * 4),
-				allowDoubles: allowDoubleShifts.value,
-				baseShift: baseShift.value,
+				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
+				allowDoubles: configuration.value.allowDoubleShifts,
+				baseShift: configuration.value.baseShift,
 				testEfficency: false
 			})
 			shift.value = await ManagerMethods.makeShift(data)
@@ -281,8 +301,8 @@ export default {
 		})
 
 		return {
-			shift, workers, slots, days, makeShift, full, minTimeBetweenShifts, allowDoubleShifts, baseShift,
-			tableResult, fullTest, options, showOptions, daysTest,
+			shift, workers, slots, days, makeShift, full,
+			tableResult, fullTest, options, showOptions, daysTest,configuration,
 			disabledViews, minEventWidth, selectedDay,updateSelectedDay,selectedMonday,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll
 		}
