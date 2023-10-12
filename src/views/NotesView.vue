@@ -44,7 +44,7 @@ export default {
 		const tryReconnect = () => {
 			console.log("websocket connection refused!")
 			setTimeout(() => {
-				useSocketIO.socket.connect()
+				socket.connect()
 			}, 3000);
 		}
 
@@ -67,11 +67,11 @@ export default {
 			modal.hide()
 		}
 		function init() {
+			const { socket } = useSocketIO()
 			ShowNotes();
 			socket();
 		}
 		function socket() {
-			const { socket } = useSocketIO()
 			socket.on('connect', function () {
 				console.log("connected!")
 				socket.emit('subscribe', localStorage.getItem("unique_id"));
