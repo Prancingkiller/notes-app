@@ -112,7 +112,7 @@ export default {
 		var morning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 		var prefMorning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 		var prefAfternoon = [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
-		//var afternoon = [28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
+
 		const workers = ref<workersData>([
 			{ showDays: false, name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
 		]);	
@@ -122,9 +122,7 @@ export default {
 
 		const slots = ref({ Lun: slotsNormal.value, Mar: slotsNormal.value, Mer: slotsNormal.value, Gio: slotsNormal.value, Ven: slotsNormal.value, Sab: slotsWeekend.value, Dom: slotsWeekend.value });
 		const days = ref(["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]);
-		// const minTimeBetweenShifts = ref(2);
-		// const allowDoubleShifts = ref(true);
-		// const baseShift = ref(3);
+
 		const tableResult = ref<HTMLDivElement>();
 			const daysTest = ref<eventPHP[]>([]);
 		var data;
@@ -142,13 +140,16 @@ export default {
 		onMounted(init)
 
 		async function init(){
-			//loadOptions();
+			loadOptions();
 			loadWokersData();
 		}
 
-		// async function loadOptions(){
-		// 	data = await ManagerMethods.getOptions();
-		// }
+		async function loadOptions(){
+			data = await ManagerMethods.loadOptions();
+			configuration.value.allowDoubleShifts = data.allowDoubles,
+			configuration.value.minTimeBetweenShifts = data.minTimeBetweenShifts,
+			configuration.value.baseShift = data.baseShift
+		}
 
 		async function loadWokersData(){
 			data = await WorkersMethods.getWorkers();

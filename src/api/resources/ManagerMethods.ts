@@ -1,57 +1,57 @@
 import { APISettings } from '../config';
-import type {eventPHP} from '../../types/shifts'
+import type { eventPHP } from '../../types/shifts'
 type toSend = BodyInit & {
-    allowDoubles:string,
-    baseShift:number,
-    days:string[],
-    minTimeBetweenShifts:number,
-    slots:{
-        slotN:number,
-        required:number
+    allowDoubles: string,
+    baseShift: number,
+    days: string[],
+    minTimeBetweenShifts: number,
+    slots: {
+        slotN: number,
+        required: number
     }[],
     testEfficency: boolean,
-    workers:{
-        SlotDays:{
-            Lun:number[],
-            Mar:number[],
-            Mer:number[],
-            Gio:number[],
-            Ven:number[],
-            Sab:number[],
-            Dom:number[]
+    workers: {
+        SlotDays: {
+            Lun: number[],
+            Mar: number[],
+            Mer: number[],
+            Gio: number[],
+            Ven: number[],
+            Sab: number[],
+            Dom: number[]
         }[],
-        favouriteSlots:{
-            Lun:number[],
-            Mar:number[],
-            Mer:number[],
-            Gio:number[],
-            Ven:number[],
-            Sab:number[],
-            Dom:number[]
+        favouriteSlots: {
+            Lun: number[],
+            Mar: number[],
+            Mer: number[],
+            Gio: number[],
+            Ven: number[],
+            Sab: number[],
+            Dom: number[]
         }[],
-        hours:number,
-        id:number,
-        label:string
-        name:string,
-        showDays:boolean
+        hours: number,
+        id: number,
+        label: string
+        name: string,
+        showDays: boolean
     }[]
 }
 
 type ApiResponse = {
-    data:{
-        0:string,
-        1:{
-            Lun:number[],
-            Mar:number[],
-            Mer:number[],
-            Gio:number[],
-            Ven:number[],
-            Sab:number[],
-            Dom:number[],
-            fairness:number,
-            left:number
+    data: {
+        0: string,
+        1: {
+            Lun: number[],
+            Mar: number[],
+            Mer: number[],
+            Gio: number[],
+            Ven: number[],
+            Sab: number[],
+            Dom: number[],
+            fairness: number,
+            left: number
         }[],
-        efficency:string,
+        efficency: string,
         hoursDeficit: number,
         hoursWasted: number,
         reportSettings: string,
@@ -62,7 +62,7 @@ type ApiResponse = {
 export default {
     name: "ManagerMethods",
 
-    async makeShift<TResponse>(data:toSend): Promise<TResponse>{
+    async makeShift<TResponse>(data: toSend): Promise<TResponse> {
         const response = await fetch(APISettings.baseURL + "/shifts.php", {
             method: "POST",
             mode: "cors",
@@ -100,5 +100,21 @@ export default {
             return false;
         }
     },
+
+    async loadOptions(){
+        const response = await fetch(APISettings.baseURL + "/options", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+        });
+        const result = await response.json();
+        if(result.allowDoubles == 1){
+            result.allowDoubles = true;
+        }
+        else{
+            result.allowDoubles = false;
+        }
+        return result;
+    }
 
 }
