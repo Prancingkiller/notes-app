@@ -131,12 +131,12 @@ export default {
 		const selectedDay = ref(new Date(new Date().setHours(12,0,0,0)));
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
-
 		const configuration = ref({
 			minTimeBetweenShifts:2,
 			allowDoubleShifts:true,
 			baseShift:3,
 		});
+		
 		onMounted(init)
 
 		async function init(){
@@ -145,7 +145,7 @@ export default {
 		}
 
 		async function loadOptions(){
-			data = await ManagerMethods.loadOptions();
+			let data = await ManagerMethods.loadOptions();
 			configuration.value.allowDoubleShifts = data.allowDoubles,
 			configuration.value.minTimeBetweenShifts = data.minTimeBetweenShifts,
 			configuration.value.baseShift = data.baseShift
