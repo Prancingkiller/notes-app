@@ -3,4 +3,5 @@ export const APISettings = {
         'Accept': 'application/json'
     }),
     baseURL: 'https://notes-api.it/api',
+    //baseURL: 'http://localhost/mc/',
 }
