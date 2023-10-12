@@ -69,9 +69,9 @@ export default {
 		}
 		function init() {
 			ShowNotes();
-			socket();
+			socketI();
 		}
-		function socket() {
+		function socketI() {
 			socket.on('connect', function () {
 				console.log("connected!")
 				socket.emit('subscribe', localStorage.getItem("unique_id"));
