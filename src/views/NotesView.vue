@@ -44,7 +44,7 @@ export default {
 		const tryReconnect = () => {
 			console.log("websocket connection refused!")
 			setTimeout(() => {
-				socket.connect()
+				useSocketIO.socket.connect()
 			}, 3000);
 		}
 
