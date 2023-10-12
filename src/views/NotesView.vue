@@ -41,6 +41,7 @@ import { Modal } from 'bootstrap'
 import { useSocketIO } from "@/socket.js";
 export default {
 	setup() {
+		const { socket } = useSocketIO()
 		const tryReconnect = () => {
 			console.log("websocket connection refused!")
 			setTimeout(() => {
@@ -67,7 +68,6 @@ export default {
 			modal.hide()
 		}
 		function init() {
-			const { socket } = useSocketIO()
 			ShowNotes();
 			socket();
 		}
