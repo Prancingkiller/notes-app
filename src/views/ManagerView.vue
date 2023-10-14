@@ -1,5 +1,4 @@
 <template>
-	{{ selectedMonday }}
 	<button @click="makeShift">Make Shift</button>
 	<button v-if="daysTest.length > 1" @click="debugShift">Debug</button>
 	<button v-if="daysTest.length > 1" @click="postShift">Submit Test</button>
