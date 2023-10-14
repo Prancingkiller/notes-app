@@ -149,7 +149,6 @@ export default {
 			configuration.value.allowDoubleShifts = data.allowDoubles,
 			configuration.value.minTimeBetweenShifts = data.minTimeBetweenShifts,
 			configuration.value.baseShift = data.baseShift
-			console.log(configuration.value);
 		}
 
 		async function loadWokersData(){

@@ -108,15 +108,16 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        if(result.allowDoubles == "1"){
-            result.allowDoubles = true;
-        }
-        else{
-            result.allowDoubles = false;
-        }
-        // return result;
         const returns = {allowDoubles:false,minTimeBetweenShifts:0,baseShift:0};
         result.forEach(element=>{
+            if(element.option_name == "allowDoubles"){
+                if(element.value == "1"){
+                    element.value = true;
+                }
+                else{
+                    element.value = false;
+                }
+            }
             returns[element.option_name]=element.value;
         })
         console.log(returns)
