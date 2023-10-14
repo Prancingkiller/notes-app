@@ -4,6 +4,7 @@ import NotesView from '../views/NotesView.vue'
 import CalendarView from '../views/CalendarView.vue'
 import ManagerView from '../views/ManagerView.vue'
 import ManagerView24 from '../views/ManagerView24.vue'
+import profileView from '../views/profileView.vue'
 function checkLog() {
   if (localStorage.getItem("logged")) {
     return true;
@@ -70,6 +71,11 @@ const routes = [
     //     return false;
     //   }
     // },
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: profileView,
   }
 ]
 

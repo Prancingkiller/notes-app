@@ -15,7 +15,7 @@
 						<router-link class="nav-link" to="/calendar">Calendar</router-link>
 					</li>
 				</ul>
-				<LoginForm />
+				<LoginForm @profilePage="toEdit()" />
 			</div>
 		</div>
 	</nav>
@@ -24,6 +24,8 @@
 <script lang="ts">
 import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm.vue"
+import { useRouter } from 'vue-router'
+
 
 interface SyncManager {
 	getTags(): Promise<string[]>;
@@ -40,6 +42,7 @@ declare global {
 		LoginForm
 	},
 	setup() {
+		const router = useRouter();
 		function registerSyncP() {
 			if (localStorage.getItem("logged")) {
 				navigator.serviceWorker.ready.then((registration) => {
@@ -69,7 +72,14 @@ declare global {
 				})
 			}
 		}
-		onMounted(handlerSync)
+		onMounted(handlerSync);
+		function toEdit(){
+			router.push("profile")
+		}
+
+		return{
+			toEdit,
+		}
 	}
 
 }
