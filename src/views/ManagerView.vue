@@ -45,20 +45,48 @@
 			<p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
 			<button @click="togglePanel(ii)">Pannello orari</button>
 			<div v-if="worker.showDays">
-				<div>Lun <input v-for="(slot, i) in worker.SlotDays.Lun" :key="i" type="time" 
-				></div>
-				<div>Mar <input v-for="(slot, i) in worker.SlotDays.Mar" :key="i" type="time" 
-				></div>
-				<div>Mer <input v-for="(slot, i) in worker.SlotDays.Mer" :key="i" type="time" 
-				></div>
-				<div>Gio <input v-for="(slot, i) in worker.SlotDays.Gio" :key="i" type="time" 
-				></div>
-				<div>Ven <input v-for="(slot, i) in worker.SlotDays.Ven" :key="i" type="time" 
-				></div>
-				<div>Sab <input v-for="(slot, i) in worker.SlotDays.Sab" :key="i" type="time" 
-				></div>
-				<div>Dom <input v-for="(slot, i) in worker.SlotDays.Dom" :key="i" type="time" 
-				></div>
+				<div>Lun 
+					<div v-for="(slot, i) in worker.SlotDays.Lun" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
+				<div>Mar 
+					<div v-for="(slot, i) in worker.SlotDays.Mar" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
+				<div>Mer 
+					<div v-for="(slot, i) in worker.SlotDays.Mer" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
+				<div>Gio 
+					<div v-for="(slot, i) in worker.SlotDays.Gio" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
+				<div>Ven 
+					<div v-for="(slot, i) in worker.SlotDays.Ven" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
+				<div>Sab 
+					<div v-for="(slot, i) in worker.SlotDays.Sab" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
+				<div>Dom 
+					<div v-for="(slot, i) in worker.SlotDays.Dom" :key="i">
+						<input type="time" v-model="slot.start">
+						<input type="time" v-model="slot.finish">
+					</div>
+				</div>
 				<!-- <div>Mar <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mar"
 						:value="slot"><span @click="toggleAll(ii, 'Mar')">All</span></div>
 				<div>Mer <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mer"
@@ -126,7 +154,7 @@ export default {
 		var prefAfternoon = [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 
 		const workers = ref<workersData>([
-			{ showDays: false, name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: full, Mar: full, Mer: full, Gio: full, Ven: full, Sab: full, Dom: full }, favouriteSlots: { Lun: prefAfternoon, Mar: prefAfternoon, Mer: prefAfternoon, Gio: prefAfternoon, Ven: prefAfternoon, Sab: prefAfternoon, Dom: prefAfternoon } },
+			{ showDays: false, name: "Salome", label: "Salome", id: 21, hours: 18, SlotDays: { Lun: [{start:"",finish:""}], Mar:[{start:"",finish:""}], Mer: [{start:"",finish:""}], Gio:[{start:"",finish:""}], Ven:[{start:"",finish:""}], Sab: [{start:"",finish:""}], Dom: [{start:"",finish:""}] }, favouriteSlots: { Lun: [{start:"",finish:""}], Mar: [{start:"",finish:""}], Mer: [{start:"",finish:""}], Gio: [{start:"",finish:""}], Ven: [{start:"",finish:""}], Sab: [{start:"",finish:""}], Dom: [{start:"",finish:""}] } },
 		]);	
 
 		const slotsWeekend = ref([{ slotN: 1, required: 2 }, { slotN: 2, required: 2 }, { slotN: 3, required: 3 }, { slotN: 4, required: 4 }, { slotN: 5, required: 4 }, { slotN: 6, required: 4 }, { slotN: 7, required: 4 }, { slotN: 8, required: 4 }, { slotN: 9, required: 4 }, { slotN: 10, required: 4 }, { slotN: 11, required: 4 }, { slotN: 12, required: 4 }, { slotN: 13, required: 5 }, { slotN: 14, required: 5 }, { slotN: 15, required: 5 }, { slotN: 16, required: 5 }, { slotN: 17, required: 7 }, { slotN: 18, required: 7 }, { slotN: 19, required: 7 }, { slotN: 20, required: 8 }, { slotN: 21, required: 8 }, { slotN: 22, required: 9 }, { slotN: 23, required: 9 }, { slotN: 24, required: 9 }, { slotN: 25, required: 9 }, { slotN: 26, required: 8 }, { slotN: 27, required: 8 }, { slotN: 28, required: 7 }, { slotN: 29, required: 7 }, { slotN: 30, required: 6 }, { slotN: 31, required: 6 }, { slotN: 32, required: 6 }, { slotN: 33, required: 6 }, { slotN: 34, required: 6 }, { slotN: 35, required: 6 }, { slotN: 36, required: 6 }, { slotN: 37, required: 7 }, { slotN: 38, required: 7 }, { slotN: 39, required: 7 }, { slotN: 40, required: 8 }, { slotN: 41, required: 8 }, { slotN: 42, required: 9 }, { slotN: 43, required: 9 }, { slotN: 44, required: 8 }, { slotN: 45, required: 8 }, { slotN: 46, required: 8 }, { slotN: 47, required: 8 }, { slotN: 48, required: 8 }, { slotN: 49, required: 8 }, { slotN: 50, required: 7 }, { slotN: 51, required: 7 }, { slotN: 52, required: 6 }, { slotN: 53, required: 6 }, { slotN: 54, required: 5 }]);
