@@ -17,7 +17,7 @@ import { ref, onMounted } from "vue"
 export default {
     setup() {
 
-        favouriteSlots = ref(null);
+        const favouriteSlots = ref(null);
 
         onMounted(() => {
             loadFavouriteSlots()
