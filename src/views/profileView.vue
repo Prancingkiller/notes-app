@@ -19,7 +19,7 @@ export default {
 
         const favouriteSlots = ref(null);
 
-        onMounted(() => {
+        onMounted(async () => {
             favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
         });
 
