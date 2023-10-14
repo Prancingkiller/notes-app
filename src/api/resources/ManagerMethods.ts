@@ -115,9 +115,9 @@ export default {
             result.allowDoubles = false;
         }
         // return result;
-        let returns = {};
+        const returns = {allowDoubles:false,minTimeBetweenShifts:0,baseShift:0};
         result.forEach(element=>{
-            returns[element.option_name]=element.option_name;
+            returns[element.option_name]=element.value;
         })
         return returns;
     }
