@@ -114,7 +114,12 @@ export default {
         else{
             result.allowDoubles = false;
         }
-        return result;
+        // return result;
+        let returns = {};
+        result.forEach(element=>{
+            returns[element.option_name]=element.option_name;
+        })
+        return returns;
     }
 
 }
