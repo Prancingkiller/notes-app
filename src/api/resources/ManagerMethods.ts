@@ -119,6 +119,7 @@ export default {
         result.forEach(element=>{
             returns[element.option_name]=element.value;
         })
+        console.log(returns)
         return returns;
     }
 
