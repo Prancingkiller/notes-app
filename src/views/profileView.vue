@@ -4,7 +4,7 @@
         <h5>Favourite slots:</h5>
         <div v-for="(days, i) in favouriteSlots" :key="i">
             {{ days.day }}
-            <div v-for="(slot,i) in days" :key="i">
+            <div v-for="(slot, i) in days" :key="i">
                 <input type="time" v-model="slot.start">
                 <input type="time" v-model="slot.finish">
             </div>
@@ -21,11 +21,11 @@ export default {
 
         onMounted(() => {
             loadFavouriteSlots()
-        }),
+        });
 
-            function loadFavouriteSlots() {
-                favouriteSlots.value = await WorkersMethods.getFavourites();
-            }
+        async function loadFavouriteSlots() {
+            favouriteSlots.value = await WorkersMethods.getFavourites();
+        }
         return {
             favouriteSlots,
         }
