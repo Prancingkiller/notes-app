@@ -21,4 +21,14 @@ export default {
         const result = await response.json();
         return result;
     },
+
+    async getFavouriteSlots() {
+        const response = await fetch("https://notes-api.it/api/favourites", {
+            mode: 'cors',
+            method: 'GET',
+            credentials:'include'
+        });
+        const result = await response.json();
+        return result;
+    },
 }
