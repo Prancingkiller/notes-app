@@ -108,7 +108,7 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        if(result.allowDoubles == 1){
+        if(result.allowDoubles == "1"){
             result.allowDoubles = true;
         }
         else{
