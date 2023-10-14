@@ -108,9 +108,9 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        const returns = {allowDoubles:false,minTimeBetweenShifts:0,baseShift:0};
+        const returns = {allowDoubleShifts:false,minTimeBetweenShifts:0,baseShift:0};
         result.forEach(element=>{
-            if(element.option_name == "allowDoubles"){
+            if(element.option_name == "allowDoubleShifts"){
                 if(element.value == "1"){
                     element.value = true;
                 }
@@ -120,7 +120,6 @@ export default {
             }
             returns[element.option_name]=element.value;
         })
-        console.log(returns)
         return returns;
     }
 

@@ -146,9 +146,7 @@ export default {
 
 		async function loadOptions(){
 			let data = await ManagerMethods.loadOptions();
-			configuration.value.allowDoubleShifts = data.allowDoubles,
-			configuration.value.minTimeBetweenShifts = data.minTimeBetweenShifts,
-			configuration.value.baseShift = data.baseShift
+			configuration.value = data;
 		}
 
 		async function loadWokersData(){
