@@ -45,9 +45,21 @@
 			<p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
 			<button @click="togglePanel(ii)">Pannello orari</button>
 			<div v-if="worker.showDays">
-				<div>Lun <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Lun"
-						:value="slot"><span @click="toggleAll(ii, 'Lun')">All</span></div>
-				<div>Mar <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mar"
+				<div>Lun <input v-for="(slot, i) in worker.SlotDays.Lun" :key="i" type="time" v-model="worker.SlotDays.Lun"
+				></div>
+				<div>Mar <input v-for="(slot, i) in worker.SlotDays.Mar" :key="i" type="time" v-model="worker.SlotDays.Mar"
+				></div>
+				<div>Mer <input v-for="(slot, i) in worker.SlotDays.Mer" :key="i" type="time" v-model="worker.SlotDays.Mer"
+				></div>
+				<div>Gio <input v-for="(slot, i) in worker.SlotDays.Gio" :key="i" type="time" v-model="worker.SlotDays.Gio"
+				></div>
+				<div>Ven <input v-for="(slot, i) in worker.SlotDays.Ven" :key="i" type="time" v-model="worker.SlotDays.Ven"
+				></div>
+				<div>Sab <input v-for="(slot, i) in worker.SlotDays.Sab" :key="i" type="time" v-model="worker.SlotDays.Sab"
+				></div>
+				<div>Dom <input v-for="(slot, i) in worker.SlotDays.Dom" :key="i" type="time" v-model="worker.SlotDays.Dom"
+				></div>
+				<!-- <div>Mar <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mar"
 						:value="slot"><span @click="toggleAll(ii, 'Mar')">All</span></div>
 				<div>Mer <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mer"
 						:value="slot"><span @click="toggleAll(ii, 'Mer')">All</span></div>
@@ -58,7 +70,7 @@
 				<div>Sab <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Sab"
 						:value="slot"><span @click="toggleAll(ii, 'Sab')">All</span></div>
 				<div>Dom <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Dom"
-						:value="slot"><span @click="toggleAll(ii, 'Dom')">All</span></div>
+						:value="slot"><span @click="toggleAll(ii, 'Dom')">All</span></div> -->
 			</div>
 		</div>
 		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="configuration.minTimeBetweenShifts"></span></p>
