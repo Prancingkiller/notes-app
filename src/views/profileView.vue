@@ -15,7 +15,7 @@
     align-items: center;">
             {{ days.day }}
             <div style="display:flex;flex-wrap:wrap">
-                <div v-for="slot in days.favourites" :key="slot.id" class="card" style="width: 14rem;">
+                <div v-for="(slot,slotI) in days.favourites" :key="slot.id" class="card" style="width: 14rem;">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -30,7 +30,7 @@
                             <!-- <button style="width:8rem;margin:auto;margin-top:5px"
                                 @click="eventDelete(event, i)">Delete</button> -->
                                 <button style="width:8rem;margin:auto;margin-top:5px"
-                                >Delete</button>
+                                @click="deleteFav(i,slotI)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -66,9 +66,12 @@ export default {
                 finish:"00:00"
             })
         }
+        function deleteFav(index,slotI){
+            favouriteSlots.value[index].favourites.splice(slotI,1);
+        }
 
         return {
-            favouriteSlots,addFav
+            favouriteSlots,addFav,deleteFav
         }
     }
 }
