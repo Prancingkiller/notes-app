@@ -13,7 +13,7 @@
 
         <div v-for="(days, i) in favouriteSlots" :key="i" style="display:flex;flex-wrap:wrap">
             {{ days.day }}
-            <div v-for="(slot, i) in days.favourites" :key="slot.id" class="card" style="width: 14rem;">
+            <div v-for="slot in days.favourites" :key="slot.id" class="card" style="width: 14rem;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
