@@ -37,9 +37,13 @@
     </div>
 </template>
 <script>
+import BaseInput from "../components/BaseInput"
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import { ref, onMounted } from "vue"
 export default {
+    components:{
+        BaseInput
+    },
     setup() {
 
         const favouriteSlots = ref(null);
