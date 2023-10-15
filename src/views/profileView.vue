@@ -10,7 +10,7 @@
             </div>
         </div> -->
 
-        <div v-for="(days, i) in favouriteSlots" :key="i" style="display: flex;
+        <div v-for="(days, i) in favouriteSlots" :key="i" class="p-5" style="display: flex;
     flex-direction: column;
     align-items: center;">
             {{ days.day }}
