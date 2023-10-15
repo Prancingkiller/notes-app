@@ -24,7 +24,7 @@
                             <div class="col-6">
                                 <BaseInput style="max-width:80px" type="time" v-model="slot.finish" label="Finish" />
                             </div>
-                            <p v-if="slot.temp == true">Not Sync...</p>
+                            <!-- <p v-if="slot.temp == true">Not Sync...</p> -->
                         </div>
                         <div class="row">
                             <!-- <button style="width:8rem;margin:auto;margin-top:5px"
@@ -43,8 +43,8 @@
 
     </div>
 </template>
-<script>
-import BaseInput from "../components/BaseInput"
+<script lang="ts">
+import BaseInput from "../components/BaseInput.vue"
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import { ref, onMounted } from "vue"
 export default {
@@ -53,7 +53,7 @@ export default {
     },
     setup() {
 
-        const favouriteSlots = ref(null);
+        const favouriteSlots = ref<{favourites:{id,start,finish}[],day:String|null}[]>([{day:null,favourites:[{id:null,start:null,finish:null}]}]);
 
         onMounted(async () => {
             favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
