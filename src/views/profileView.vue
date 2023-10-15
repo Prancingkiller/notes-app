@@ -60,7 +60,7 @@ export default {
         });
 
         function addFav(index){
-            favouriteSlots.value[index].push({
+            favouriteSlots.value[index].favourites.push({
                 id:0,
                 start:"00:00",
                 finish:"00:00"
