@@ -37,7 +37,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/api/resources/WorkersMethods.js"  ],
   "exclude": [
     "node_modules"
   ]

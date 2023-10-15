@@ -42,6 +42,9 @@
 
 
     </div>
+    <div style="position:fixed,right:0px,bottom:0px">
+        <button @click="postFavs()">Salva</button>
+    </div>
 </template>
 <script lang="ts">
 import BaseInput from "../components/BaseInput.vue"
@@ -69,9 +72,19 @@ export default {
         function deleteFav(index,slotI){
             favouriteSlots.value[index].favourites.splice(slotI,1);
         }
+        async function postFavs(){
+            console.log(favouriteSlots.value)
+            // const res = await WorkersMethods.postFavs(data);
+            // if(!res){
+            //     console.log("post fallito!");
+            // }
+            // else{
+            //     console.log(res);
+            // }
+        }
 
         return {
-            favouriteSlots,addFav,deleteFav
+            favouriteSlots,addFav,deleteFav,postFavs
         }
     }
 }

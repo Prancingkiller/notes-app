@@ -1,4 +1,4 @@
-import { APISettings } from '../config.js';
+import { APISettings } from '../config.ts';
 export default {
     name: "WorkersMethods",
 
@@ -31,4 +31,23 @@ export default {
         const result = await response.json();
         return result;
     },
+
+    async postFavs(data){
+        const response = await fetch(APISettings.baseURL + "/eventsAdd2", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Trusted': 'yes'
+            },
+            body: JSON.stringify(data)
+        }).catch(() => { return false })
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+        else {
+            return false;
+        }
+    }
 }
