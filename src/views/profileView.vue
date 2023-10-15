@@ -11,7 +11,7 @@
         </div> -->
 
 
-        <div v-for="(slot, i) in days.favourites" :key="days.favourites.id" style="display:flex;flex-wrap:wrap">
+        <div v-for="(days, i) in favouriteSlots" :key="i" style="display:flex;flex-wrap:wrap">
             {{ days.day }}
             <div v-for="(slot, i) in days.favourites" :key="days.favourites.id" class="card" style="width: 14rem;">
                 <div class="card-body">
