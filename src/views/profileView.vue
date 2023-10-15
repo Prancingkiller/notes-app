@@ -29,10 +29,13 @@
                         <div class="row">
                             <!-- <button style="width:8rem;margin:auto;margin-top:5px"
                                 @click="eventDelete(event, i)">Delete</button> -->
+                                <button style="width:8rem;margin:auto;margin-top:5px"
+                                >Delete</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <button>Add New</button>
         </div>
 
 
