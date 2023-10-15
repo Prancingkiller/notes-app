@@ -42,7 +42,7 @@
 
 
     </div>
-    <div style="position:fixed,right:0px,bottom:0px">
+    <div style="position:fixed;right:0px;bottom:0px">
         <button @click="postFavs()">Salva</button>
     </div>
 </template>
@@ -73,14 +73,14 @@ export default {
             favouriteSlots.value[index].favourites.splice(slotI,1);
         }
         async function postFavs(){
-            console.log(favouriteSlots.value)
-            // const res = await WorkersMethods.postFavs(data);
-            // if(!res){
-            //     console.log("post fallito!");
-            // }
-            // else{
-            //     console.log(res);
-            // }
+            // console.log(favouriteSlots.value)
+            const res = await WorkersMethods.postFavs(favouriteSlots.value);
+            if(!res){
+                console.log("post fallito!");
+            }
+            else{
+                console.log(res);
+            }
         }
 
         return {

@@ -33,7 +33,7 @@ export default {
     },
 
     async postFavs(data){
-        const response = await fetch(APISettings.baseURL + "/eventsAdd2", {
+        const response = await fetch(APISettings.baseURL + "/favouritesEdit", {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',
