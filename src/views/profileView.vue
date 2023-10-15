@@ -30,7 +30,7 @@
                             <!-- <button style="width:8rem;margin:auto;margin-top:5px"
                                 @click="eventDelete(event, i)">Delete</button> -->
                                 <button style="width:8rem;margin:auto;margin-top:5px"
-                                @click="deleteFav(i,slotI)">Delete</button>
+                                @click="deleteFav(i,slotI,slot.id)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -69,11 +69,17 @@ export default {
                 finish:"00:00"
             })
         }
-        function deleteFav(index,slotI){
-            favouriteSlots.value[index].favourites.splice(slotI,1);
+        async function deleteFav(index,slotI,slotId){
+            const res = await WorkersMethods.deleteFav(slotId);
+            if(!res){
+                console.log("delete fallito!");
+            }
+            else{
+                console.log(res);
+                favouriteSlots.value[index].favourites.splice(slotI,1);
+            }
         }
         async function postFavs(){
-            // console.log(favouriteSlots.value)
             const res = await WorkersMethods.postFavs(favouriteSlots.value);
             if(!res){
                 console.log("post fallito!");
@@ -82,7 +88,6 @@ export default {
                 console.log(res);
             }
         }
-
         return {
             favouriteSlots,addFav,deleteFav,postFavs
         }

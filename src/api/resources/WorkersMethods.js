@@ -49,5 +49,22 @@ export default {
         else {
             return false;
         }
+    },
+
+    async deleteFav(data){
+        const response = await fetch(APISettings.baseURL + "/favouritesDelete", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'DELETE',
+            contentType: 'application/json',
+            body: JSON.stringify([{id:data}])
+        }).catch(() => { return false })
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+        else {
+            return false;
+        }
     }
 }
