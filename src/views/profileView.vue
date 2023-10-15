@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <button>Add New</button>
+            <button @click="addFav(i)">Add New</button>
         </div>
 
 
@@ -59,8 +59,16 @@ export default {
             favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
         });
 
+        function addFav(index){
+            favouriteSlots.value[index].push({
+                id:0,
+                start:"00:00",
+                finish:"00:00"
+            })
+        }
+
         return {
-            favouriteSlots,
+            favouriteSlots,addFav
         }
     }
 }
