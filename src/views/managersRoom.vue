@@ -1,11 +1,11 @@
 <template>
     <h3>Managers Room</h3>
     <div>
-        <button @click="router.push('profile')">Notes</button>
-        <button>Calendar</button>
-        <button>Crew Planner</button>
-        <button>Hostess Planner</button>
-        <button>Managers Planner</button>
+        <button @click="router.push('notes')">Notes</button>
+        <button @click="router.push('calendar')">Calendar</button>
+        <button @click="router.push('manager')">Crew Planner</button>
+        <button @click="router.push('manager')">Hostess Planner</button>
+        <button @click="router.push('manager')">Managers Planner</button>
     </div>
 </template>
 <script>
