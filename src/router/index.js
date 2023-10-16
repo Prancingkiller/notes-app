@@ -5,6 +5,7 @@ import CalendarView from '../views/CalendarView.vue'
 import ManagerView from '../views/ManagerView.vue'
 import ManagerView24 from '../views/ManagerView24.vue'
 import profileView from '../views/profileView.vue'
+import crewRoom from '../views/crewRoom.vue'
 import directorsRoom from '../views/directorsRoom.vue'
 import managersRoom from '../views/managersRoom.vue'
 
@@ -79,6 +80,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: profileView,
+  },
+  {
+    path: '/crewRoom',
+    name: 'crewRoom',
+    component: crewRoom,
   },
   {
     path: '/managersRoom',

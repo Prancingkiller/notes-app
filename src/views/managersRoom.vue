@@ -7,7 +7,6 @@
         <button>Hostess Planner</button>
         <button>Managers Planner</button>
     </div>
-    <button></button>
 </template>
 <script>
 
