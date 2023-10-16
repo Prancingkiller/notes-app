@@ -14,6 +14,15 @@
 					<li class="nav-item">
 						<router-link class="nav-link" to="/calendar">Calendar</router-link>
 					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/crewRoom">Crew Room</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/managersRoom">Managers Room</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/directorsRoom">Directors Room</router-link>
+					</li>
 				</ul>
 				<LoginForm @profilePage="toEdit()" />
 			</div>

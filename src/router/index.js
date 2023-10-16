@@ -5,6 +5,9 @@ import CalendarView from '../views/CalendarView.vue'
 import ManagerView from '../views/ManagerView.vue'
 import ManagerView24 from '../views/ManagerView24.vue'
 import profileView from '../views/profileView.vue'
+import directorsRoom from '../views/directorsRoom.vue'
+import managersRoom from '../views/managersRoom.vue'
+
 function checkLog() {
   if (localStorage.getItem("logged")) {
     return true;
@@ -76,6 +79,16 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: profileView,
+  },
+  {
+    path: '/managersRoom',
+    name: 'managersRoom',
+    component: managersRoom,
+  },
+  {
+    path: '/directorsRoom',
+    name: 'directorsRoom',
+    component: directorsRoom,
   }
 ]
 
