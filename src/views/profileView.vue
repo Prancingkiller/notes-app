@@ -30,7 +30,7 @@
                             <!-- <button style="width:8rem;margin:auto;margin-top:5px"
                                 @click="eventDelete(event, i)">Delete</button> -->
                                 <button style="width:8rem;margin:auto;margin-top:5px"
-                                @click="deleteFav(i,slotI,slot.id)">Delete</button>
+                                @click="deleteFav(i,slotI,slot)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ export default {
     },
     setup() {
 
-        const favouriteSlots = ref<{favourites:{id,start,finish}[],day:String|null}[]>([{day:null,favourites:[{id:null,start:null,finish:null}]}]);
+        const favouriteSlots = ref<{favourites:{id,start,finish,temp}[],day:String|null,}[]>([{day:null,favourites:[{id:null,start:null,finish:null,temp:true}]}]);
 
         onMounted(async () => {
             favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
@@ -66,18 +66,25 @@ export default {
             favouriteSlots.value[index].favourites.push({
                 id:0,
                 start:"00:00",
-                finish:"00:00"
+                finish:"00:00",
+                temp:true
             })
         }
-        async function deleteFav(index,slotI,slotId){
-            const res = await WorkersMethods.deleteFav(slotId);
-            if(!res){
-                console.log("delete fallito!");
-            }
-            else{
-                console.log(res);
+        async function deleteFav(index,slotI,slot){
+            if(slot.temp){
                 favouriteSlots.value[index].favourites.splice(slotI,1);
             }
+            else{
+                const res = await WorkersMethods.deleteFav(slot.id);
+                if(!res){
+                    console.log("delete fallito!");
+                }
+                else{
+                    console.log(res);
+                    favouriteSlots.value[index].favourites.splice(slotI,1);
+                }
+            }
+
         }
         async function postFavs(){
             const res = await WorkersMethods.postFavs(favouriteSlots.value);
