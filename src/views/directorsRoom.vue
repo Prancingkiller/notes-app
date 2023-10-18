@@ -35,6 +35,7 @@ export default{
 
         function setContent(data){
             content.value = data;
+            console.log(options.value);
         }
 
         return{
