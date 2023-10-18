@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-import {ref} from 'vue'
+import {ref,onMounted} from 'vue'
 import { useRouter } from 'vue-router'
 import BaseOptions from '../components/BaseOptions.vue'
 import directorMethods from '../api/resources/directorMethods.js'
@@ -29,6 +29,9 @@ export default{
             options.value = (directorMethods.getAllOptions());
         }
 
+        onMounted(()=>{
+            getOptions();
+        })
 
         return{
             content,router,options
