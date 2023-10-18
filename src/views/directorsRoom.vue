@@ -2,8 +2,8 @@
     <h3>Directors Room</h3>
     <div>
         <button @click="router.push('notes')">Notes</button>
-        <button @click="content='generalOptions'">General Options</button>
-        <button @click="content='resourcesOptions'">Resources Manager</button>
+        <button @click="setContent('generalOptions')">General Options</button>
+        <button @click="setContent('resourcesOptions')">Resources Manager</button>
     </div>
     <div>
         <div v-if="content=='generalOptions'">
@@ -33,8 +33,12 @@ export default{
             getOptions();
         })
 
+        function setContent(data){
+            content.value = data;
+        }
+
         return{
-            content,router,options
+            content,router,options,setContent
         }
     }
 }
