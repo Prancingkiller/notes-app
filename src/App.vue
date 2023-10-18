@@ -83,7 +83,7 @@ declare global {
 		}
 		onMounted(handlerSync);
 		function toEdit(){
-			router.push("profile")
+			router.push({ name: 'profile'});
 		}
 
 		return{
