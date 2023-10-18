@@ -1,5 +1,4 @@
 <template>
-    <div style="display:flex;flex-direction: row;">
         <div>
             <h3>Opzioni per gruppo: {{ userGroup.user_group }}</h3>
             <table class="table table-sm">
@@ -24,7 +23,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
 </template>
 <script>
 import BaseInput from './BaseInput.vue'

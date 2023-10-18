@@ -6,7 +6,7 @@
         <button @click="setContent('resourcesOptions')">Resources Manager</button>
     </div>
     <div>
-        <div v-if="content == 'generalOptions'">
+        <div v-if="content == 'generalOptions'" style="display:flex;flex-direction: row;">
             <BaseOptions v-for="(set, i) in options" :key="i" :userGroup="set"></BaseOptions>
         </div>
     </div>
