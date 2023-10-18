@@ -3,9 +3,9 @@
     <div>
         <button @click="router.push('notes')">Notes</button>
         <button @click="router.push('calendar')">Calendar</button>
-        <button @click="router.push('planner/crew')">Crew Planner</button>
-        <button @click="router.push('planner/hostess')">Hostess Planner</button>
-        <button @click="router.push('planner/manager')">Managers Planner</button>
+        <button @click="router.push({ name: 'planner', params: { resource: 'crew' } })">Crew Planner</button>
+        <button @click="router.push({ name: 'planner', params: { resource: 'hostess' } })">Hostess Planner</button>
+        <button @click="router.push({ name: 'planner', params: { resource: 'manager' } })">Managers Planner</button>
     </div>
 </template>
 <script>
