@@ -101,8 +101,8 @@ export default {
         }
     },
 
-    async loadOptions(){
-        const response = await fetch(APISettings.baseURL + "/options", {
+    async loadOptions(type){
+        const response = await fetch(APISettings.baseURL + "/options?type="+type, {
             mode: 'cors',
             credentials: 'include',
             method: 'GET',

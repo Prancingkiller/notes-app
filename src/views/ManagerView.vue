@@ -133,6 +133,7 @@
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
 import { ref,computed,onMounted } from "vue"
+import {useRoute} from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import type { workersData } from '../types/workers'
@@ -179,17 +180,32 @@ export default {
 		onMounted(init)
 
 		async function init(){
-			loadOptions();
-			loadWokersData();
+			const route = useRoute();
+			let type;
+			switch(route.params.resource){
+				case 'crew':
+					type = 0
+					break;
+				case 'hostess':
+					type = 1
+					break;
+				case 'manager':
+					type = 2
+					break;
+				default:
+					type = 0
+			}
+			loadOptions(type);
+			loadWokersData(type);
 		}
 
-		async function loadOptions(){
-			let data = await ManagerMethods.loadOptions();
+		async function loadOptions(type){
+			let data = await ManagerMethods.loadOptions(type);
 			configuration.value = data;
 		}
 
-		async function loadWokersData(){
-			data = await WorkersMethods.getWorkers();
+		async function loadWokersData(type){
+			data = await WorkersMethods.getWorkers(type);
 			console.log(data);
 			workers.value = data;
 		}

@@ -12,8 +12,8 @@ export default {
         return result;
     },
 
-    async getWorkers() {
-        const response = await fetch("https://notes-api.it/api/workersData", {
+    async getWorkers(type) {
+        const response = await fetch("https://notes-api.it/api/workersData?type="+type, {
             mode: 'cors',
             method: 'GET',
             credentials:'include'

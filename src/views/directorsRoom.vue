@@ -2,6 +2,7 @@
     <h3>Directors Room</h3>
     <div>
         <button @click="router.push('notes')">Notes</button>
+        <button>General Options</button>
         <button>Resources Manager</button>
     </div>
 </template>

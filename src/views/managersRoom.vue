@@ -3,9 +3,9 @@
     <div>
         <button @click="router.push('notes')">Notes</button>
         <button @click="router.push('calendar')">Calendar</button>
-        <button @click="router.push('manager')">Crew Planner</button>
-        <button @click="router.push('manager')">Hostess Planner</button>
-        <button @click="router.push('manager')">Managers Planner</button>
+        <button @click="router.push('planner/crew')">Crew Planner</button>
+        <button @click="router.push('planner/hostess')">Hostess Planner</button>
+        <button @click="router.push('planner/manager')">Managers Planner</button>
     </div>
 </template>
 <script>

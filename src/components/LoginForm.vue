@@ -45,6 +45,7 @@ export default{
                 localStorage.setItem('email', response.email);
                 localStorage.setItem('company', response.company_name);
                 localStorage.setItem('unique_id', response.csrf);
+                localStorage.setItem('role', response.role);
                 CheckLogged()
             }
             else{
