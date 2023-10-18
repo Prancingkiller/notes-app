@@ -1,10 +1,28 @@
 <template>
-    Options for {{ userGroup.user_group }}
-    <div>
-        <div v-for="(option,i) in userGroup.options" :key="i">
-            {{ option.name }}
-            <BaseInput v-if="option.type=='number' || option.type=='time'" :type="option.type" v-model="option.value"></BaseInput>
-            <BaseCheckbox v-if="option.type=='boolean'" v-model="option.value"></BaseCheckbox>
+    <div style="display:flex;flex-direction: row;">
+        <div>
+            <h3>Opzioni per gruppo: {{ userGroup.user_group }}</h3>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Opzione</th>
+                        <th>Valore</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr v-for="(option, i) in userGroup.options" :key="i">
+                        {{ option.name }}
+                        <td>
+                            <BaseInput v-if="option.type == 'number' || option.type == 'time'" :type="option.type"
+                                v-model="option.value"></BaseInput>
+                        </td>
+                        <td>
+                            <BaseCheckbox v-if="option.type == 'boolean'" v-model="option.value"></BaseCheckbox>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -17,8 +35,8 @@ export default {
             type: Object
         }
     },
-    components:{
-        BaseInput,BaseCheckbox
+    components: {
+        BaseInput, BaseCheckbox
     }
 }
 </script>
