@@ -118,13 +118,13 @@
 			</thead>
 			<tr v-for="(slot, i) in fullTest" :key="i">
 				<td>{{ slot }}</td>
-				<td><input type="number" v-model="slots.Lun[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="slots.Mar[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="slots.Mer[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="slots.Gio[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="slots.Ven[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="slots.Sab[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="slots.Dom[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Lun[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Mar[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Mer[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Gio[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Ven[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Sab[i].required" style="width:40px;border:0px"></td>
+				<td><input type="number" v-model="configuration.slots.Dom[i].required" style="width:40px;border:0px"></td>
 			</tr>
 		</table>
 	</div>
@@ -175,6 +175,7 @@ export default {
 			minTimeBetweenShifts:2,
 			allowDoubleShifts:true,
 			baseShift:3,
+			slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]}
 		});
 
 		onMounted(init)

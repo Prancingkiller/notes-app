@@ -108,7 +108,7 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        const returns = {allowDoubleShifts:false,minTimeBetweenShifts:0,baseShift:0};
+        const returns = {allowDoubleShifts:false,minTimeBetweenShifts:0,baseShift:0,slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]}};
         result.forEach(element=>{
             if(element.option_name == "allowDoubleShifts"){
                 if(element.value == "1"){
