@@ -10,31 +10,37 @@
 
                 </thead>
                 <tbody>
-                    <tr v-for="(option, i) in userGroup.options" :key="i">
-                        {{ option.name }}
-                        <td>
-                            <BaseInput v-if="option.type == 'number' || option.type == 'time'" :type="option.type"
-                                v-model="option.value"></BaseInput>
-                        </td>
-                        <td>
-                            <BaseCheckbox v-if="option.type == 'boolean'" v-model="option.value"></BaseCheckbox>
-                        </td>
+                    <tr>
+                        <td>Apertura</td>
+                        <td><input type="time" v-model="userGroup.options.apertura"></td>
+                    </tr>
+                    <tr>
+                        <td>Chiusura</td>
+                        <td><input type="time" v-model="userGroup.options.chiusura"></td>
+                    </tr>
+                    <tr>
+                        <td>Pausa minima tra turni (h)</td>
+                        <td><input type="number" v-model="userGroup.options.minTimeBetweenShifts"></td>
+                    </tr>
+                    <tr>
+                        <td>Turno minimo (h)</td>
+                        <td><input type="number" v-model="userGroup.options.baseShift"></td>
+                    </tr>
+                    <tr>
+                        <td>Abilita doppi turni</td>
+                        <td><input type="checkbox" v-model="userGroup.options.allowDoubleShifts"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 </template>
 <script>
-import BaseInput from './BaseInput.vue'
-import BaseCheckbox from './BaseCheckbox.vue'
+
 export default {
     props: {
         userGroup: {
             type: Object
         }
     },
-    components: {
-        BaseInput, BaseCheckbox
-    }
 }
 </script>
