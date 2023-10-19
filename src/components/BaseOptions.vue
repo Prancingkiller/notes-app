@@ -1,5 +1,5 @@
 <template>
-        <div>
+        <div class="p-4">
             <h3>Opzioni per gruppo: {{ data.user_group }}</h3>
             <table class="table table-sm">
                 <thead>
@@ -52,6 +52,16 @@ export default {
     },
     setup(props){
         const data = props.userGroup;
+
+        if(data.userGroup == 0){
+            data.userGroup = "Crew"
+        }
+        if(data.userGroup == 1){
+            data.userGroup = "Hostess"
+        }
+        if(data.userGroup == 2){
+            data.userGroup = "Manager"
+        }
 
         return{data}
     }
