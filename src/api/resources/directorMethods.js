@@ -9,6 +9,15 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        return result;
+        let returns = {
+            apertura: result.apertura,
+            chiusura: result.chiusura,
+            minTimeBetweenShifts: result.minTimeBetweenShifts,
+            allowDoubleShifts: result.allowDoubleShifts,
+            baseShift: result.baseShift,
+            slots: JSON.parse(result.slots)
+        }
+        console.log(returns);
+        return returns;
     }
 }
