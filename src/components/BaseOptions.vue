@@ -53,14 +53,14 @@ export default {
     setup(props){
         const data = props.userGroup;
 
-        if(data.userGroup == 0){
-            data.userGroup = "Crew"
+        if(data.user_group == 0){
+            data.user_group = "Crew"
         }
-        if(data.userGroup == 1){
-            data.userGroup = "Hostess"
+        if(data.user_group == 1){
+            data.user_group = "Hostess"
         }
-        if(data.userGroup == 2){
-            data.userGroup = "Manager"
+        if(data.user_group == 2){
+            data.user_group = "Manager"
         }
 
         return{data}
