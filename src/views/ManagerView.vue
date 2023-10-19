@@ -219,7 +219,7 @@ export default {
 		async function testEfficency() {
 			data = JSON.stringify({
 				days: days.value,
-				slots: slots.value,
+				slots: configuration.value.slots,
 				workers: workers.value,
 				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
 				allowDoubles: configuration.value.allowDoubleShifts,
@@ -233,7 +233,7 @@ export default {
 			data = JSON.stringify({
 				days: days.value,
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
-				slots: slots.value,
+				slots: configuration.value.slots,
 				workers: workers.value,
 				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
 				allowDoubles: configuration.value.allowDoubleShifts,
