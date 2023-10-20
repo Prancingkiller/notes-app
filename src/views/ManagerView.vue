@@ -132,7 +132,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref,computed,onMounted } from "vue"
+import { ref,computed,onMounted,watch } from "vue"
 import {useRoute} from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -176,8 +176,9 @@ export default {
 			allowDoubleShifts:true,
 			baseShift:3,
 			slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]},
-			openings:[],
+			openings:[{apertura:"",chiusura:""}],
 		});
+		const longestDay = ref(null);
 
 		onMounted(init)
 
@@ -355,6 +356,16 @@ export default {
 			}
 			let toRemove = 0-(index-1);
 			return selectedDay.value.addDays(toRemove);
+		})
+
+		watch(configuration.value.openings, (newOpenings, oldOpenings) => {
+			days.value.forEach((day)=>{
+				newOpenings.forEach((element)=>{
+					let apertura = element[day].apertura;
+					let chiusura = element[day].chiusura;
+					console.log(apertura+chiusura);
+			})
+			})
 		})
 
 		return {
