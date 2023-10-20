@@ -358,7 +358,7 @@ export default {
 			return selectedDay.value.addDays(toRemove);
 		})
 
-		watch(configuration.value, (newOpenings) => {
+		watch(configuration, (newOpenings) => {
 			console.log("aa");
 			days.value.forEach((day)=>{
 				console.log(day);
