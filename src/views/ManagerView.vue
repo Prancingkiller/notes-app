@@ -205,6 +205,7 @@ export default {
 		async function loadOptions(type){
 			let data = await ManagerMethods.loadOptions(type);
 			configuration.value = data;
+			getLongestDay(configuration.value.openings);
 		}
 
 		async function loadWokersData(type){
@@ -357,18 +358,15 @@ export default {
 			let toRemove = 0-(index-1);
 			return selectedDay.value.addDays(toRemove);
 		})
-
-		watch(configuration, (newOpenings) => {
-			console.log("aa");
+		function getLongestDay(data){
 			days.value.forEach((day)=>{
-				console.log(day);
-				newOpenings.openings.forEach((element)=>{
+				data.forEach((element)=>{
 					let apertura = element[day].apertura;
 					let chiusura = element[day].chiusura;
 					console.log(apertura+chiusura);
 				})
 			})
-		})
+		}
 
 		return {
 			shift, workers, slots, days, makeShift, full,
