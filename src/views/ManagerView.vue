@@ -359,6 +359,7 @@ export default {
 			return selectedDay.value.addDays(toRemove);
 		})
 		function getLongestDay(){
+			console.log(configuration.value.openings);
 			days.value.forEach((day)=>{
 				configuration.value.openings.forEach((element)=>{
 					let apertura = element[day].apertura;
