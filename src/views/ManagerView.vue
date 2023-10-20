@@ -175,7 +175,8 @@ export default {
 			minTimeBetweenShifts:2,
 			allowDoubleShifts:true,
 			baseShift:3,
-			slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]}
+			slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]},
+			openings:[],
 		});
 
 		onMounted(init)
@@ -238,7 +239,8 @@ export default {
 				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
 				allowDoubles: configuration.value.allowDoubleShifts,
 				baseShift: configuration.value.baseShift,
-				testEfficency: false
+				testEfficency: false,
+				openings: configuration.value.openings
 			})
 			shift.value = await ManagerMethods.makeShift(data)
 			var year = "2023";
