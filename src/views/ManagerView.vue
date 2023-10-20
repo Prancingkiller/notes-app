@@ -359,6 +359,7 @@ export default {
 		})
 
 		watch(configuration.value.openings, (newOpenings) => {
+			console.log("aa");
 			days.value.forEach((day)=>{
 				console.log(day);
 				newOpenings.forEach((element)=>{
