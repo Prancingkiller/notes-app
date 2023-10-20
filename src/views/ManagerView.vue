@@ -358,13 +358,14 @@ export default {
 			return selectedDay.value.addDays(toRemove);
 		})
 
-		watch(configuration.value.openings, (newOpenings, oldOpenings) => {
+		watch(configuration.value.openings, (newOpenings) => {
 			days.value.forEach((day)=>{
+				console.log(day);
 				newOpenings.forEach((element)=>{
 					let apertura = element[day].apertura;
 					let chiusura = element[day].chiusura;
 					console.log(apertura+chiusura);
-			})
+				})
 			})
 		})
 
