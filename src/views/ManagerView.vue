@@ -359,11 +359,23 @@ export default {
 			return selectedDay.value.addDays(toRemove);
 		})
 		function getLongestDay() {
+			let aperture:String[] = [];
+			let chiusure:String[] = [];
 			for (const key in configuration.value.openings) {
-				let apertura = configuration.value.openings[key].apertura;
-				let chiusura = configuration.value.openings[key].chiusura;
-				console.log(apertura + chiusura);
+				aperture.push(configuration.value.openings[key].apertura);
+				chiusure.push(configuration.value.openings[key].chiusura);
 			}
+			aperture.sort( function(a, b) {
+				a = "02/13/2009 "+a;
+				b = "02/13/2009 "+b;
+    			return (toTimestamp(a) - toTimestamp(b));
+			});
+			chiusure.sort( function(a, b) {
+				a = "02/13/2009 "+a;
+				b = "02/13/2009 "+b;
+    			return (toTimestamp(b) - toTimestamp(a));
+			});
+			console.log(aperture);
 		}
 		function toTimestamp(strDate) {
 			var datum = Date.parse(strDate);
