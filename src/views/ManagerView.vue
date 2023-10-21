@@ -127,6 +127,16 @@
 				<td><input type="number" v-model="configuration.slots.Dom[i].required" style="width:40px;border:0px"></td>
 			</tr>
 		</table>
+		<table v-for="(day,i) in days" :key="i">
+			<tr>
+				<td v-for="(slot,i) in configuration.slots[day]" :key="i">{{ slot.slotN }}</td>
+			</tr>
+			<tr>
+				<td v-for="(slot,i) in configuration.slots[day]" :key="i">
+					<input type="number" v-model="slot.required" style="width:40px;border:0px">
+				</td>
+			</tr>
+		</table>
 	</div>
 </template>
 <script lang="ts">
