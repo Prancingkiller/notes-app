@@ -33,8 +33,8 @@
                 <input type="time" v-model="data.openings[day].chiusura">
             </div>
         </div>
+        <p>{{ data }}</p>
     </div>
-    <p>{{ data }}</p>
 </template>
 <script>
 import { ref } from 'vue'
