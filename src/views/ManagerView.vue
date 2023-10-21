@@ -103,40 +103,20 @@
 		<p>Allow double turns (even if not strictly needed):<input type="checkbox"
 				v-model="configuration.allowDoubleShifts"></p>
 		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.baseShift"></p>
-		<table class="tableResult" style="margin:auto">
-			<thead>
-				<tr>
-					<td></td>
-					<td>Lunedì</td>
-					<td>Martedì</td>
-					<td>Mercoledì</td>
-					<td>Giovedì</td>
-					<td>Venerdì</td>
-					<td>Sabato</td>
-					<td>Domenica</td>
-				</tr>
-			</thead>
-			<tr v-for="(slot, i) in fullTest" :key="i">
-				<td>{{ slot }}</td>
-				<td><input type="number" v-model="configuration.slots.Lun[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="configuration.slots.Mar[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="configuration.slots.Mer[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="configuration.slots.Gio[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="configuration.slots.Ven[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="configuration.slots.Sab[i].required" style="width:40px;border:0px"></td>
-				<td><input type="number" v-model="configuration.slots.Dom[i].required" style="width:40px;border:0px"></td>
-			</tr>
-		</table>
-		<table class="tableResult" v-for="(day,i) in days" :key="i">
-			<tr>
-				<td v-for="(slot,i) in configuration.slots[day]" :key="i">{{ slot.slotN }}</td>
-			</tr>
-			<tr>
-				<td v-for="(slot,i) in configuration.slots[day]" :key="i">
-					<input type="number" v-model="slot.required" style="width:35px;border:0px">
-				</td>
-			</tr>
-		</table>
+		<div style="display:flex;flex-direction: :row;">
+			<div v-for="(day, i) in days" :key="i">
+				{{ day }}
+				<table class="tableResult">
+					<tr v-for="(slot, i) in configuration.slots[day]" :key="i">
+						<td>{{ slot.slotN }}</td>
+						<td>
+							<input type="number" v-model="slot.required" style="width:35px;border:0px">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
 	</div>
 </template>
 <script lang="ts">
