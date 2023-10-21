@@ -28,8 +28,8 @@
         <div style="display:flex;flex-direction: row;">
             <div v-for="(day,i) in days" :key="i" style="display:flex;flex-direction: column;">
                 {{ day }}<br>
-                <input type="time" :value="data.options.openings[day].apertura">
-                <input type="time" :value="data.options.openings[day].chiusura">
+                <input type="time" :value="data.openings[day].apertura">
+                <input type="time" :value="data.openings[day].chiusura">
             </div>
         </div>
 </template>
