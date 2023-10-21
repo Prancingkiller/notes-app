@@ -5,9 +5,7 @@
 	<vue-cal :selected-date="selectedDay" :timeFrom=480 :timeTo=1290 :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
-		@event-duration-change="updateEvent($event)"
-		@view-change ="updateSelectedDay($event)"
-		>
+		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)">
 
 	</vue-cal>
 	<!-- <div class="row" style="display:none">
@@ -44,43 +42,43 @@
 			<p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
 			<button @click="togglePanel(ii)">Pannello orari</button>
 			<div v-if="worker.showDays">
-				<div>Lun 
+				<div>Lun
 					<div v-for="(slot, i) in worker.SlotDays.Lun" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<div>Mar 
+				<div>Mar
 					<div v-for="(slot, i) in worker.SlotDays.Mar" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<div>Mer 
+				<div>Mer
 					<div v-for="(slot, i) in worker.SlotDays.Mer" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<div>Gio 
+				<div>Gio
 					<div v-for="(slot, i) in worker.SlotDays.Gio" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<div>Ven 
+				<div>Ven
 					<div v-for="(slot, i) in worker.SlotDays.Ven" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<div>Sab 
+				<div>Sab
 					<div v-for="(slot, i) in worker.SlotDays.Sab" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<div>Dom 
+				<div>Dom
 					<div v-for="(slot, i) in worker.SlotDays.Dom" :key="i">
 						<input type="time" v-model="slot.start">
 						<input type="time" v-model="slot.finish">
@@ -100,8 +98,10 @@
 						:value="slot"><span @click="toggleAll(ii, 'Dom')">All</span></div> -->
 			</div>
 		</div>
-		<p>Minimum time between shifts (in hours): <span><input type="number" v-model="configuration.minTimeBetweenShifts"></span></p>
-		<p>Allow double turns (even if not strictly needed):<input type="checkbox" v-model="configuration.allowDoubleShifts"></p>
+		<p>Minimum time between shifts (in hours): <span><input type="number"
+					v-model="configuration.minTimeBetweenShifts"></span></p>
+		<p>Allow double turns (even if not strictly needed):<input type="checkbox"
+				v-model="configuration.allowDoubleShifts"></p>
 		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.baseShift"></p>
 		<table class="tableResult" style="margin:auto">
 			<thead>
@@ -132,8 +132,8 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref,computed,onMounted,watch } from "vue"
-import {useRoute} from 'vue-router'
+import { ref, computed, onMounted, watch } from "vue"
+import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import type { workersData } from '../types/workers'
@@ -154,8 +154,8 @@ export default {
 		var prefAfternoon = [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 
 		const workers = ref<workersData>([
-			{ showDays: false, name: "user", label: "user", id: 0, hours: 0, SlotDays: { Lun: [{start:"",finish:""}], Mar:[{start:"",finish:""}], Mer: [{start:"",finish:""}], Gio:[{start:"",finish:""}], Ven:[{start:"",finish:""}], Sab: [{start:"",finish:""}], Dom: [{start:"",finish:""}] }},
-		]);	
+			{ showDays: false, name: "user", label: "user", id: 0, hours: 0, SlotDays: { Lun: [{ start: "", finish: "" }], Mar: [{ start: "", finish: "" }], Mer: [{ start: "", finish: "" }], Gio: [{ start: "", finish: "" }], Ven: [{ start: "", finish: "" }], Sab: [{ start: "", finish: "" }], Dom: [{ start: "", finish: "" }] } },
+		]);
 
 		const slotsWeekend = ref([{ slotN: 1, required: 2 }, { slotN: 2, required: 2 }, { slotN: 3, required: 3 }, { slotN: 4, required: 4 }, { slotN: 5, required: 4 }, { slotN: 6, required: 4 }, { slotN: 7, required: 4 }, { slotN: 8, required: 4 }, { slotN: 9, required: 4 }, { slotN: 10, required: 4 }, { slotN: 11, required: 4 }, { slotN: 12, required: 4 }, { slotN: 13, required: 5 }, { slotN: 14, required: 5 }, { slotN: 15, required: 5 }, { slotN: 16, required: 5 }, { slotN: 17, required: 7 }, { slotN: 18, required: 7 }, { slotN: 19, required: 7 }, { slotN: 20, required: 8 }, { slotN: 21, required: 8 }, { slotN: 22, required: 9 }, { slotN: 23, required: 9 }, { slotN: 24, required: 9 }, { slotN: 25, required: 9 }, { slotN: 26, required: 8 }, { slotN: 27, required: 8 }, { slotN: 28, required: 7 }, { slotN: 29, required: 7 }, { slotN: 30, required: 6 }, { slotN: 31, required: 6 }, { slotN: 32, required: 6 }, { slotN: 33, required: 6 }, { slotN: 34, required: 6 }, { slotN: 35, required: 6 }, { slotN: 36, required: 6 }, { slotN: 37, required: 7 }, { slotN: 38, required: 7 }, { slotN: 39, required: 7 }, { slotN: 40, required: 8 }, { slotN: 41, required: 8 }, { slotN: 42, required: 9 }, { slotN: 43, required: 9 }, { slotN: 44, required: 8 }, { slotN: 45, required: 8 }, { slotN: 46, required: 8 }, { slotN: 47, required: 8 }, { slotN: 48, required: 8 }, { slotN: 49, required: 8 }, { slotN: 50, required: 7 }, { slotN: 51, required: 7 }, { slotN: 52, required: 6 }, { slotN: 53, required: 6 }, { slotN: 54, required: 5 }]);
 		const slotsNormal = ref([{ slotN: 1, required: 1 }, { slotN: 2, required: 1 }, { slotN: 3, required: 1 }, { slotN: 4, required: 1 }, { slotN: 5, required: 2 }, { slotN: 6, required: 2 }, { slotN: 7, required: 2 }, { slotN: 8, required: 3 }, { slotN: 9, required: 3 }, { slotN: 10, required: 3 }, { slotN: 11, required: 3 }, { slotN: 12, required: 3 }, { slotN: 13, required: 4 }, { slotN: 14, required: 4 }, { slotN: 15, required: 4 }, { slotN: 16, required: 4 }, { slotN: 17, required: 6 }, { slotN: 18, required: 6 }, { slotN: 19, required: 6 }, { slotN: 20, required: 7 }, { slotN: 21, required: 7 }, { slotN: 22, required: 8 }, { slotN: 23, required: 8 }, { slotN: 24, required: 8 }, { slotN: 25, required: 8 }, { slotN: 26, required: 7 }, { slotN: 27, required: 7 }, { slotN: 28, required: 6 }, { slotN: 29, required: 6 }, { slotN: 30, required: 5 }, { slotN: 31, required: 5 }, { slotN: 32, required: 4 }, { slotN: 33, required: 4 }, { slotN: 34, required: 5 }, { slotN: 35, required: 5 }, { slotN: 36, required: 5 }, { slotN: 37, required: 6 }, { slotN: 38, required: 6 }, { slotN: 39, required: 6 }, { slotN: 40, required: 7 }, { slotN: 41, required: 7 }, { slotN: 42, required: 8 }, { slotN: 43, required: 8 }, { slotN: 44, required: 7 }, { slotN: 45, required: 7 }, { slotN: 46, required: 7 }, { slotN: 47, required: 7 }, { slotN: 48, required: 7 }, { slotN: 49, required: 7 }, { slotN: 50, required: 6 }, { slotN: 51, required: 6 }, { slotN: 52, required: 5 }, { slotN: 53, required: 5 }, { slotN: 54, required: 4 }]);
@@ -164,28 +164,28 @@ export default {
 		const days = ref(["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]);
 
 		const tableResult = ref<HTMLDivElement>();
-			const daysTest = ref<eventPHP[]>([]);
+		const daysTest = ref<eventPHP[]>([]);
 		var data;
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
-		const selectedDay = ref(new Date(new Date().setHours(12,0,0,0)));
+		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		const configuration = ref({
-			minTimeBetweenShifts:2,
-			allowDoubleShifts:true,
-			baseShift:3,
-			slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]},
-			openings:[{apertura:"",chiusura:""}],
+			minTimeBetweenShifts: 2,
+			allowDoubleShifts: true,
+			baseShift: 3,
+			slots: { Lun: [{ slotN: null, required: null }], Mar: [{ slotN: null, required: null }], Mer: [{ slotN: null, required: null }], Gio: [{ slotN: null, required: null }], Ven: [{ slotN: null, required: null }], Sab: [{ slotN: null, required: null }], Dom: [{ slotN: null, required: null }] },
+			openings: [{ apertura: "", chiusura: "" }],
 		});
 		const longestDay = ref(null);
 
 		onMounted(init)
 
-		async function init(){
+		async function init() {
 			const route = useRoute();
 			let type;
-			switch(route.params.resource){
+			switch (route.params.resource) {
 				case 'crew':
 					type = 0
 					break;
@@ -202,13 +202,13 @@ export default {
 			loadWokersData(type);
 		}
 
-		async function loadOptions(type){
+		async function loadOptions(type) {
 			let data = await ManagerMethods.loadOptions(type);
 			configuration.value = data;
 			getLongestDay();
 		}
 
-		async function loadWokersData(type){
+		async function loadWokersData(type) {
 			data = await WorkersMethods.getWorkers(type);
 			console.log(data);
 			workers.value = data;
@@ -350,29 +350,33 @@ export default {
 			}
 
 		}
-		const selectedMonday = computed(()=>{
+		const selectedMonday = computed(() => {
 			let index = selectedDay.value.getDay();
-			if(index == 0){
+			if (index == 0) {
 				index = 7;
 			}
-			let toRemove = 0-(index-1);
+			let toRemove = 0 - (index - 1);
 			return selectedDay.value.addDays(toRemove);
 		})
-		function getLongestDay(){
+		function getLongestDay() {
 			console.log(configuration.value.openings);
-			days.value.forEach((day)=>{
-				configuration.value.openings.forEach((element)=>{
-					let apertura = element[day].apertura;
-					let chiusura = element[day].chiusura;
-					console.log(apertura+chiusura);
-				})
+			days.value.forEach((day) => {
+				for (const key in configuration.value.openings) {
+					let apertura = configuration.value.openings[key].apertura;
+					let chiusura = configuration.value.openings[key].chiusura;
+					console.log(apertura + chiusura);
+				}
 			})
+		}
+		function toTimestamp(strDate) {
+			var datum = Date.parse(strDate);
+			return datum / 1000;
 		}
 
 		return {
 			shift, workers, slots, days, makeShift, full,
-			tableResult, fullTest, options, showOptions, daysTest,configuration,
-			disabledViews, minEventWidth, selectedDay,updateSelectedDay,selectedMonday,
+			tableResult, fullTest, options, showOptions, daysTest, configuration,
+			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll
 		}
 	},
