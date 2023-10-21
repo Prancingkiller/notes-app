@@ -103,12 +103,12 @@
 		<p>Allow double turns (even if not strictly needed):<input type="checkbox"
 				v-model="configuration.allowDoubleShifts"></p>
 		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.baseShift"></p>
-		<div style="display:flex;flex-direction: :row;">
+		<div style="display:flex;flex-direction:row;justify-content: center;">
 			<div v-for="(day, i) in days" :key="i">
 				{{ day }}
-				<table class="tableResult">
+				<table style="margin:5px" class="tableResult">
 					<tr v-for="(slot, i) in configuration.slots[day]" :key="i">
-						<td>{{ slot.slotN }}</td>
+						<td>{{ slot.start }}-{{ slot.finish }}</td>
 						<td>
 							<input type="number" v-model="slot.required" style="width:35px;border:0px">
 						</td>
