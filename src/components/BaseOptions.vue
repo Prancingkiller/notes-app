@@ -70,17 +70,56 @@ export default {
     setup(props) {
         const data = ref(props.userGroup);
         const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
-        if (data.user_group == 0) {
-            data.user_group = "Crew"
+        if (data.value.user_group == 0) {
+            data.value.user_group = "Crew"
         }
-        if (data.user_group == 1) {
-            data.user_group = "Hostess"
+        if (data.value.user_group == 1) {
+            data.value.user_group = "Hostess"
         }
-        if (data.user_group == 2) {
-            data.user_group = "Manager"
+        if (data.value.user_group == 2) {
+            data.value.user_group = "Manager"
         }
 
         return { data, days }
     }
 }
 </script>
+<style scoped>
+.tableResult /deep/ td {
+	border-style: solid;
+	border-width: 1px;
+	border-color: black
+}
+
+.tableResult /deep/ .red {
+	background-color: red;
+}
+
+.tableResult /deep/ .green {
+	background-color: green;
+}
+
+.tableResult /deep/ .orange {
+	background-color: orange;
+}
+
+.tableResult /deep/ .black {
+	background-color: black;
+}
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+
+.orange {
+	background-color: orange;
+}
+
+.black {
+	background-color: black;
+}
+</style>
