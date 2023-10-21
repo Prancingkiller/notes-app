@@ -33,7 +33,19 @@
                 <input type="time" v-model="data.openings[day].chiusura">
             </div>
         </div>
-        <p>{{ data }}</p>
+        <div style="display:flex;flex-direction:row;justify-content: center;">
+			<div v-for="(day, i) in days" :key="i">
+				{{ day }}
+				<table style="margin:5px" class="tableResult">
+					<tr v-for="(slot, i) in data.slots[day]" :key="i">
+						<td>{{ slot.start }}-{{ slot.finish }}</td>
+						<td>
+							<input type="number" v-model="slot.required" style="width:35px;border:0px">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
     </div>
 </template>
 <script>
