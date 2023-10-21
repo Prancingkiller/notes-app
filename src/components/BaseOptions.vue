@@ -11,14 +11,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Apertura</td>
-                        <td><input type="time" v-model="data.options.apertura"></td>
-                    </tr>
-                    <tr>
-                        <td>Chiusura</td>
-                        <td><input type="time" v-model="data.options.chiusura"></td>
-                    </tr>
-                    <tr>
                         <td>Pausa minima tra turni (h)</td>
                         <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
                     </tr>
@@ -33,6 +25,13 @@
                 </tbody>
             </table>
         </div>
+        <div style="display:flex;flex-direction: row;">
+            <div v-for="(day,i) in days" :key="i" style="display:flex;flex-direction: column;">
+                {{ day }}<br>
+                <input type="time" :value="userGroup.openings.day.apertura">
+                <input type="time" :value="userGroup.openings.day.chiusura">
+            </div>
+        </div>
 </template>
 <script>
 export default {
@@ -45,14 +44,16 @@ export default {
                     baseShift:Number,
                     minTimeBetweenShifts:Number,
                     chiusura:String,
-                    apertura:String
+                    apertura:String,
+                    slots:Object,
+                    openings:Object
                 }
             }
         }
     },
     setup(props){
         const data = props.userGroup;
-
+        const days = ["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
         if(data.user_group == 0){
             data.user_group = "Crew"
         }
@@ -63,7 +64,7 @@ export default {
             data.user_group = "Manager"
         }
 
-        return{data}
+        return{data,days}
     }
 }
 </script>
