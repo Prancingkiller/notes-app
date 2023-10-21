@@ -359,14 +359,11 @@ export default {
 			return selectedDay.value.addDays(toRemove);
 		})
 		function getLongestDay() {
-			console.log(configuration.value.openings);
-			days.value.forEach((day) => {
-				for (const key in configuration.value.openings) {
-					let apertura = configuration.value.openings[key].apertura;
-					let chiusura = configuration.value.openings[key].chiusura;
-					console.log(apertura + chiusura);
-				}
-			})
+			for (const key in configuration.value.openings) {
+				let apertura = configuration.value.openings[key].apertura;
+				let chiusura = configuration.value.openings[key].chiusura;
+				console.log(apertura + chiusura);
+			}
 		}
 		function toTimestamp(strDate) {
 			var datum = Date.parse(strDate);
