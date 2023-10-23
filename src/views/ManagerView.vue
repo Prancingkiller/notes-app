@@ -122,7 +122,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref, computed, onMounted, watch } from "vue"
+import { ref, computed,onBeforeMount, watch } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -171,9 +171,8 @@ export default {
 		});
 		const longestDay = ref(null);
 
-		onMounted(init)
-
-		async function init() {
+		// onMounted(init)
+		onBeforeMount(()=>{
 			const route = useRoute();
 			let type;
 			switch (route.params.resource) {
@@ -191,7 +190,10 @@ export default {
 			}
 			loadOptions(type);
 			loadWokersData(type);
-		}
+		})
+		// async function init() {
+			
+		// }
 
 		async function loadOptions(type) {
 			let data = await ManagerMethods.loadOptions(type);
