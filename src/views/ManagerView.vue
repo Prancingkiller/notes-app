@@ -368,12 +368,12 @@ export default {
 			});
 			calendarRanges.value.apertura = strToMinPast00(aperture[0]);
 			calendarRanges.value.chiusura = strToMinPast00(chiusure[0]);
+			console.log(calendarRanges.value);
 		}
 		function strToMinPast00(str){
 			let result = 0;
 			let array = str.split(":");
 			result = (parseInt(array[0])*60)+parseInt(array[1]);
-			console.log(result);
 			return ""+result+"";
 		}
 
