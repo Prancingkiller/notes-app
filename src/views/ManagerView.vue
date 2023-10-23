@@ -367,7 +367,7 @@ export default {
 				return (toTimestamp(b) - toTimestamp(a));
 			});
 			calendarRanges.value.apertura = strToMinPast00(aperture[0]);
-			calendarRanges.value.chiusura = strToMinPast00(aperture[0]);
+			calendarRanges.value.chiusura = strToMinPast00(chiusure[0]);
 		}
 		function strToMinPast00(str){
 			let result = 0;
