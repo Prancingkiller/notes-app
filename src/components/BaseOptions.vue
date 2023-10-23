@@ -50,6 +50,7 @@
     <button @click="saveOptions()">Salva</button>
 </template>
 <script>
+import directorMethods from '../api/resources/directorMethods.js'
 import { ref } from 'vue'
 export default {
     props: {
