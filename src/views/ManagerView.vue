@@ -161,7 +161,7 @@ export default {
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
-		const calendarRanges = {apertura:"",chiusura:""};
+		const calendarRanges = {apertura:0,chiusura:1000}
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -376,7 +376,7 @@ export default {
 			let result = 0;
 			let array = str.split(":");
 			result = (parseInt(array[0])*60)+parseInt(array[1]);
-			return ""+result+"";
+			return result;
 		}
 
 		function toTimestamp(strDate) {
