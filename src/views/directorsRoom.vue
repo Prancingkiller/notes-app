@@ -36,7 +36,7 @@ export default {
         }
 
         return {
-            content, router, options, setContent
+            content, router, options, setContent, getOptions
         }
     },
     components: {
