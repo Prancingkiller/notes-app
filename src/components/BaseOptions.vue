@@ -47,6 +47,7 @@
 			</div>
 		</div>
     </div>
+    <button @click="saveOptions()">Salva</button>
 </template>
 <script>
 import { ref } from 'vue'
@@ -67,7 +68,8 @@ export default {
             }
         }
     },
-    setup(props) {
+    emits: ['inFocus', 'submit'],
+    setup(props,ctx) {
         const data = ref(props.userGroup);
         const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
         if (data.value.user_group == 0) {
@@ -78,6 +80,17 @@ export default {
         }
         if (data.value.user_group == 2) {
             data.value.user_group = "Manager"
+        }
+
+        async function saveOptions(){
+            let obj = [data];
+            const res = await directorMethods.postAllOptions(obj);
+            if(res){
+                ctx.emit('submit')
+            }
+            else{
+                console.log("problems saving! offline?")
+            } 
         }
 
         return { data, days }

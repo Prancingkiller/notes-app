@@ -19,5 +19,23 @@ export default {
         // }
         // console.log(returns);
         return result;
+    },
+    async postAllOptions(data){
+        const response = await fetch(APISettings.baseURL + "/postAllOptions", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Trusted': 'yes'
+            },
+            body: JSON.stringify(data)
+        })
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+        else {
+            return false;
+        }
     }
 }
