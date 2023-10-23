@@ -1,57 +1,79 @@
 <template>
-    <div style="display:flex;flex-direction: column;">
-        <div class="p-4">
-            <h3>Opzioni per gruppo: {{ data.user_group }}</h3>
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th>Opzione</th>
-                        <th>Valore</th>
-                    </tr>
+    <button>
+        {{ data.user_group }}
+    </button>
 
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pausa minima tra turni (h)</td>
-                        <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
-                    </tr>
-                    <tr>
-                        <td>Turno minimo (h)</td>
-                        <td><input type="number" v-model="data.options.baseShift"></td>
-                    </tr>
-                    <tr>
-                        <td>Abilita doppi turni</td>
-                        <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style="display:flex;flex-direction: row;">
-            <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column;">
-                {{ day }}<br>
-                <input type="time" v-model="data.openings[day].apertura">
-                <input type="time" v-model="data.openings[day].chiusura">
+    <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Opzioni per gruppo: {{ data.user_group }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        @click="closeModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="notesForm">
+                        <div style="display:flex;flex-direction: column;">
+                            <div class="p-4">
+                                <h3></h3>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Opzione</th>
+                                            <th>Valore</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Pausa minima tra turni (h)</td>
+                                            <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Turno minimo (h)</td>
+                                            <td><input type="number" v-model="data.options.baseShift"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Abilita doppi turni</td>
+                                            <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="display:flex;flex-direction: row;">
+                                <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column;">
+                                    {{ day }}<br>
+                                    <input type="time" v-model="data.openings[day].apertura">
+                                    <input type="time" v-model="data.openings[day].chiusura">
+                                </div>
+                            </div>
+                            <div style="display:flex;flex-direction:row;justify-content: center;">
+                                <div v-for="(day, i) in days" :key="i">
+                                    {{ day }}
+                                    <table style="margin:5px" class="tableResult">
+                                        <tr v-for="(slot, i) in data.slots[day]" :key="i">
+                                            <td>{{ slot.start }}-{{ slot.finish }}</td>
+                                            <td>
+                                                <input type="number" v-model="slot.required" style="width:35px;border:0px">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" @click="saveOptions()">Salva</button>
+                </div>
             </div>
         </div>
-        <div style="display:flex;flex-direction:row;justify-content: center;">
-			<div v-for="(day, i) in days" :key="i">
-				{{ day }}
-				<table style="margin:5px" class="tableResult">
-					<tr v-for="(slot, i) in data.slots[day]" :key="i">
-						<td>{{ slot.start }}-{{ slot.finish }}</td>
-						<td>
-							<input type="number" v-model="slot.required" style="width:35px;border:0px">
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
     </div>
-    <button @click="saveOptions()">Salva</button>
 </template>
 <script>
 import directorMethods from '../api/resources/directorMethods.js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { Modal } from 'bootstrap'
 export default {
     props: {
         userGroup: {
@@ -70,7 +92,9 @@ export default {
         }
     },
     emits: ['inFocus', 'submit'],
-    setup(props,ctx) {
+    setup(props, ctx) {
+        const modalRef = ref(null);
+        var modal = Modal;
         const data = ref(props.userGroup);
         const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
         if (data.value.user_group == 0) {
@@ -82,58 +106,66 @@ export default {
         if (data.value.user_group == 2) {
             data.value.user_group = "Manager"
         }
-
-        async function saveOptions(){
+        function openModal() {
+            modal.show()
+        }
+        function closeModal() {
+            modal.hide()
+        }
+        onMounted(() => {
+            modal = new Modal(modalRef.value);
+        })
+        async function saveOptions() {
             let obj = [data.value];
             const res = await directorMethods.postAllOptions(obj);
-            if(res){
+            if (res) {
                 ctx.emit('submit')
             }
-            else{
+            else {
                 console.log("problems saving! offline?")
-            } 
+            }
         }
 
-        return { data, days, saveOptions }
+        return { data, days, saveOptions, openModal, closeModal, modalRef }
     }
 }
 </script>
 <style scoped>
 .tableResult /deep/ td {
-	border-style: solid;
-	border-width: 1px;
-	border-color: black
+    border-style: solid;
+    border-width: 1px;
+    border-color: black
 }
 
 .tableResult /deep/ .red {
-	background-color: red;
+    background-color: red;
 }
 
 .tableResult /deep/ .green {
-	background-color: green;
+    background-color: green;
 }
 
 .tableResult /deep/ .orange {
-	background-color: orange;
+    background-color: orange;
 }
 
 .tableResult /deep/ .black {
-	background-color: black;
+    background-color: black;
 }
 
 .red {
-	background-color: red;
+    background-color: red;
 }
 
 .green {
-	background-color: green;
+    background-color: green;
 }
 
 .orange {
-	background-color: orange;
+    background-color: orange;
 }
 
 .black {
-	background-color: black;
+    background-color: black;
 }
 </style>
