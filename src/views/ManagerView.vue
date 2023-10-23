@@ -2,7 +2,7 @@
 	<button @click="makeShift">Make Shift</button>
 	<button v-if="daysTest.length > 1" @click="debugShift">Debug</button>
 	<button v-if="daysTest.length > 1" @click="postShift">Submit Test</button>
-	<vue-cal :selected-date="selectedDay" :timeFrom=480 :timeTo=1290 :disableViews="disabledViews" :events="daysTest"
+	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)">
@@ -161,6 +161,7 @@ export default {
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
+		const calendarRanges = ref({apertura:"",chiusura:""});
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -365,15 +366,23 @@ export default {
 				b = "02/13/2009 " + b;
 				return (toTimestamp(b) - toTimestamp(a));
 			});
-			console.log(aperture);
+			calendarRanges.value.apertura = strToMinPast00(aperture[0]);
+			calendarRanges.value.chiusura = strToMinPast00(aperture[0]);
 		}
+		function strToMinPast00(str){
+			let result = 0;
+			let array = str.split(":");
+			result = (parseInt(array[0])*60)+parseInt(array[1]);
+			return ""+result+"";
+		}
+
 		function toTimestamp(strDate) {
 			var datum = Date.parse(strDate);
 			return datum / 1000;
 		}
 
 		return {
-			shift, workers, slots, days, makeShift, full,
+			shift, workers, slots, days, makeShift, full,calendarRanges,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
 			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll
