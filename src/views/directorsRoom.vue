@@ -1,12 +1,12 @@
 <template>
     <h3>Directors Room</h3>
     <div>
-        <button @click="router.push('notes')">Notes</button>
-        <button @click="setContent('generalOptions')">General Options</button>
-        <button @click="setContent('resourcesOptions')">Resources Manager</button>
+        <button class="btn btn-primary" @click="router.push('notes')">Notes</button>
+        <button class="btn btn-primary" @click="setContent('generalOptions')">General Options</button>
+        <button class="btn btn-primary" @click="setContent('resourcesOptions')">Resources Manager</button>
     </div>
     <div>
-        <div v-if="content == 'generalOptions'" style="display:flex;flex-direction: row;justify-content: center;">
+        <div class="m-4" v-if="content == 'generalOptions'" style="display:flex;flex-direction: row;justify-content: center;">
             <BaseOptions v-for="(set, i) in options" :key="i" :userGroup="set" @submit="getOptions()"></BaseOptions>
         </div>
     </div>
