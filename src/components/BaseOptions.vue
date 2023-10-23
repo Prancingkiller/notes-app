@@ -40,7 +40,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="display:flex;flex-direction: row;">
+                            <div style="display:flex;flex-direction: row;justify-content: center;">
                                 <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column;">
                                     {{ day }}<br>
                                     <input type="time" v-model="data.openings[day].apertura">
