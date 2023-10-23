@@ -94,7 +94,7 @@ export default {
             } 
         }
 
-        return { data, days }
+        return { data, days, saveOptions }
     }
 }
 </script>
