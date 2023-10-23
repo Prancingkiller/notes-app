@@ -7,7 +7,7 @@
     </div>
     <div>
         <div v-if="content == 'generalOptions'" style="display:flex;flex-direction: row;justify-content: center;">
-            <BaseOptions v-for="(set, i) in options" :key="i" :userGroup="set" :submit="getOptions()"></BaseOptions>
+            <BaseOptions v-for="(set, i) in options" :key="i" :userGroup="set" @submit="getOptions()"></BaseOptions>
         </div>
     </div>
 </template>
