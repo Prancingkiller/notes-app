@@ -373,6 +373,7 @@ export default {
 			let result = 0;
 			let array = str.split(":");
 			result = (parseInt(array[0])*60)+parseInt(array[1]);
+			console.log(result);
 			return ""+result+"";
 		}
 
