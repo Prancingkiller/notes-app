@@ -84,7 +84,7 @@ export default {
         }
 
         async function saveOptions(){
-            let obj = [data];
+            let obj = [data.value];
             const res = await directorMethods.postAllOptions(obj);
             if(res){
                 ctx.emit('submit')
