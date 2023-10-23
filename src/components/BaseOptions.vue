@@ -1,5 +1,5 @@
 <template>
-    <button>
+    <button class="btn btn-primary" @click="openModal">
         {{ data.user_group }}
     </button>
 
