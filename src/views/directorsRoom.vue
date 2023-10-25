@@ -36,6 +36,7 @@ export default {
 
         onMounted(() => {
             getOptions();
+            getResources();
         })
 
         function setContent(data) {
