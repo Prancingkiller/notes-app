@@ -203,7 +203,6 @@ export default {
 
 		async function loadWokersData(type) {
 			data = await WorkersMethods.getWorkers(type);
-			console.log(data);
 			workers.value = data;
 		}
 
