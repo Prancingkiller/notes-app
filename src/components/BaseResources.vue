@@ -70,7 +70,7 @@
         </div>
     </div>
 </template>
-<script>
+<script >
 import directorMethods from '../api/resources/directorMethods.js'
 import { ref, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
@@ -91,7 +91,7 @@ export default {
         }
     },
     setup(props, ctx) {
-        const data = ref(props.user_group);
+        const data = ref(props.userGroup);
         const modalRef = ref(null);
         var modal = Modal;
         if (data.value.user_group == 0) {
