@@ -105,7 +105,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
     input:valid{
         background:rgb(135, 229, 135)
     }
