@@ -19,10 +19,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.start" label="Start" />
+                                <BaseInput style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.finish" label="Finish" />
+                                <BaseInput style="max-width:80px" type="time" v-model="slot.finish" label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <!-- <p v-if="slot.temp == true">Not Sync...</p> -->
                         </div>
@@ -46,9 +46,10 @@
         <button @click="postFavs()">Salva</button>
     </div>
 </template>
-<script lang="ts">
+<script >
 import BaseInput from "../components/BaseInput.vue"
 import WorkersMethods from "@/api/resources/WorkersMethods"
+import ManagerMethods from "@/api/resources/ManagerMethods";
 import { ref, onMounted } from "vue"
 export default {
     components: {
@@ -56,10 +57,12 @@ export default {
     },
     setup() {
 
-        const favouriteSlots = ref<{favourites:{id,start,finish,temp}[],day:String|null,}[]>([{day:null,favourites:[{id:null,start:null,finish:null,temp:true}]}]);
-
+        const favouriteSlots = ref([{day:null,favourites:[{id:null,start:null,finish:null,temp:true}]}]);
+        const configuration = ref({});
         onMounted(async () => {
             favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
+            let data = await ManagerMethods.loadOptions(0);
+			configuration.value = data;
         });
 
         function addFav(index){
@@ -96,8 +99,16 @@ export default {
             }
         }
         return {
-            favouriteSlots,addFav,deleteFav,postFavs
+            favouriteSlots,addFav,deleteFav,postFavs,configuration
         }
     }
 }
 </script>
+<style scoped>
+    .input:valid{
+        background:rgb(135, 229, 135)
+    }
+    .input:invalid{
+        background:rgb(255, 98, 98)
+    }
+</style>
