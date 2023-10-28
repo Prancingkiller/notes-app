@@ -60,9 +60,10 @@ export default {
         const favouriteSlots = ref([{day:null,favourites:[{id:null,start:null,finish:null,temp:true}]}]);
         const configuration = ref({});
         onMounted(async () => {
-            favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
             let data = await ManagerMethods.loadOptions(0);
 			configuration.value = data;
+            console.log(configuration.value);
+            favouriteSlots.value = await WorkersMethods.getFavouriteSlots();
         });
 
         function addFav(index){
