@@ -106,10 +106,10 @@ export default {
 }
 </script>
 <style scoped>
-    input:valid{
+    BaseInput:valid{
         background:rgb(135, 229, 135)
     }
-    input:invalid{
+    BaseInput:invalid{
         background:rgb(255, 98, 98)
     }
 </style>
