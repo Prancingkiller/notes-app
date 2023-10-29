@@ -164,7 +164,7 @@ export default {
             data.value.workers.push(obj);
         }
         async function updateWorkers(){
-            let obj = [data.value];
+            let obj = data.value;
             const res = await directorMethods.updateResources(obj);
             if (res) {
                 ctx.emit('submit')
