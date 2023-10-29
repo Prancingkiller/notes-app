@@ -173,7 +173,6 @@ export default {
                 console.log("problems saving! offline?")
             }
         }
-
         async function deleteWorker(workerId,index){
             if(workerId == 0){
                 data.value.workers.splice(index,1);
