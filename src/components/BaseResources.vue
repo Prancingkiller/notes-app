@@ -112,13 +112,13 @@ export default {
         if (data.value.user_group == 2) {
             data.value.user_group = "Drive"
         }
-        if (data.value.user_group == 2) {
+        if (data.value.user_group == 3) {
             data.value.user_group = "Hostess"
         }
-        if (data.value.user_group == 2) {
+        if (data.value.user_group == 4) {
             data.value.user_group = "Manager"
         }
-        if (data.value.user_group == 2) {
+        if (data.value.user_group == 5) {
             data.value.user_group = "Direttore"
         }
         onMounted(() => {
