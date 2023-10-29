@@ -14,8 +14,14 @@
                 <div class="modal-body">
                     <div class="notesForm" style="display:flex;flex-direction: row;flex-wrap: wrap;">
                         <div class="border" style="width:350px;" v-for="(worker, ii) in data.workers" :key="worker.id">
-                            <p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
-                            <p>Soddisfazione: {{ worker.fairness }}</p><button @click="togglePanel(ii)">Pannello orari</button>
+                            <p v-if="worker.id != 0">{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
+                            <div v-else>
+                                Nome<input  type="text" v-model="worker.name">
+                                Email<input  type="text" v-model="worker.password">
+                                Password<input  type="text" v-model="worker.email">
+                            </div>
+                            <p>Soddisfazione: {{ worker.fairness }}</p><button @click="togglePanel(ii)">Pannello
+                                orari</button>
                             <div v-if="worker.showDays">
                                 <div>Lun
                                     <div v-for="(slot, i) in worker.SlotDays.Lun" :key="i">
@@ -61,6 +67,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div><font-awesome-icon icon="circle-plus" class="fa-4x" @click="addResource" /></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -113,11 +120,40 @@ export default {
             modal.hide()
         }
         function togglePanel(index) {
-			data.value.workers[index].showDays = !data.value.workers[index].showDays;
-		}
+            data.value.workers[index].showDays = !data.value.workers[index].showDays;
+        }
+
+        function addResource() {
+            let obj = {
+                showDays: false,
+                name: "",
+                password:"",
+                email:"",
+                label: "",
+                id: 0,
+                hours: 0,
+                SlotDays: {
+                    Lun: [{start: "08:00",finish: "08:00",}
+                    ],
+                    Mar: [{start: "08:00",finish: "08:00",}
+                    ],
+                    Mer: [{start: "08:00",finish: "08:00",}
+                    ],
+                    Gio: [{start: "08:00","finish": "08:00",}
+                    ],
+                    Ven: [{start: "08:00",finish: "08:00",}
+                    ],
+                    Sab: [{start: "08:00",finish: "08:00",}
+                    ],
+                    Dom: [{start: "08:00",finish: "08:00",}
+                    ]
+                }
+            }
+            data.value.workers.push(obj);
+        }
 
         return {
-            data, openModal, closeModal, modalRef,togglePanel
+            data, openModal, closeModal, modalRef, togglePanel, addResource
         }
     }
 }
