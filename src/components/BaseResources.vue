@@ -15,7 +15,7 @@
                     <div class="notesForm" style="display:flex;flex-direction: row;flex-wrap: wrap;">
                         <div class="border" style="width:350px;" v-for="(worker, ii) in data.workers" :key="worker.id">
                             <p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
-                            <button @click="togglePanel(ii)">Pannello orari</button>
+                            <p>Soddisfazione: {{ worker.fairness }}</p><button @click="togglePanel(ii)">Pannello orari</button>
                             <div v-if="worker.showDays">
                                 <div>Lun
                                     <div v-for="(slot, i) in worker.SlotDays.Lun" :key="i">
