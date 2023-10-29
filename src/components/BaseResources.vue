@@ -66,12 +66,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="btn btn-danger" @click="deleteWorker(worker.id,ii)">Elimina</button>
                         </div>
                         <div><font-awesome-icon icon="circle-plus" class="fa-4x" @click="addResource" /></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Salva</button>
+                    <button type="button" class="btn btn-success" @click="updateWorkers()">Salva</button>
                 </div>
             </div>
         </div>
@@ -97,6 +98,7 @@ export default {
             }
         }
     },
+    emits: ['inFocus', 'submit'],
     setup(props, ctx) {
         const data = ref(props.userGroup);
         const modalRef = ref(null);
@@ -105,10 +107,19 @@ export default {
             data.value.user_group = "Crew"
         }
         if (data.value.user_group == 1) {
+            data.value.user_group = "Cafè"
+        }
+        if (data.value.user_group == 2) {
+            data.value.user_group = "Drive"
+        }
+        if (data.value.user_group == 2) {
             data.value.user_group = "Hostess"
         }
         if (data.value.user_group == 2) {
             data.value.user_group = "Manager"
+        }
+        if (data.value.user_group == 2) {
+            data.value.user_group = "Direttore"
         }
         onMounted(() => {
             modal = new Modal(modalRef.value);
@@ -131,6 +142,7 @@ export default {
                 email:"",
                 label: "",
                 id: 0,
+                user_group: data.value.user_group,
                 hours: 0,
                 SlotDays: {
                     Lun: [{start: "08:00",finish: "08:00",}
@@ -151,9 +163,35 @@ export default {
             }
             data.value.workers.push(obj);
         }
+        async function updateWorkers(){
+            let obj = [data.value];
+            const res = await directorMethods.updateResources(obj);
+            if (res) {
+                ctx.emit('submit')
+            }
+            else {
+                console.log("problems saving! offline?")
+            }
+        }
+
+        async function deleteWorker(workerId,index){
+            if(workerId == 0){
+                data.value.workers.splice(index,1);
+            }
+            else{
+                const res = await directorMethods.deleteResource([workerId]);
+                if(!res){
+                    console.log("delete fallito!");
+                }
+                else{
+                    console.log(res);
+                    data.value.workers.splice(index,1);
+                }
+            }
+        }
 
         return {
-            data, openModal, closeModal, modalRef, togglePanel, addResource
+            data, openModal, closeModal, modalRef, togglePanel, addResource,updateWorkers,deleteWorker
         }
     }
 }

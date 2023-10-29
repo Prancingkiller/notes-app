@@ -37,5 +37,42 @@ export default {
         else {
             return false;
         }
+    },
+    async updateResources(data){
+        const response = await fetch(APISettings.baseURL + "/workersEdit", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Trusted': 'yes'
+            },
+            body: JSON.stringify(data)
+        })
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+        else {
+            return false;
+        }
+    },
+    async deleteResource(data){
+        const response = await fetch(APISettings.baseURL + "/workersDelete", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Trusted': 'yes'
+            },
+            body: JSON.stringify(data)
+        })
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+        else {
+            return false;
+        }
     }
+
 }
