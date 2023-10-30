@@ -248,6 +248,8 @@ export default {
 					var inner = shift.value.data[1][worker][prop];
 					for (const propp in inner) {
 						if (prop == "Lun") {
+							year = selectedMonday.value.getFullYear().toString()
+							month = (selectedMonday.value.getMonth()+1).toString()
 							day = selectedMonday.value.getDate().toString()
 						}
 						else if (prop == "Mar") {
