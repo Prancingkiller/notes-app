@@ -464,4 +464,16 @@ export default {
 .black {
 	background-color: black;
 }
+.past-event{
+	background-color: #212529ad;
+    color: white;
+}
+.future-event{
+	background-color: #773eeead;
+    color: white;
+}
+.temporary-event{
+	background-color: #ff8383;
+    color: white;
+}
 </style>
