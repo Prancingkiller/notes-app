@@ -340,12 +340,13 @@ export default {
 		function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
 			console.log("selected month:"+selectedMonth.value);
-			console.log("month in view:"+e.endDate.getMonth()+1);
-			if(!selectedMonth.value == (e.endDate.getMonth()+1)){
-				selectedMonth.value = e.endDate.getMonth()+1;
-				selectedYear.value = e.endDate.getYear();
-				loadEvents();
-			}
+			console.log("month in view:"+parseInt(e.endDate.getMonth())+1);
+			let month = parseInt(e.endDate.getMonth())+1;
+			// if(!selectedMonth.value == month){
+			// 	selectedMonth.value = e.endDate.getMonth()+1;
+			// 	selectedYear.value = e.endDate.getYear();
+			// 	loadEvents();
+			// }
 			// console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
