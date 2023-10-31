@@ -311,7 +311,7 @@ export default {
 		}
 		async function postShift() {
 			var data: shiftsData = [];
-			daysTest.value.forEach(element => {
+			tempEvents.value.forEach(element => {
 				var fullDateStart = new Date(element.start)
 				var fullDateFinish = new Date(element.end)
 				var datePost = fullDateStart.getFullYear() + "-" + String(fullDateStart.getMonth() + 1).padStart(2, "0") + "-" + fullDateStart.getDate()
@@ -331,6 +331,7 @@ export default {
 			}
 			else {
 				console.log("all ok");
+				loadEvents();
 			}
 		}
 		function updateEvent(e: any) {
