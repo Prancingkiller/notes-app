@@ -10,7 +10,8 @@ type eventFromPHP = {
     workerId: string,
     start:string,
     end:string,
-    split:number
+    split:number,
+    class:String
 }
 
 type shiftsType = shiftType[];

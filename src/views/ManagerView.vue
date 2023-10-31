@@ -288,10 +288,12 @@ export default {
 							workerId: "",
 							start: "",
 							end: "",
-							split: 0
+							split: 0,
+							class:""
 						};
 						shiftTest.eventId = shiftId++;
 						shiftTest.workerId = worker;
+						shiftTest.class = 'temporary-event';
 						shiftTest.start = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].start;
 						shiftTest.end = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].finish;
 						//shiftTest.title= 'Worker: '+worker,
