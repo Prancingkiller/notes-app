@@ -1,7 +1,7 @@
 <template>
-	<button class="btn btn-primary" v-if="tempEvents.length == 0" @click="makeShift">Genera Turni</button>
-	<button class="btn btn-warning" v-if="tempEvents.length > 1" @click="debugShift">Debug Turni</button>
-	<button class="btn btn-success" v-if="tempEvents.length > 1" @click="postShift">Pubblica Turni</button>
+	<button class="btn btn-primary" :disabled="tempEvents.length == 0" @click="makeShift">Genera Turni</button>
+	<button class="btn btn-warning" :disabled="tempEvents.length > 1" @click="debugShift">Debug Turni</button>
+	<button class="btn btn-success" :disabled="tempEvents.length > 1" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
