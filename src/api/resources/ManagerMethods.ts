@@ -123,6 +123,16 @@ export default {
             returns[element.option_name]=element.value;
         })
         return returns;
+    },
+
+    async loadEvents(month,year){
+        const response = await fetch(APISettings.baseURL + "/eventsManager?month="+month+"&year="+year, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+        });
+        const result = await response.json();
+        return result;
     }
 
 }
