@@ -6,7 +6,9 @@
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
-		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)">
+		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
+		@ready="loadEvents()"
+		>
 
 	</vue-cal>
 	<!-- <div class="row" style="display:none">
@@ -140,9 +142,6 @@ export default {
 	setup() {
 		var full = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
 		const fullTest = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]);
-		var morning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-		var prefMorning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-		var prefAfternoon = [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 
 		const workers = ref<workersData>([
 			{ showDays: false, name: "user", label: "user", id: 0, hours: 0, SlotDays: { Lun: [{ start: "", finish: "" }], Mar: [{ start: "", finish: "" }], Mer: [{ start: "", finish: "" }], Gio: [{ start: "", finish: "" }], Ven: [{ start: "", finish: "" }], Sab: [{ start: "", finish: "" }], Dom: [{ start: "", finish: "" }] } },
@@ -160,6 +159,8 @@ export default {
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
+		const selectedMonth = ref(selectedDay.value.getMonth()+1);
+		const selectedYear = ref(selectedDay.value.getFullYear());
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		const calendarRanges = {apertura:0,chiusura:1000}
@@ -190,10 +191,6 @@ export default {
 			}
 			loadOptions(type);
 			loadWokersData(type);
-			let month = 10;
-			let year = 2023;
-			let result = await ManagerMethods.loadEvents(month,year);
-			daysTest.value = result;
 		})
 		// async function init() {
 			
@@ -342,7 +339,12 @@ export default {
 		}
 		function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
-			console.log(e.endDate.toISOString().split('T')[0]);
+			if(!selectedMonth.value == (e.endDate.getMonth()+1)){
+				selectedMonth.value = e.endDate.getMonth()+1;
+				selectedYear.value = e.endDate.getYear();
+				loadEvents();
+			}
+			// console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
 			workers.value[index].showDays = !workers.value[index].showDays;
@@ -400,12 +402,18 @@ export default {
 			var datum = Date.parse(strDate);
 			return datum / 1000;
 		}
+		async function loadEvents(){
+			let month = selectedMonth.value;
+			let year = selectedYear.value;
+			let result = await ManagerMethods.loadEvents(month,year);
+			daysTest.value = result;
+		}
 
 		return {
 			shift, workers, slots, days, makeShift, full,calendarRanges,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
 			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll
+			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents
 		}
 	},
 	components: {
