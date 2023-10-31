@@ -1,8 +1,7 @@
 <template>
-	{{ selectedMonday }}
-	<button @click="makeShift">Make Shift</button>
-	<button v-if="tempEvents.length > 1" @click="debugShift">Debug</button>
-	<button v-if="tempEvents.length > 1" @click="postShift">Submit Test</button>
+	<button class="btn btn-primary" v-if="tempEvents.length == 0" @click="makeShift">Genera Turni</button>
+	<button class="btn btn-warning" v-if="tempEvents.length > 1" @click="debugShift">Debug Turni</button>
+	<button class="btn btn-success" v-if="tempEvents.length > 1" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
@@ -433,25 +432,25 @@ export default {
 }
 </script>
 <style>
-.tableResult /deep/ td {
+.tableResult  td {
 	border-style: solid;
 	border-width: 1px;
 	border-color: black
 }
 
-.tableResult /deep/ .red {
+.tableResult  .red {
 	background-color: red;
 }
 
-.tableResult /deep/ .green {
+.tableResult  .green {
 	background-color: green;
 }
 
-.tableResult /deep/ .orange {
+.tableResult .orange {
 	background-color: orange;
 }
 
-.tableResult /deep/ .black {
+.tableResult .black {
 	background-color: black;
 }
 
