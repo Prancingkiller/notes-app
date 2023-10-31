@@ -1,8 +1,8 @@
 <template>
 	{{ selectedMonday }}
 	<button @click="makeShift">Make Shift</button>
-	<button v-if="daysTest.length > 1" @click="debugShift">Debug</button>
-	<button v-if="daysTest.length > 1" @click="postShift">Submit Test</button>
+	<button v-if="tempEvents.length > 1" @click="debugShift">Debug</button>
+	<button v-if="tempEvents.length > 1" @click="postShift">Submit Test</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
@@ -419,7 +419,7 @@ export default {
 		}
 
 		return {
-			shift, workers, slots, days, makeShift, full,calendarRanges,
+			shift, workers, slots, days, makeShift, full,calendarRanges,tempEvents,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
 			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents
