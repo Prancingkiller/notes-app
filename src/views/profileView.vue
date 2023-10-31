@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <BaseInput :class="slot.start<configuration.openings[days.day].apertura||slot.start>configuration.openings[days.day].chiusura?'invalid':''" 
+                                <BaseInput :class="slot.start<configuration.openings[days.day].apertura||slot.start>configuration.openings[days.day].chiusura||parseInt(a.split(':')[1])%15!=0?'invalid':''" 
                                     style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <div class="col-6">
