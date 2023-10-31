@@ -6,6 +6,8 @@
         v-bind="$attrs"
         class="input"
         :name="label"
+        :min="min"
+        :max="max"
         :id="label"
         :value="modelValue"
         :placeholder="label"
