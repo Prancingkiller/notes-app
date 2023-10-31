@@ -176,6 +176,7 @@ export default {
 			let month = 10;
 			let year = 2023;
 			let result = await ManagerMethods.loadEvents(month,year);
+			getLongestDay();
 			daysTest.value = result;
 		})
 		onBeforeMount(()=>{
