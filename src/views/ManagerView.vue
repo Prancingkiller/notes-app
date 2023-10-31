@@ -344,7 +344,7 @@ export default {
 			let month = parseInt(e.endDate.getMonth())+1;
 			if(selectedMonth.value != month){
 				selectedMonth.value = e.endDate.getMonth()+1;
-				selectedYear.value = e.endDate.getYear();
+				selectedYear.value = e.endDate.getFullYear();
 				loadEvents();
 			}
 			console.log(e.endDate.toISOString().split('T')[0]);
