@@ -172,14 +172,7 @@ export default {
 		});
 		const longestDay = ref(null);
 
-		onMounted(async ()=>{
-			let month = 10;
-			let year = 2023;
-			let result = await ManagerMethods.loadEvents(month,year);
-			getLongestDay();
-			daysTest.value = result;
-		})
-		onBeforeMount(()=>{
+		onBeforeMount(async ()=>{
 			const route = useRoute();
 			let type;
 			switch (route.params.resource) {
@@ -197,6 +190,10 @@ export default {
 			}
 			loadOptions(type);
 			loadWokersData(type);
+			let month = 10;
+			let year = 2023;
+			let result = await ManagerMethods.loadEvents(month,year);
+			daysTest.value = result;
 		})
 		// async function init() {
 			
