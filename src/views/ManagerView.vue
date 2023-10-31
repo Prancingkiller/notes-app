@@ -331,6 +331,7 @@ export default {
 			}
 			else {
 				console.log("all ok");
+				tempEvents.value = [];
 				loadEvents();
 			}
 		}
