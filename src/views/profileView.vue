@@ -19,10 +19,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.start" error="!!" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
+                                <BaseInput style="max-width:80px" type="time" v-model="slot.start" :error="this.checkValidity()?'':'!!'" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.finish" error="!!"  label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
+                                <BaseInput style="max-width:80px" type="time" v-model="slot.finish" :error="this.checkValidity()?'':'!!'"  label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <!-- <p v-if="slot.temp == true">Not Sync...</p> -->
                         </div>
