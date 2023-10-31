@@ -155,6 +155,7 @@ export default {
 
 		const tableResult = ref<HTMLDivElement>();
 		const daysTest = ref<eventPHP[]>([]);
+		const tempEvents = ref<eventPHP[]>([]);
 		var data;
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
@@ -242,7 +243,7 @@ export default {
 			var month = "10";
 			var day = "15";
 			var shiftId = 0;
-			daysTest.value = [];
+			tempEvents.value = [];
 			for (const worker in shift.value.data[1]) {
 				for (const prop in shift.value.data[1][worker]) {
 					var inner = shift.value.data[1][worker][prop];
@@ -298,11 +299,12 @@ export default {
 						shiftTest.end = year + "-" + month + "-" + day + " " + shift.value.data[1][worker][prop][propp].finish;
 						//shiftTest.title= 'Worker: '+worker,
 						shiftTest.split = parseInt(worker),
-							daysTest.value.push(shiftTest)
+						tempEvents.value.push(shiftTest)
 					}
 				}
 			}
-			daysTest.value.sort((a, b) => (a.start > b.start) ? 1 : -1)
+			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
+			daysTest.value = daysTest.value.concat(tempEvents.value);
 		}
 		function debugShift() {
 			console.log(daysTest.value)
@@ -411,7 +413,7 @@ export default {
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
 			let result = await ManagerMethods.loadEvents(month,year);
-			daysTest.value = result;
+			daysTest.value = result.concat(tempEvents.value);
 		}
 
 		return {
