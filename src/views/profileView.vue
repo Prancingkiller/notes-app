@@ -19,7 +19,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
+                                <input style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura">
+                                <!-- <BaseInput style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" /> -->
                             </div>
                             <div class="col-6">
                                 <BaseInput style="max-width:80px" type="time" v-model="slot.finish" label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
