@@ -23,7 +23,8 @@
                                     style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.finish" label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
+                                <BaseInput :class="slot.finish<configuration.openings[days.day].apertura||slot.finish>configuration.openings[days.day].chiusura||parseInt(slot.finish.split(':')[1])%15!=0?'invalid':''"
+                                style="max-width:80px" type="time" v-model="slot.finish" label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <!-- <p v-if="slot.temp == true">Not Sync...</p> -->
                         </div>
