@@ -19,7 +19,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <BaseInput style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
+                                <BaseInput :class="slot.start<configuration.openings[days.day].apertura||slot.start>configuration.openings[days.day].chiusura?'invalid':''" 
+                                    style="max-width:80px" type="time" v-model="slot.start" label="Start" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
                             </div>
                             <div class="col-6">
                                 <BaseInput style="max-width:80px" type="time" v-model="slot.finish" label="Finish" :min="configuration.openings[days.day].apertura" step="900" :max="configuration.openings[days.day].chiusura" />
@@ -110,6 +111,9 @@ export default {
         background:rgb(135, 229, 135)
     }
     BaseInput:invalid{
+        background:rgb(255, 98, 98)
+    }
+    .invalid{
         background:rgb(255, 98, 98)
     }
 </style>
