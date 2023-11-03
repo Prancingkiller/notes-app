@@ -1,13 +1,13 @@
 <template>
     <button class="btn btn-primary" @click="openModal">
-        {{ data.user_group }}
+        {{ data.name }}
     </button>
 
     <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Opzioni per gruppo: {{ data.user_group }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Opzioni per gruppo: {{ data.name }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         @click="closeModal"></button>
                 </div>
@@ -98,13 +98,13 @@ export default {
         const data = ref(props.userGroup);
         const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
         if (data.value.user_group == 0) {
-            data.value.user_group = "Crew"
+            data.value.name = "Crew"
         }
         if (data.value.user_group == 1) {
-            data.value.user_group = "Hostess"
+            data.value.name = "Hostess"
         }
         if (data.value.user_group == 2) {
-            data.value.user_group = "Manager"
+            data.value.name = "Manager"
         }
         function openModal() {
             modal.show()
