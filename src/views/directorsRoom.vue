@@ -35,7 +35,7 @@ export default {
             res.forEach(element=>{
                 let group = element.user_group;
                 options.value.forEach(e=>{
-                    if(e.user_group == group){
+                    if(parseInt(e.user_group) == group){
                         res.rules = e;
                     }
                     else{
