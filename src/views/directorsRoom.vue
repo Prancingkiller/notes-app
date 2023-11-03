@@ -31,11 +31,20 @@ export default {
             options.value = await directorMethods.getAllOptions();
         }
         async function getResources() {
-			resources.value = await directorMethods.getAllWorkers();
+            let res = await directorMethods.getAllWorkers();
+            res.ferEach(element=>{
+                group = element.user_group;
+                options.value.forEach(e=>{
+                    if(e.user_group == group){
+                        res.rules = e;
+                    }
+                })
+            })
+			resources.value = res;
 		}
 
-        onMounted(() => {
-            getOptions();
+        onMounted(async () => {
+           await getOptions();
             getResources();
         })
 
