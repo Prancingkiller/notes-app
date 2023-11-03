@@ -38,6 +38,9 @@ export default {
                     if(e.user_group == group){
                         res.rules = e;
                     }
+                    else{
+                        console.log("no")
+                    }
                 })
             })
 			resources.value = res;
