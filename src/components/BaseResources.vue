@@ -1,13 +1,13 @@
 <template>
     <button class="btn btn-primary" @click="openModal">
-        {{ data.user_group }}
+        {{ data.name }}
     </button>
 
     <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Risorse per gruppo: {{ data.user_group }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Risorse per gruppo: {{ data.name }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         @click="closeModal"></button>
                 </div>
@@ -104,22 +104,22 @@ export default {
         const modalRef = ref(null);
         var modal = Modal;
         if (data.value.user_group == 0) {
-            data.value.user_group = "Crew"
+            data.value.name = "Crew"
         }
         if (data.value.user_group == 1) {
-            data.value.user_group = "Cafè"
+            data.value.name = "Cafè"
         }
         if (data.value.user_group == 2) {
-            data.value.user_group = "Drive"
+            data.value.name = "Drive"
         }
         if (data.value.user_group == 3) {
-            data.value.user_group = "Hostess"
+            data.value.name = "Hostess"
         }
         if (data.value.user_group == 4) {
-            data.value.user_group = "Manager"
+            data.value.name = "Manager"
         }
         if (data.value.user_group == 5) {
-            data.value.user_group = "Direttore"
+            data.value.name = "Direttore"
         }
         onMounted(() => {
             modal = new Modal(modalRef.value);

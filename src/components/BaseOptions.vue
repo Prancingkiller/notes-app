@@ -101,10 +101,19 @@ export default {
             data.value.name = "Crew"
         }
         if (data.value.user_group == 1) {
-            data.value.name = "Hostess"
+            data.value.name = "Cafè"
         }
         if (data.value.user_group == 2) {
+            data.value.name = "Drive"
+        }
+        if (data.value.user_group == 3) {
+            data.value.name = "Hostess"
+        }
+        if (data.value.user_group == 4) {
             data.value.name = "Manager"
+        }
+        if (data.value.user_group == 5) {
+            data.value.name = "Direttore"
         }
         function openModal() {
             modal.show()
