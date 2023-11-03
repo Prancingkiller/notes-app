@@ -180,11 +180,17 @@ export default {
 				case 'crew':
 					type = 0
 					break;
-				case 'hostess':
+				case 'cafe':
 					type = 1
 					break;
-				case 'manager':
+				case 'drive':
 					type = 2
+					break;
+				case 'hostess':
+					type = 3
+					break;
+				case 'manager':
+					type = 4
 					break;
 				default:
 					type = 0
