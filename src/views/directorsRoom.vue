@@ -39,7 +39,7 @@ export default {
                         res.rules = e;
                     }
                     else{
-                        console.log("no")
+                        console.log(e.user_group." no ".group)
                     }
                 })
             })
