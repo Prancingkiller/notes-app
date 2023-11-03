@@ -147,17 +147,17 @@ export default {
                 SlotDays: {
                     Lun: [{start: data.value.rules.openings.Lun.apertura,finish: data.value.rules.openings.Lun.chiusura,}
                     ],
-                    Mar: [{start: "08:00",finish: "08:00",}
+                    Mar: [{start: data.value.rules.openings.Mar.apertura,finish: data.value.rules.openings.Mar.chiusura,}
                     ],
-                    Mer: [{start: "08:00",finish: "08:00",}
+                    Mer: [{start: data.value.rules.openings.Mer.apertura,finish: data.value.rules.openings.Mer.chiusura,}
                     ],
-                    Gio: [{start: "08:00","finish": "08:00",}
+                    Gio: [{start: data.value.rules.openings.Gio.apertura,finish: data.value.rules.openings.Gio.chiusura,}
                     ],
-                    Ven: [{start: "08:00",finish: "08:00",}
+                    Ven: [{start: data.value.rules.openings.Ven.apertura,finish: data.value.rules.openings.Ven.chiusura,}
                     ],
-                    Sab: [{start: "08:00",finish: "08:00",}
+                    Sab: [{start: data.value.rules.openings.Sab.apertura,finish: data.value.rules.openings.Sab.chiusura,}
                     ],
-                    Dom: [{start: "08:00",finish: "08:00",}
+                    Dom: [{start: data.value.rules.openings.Dom.apertura,finish: data.value.rules.openings.Dom.chiusura,}
                     ]
                 }
             }
