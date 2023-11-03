@@ -32,7 +32,7 @@ export default {
         }
         async function getResources() {
             let res = await directorMethods.getAllWorkers();
-            res.ferEach(element=>{
+            res.forEach(element=>{
                 let group = element.user_group;
                 options.value.forEach(e=>{
                     if(e.user_group == group){
