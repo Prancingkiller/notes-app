@@ -32,11 +32,11 @@ export default {
         }
         async function getResources() {
             let res = await directorMethods.getAllWorkers();
-            res.forEach(element=>{
+            res.forEach((element,i)=>{
                 let group = element.user_group;
                 options.value.forEach(e=>{
                     if(parseInt(e.user_group) == group){
-                        element.rules = e;
+                        res[i].rules = e;
                     }
                     else{
                         console.log(e.user_group+" no "+group)
