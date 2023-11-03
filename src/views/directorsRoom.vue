@@ -38,12 +38,10 @@ export default {
                     if(parseInt(e.user_group) == group){
                         res[i].rules = e;
                     }
-                    else{
-                        console.log(e.user_group+" no "+group)
-                    }
                 })
             })
 			resources.value = res;
+            console.log(resources.value)
 		}
 
         onMounted(async () => {
