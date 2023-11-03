@@ -145,7 +145,7 @@ export default {
                 user_group: data.value.user_group,
                 hours: 0,
                 SlotDays: {
-                    Lun: [{start: "08:00",finish: "08:00",}
+                    Lun: [{start: data.rules.openings.Lun.apertura,finish: data.rules.openings.Lun.chiusura,}
                     ],
                     Mar: [{start: "08:00",finish: "08:00",}
                     ],
