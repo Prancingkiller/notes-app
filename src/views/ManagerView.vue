@@ -156,7 +156,7 @@ export default {
 		const daysTest = ref<eventPHP[]>([]);
 		const tempEvents = ref<eventPHP[]>([]);
 		var data;
-		const disabledViews = ["years", "year", "month", "week"];
+		const disabledViews = ["years", "year", "week"];
 		const minEventWidth = 0;
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth()+1);
