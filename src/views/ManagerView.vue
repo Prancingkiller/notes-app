@@ -6,7 +6,7 @@
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
-		@ready="loadEvents()"
+		@ready="loadEvents()" click-to-navigate
 		>
 
 	</vue-cal>
