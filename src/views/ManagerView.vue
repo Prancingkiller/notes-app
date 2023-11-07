@@ -6,7 +6,7 @@
 		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
-		@ready="loadEvents()" click-to-navigate
+		@ready="loadEvents()"
 		>
 
 	</vue-cal>
@@ -156,7 +156,7 @@ export default {
 		const daysTest = ref<eventPHP[]>([]);
 		const tempEvents = ref<eventPHP[]>([]);
 		var data;
-		const disabledViews = ["years", "year", "week"];
+		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth()+1);
