@@ -64,6 +64,7 @@ export default {
     async makeShiftV3<TResponse>(data: toSend): Promise<TResponse> {
         const response = await fetch(APISettings.baseURL + "/shiftsV3.php", {
             method: "POST",
+            timeout: 60,
             mode: "cors",
             cache: "no-cache",
             headers: {
