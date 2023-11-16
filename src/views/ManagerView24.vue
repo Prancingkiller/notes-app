@@ -288,7 +288,7 @@ export default {
 						// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
 						// 	day = selectedMonday.value.addDays(6).getDate().toString()
 						// }
-						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
+						console.log(shift.value.data[1][worker][propp].start +"-"+ shift.value.data[1][worker][propp].finish)
 						var shiftTest: eventPHP = {
 							eventId: 0,
 							workerId: "",
