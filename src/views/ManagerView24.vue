@@ -250,44 +250,44 @@ export default {
 			var shiftId = 0;
 			tempEvents.value = [];
 			for (const worker in shift.value.data[1]) {
-				for (const prop in shift.value.data[1][worker]) {
-					var inner = shift.value.data[1][worker][prop];
+
+					var inner = shift.value.data[1][worker];
 					for (const propp in inner) {
-						if (prop == "Lun") {
-							year = selectedMonday.value.getFullYear().toString()
-							month = (selectedMonday.value.getMonth()+1).toString()
-							day = selectedMonday.value.getDate().toString()
-						}
-						else if (prop == "Mar") {
-							year = selectedMonday.value.addDays(1).getFullYear().toString()
-							month = (selectedMonday.value.addDays(1).getMonth()+1).toString()
-							day = selectedMonday.value.addDays(1).getDate().toString()
-						}
-						else if (prop == "Mer") {
-							year = selectedMonday.value.addDays(2).getFullYear().toString()
-							month = (selectedMonday.value.addDays(2).getMonth()+1).toString()
-							day = selectedMonday.value.addDays(2).getDate().toString()
-						}
-						else if (prop == "Gio") {
-							year = selectedMonday.value.addDays(3).getFullYear().toString()
-							month = (selectedMonday.value.addDays(3).getMonth()+1).toString()
-							day = selectedMonday.value.addDays(3).getDate().toString()
-						}
-						else if (prop == "Ven") {
-							year = selectedMonday.value.addDays(4).getFullYear().toString()
-							month = (selectedMonday.value.addDays(4).getMonth()+1).toString()
-							day = selectedMonday.value.addDays(4).getDate().toString()
-						}
-						else if (prop == "Sab") {
-							year = selectedMonday.value.addDays(5).getFullYear().toString()
-							month = (selectedMonday.value.addDays(5).getMonth()+1).toString()
-							day = selectedMonday.value.addDays(5).getDate().toString()
-						}
-						else if (prop == "Dom") {
-							year = selectedMonday.value.addDays(6).getFullYear().toString()
-							month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
-							day = selectedMonday.value.addDays(6).getDate().toString()
-						}
+						// if (prop == "Lun") {
+						// 	year = selectedMonday.value.getFullYear().toString()
+						// 	month = (selectedMonday.value.getMonth()+1).toString()
+						// 	day = selectedMonday.value.getDate().toString()
+						// }
+						// else if (prop == "Mar") {
+						// 	year = selectedMonday.value.addDays(1).getFullYear().toString()
+						// 	month = (selectedMonday.value.addDays(1).getMonth()+1).toString()
+						// 	day = selectedMonday.value.addDays(1).getDate().toString()
+						// }
+						// else if (prop == "Mer") {
+						// 	year = selectedMonday.value.addDays(2).getFullYear().toString()
+						// 	month = (selectedMonday.value.addDays(2).getMonth()+1).toString()
+						// 	day = selectedMonday.value.addDays(2).getDate().toString()
+						// }
+						// else if (prop == "Gio") {
+						// 	year = selectedMonday.value.addDays(3).getFullYear().toString()
+						// 	month = (selectedMonday.value.addDays(3).getMonth()+1).toString()
+						// 	day = selectedMonday.value.addDays(3).getDate().toString()
+						// }
+						// else if (prop == "Ven") {
+						// 	year = selectedMonday.value.addDays(4).getFullYear().toString()
+						// 	month = (selectedMonday.value.addDays(4).getMonth()+1).toString()
+						// 	day = selectedMonday.value.addDays(4).getDate().toString()
+						// }
+						// else if (prop == "Sab") {
+						// 	year = selectedMonday.value.addDays(5).getFullYear().toString()
+						// 	month = (selectedMonday.value.addDays(5).getMonth()+1).toString()
+						// 	day = selectedMonday.value.addDays(5).getDate().toString()
+						// }
+						// else if (prop == "Dom") {
+						// 	year = selectedMonday.value.addDays(6).getFullYear().toString()
+						// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
+						// 	day = selectedMonday.value.addDays(6).getDate().toString()
+						// }
 						//console.log(shift.value.data[1][worker][prop][propp].start +"-"+ shift.value.data[1][worker][prop][propp].finish)
 						var shiftTest: eventPHP = {
 							eventId: 0,
@@ -300,18 +300,18 @@ export default {
 						shiftTest.eventId = shiftId++;
 						shiftTest.workerId = worker;
 						shiftTest.class = 'temporary-event';
-						shiftTest.start = shift.value.data[1][worker][prop][propp].start;
-						if(shift.value.data[1][worker][prop][propp].finish == "0:00"){
+						shiftTest.start = shift.value.data[1][worker][propp].start;
+						if(shift.value.data[1][worker][propp].finish == "0:00"){
 							shiftTest.end = "24:00";
 						}
 						else{
-							shiftTest.end = shift.value.data[1][worker][prop][propp].finish;
+							shiftTest.end = shift.value.data[1][worker][propp].finish;
 						}
 						//shiftTest.title= 'Worker: '+worker,
 						shiftTest.split = parseInt(worker),
 						tempEvents.value.push(shiftTest)
 					}
-				}
+				// }
 			}
 			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
 			daysTest.value = daysTest.value.concat(tempEvents.value);
