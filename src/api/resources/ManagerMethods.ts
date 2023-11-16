@@ -61,7 +61,26 @@ type ApiResponse = {
 
 export default {
     name: "ManagerMethods",
-
+    async makeShiftV3<TResponse>(data: toSend): Promise<TResponse> {
+        const response = await fetch(APISettings.baseURL + "/shiftsV3.php", {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                //'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Trusted': 'yes'
+            },
+            body: data
+        })
+        const result = await response.json();
+        if (result.data.status == "allGood") {
+            return (result);
+        }
+        else {
+            alert(result.data.status)
+            return (result);
+        }
+    },
     async makeShift<TResponse>(data: toSend): Promise<TResponse> {
         const response = await fetch(APISettings.baseURL + "/shifts.php", {
             method: "POST",

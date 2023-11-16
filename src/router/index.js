@@ -64,7 +64,7 @@ const routes = [
     // },
   },
   {
-    path: '/manager24',
+    path: '/manager24/:resource',
     name: 'manager24',
     component: ManagerView24,
     // beforeEnter: (to, from) => {
