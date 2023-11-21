@@ -450,6 +450,7 @@ export default {
 				}
 			})
 			daySplits.value = array;
+			console.log(daySplits.value);
 		})
 
 
