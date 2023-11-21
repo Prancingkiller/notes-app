@@ -429,6 +429,7 @@ export default {
 			daysTest.value = result.concat(tempEvents.value);
 		}
 		watch(daysTest.value, () => {
+			console.log("checking");
 			let array:Number[] = [];
 			daysTest.value.forEach(element=>{
 				let start = new Date(element.start);
