@@ -428,7 +428,7 @@ export default {
 			let result = await ManagerMethods.loadEvents(month,year);
 			daysTest.value = result.concat(tempEvents.value);
 		}
-		watch(daysTest.value, () => {
+		watch(() => daysTest.value, () => {
 			console.log("checking");
 			let array:Number[] = [];
 			daysTest.value.forEach(element=>{
@@ -451,6 +451,7 @@ export default {
 			})
 			daySplits.value = array;
 		})
+
 
 		return {
 			shift, workers, slots, days, makeShift, full,calendarRanges,tempEvents,
