@@ -289,7 +289,7 @@ export default {
 						// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
 						// 	day = selectedMonday.value.addDays(6).getDate().toString()
 						// }
-						console.log(shift.value.data[1][worker][propp].start +"-"+ shift.value.data[1][worker][propp].finish)
+						// console.log(shift.value.data[1][worker][propp].start +"-"+ shift.value.data[1][worker][propp].finish)
 						var shiftTest: eventPHP = {
 							eventId: 0,
 							workerId: "",
@@ -440,6 +440,12 @@ export default {
 					if(!array.includes(element.split)){
 						array.push(element.split);
 					}
+					else{
+						console.log("no")
+					}
+				}
+				else{
+					console.log(selected+" is not same as "+startString+" or "+ endString)
 				}
 			})
 			daySplits.value = array;
