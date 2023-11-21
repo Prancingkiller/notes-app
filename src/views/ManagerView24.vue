@@ -3,7 +3,7 @@
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
-		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
+		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="daySplits"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
 		@ready="loadEvents()"
@@ -124,7 +124,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref, computed,onBeforeMount,onMounted } from "vue"
+import { ref, computed,onBeforeMount,watch } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -161,6 +161,7 @@ export default {
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth()+1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
+		const daySplits = ref<Number[]>([]);
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		const calendarRanges = {apertura:0,chiusura:1000}
@@ -427,12 +428,28 @@ export default {
 			let result = await ManagerMethods.loadEvents(month,year);
 			daysTest.value = result.concat(tempEvents.value);
 		}
+		watch(daysTest.value, () => {
+			let array:Number[] = [];
+			daysTest.value.forEach(element=>{
+				let start = new Date(element.start);
+				let end = new Date(element.end);
+				let startString = start.getFullYear()+"-"+(start.getMonth()+1)+"-"+start.getDate();
+				let endString = end.getFullYear()+"-"+(end.getMonth()+1)+"-"+end.getDate();
+				let selected = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate();
+				if(selected == startString || selected == endString){
+					if(!array.includes(element.split)){
+						array.push(element.split);
+					}
+				}
+			})
+			daySplits.value = array;
+		})
 
 		return {
 			shift, workers, slots, days, makeShift, full,calendarRanges,tempEvents,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
 			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents
+			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents,daySplits
 		}
 	},
 	components: {
