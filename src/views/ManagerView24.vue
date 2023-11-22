@@ -196,8 +196,8 @@ export default {
 				default:
 					type = 0
 			}
-			loadOptions(type);
-			loadWokersData(type);
+			await loadOptions(type);
+			await loadWokersData(type);
 		})
 		// async function init() {
 
