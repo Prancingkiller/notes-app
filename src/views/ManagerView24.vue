@@ -2,7 +2,6 @@
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
-	<Suspense>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 editable-events
 		overlapEventStartOnly :split-days="splits" :special-hours="highlights" :min-split-width=70 locale="it"
@@ -10,10 +9,6 @@
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
 
 	</vue-cal>
-	<template #fallback>
-            Loading...
-          </template>
-	</Suspense>
 	<!-- <div class="row" style="display:none">
 		<div v-for="(day,i) in daysTest" :key="i" class="col">
 		<draggable
@@ -128,7 +123,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref, computed, onBeforeMount, watch } from "vue"
+import { ref, computed, onBeforeMount, onMounted } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -142,7 +137,7 @@ declare global {
 }
 Date.prototype.addDays = function (d: number) { return new Date(this.valueOf() + 864E5 * d); };
 export default {
-	async setup() {
+	setup() {
 		var full = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
 		const fullTest = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]);
 
@@ -201,8 +196,8 @@ export default {
 				default:
 					type = 0
 			}
-			await loadOptions(type);
-			await loadWokersData(type);
+			loadOptions(type);
+			loadWokersData(type);
 		})
 		// async function init() {
 
