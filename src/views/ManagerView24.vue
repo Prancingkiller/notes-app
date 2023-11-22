@@ -128,7 +128,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref, computed, onBeforeMount, onMounted } from "vue"
+import { ref, computed, onBeforeMount, watch } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -142,7 +142,7 @@ declare global {
 }
 Date.prototype.addDays = function (d: number) { return new Date(this.valueOf() + 864E5 * d); };
 export default {
-	setup() {
+	async setup() {
 		var full = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
 		const fullTest = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]);
 
@@ -201,8 +201,8 @@ export default {
 				default:
 					type = 0
 			}
-			loadOptions(type);
-			loadWokersData(type);
+			await loadOptions(type);
+			await loadWokersData(type);
 		})
 		// async function init() {
 
