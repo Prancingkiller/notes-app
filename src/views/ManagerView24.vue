@@ -480,8 +480,10 @@ export default {
 				daysTest.value.forEach(shift => {
 					let shiftStart = shift.start.split(" ")[0];
 					let shiftEnd = shift.end.split(" ")[0];
+					let shiftStartHour = shift.start.split(" ")[1];
+					let shiftEndhour = shift.end.split(" ")[1];
 					if (dateString == shiftStart || dateString == shiftEnd) {
-						if (slotFinish >= shiftStart && slotFinish <= shiftEnd) {
+						if (slotFinish >= shiftStartHour && slotFinish <= shiftEndhour) {
 							required -= 1;
 						}
 					}
