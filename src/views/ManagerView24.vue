@@ -493,8 +493,16 @@ export default {
 					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficit', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
-				else {
-					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'good', required: required }
+				else if(required == 0) {
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'perfect', required: required }
+					highlights.value[dayNumber].push(obj)
+				}
+				else if(required == -1){
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'oneMore', required: required }
+					highlights.value[dayNumber].push(obj)
+				}
+				else if(required < -1){
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'manyMore', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
 			})
@@ -520,8 +528,14 @@ export default {
 	background-color: rgba(255, 0, 0, 0.11);
 }
 
-.good {
+.perfect {
 	background-color: rgba(0, 128, 0, 0.233);
+}
+.oneMore {
+	background-color: rgba(1, 74, 1, 0.233);
+}
+.manyMore {
+	background-color: rgba(0, 42, 0, 0.233);
 }
 
 .tableResult td {
