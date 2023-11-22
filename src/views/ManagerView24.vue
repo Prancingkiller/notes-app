@@ -472,21 +472,21 @@ export default {
 			}
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
 			highlights.value[dayNumber] = [];
-			// console.log(configuration.value.slots[dayWord]);
+			console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
 				let slotStart = element.start
 				let slotFinish = element.finish
 				daysTest.value.forEach(shift => {
-					let shiftStart = shift.start.split(" ")[0];
-					let shiftEnd = shift.end.split(" ")[0];
+					let shiftStart = new Date(shift.start);
+					let shiftEnd = new Date(shift.end);
 					let shiftStartHour = shift.start.split(" ")[1];
 					let shiftEndhour = shift.end.split(" ")[1];
-					if (dateString == shiftStart || dateString == shiftEnd) {
-						if (slotStart >= shiftStartHour && slotFinish <= shiftEndhour) {
-							required--;
-						}
-					}
+					// if (dateString == shiftStart || dateString == shiftEnd) {
+					// 	if (slotStart >= shiftStartHour && slotFinish <= shiftEndhour) {
+					// 		required--;
+					// 	}
+					// }
 				})
 				if (required > 0) {
 					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'deficit', required:required }
@@ -497,7 +497,7 @@ export default {
 					highlights.value[dayNumber].push(obj)
 				}
 			})
-			console.log(highlights.value);
+			// console.log(highlights.value);
 		}
 
 		return {
