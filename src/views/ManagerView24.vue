@@ -3,7 +3,7 @@
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
-		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="workers"
+		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="splits"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
 		@ready="loadEvents()"
@@ -161,6 +161,7 @@ export default {
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth()+1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
+		const splits = ref([{}]);
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		const calendarRanges = {apertura:0,chiusura:1000}
@@ -310,6 +311,7 @@ export default {
 						//shiftTest.title= 'Worker: '+worker,
 						shiftTest.split = parseInt(worker),
 						tempEvents.value.push(shiftTest)
+						renderSplits();
 					}
 				// }
 			}
@@ -353,7 +355,7 @@ export default {
 				}
 			})
 		}
-		function updateSelectedDay(e: any) {
+		async function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
 			// console.log("selected month:"+selectedMonth.value);
 			// console.log("month in view:"+parseInt(e.endDate.getMonth())+1);
@@ -361,7 +363,8 @@ export default {
 			if(selectedMonth.value != month){
 				selectedMonth.value = e.endDate.getMonth()+1;
 				selectedYear.value = e.endDate.getFullYear();
-				loadEvents();
+				await loadEvents();
+				renderSplits();
 			}
 			console.log(e.endDate.toISOString().split('T')[0]);
 		}
@@ -427,11 +430,34 @@ export default {
 			let result = await ManagerMethods.loadEvents(month,year);
 			daysTest.value = result.concat(tempEvents.value);
 		}
+		function renderSplits(){
+			splits.value = [];
+			let array:number[] = [];
+			let dateString = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate();
+			daysTest.value.forEach(shift=>{
+				let shiftStart = shift.start.split(" ")[0];
+				let shiftEnd = shift.end.split(" ")[0];
+				if(dateString == shiftStart || dateString == shiftEnd){
+					if(!array.includes(shift.split)){
+						array.push(shift.split);
+					}
+				}
+			})
+			workers.value.forEach(worker=>{
+				if(array.includes(worker.id)){
+					let obj = {
+						id:worker.id,
+						label:worker.label
+					}
+					splits.value.push(obj);
+				}
+			})
+		}
 
 		return {
 			shift, workers, slots, days, makeShift, full,calendarRanges,tempEvents,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
-			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,
+			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,splits,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents
 		}
 	},
