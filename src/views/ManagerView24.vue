@@ -161,7 +161,7 @@ export default {
 		const selectedMonth = ref(selectedDay.value.getMonth() + 1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
 		const splits = ref([{}]);
-		const highlights = ref([{}]);
+		const highlights = ref({});
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 }
@@ -464,9 +464,11 @@ export default {
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
 		function renderHighlightHours() {
-			highlights.value = [];
+			// highlights.value = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
+			let dayNumber = selectedDay.value.getDay();
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
+			highlights.value[dayNumber] = [];
 			// console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
@@ -483,11 +485,11 @@ export default {
 				})
 				if (required > 0) {
 					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'deficit' }
-					highlights.value.push(obj)
+					highlights.value[dayNumber].push(obj)
 				}
 				else {
 					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'good' }
-					highlights.value.push(obj)
+					highlights.value[dayNumber].push(obj)
 				}
 			})
 			console.log(highlights.value);
