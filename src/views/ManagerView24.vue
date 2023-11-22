@@ -467,7 +467,7 @@ export default {
 			highlights.value = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
-			console.log(configuration.value.slots[dayWord]);
+			// console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
 				let slotStart = element.start
@@ -490,6 +490,7 @@ export default {
 					highlights.value.push(obj)
 				}
 			})
+			console.log(highlights.value);
 		}
 
 		return {
