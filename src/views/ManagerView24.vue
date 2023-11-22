@@ -467,6 +467,9 @@ export default {
 			highlights.value = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
 			let dayNumber = selectedDay.value.getDay();
+			if(dayNumber == 0){
+				dayNumber = 7;
+			}
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
 			highlights.value[dayNumber] = [];
 			// console.log(configuration.value.slots[dayWord]);
