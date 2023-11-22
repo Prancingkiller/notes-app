@@ -475,6 +475,8 @@ export default {
 			console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
+				let slotStartString = element.start
+				let slotFinishString = element.finish
 				let slotStart:string|Date = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate()+" "+element.start;
 				let slotFinish:string|Date = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate()+" "+element.finish;
 				slotStart = new Date(slotStart);
@@ -482,8 +484,8 @@ export default {
 				daysTest.value.forEach(shift => {
 					let shiftStart = new Date(shift.start);
 					let shiftEnd = new Date(shift.end);
-					// let shiftStartHour = new Date(shift.start);
-					// let shiftEndhour = new Date(shift.end);
+					// let shiftStartHour = shift.start.split(" ")[1];
+					// let shiftEndhour = shift.end.split(" ")[1];
 					// if (dateString == shiftStart || dateString == shiftEnd) {
 						if (slotStart >= shiftStart && slotFinish <= shiftEnd) {
 							required--;
@@ -491,15 +493,15 @@ export default {
 					// }
 				})
 				if (required > 0) {
-					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'deficit', required:required }
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficit', required:required }
 					highlights.value[dayNumber].push(obj)
 				}
 				else {
-					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'good', required:required}
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'good', required:required}
 					highlights.value[dayNumber].push(obj)
 				}
 			})
-			// console.log(highlights.value);
+			console.log(highlights.value);
 		}
 
 		return {
