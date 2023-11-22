@@ -484,16 +484,16 @@ export default {
 					let shiftEndhour = shift.end.split(" ")[1];
 					if (dateString == shiftStart || dateString == shiftEnd) {
 						if (slotFinish >= shiftStartHour && slotFinish <= shiftEndhour) {
-							required -= 1;
+							required--;
 						}
 					}
 				})
 				if (required > 0) {
-					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'deficit' }
+					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'deficit', required:required }
 					highlights.value[dayNumber].push(obj)
 				}
 				else {
-					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'good' }
+					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'good', required:required}
 					highlights.value[dayNumber].push(obj)
 				}
 			})
