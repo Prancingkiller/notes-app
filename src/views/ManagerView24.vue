@@ -368,7 +368,7 @@ export default {
 				await loadEvents();
 			}
 			renderSplits();
-			console.log(e.endDate.toISOString().split('T')[0]);
+			// console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
 			workers.value[index].showDays = !workers.value[index].showDays;
@@ -467,6 +467,7 @@ export default {
 			highlights.value = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
+			console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
 				let slotStart = element.start
