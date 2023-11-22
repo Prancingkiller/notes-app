@@ -311,12 +311,12 @@ export default {
 						//shiftTest.title= 'Worker: '+worker,
 						shiftTest.split = parseInt(worker),
 						tempEvents.value.push(shiftTest)
-						renderSplits();
 					}
 				// }
 			}
 			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
 			daysTest.value = daysTest.value.concat(tempEvents.value);
+			renderSplits();
 		}
 		function debugShift() {
 			console.log(daysTest.value)
@@ -364,8 +364,8 @@ export default {
 				selectedMonth.value = e.endDate.getMonth()+1;
 				selectedYear.value = e.endDate.getFullYear();
 				await loadEvents();
-				renderSplits();
 			}
+			renderSplits();
 			console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
