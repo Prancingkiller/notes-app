@@ -483,7 +483,7 @@ export default {
 					let shiftStartHour = shift.start.split(" ")[1];
 					let shiftEndhour = shift.end.split(" ")[1];
 					if (dateString == shiftStart || dateString == shiftEnd) {
-						if (slotFinish >= shiftStartHour && slotFinish <= shiftEndhour) {
+						if (slotStart >= shiftStartHour && slotFinish <= shiftEndhour) {
 							required--;
 						}
 					}
