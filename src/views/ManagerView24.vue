@@ -481,11 +481,11 @@ export default {
 					}
 				})
 				if (required > 0) {
-					let obj = { from: (slotStart.split(":")[0]) * 60 + slotStart.split(":")[1], to: (slotFinish.split(":")[0]) * 60 + slotFinish.split(":")[1], class: 'deficit' };
+					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'deficit' }
 					highlights.value.push(obj)
 				}
 				else {
-					let obj = { from: (slotStart.split(":")[0]) * 60 + slotStart.split(":")[1], to: (slotFinish.split(":")[0]) * 60 + slotFinish.split(":")[1], class: 'good' }
+					let obj = { from: (parseInt(slotStart.split(":")[0])) * 60 + parseInt(slotStart.split(":")[1]), to: parseInt((slotFinish.split(":")[0])) * 60 + parseInt(slotFinish.split(":")[1]), class: 'good' }
 					highlights.value.push(obj)
 				}
 			})
