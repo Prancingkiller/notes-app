@@ -475,17 +475,19 @@ export default {
 			console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
-				let slotStart = element.start
-				let slotFinish = element.finish
+				let slotStart:string|Date = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate()+" "+element.start;
+				let slotFinish:string|Date = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate()+" "+element.finish;
+				slotStart = new Date(slotStart);
+				slotFinish = new Date(slotFinish);
 				daysTest.value.forEach(shift => {
 					let shiftStart = new Date(shift.start);
 					let shiftEnd = new Date(shift.end);
-					let shiftStartHour = shift.start.split(" ")[1];
-					let shiftEndhour = shift.end.split(" ")[1];
+					// let shiftStartHour = new Date(shift.start);
+					// let shiftEndhour = new Date(shift.end);
 					// if (dateString == shiftStart || dateString == shiftEnd) {
-					// 	if (slotStart >= shiftStartHour && slotFinish <= shiftEndhour) {
-					// 		required--;
-					// 	}
+						if (slotStart >= shiftStart && slotFinish <= shiftEnd) {
+							required--;
+						}
 					// }
 				})
 				if (required > 0) {
