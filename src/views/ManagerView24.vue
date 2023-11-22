@@ -443,6 +443,7 @@ export default {
 					}
 				}
 			})
+			console.log("splits:"+array);
 			workers.value.forEach(worker=>{
 				if(array.includes(worker.id)){
 					let obj = {
