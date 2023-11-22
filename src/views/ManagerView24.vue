@@ -2,12 +2,11 @@
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
-	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
-		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="splits" :special-hours="highlights"
-		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
-		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
-		@ready="loadEvents()"
-		>
+	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
+		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 editable-events
+		overlapEventStartOnly :split-days="splits" :special-hours="highlights" :min-split-width=70 locale="it"
+		:overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
+		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
 
 	</vue-cal>
 	<!-- <div class="row" style="display:none">
@@ -124,7 +123,7 @@
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref, computed,onBeforeMount,onMounted } from "vue"
+import { ref, computed, onBeforeMount, onMounted } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -159,13 +158,13 @@ export default {
 		const disabledViews = ["years", "year", "month", "week"];
 		const minEventWidth = 0;
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
-		const selectedMonth = ref(selectedDay.value.getMonth()+1);
+		const selectedMonth = ref(selectedDay.value.getMonth() + 1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
 		const splits = ref([{}]);
 		const highlights = ref([{}]);
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
-		const calendarRanges = {apertura:0,chiusura:1000}
+		const calendarRanges = { apertura: 0, chiusura: 1000 }
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -175,7 +174,7 @@ export default {
 		});
 		const longestDay = ref(null);
 
-		onBeforeMount(async ()=>{
+		onBeforeMount(async () => {
 			const route = useRoute();
 			let type;
 			switch (route.params.resource) {
@@ -201,7 +200,7 @@ export default {
 			loadWokersData(type);
 		})
 		// async function init() {
-			
+
 		// }
 
 		async function loadOptions(type) {
@@ -253,66 +252,66 @@ export default {
 			tempEvents.value = [];
 			for (const worker in shift.value.data[1]) {
 
-					var inner = shift.value.data[1][worker];
-					for (const propp in inner) {
-						// if (prop == "Lun") {
-						// 	year = selectedMonday.value.getFullYear().toString()
-						// 	month = (selectedMonday.value.getMonth()+1).toString()
-						// 	day = selectedMonday.value.getDate().toString()
-						// }
-						// else if (prop == "Mar") {
-						// 	year = selectedMonday.value.addDays(1).getFullYear().toString()
-						// 	month = (selectedMonday.value.addDays(1).getMonth()+1).toString()
-						// 	day = selectedMonday.value.addDays(1).getDate().toString()
-						// }
-						// else if (prop == "Mer") {
-						// 	year = selectedMonday.value.addDays(2).getFullYear().toString()
-						// 	month = (selectedMonday.value.addDays(2).getMonth()+1).toString()
-						// 	day = selectedMonday.value.addDays(2).getDate().toString()
-						// }
-						// else if (prop == "Gio") {
-						// 	year = selectedMonday.value.addDays(3).getFullYear().toString()
-						// 	month = (selectedMonday.value.addDays(3).getMonth()+1).toString()
-						// 	day = selectedMonday.value.addDays(3).getDate().toString()
-						// }
-						// else if (prop == "Ven") {
-						// 	year = selectedMonday.value.addDays(4).getFullYear().toString()
-						// 	month = (selectedMonday.value.addDays(4).getMonth()+1).toString()
-						// 	day = selectedMonday.value.addDays(4).getDate().toString()
-						// }
-						// else if (prop == "Sab") {
-						// 	year = selectedMonday.value.addDays(5).getFullYear().toString()
-						// 	month = (selectedMonday.value.addDays(5).getMonth()+1).toString()
-						// 	day = selectedMonday.value.addDays(5).getDate().toString()
-						// }
-						// else if (prop == "Dom") {
-						// 	year = selectedMonday.value.addDays(6).getFullYear().toString()
-						// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
-						// 	day = selectedMonday.value.addDays(6).getDate().toString()
-						// }
-						console.log(shift.value.data[1][worker][propp].start +"-"+ shift.value.data[1][worker][propp].finish)
-						var shiftTest: eventPHP = {
-							eventId: 0,
-							workerId: "",
-							start: "",
-							end: "",
-							split: 0,
-							class:""
-						};
-						shiftTest.eventId = shiftId++;
-						shiftTest.workerId = worker;
-						shiftTest.class = 'temporary-event';
-						shiftTest.start = shift.value.data[1][worker][propp].start;
-						if(shift.value.data[1][worker][propp].finish == "0:00"){
-							shiftTest.end = "24:00";
-						}
-						else{
-							shiftTest.end = shift.value.data[1][worker][propp].finish;
-						}
-						//shiftTest.title= 'Worker: '+worker,
-						shiftTest.split = parseInt(worker),
-						tempEvents.value.push(shiftTest)
+				var inner = shift.value.data[1][worker];
+				for (const propp in inner) {
+					// if (prop == "Lun") {
+					// 	year = selectedMonday.value.getFullYear().toString()
+					// 	month = (selectedMonday.value.getMonth()+1).toString()
+					// 	day = selectedMonday.value.getDate().toString()
+					// }
+					// else if (prop == "Mar") {
+					// 	year = selectedMonday.value.addDays(1).getFullYear().toString()
+					// 	month = (selectedMonday.value.addDays(1).getMonth()+1).toString()
+					// 	day = selectedMonday.value.addDays(1).getDate().toString()
+					// }
+					// else if (prop == "Mer") {
+					// 	year = selectedMonday.value.addDays(2).getFullYear().toString()
+					// 	month = (selectedMonday.value.addDays(2).getMonth()+1).toString()
+					// 	day = selectedMonday.value.addDays(2).getDate().toString()
+					// }
+					// else if (prop == "Gio") {
+					// 	year = selectedMonday.value.addDays(3).getFullYear().toString()
+					// 	month = (selectedMonday.value.addDays(3).getMonth()+1).toString()
+					// 	day = selectedMonday.value.addDays(3).getDate().toString()
+					// }
+					// else if (prop == "Ven") {
+					// 	year = selectedMonday.value.addDays(4).getFullYear().toString()
+					// 	month = (selectedMonday.value.addDays(4).getMonth()+1).toString()
+					// 	day = selectedMonday.value.addDays(4).getDate().toString()
+					// }
+					// else if (prop == "Sab") {
+					// 	year = selectedMonday.value.addDays(5).getFullYear().toString()
+					// 	month = (selectedMonday.value.addDays(5).getMonth()+1).toString()
+					// 	day = selectedMonday.value.addDays(5).getDate().toString()
+					// }
+					// else if (prop == "Dom") {
+					// 	year = selectedMonday.value.addDays(6).getFullYear().toString()
+					// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
+					// 	day = selectedMonday.value.addDays(6).getDate().toString()
+					// }
+					console.log(shift.value.data[1][worker][propp].start + "-" + shift.value.data[1][worker][propp].finish)
+					var shiftTest: eventPHP = {
+						eventId: 0,
+						workerId: "",
+						start: "",
+						end: "",
+						split: 0,
+						class: ""
+					};
+					shiftTest.eventId = shiftId++;
+					shiftTest.workerId = worker;
+					shiftTest.class = 'temporary-event';
+					shiftTest.start = shift.value.data[1][worker][propp].start;
+					if (shift.value.data[1][worker][propp].finish == "0:00") {
+						shiftTest.end = "24:00";
 					}
+					else {
+						shiftTest.end = shift.value.data[1][worker][propp].finish;
+					}
+					//shiftTest.title= 'Worker: '+worker,
+					shiftTest.split = parseInt(worker),
+						tempEvents.value.push(shiftTest)
+				}
 				// }
 			}
 			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
@@ -362,9 +361,9 @@ export default {
 			selectedDay.value = e.endDate;
 			// console.log("selected month:"+selectedMonth.value);
 			// console.log("month in view:"+parseInt(e.endDate.getMonth())+1);
-			let month = parseInt(e.endDate.getMonth())+1;
-			if(selectedMonth.value != month){
-				selectedMonth.value = e.endDate.getMonth()+1;
+			let month = parseInt(e.endDate.getMonth()) + 1;
+			if (selectedMonth.value != month) {
+				selectedMonth.value = e.endDate.getMonth() + 1;
 				selectedYear.value = e.endDate.getFullYear();
 				await loadEvents();
 			}
@@ -416,10 +415,10 @@ export default {
 			calendarRanges.chiusura = strToMinPast00(chiusure[0]);
 			console.log(calendarRanges);
 		}
-		function strToMinPast00(str){
+		function strToMinPast00(str) {
 			let result = 0;
 			let array = str.split(":");
-			result = (parseInt(array[0])*60)+parseInt(array[1]);
+			result = (parseInt(array[0]) * 60) + parseInt(array[1]);
 			return result;
 		}
 
@@ -427,34 +426,34 @@ export default {
 			var datum = Date.parse(strDate);
 			return datum / 1000;
 		}
-		async function loadEvents(){
+		async function loadEvents() {
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await ManagerMethods.loadEvents(month,year);
+			let result = await ManagerMethods.loadEvents(month, year);
 			daysTest.value = result.concat(tempEvents.value);
 		}
-		function renderSplits(){
+		function renderSplits() {
 			splits.value = [];
-			let array:number[] = [];
-			let dateString = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate();
-			daysTest.value.forEach(shift=>{
+			let array: number[] = [];
+			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
+			daysTest.value.forEach(shift => {
 				let shiftStart = shift.start.split(" ")[0];
 				let shiftEnd = shift.end.split(" ")[0];
-				if(dateString == shiftStart || dateString == shiftEnd){
-					if(!array.includes(shift.split)){
+				if (dateString == shiftStart || dateString == shiftEnd) {
+					if (!array.includes(shift.split)) {
 						array.push(shift.split);
 					}
 				}
-				else{
-					console.log(dateString+" non è uguale a "+shiftStart+" o "+shiftEnd);
+				else {
+					// console.log(dateString+" non è uguale a "+shiftStart+" o "+shiftEnd);
 				}
 			})
-			console.log("splits:"+array);
-			workers.value.forEach(worker=>{
-				if(array.includes(worker.id)){
+			// console.log("splits:"+array);
+			workers.value.forEach(worker => {
+				if (array.includes(worker.id)) {
 					let obj = {
-						id:worker.id,
-						label:worker.label
+						id: worker.id,
+						label: worker.label
 					}
 					splits.value.push(obj);
 				}
@@ -462,41 +461,41 @@ export default {
 			renderHighlightHours();
 		}
 		function capitalizeFirstLetter(string) {
-    		return string.charAt(0).toUpperCase() + string.slice(1);
+			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
-		function renderHighlightHours(){
+		function renderHighlightHours() {
 			highlights.value = [];
-			let dateString = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate();
-			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', {weekday: 'short'}));
-			configuration.value.slots[dayWord].forEach(element=>{
+			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
+			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
+			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
 				let slotStart = element.start
 				let slotFinish = element.finish
-				daysTest.value.forEach(shift=>{
+				daysTest.value.forEach(shift => {
 					let shiftStart = shift.start.split(" ")[0];
 					let shiftEnd = shift.end.split(" ")[0];
-					if(dateString == shiftStart || dateString == shiftEnd){
-						if(slotFinish>=shiftStart && slotFinish<=shiftEnd){
-							required -=1;
+					if (dateString == shiftStart || dateString == shiftEnd) {
+						if (slotFinish >= shiftStart && slotFinish <= shiftEnd) {
+							required -= 1;
 						}
 					}
 				})
-				if(required>0){
-					let obj = { from: (slotStart.split(":")[0])*60+slotStart.split(":")[1], to: (slotFinish.split(":")[0])*60+slotFinish.split(":")[1], class: 'deficit' };
+				if (required > 0) {
+					let obj = { from: (slotStart.split(":")[0]) * 60 + slotStart.split(":")[1], to: (slotFinish.split(":")[0]) * 60 + slotFinish.split(":")[1], class: 'deficit' };
 					highlights.value.push(obj)
 				}
-				else{
-					let obj = { from: (slotStart.split(":")[0])*60+slotStart.split(":")[1], to: (slotFinish.split(":")[0])*60+slotFinish.split(":")[1], class: 'good' }
+				else {
+					let obj = { from: (slotStart.split(":")[0]) * 60 + slotStart.split(":")[1], to: (slotFinish.split(":")[0]) * 60 + slotFinish.split(":")[1], class: 'good' }
 					highlights.value.push(obj)
 				}
 			})
 		}
 
 		return {
-			shift, workers, slots, days, makeShift, full,calendarRanges,tempEvents,
+			shift, workers, slots, days, makeShift, full, calendarRanges, tempEvents,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
-			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,splits,highlights,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents
+			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
+			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents
 		}
 	},
 	components: {
@@ -507,23 +506,25 @@ export default {
 }
 </script>
 <style>
-.deficit{
+.deficit {
 	background-color: rgba(255, 0, 0, 0.11);
 }
-.good{
+
+.good {
 	background-color: rgba(0, 128, 0, 0.233);
 }
-.tableResult  td {
+
+.tableResult td {
 	border-style: solid;
 	border-width: 1px;
 	border-color: black
 }
 
-.tableResult  .red {
+.tableResult .red {
 	background-color: red;
 }
 
-.tableResult  .green {
+.tableResult .green {
 	background-color: green;
 }
 
@@ -550,19 +551,21 @@ export default {
 .black {
 	background-color: black;
 }
-.past-event{
+
+.past-event {
 	background-color: #212529ad;
-    color: white;
+	color: white;
 	border: 2px solid black;
 }
-.future-event{
+
+.future-event {
 	background-color: #773eeead;
-    color: white;
+	color: white;
 	border: 2px solid black;
 }
-.temporary-event{
+
+.temporary-event {
 	background-color: #ff8383;
-    color: white;
+	color: white;
 	border: 2px solid black;
-}
-</style>
+}</style>
