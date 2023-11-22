@@ -356,6 +356,7 @@ export default {
 					element.workerId = e.event.split.toString();
 				}
 			})
+			renderSplits();
 		}
 		async function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
@@ -467,7 +468,7 @@ export default {
 			highlights.value = {};
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
 			let dayNumber = selectedDay.value.getDay();
-			if(dayNumber == 0){
+			if (dayNumber == 0) {
 				dayNumber = 7;
 			}
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
@@ -477,31 +478,27 @@ export default {
 				let required = element.required
 				let slotStartString = element.start
 				let slotFinishString = element.finish
-				let slotStart:string|Date = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate()+" "+element.start;
-				let slotFinish:string|Date = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate()+" "+element.finish;
+				let slotStart: string | Date = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate() + " " + element.start;
+				let slotFinish: string | Date = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate() + " " + element.finish;
 				slotStart = new Date(slotStart);
 				slotFinish = new Date(slotFinish);
 				daysTest.value.forEach(shift => {
 					let shiftStart = new Date(shift.start);
 					let shiftEnd = new Date(shift.end);
-					// let shiftStartHour = shift.start.split(" ")[1];
-					// let shiftEndhour = shift.end.split(" ")[1];
-					// if (dateString == shiftStart || dateString == shiftEnd) {
-						if (slotStart >= shiftStart && slotFinish <= shiftEnd) {
-							required--;
-						}
-					// }
+					if (slotStart >= shiftStart && slotFinish <= shiftEnd) {
+						required--;
+					}
 				})
 				if (required > 0) {
-					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficit', required:required }
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficit', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
 				else {
-					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'good', required:required}
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'good', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
 			})
-			console.log(highlights.value);
+			// console.log(highlights.value);
 		}
 
 		return {
@@ -581,4 +578,5 @@ export default {
 	background-color: #ff8383;
 	color: white;
 	border: 2px solid black;
-}</style>
+}
+</style>
