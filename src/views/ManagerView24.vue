@@ -515,13 +515,16 @@ export default {
 .past-event{
 	background-color: #212529ad;
     color: white;
+	border: 2px solid black;
 }
 .future-event{
 	background-color: #773eeead;
     color: white;
+	border: 2px solid black;
 }
 .temporary-event{
 	background-color: #ff8383;
     color: white;
+	border: 2px solid black;
 }
 </style>
