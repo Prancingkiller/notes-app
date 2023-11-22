@@ -212,6 +212,7 @@ export default {
 		async function loadWokersData(type) {
 			data = await WorkersMethods.getWorkers(type);
 			workers.value = data;
+			renderSplits();
 		}
 
 
