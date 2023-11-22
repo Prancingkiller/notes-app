@@ -2,6 +2,7 @@
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
+	<Suspense>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 editable-events
 		overlapEventStartOnly :split-days="splits" :special-hours="highlights" :min-split-width=70 locale="it"
@@ -9,6 +10,10 @@
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
 
 	</vue-cal>
+	<template #fallback>
+            Loading...
+          </template>
+	</Suspense>
 	<!-- <div class="row" style="display:none">
 		<div v-for="(day,i) in daysTest" :key="i" class="col">
 		<draggable
@@ -196,8 +201,8 @@ export default {
 				default:
 					type = 0
 			}
-			await loadOptions(type);
-			await loadWokersData(type);
+			loadOptions(type);
+			loadWokersData(type);
 		})
 		// async function init() {
 
