@@ -464,7 +464,7 @@ export default {
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
 		function renderHighlightHours() {
-			highlights.value = [];
+			highlights.value = {};
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
 			let dayNumber = selectedDay.value.getDay();
 			if(dayNumber == 0){
