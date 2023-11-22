@@ -432,6 +432,7 @@ export default {
 			let year = selectedYear.value;
 			let result = await ManagerMethods.loadEvents(month, year);
 			daysTest.value = result.concat(tempEvents.value);
+			renderSplits();
 		}
 		function renderSplits() {
 			splits.value = [];
