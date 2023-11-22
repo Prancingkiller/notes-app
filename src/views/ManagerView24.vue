@@ -3,7 +3,7 @@
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura" :disableViews="disabledViews" :events="daysTest"
-		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="splits"
+		:sticky-split-labels=true :snapToTime=15 editable-events overlapEventStartOnly :split-days="splits" :special-hours="highlights"
 		:min-split-width=70 locale="it" :overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)"
 		@ready="loadEvents()"
@@ -162,6 +162,7 @@ export default {
 		const selectedMonth = ref(selectedDay.value.getMonth()+1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
 		const splits = ref([{}]);
+		const highlights = ref([{}]);
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
 		const calendarRanges = {apertura:0,chiusura:1000}
@@ -458,12 +459,43 @@ export default {
 					splits.value.push(obj);
 				}
 			})
+			renderHighlightHours();
+		}
+		function capitalizeFirstLetter(string) {
+    		return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		function renderHighlightHours(){
+			highlights.value = [];
+			let dateString = selectedYear.value+"-"+selectedMonth.value+"-"+selectedDay.value.getDate();
+			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', {weekday: 'short'}));
+			configuration.value.slots[dayWord].forEach(element=>{
+				let required = element.required
+				let slotStart = element.start
+				let slotFinish = element.finish
+				daysTest.value.forEach(shift=>{
+					let shiftStart = shift.start.split(" ")[0];
+					let shiftEnd = shift.end.split(" ")[0];
+					if(dateString == shiftStart || dateString == shiftEnd){
+						if(slotFinish>=shiftStart && slotFinish<=shiftEnd){
+							required -=1;
+						}
+					}
+				})
+				if(required>0){
+					let obj = { from: (slotStart.split(":")[0])*60+slotStart.split(":")[1], to: (slotFinish.split(":")[0])*60+slotFinish.split(":")[1], class: 'deficit' };
+					highlights.value.push(obj)
+				}
+				else{
+					let obj = { from: (slotStart.split(":")[0])*60+slotStart.split(":")[1], to: (slotFinish.split(":")[0])*60+slotFinish.split(":")[1], class: 'good' }
+					highlights.value.push(obj)
+				}
+			})
 		}
 
 		return {
 			shift, workers, slots, days, makeShift, full,calendarRanges,tempEvents,
 			tableResult, fullTest, options, showOptions, daysTest, configuration,
-			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,splits,
+			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday,splits,highlights,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll,loadEvents
 		}
 	},
@@ -475,6 +507,12 @@ export default {
 }
 </script>
 <style>
+.deficit{
+	background-color: rgba(255, 0, 0, 0.11);
+}
+.good{
+	background-color: rgba(0, 128, 0, 0.233);
+}
 .tableResult  td {
 	border-style: solid;
 	border-width: 1px;
