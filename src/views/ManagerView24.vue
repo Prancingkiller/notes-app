@@ -489,8 +489,12 @@ export default {
 						required--;
 					}
 				})
-				if (required > 0) {
+				if (required == 1) {
 					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficit', required: required }
+					highlights.value[dayNumber].push(obj)
+				}
+				else if (required > 1) {
+					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficitMany', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
 				else if(required == 0) {
@@ -527,7 +531,9 @@ export default {
 .deficit {
 	background-color: rgba(255, 0, 0, 0.11);
 }
-
+.deficitMany {
+	background-color: rgba(85, 0, 0, 0.11);
+}
 .perfect {
 	background-color: rgba(0, 128, 0, 0.233);
 }
