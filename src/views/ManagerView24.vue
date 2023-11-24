@@ -351,14 +351,14 @@ export default {
 		function updateEvent(e: any) {
 			daysTest.value.forEach(element => {
 				if (element.eventId == e.event.eventId) {
-					console.log("DA");
-					console.log(element)
+					// console.log("DA");
+					// console.log(element)
 					element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", {day: "2-digit",}) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
 					element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", {day: "2-digit",}) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
 					element.split = e.event.split;
 					element.workerId = e.event.split.toString();
-					console.log("A");
-					console.log(element)
+					// console.log("A");
+					// console.log(element)
 				}
 			})
 			renderSplits();
