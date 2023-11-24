@@ -369,7 +369,9 @@ export default {
 				selectedYear.value = e.endDate.getFullYear();
 				await loadEvents();
 			}
-			renderSplits();
+			else{
+				await renderSplits();
+			}
 			// console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
