@@ -357,7 +357,7 @@ export default {
 					element.workerId = e.event.split.toString();
 				}
 			})
-			renderSplits();
+			// renderSplits();
 		}
 		async function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
