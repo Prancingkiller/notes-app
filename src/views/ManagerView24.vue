@@ -438,8 +438,10 @@ export default {
 			renderSplits();
 		}
 		function renderSplits() {
-			console.log("SLOTS:"+daysTest.value);
-			console.log("WORKERS:"+workers.value);
+			console.log("SLOTS:");
+			console.log(daysTest.value);
+			console.log("WORKERS:");
+			console.log(workers.value);
 			splits.value = [];
 			let array: number[] = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
