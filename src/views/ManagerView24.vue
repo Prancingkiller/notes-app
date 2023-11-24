@@ -451,7 +451,7 @@ export default {
 					// console.log(dateString+" non è uguale a "+shiftStart+" o "+shiftEnd);
 				}
 			})
-			// console.log("splits:"+array);
+			console.log("splits:"+array);
 			workers.value.forEach(worker => {
 				if (array.includes(worker.id)) {
 					let obj = {
