@@ -443,6 +443,7 @@ export default {
 			splits.value = [];
 			let array: number[] = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
+			console.log(dateString);
 			daysTest.value.forEach(shift => {
 				let shiftStart = shift.start.split(" ")[0];
 				let shiftEnd = shift.end.split(" ")[0];
