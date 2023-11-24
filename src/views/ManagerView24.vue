@@ -438,14 +438,9 @@ export default {
 			renderSplits();
 		}
 		function renderSplits() {
-			console.log("SLOTS:");
-			console.log(daysTest.value);
-			console.log("WORKERS:");
-			console.log(workers.value);
 			splits.value = [];
 			let array: number[] = [];
 			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.toLocaleDateString("it-IT", {day: "2-digit",});
-			console.log(dateString);
 			daysTest.value.forEach(shift => {
 				let shiftStart = shift.start.split(" ")[0];
 				let shiftEnd = shift.end.split(" ")[0];
@@ -458,7 +453,6 @@ export default {
 					// console.log(dateString+" non è uguale a "+shiftStart+" o "+shiftEnd);
 				}
 			})
-			console.log("splits:"+array);
 			workers.value.forEach(worker => {
 				if (array.includes(worker.id)) {
 					let obj = {
@@ -482,7 +476,6 @@ export default {
 			}
 			let dayWord = capitalizeFirstLetter(selectedDay.value.toLocaleDateString('it', { weekday: 'short' }));
 			highlights.value[dayNumber] = [];
-			console.log(configuration.value.slots[dayWord]);
 			configuration.value.slots[dayWord].forEach(element => {
 				let required = element.required
 				let slotStartString = element.start
