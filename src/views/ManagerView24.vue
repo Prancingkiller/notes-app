@@ -444,7 +444,7 @@ export default {
 			console.log(workers.value);
 			splits.value = [];
 			let array: number[] = [];
-			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.getDate();
+			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.toLocaleDateString("it-IT", {day: "2-digit",});
 			console.log(dateString);
 			daysTest.value.forEach(shift => {
 				let shiftStart = shift.start.split(" ")[0];
