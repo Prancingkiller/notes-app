@@ -47,6 +47,7 @@
                                         <input type="time" v-model="opening.apertura">
                                         <input type="time" v-model="opening.chiusura">
                                     </div>
+                                    <button @click="addOpening(day)">Add</button>
                                 </div>
                             </div>
                             <div style="display:flex;flex-direction:row;justify-content: center;">
@@ -136,8 +137,18 @@ export default {
                 console.log("problems saving! offline?")
             }
         }
+        function addOpening(day){
+            let obj = {
+                day:day,
+                apertura:"00:00",
+                chiusura:"00:00"
+            }
+            data.openings[day].push(obj);
+        }
 
-        return { data, days, saveOptions, openModal, closeModal, modalRef }
+        return { data, days, saveOptions, openModal, closeModal, modalRef,
+            addOpening
+        }
     }
 }
 </script>
