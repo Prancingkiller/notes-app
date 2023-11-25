@@ -197,6 +197,7 @@ export default {
         }
         function addSlotDay(index,day){
             let obj={
+                id:0,
                 start:"00:00",
                 finish:"00:00"
             }
