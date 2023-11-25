@@ -143,7 +143,7 @@ export default {
                 apertura:"00:00",
                 chiusura:"00:00"
             }
-            data.openings[day].push(obj);
+            data.value.openings[day].push(obj);
         }
 
         return { data, days, saveOptions, openModal, closeModal, modalRef,
