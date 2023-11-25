@@ -43,8 +43,10 @@
                             <div style="display:flex;flex-direction: row;justify-content: center;">
                                 <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column;">
                                     {{ day }}<br>
-                                    <input type="time" v-model="data.openings[day].apertura">
-                                    <input type="time" v-model="data.openings[day].chiusura">
+                                    <div v-for="(opening,i) in data.openings[day]" :key="i">
+                                        <input type="time" v-model="opening.apertura">
+                                        <input type="time" v-model="opening.chiusura">
+                                    </div>
                                 </div>
                             </div>
                             <div style="display:flex;flex-direction:row;justify-content: center;">
