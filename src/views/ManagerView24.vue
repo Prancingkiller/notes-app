@@ -444,30 +444,30 @@ export default {
 			renderSplits();
 		}
 		function renderSplits() {
-			splits.value = [];
-			let array: number[] = [];
-			let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.toLocaleDateString("it-IT", {day: "2-digit",});
-			daysTest.value.forEach(shift => {
-				let shiftStart = shift.start.split(" ")[0];
-				let shiftEnd = shift.end.split(" ")[0];
-				if (dateString == shiftStart || dateString == shiftEnd) {
-					if (!array.includes(shift.split)) {
-						array.push(shift.split);
-					}
-				}
-				else {
-					// console.log(dateString+" non è uguale a "+shiftStart+" o "+shiftEnd);
-				}
-			})
-			workers.value.forEach(worker => {
-				if (array.includes(worker.id)) {
-					let obj = {
-						id: worker.id,
-						label: worker.label
-					}
-					splits.value.push(obj);
-				}
-			})
+			// splits.value = [];
+			// let array: number[] = [];
+			// let dateString = selectedYear.value + "-" + selectedMonth.value + "-" + selectedDay.value.toLocaleDateString("it-IT", {day: "2-digit",});
+			// daysTest.value.forEach(shift => {
+			// 	let shiftStart = shift.start.split(" ")[0];
+			// 	let shiftEnd = shift.end.split(" ")[0];
+			// 	if (dateString == shiftStart || dateString == shiftEnd) {
+			// 		if (!array.includes(shift.split)) {
+			// 			array.push(shift.split);
+			// 		}
+			// 	}
+			// 	else {
+			// 		// console.log(dateString+" non è uguale a "+shiftStart+" o "+shiftEnd);
+			// 	}
+			// })
+			// workers.value.forEach(worker => {
+			// 	if (array.includes(worker.id)) {
+			// 		let obj = {
+			// 			id: worker.id,
+			// 			label: worker.label
+			// 		}
+			// 		splits.value.push(obj);
+			// 	}
+			// })
 			renderHighlightHours();
 		}
 		function capitalizeFirstLetter(string) {
