@@ -4,7 +4,7 @@
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 editable-events
-		overlapEventStartOnly :split-days="splits" :special-hours="highlights" :min-split-width=70 locale="it"
+		overlapEventStartOnly :split-days="workers" :special-hours="highlights" :min-split-width=70 locale="it"
 		:overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
 
