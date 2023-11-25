@@ -41,9 +41,9 @@
                                 </table>
                             </div>
                             <div style="display:flex;flex-direction: row;justify-content: center;">
-                                <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column;">
-                                    {{ day }}<br>
+                                <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column" class="m-3">
                                     <div v-for="(opening,i) in data.openings[day]" :key="i">
+                                    {{ day }}<br>
                                         <input type="time" v-model="opening.apertura">
                                         <input type="time" v-model="opening.chiusura">
                                     </div>
