@@ -28,42 +28,49 @@
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Lun')">Add</button>
                                 </div>
                                 <div>Mar
                                     <div v-for="(slot, i) in worker.SlotDays.Mar" :key="i">
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Mar')">Add</button>
                                 </div>
                                 <div>Mer
                                     <div v-for="(slot, i) in worker.SlotDays.Mer" :key="i">
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Mer')">Add</button>
                                 </div>
                                 <div>Gio
                                     <div v-for="(slot, i) in worker.SlotDays.Gio" :key="i">
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Gio')">Add</button>
                                 </div>
                                 <div>Ven
                                     <div v-for="(slot, i) in worker.SlotDays.Ven" :key="i">
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Ven')">Add</button>
                                 </div>
                                 <div>Sab
                                     <div v-for="(slot, i) in worker.SlotDays.Sab" :key="i">
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Sab')">Add</button>
                                 </div>
                                 <div>Dom
                                     <div v-for="(slot, i) in worker.SlotDays.Dom" :key="i">
                                         <input type="time" v-model="slot.start">
                                         <input type="time" v-model="slot.finish">
                                     </div>
+                                    <button @click="addSlotDay('Dom')">Add</button>
                                 </div>
                             </div>
                             <button class="btn btn-danger" @click="deleteWorker(worker.id,ii)">Elimina</button>
@@ -187,6 +194,13 @@ export default {
                     data.value.workers.splice(index,1);
                 }
             }
+        }
+        function addSlotDay(day){
+            let obj={
+                start:"00:00",
+                finish:"00:00"
+            }
+            worker.value.SlotDays.Lun.push(obj);
         }
 
         return {
