@@ -3,11 +3,11 @@
     <div>
         <button class="btn btn-primary" @click="router.push('notes')">Notes</button>
         <button class="btn btn-primary" @click="router.push('calendar')">Calendar</button>
-        <button class="btn btn-primary" @click="router.push({ name: 'planner', params: { resource: 'crew' } })">Crew Planner</button>
-        <button class="btn btn-primary" @click="router.push({ name: 'planner', params: { resource: 'cafe' } })">Cafe Planner</button>
-        <button class="btn btn-primary" @click="router.push({ name: 'planner', params: { resource: 'drive' } })">Drive Planner</button>
-        <button class="btn btn-primary" @click="router.push({ name: 'planner', params: { resource: 'hostess' } })">Hostess Planner</button>
-        <button class="btn btn-primary" @click="router.push({ name: 'planner', params: { resource: 'manager' } })">Managers Planner</button>
+        <button class="btn btn-primary" @click="router.push({ name: 'manager24', params: { resource: 'crew' } })">Crew Planner</button>
+        <button class="btn btn-primary" @click="router.push({ name: 'manager24', params: { resource: 'cafe' } })">Cafe Planner</button>
+        <button class="btn btn-primary" >Drive Planner</button>
+        <button class="btn btn-primary" >Hostess Planner</button>
+        <button class="btn btn-primary" >Managers Planner</button>
     </div>
 </template>
 <script>
