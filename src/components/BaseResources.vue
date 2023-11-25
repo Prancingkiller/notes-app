@@ -204,7 +204,7 @@ export default {
         }
 
         return {
-            data, openModal, closeModal, modalRef, togglePanel, addResource,updateWorkers,deleteWorker
+            data, openModal, closeModal, modalRef, togglePanel, addResource,updateWorkers,deleteWorker,addSlotDay
         }
     }
 }
