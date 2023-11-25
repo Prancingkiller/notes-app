@@ -170,7 +170,7 @@ export default {
 			allowDoubleShifts: true,
 			baseShift: 3,
 			slots: { Lun: [{ slotN: null, required: null }], Mar: [{ slotN: null, required: null }], Mer: [{ slotN: null, required: null }], Gio: [{ slotN: null, required: null }], Ven: [{ slotN: null, required: null }], Sab: [{ slotN: null, required: null }], Dom: [{ slotN: null, required: null }] },
-			openings: [{ apertura: "", chiusura: "" }],
+			openings: {},
 		});
 		const longestDay = ref(null);
 
@@ -403,11 +403,13 @@ export default {
 			return selectedDay.value.addDays(toRemove);
 		})
 		function getLongestDay() {
-			let aperture: String[] = [];
-			let chiusure: String[] = [];
+			let aperture: {}[] = [];
+			let chiusure: {}[] = [];
 			for (const key in configuration.value.openings) {
-				aperture.push(configuration.value.openings[key].apertura);
-				chiusure.push(configuration.value.openings[key].chiusura);
+				configuration.value.openings[key].forEach(op=>{
+					aperture.push(op.apertura);
+					chiusure.push(op.chiusura);
+				})
 			}
 			aperture.sort(function (a, b) {
 				a = "02/13/2009 " + a;
