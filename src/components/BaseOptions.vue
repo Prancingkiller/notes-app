@@ -27,7 +27,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Pausa minima tra turni (h)</td>
-                                            <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
+                                            <!-- <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
                                         </tr>
                                         <tr>
                                             <td>Turno minimo (h)</td>
@@ -35,12 +35,12 @@
                                         </tr>
                                         <tr>
                                             <td>Abilita doppi turni</td>
-                                            <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td>
+                                            <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td> -->
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="display:flex;flex-direction: row;justify-content: center;">
+                            <!-- <div style="display:flex;flex-direction: row;justify-content: center;">
                                 <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column" class="m-3">
                                     {{ day }}<br>
                                     <div v-for="(opening,i) in data.openings[day]" :key="i">
@@ -62,7 +62,7 @@
                                         </tr>
                                     </table>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
