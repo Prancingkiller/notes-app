@@ -489,9 +489,7 @@ export default {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
 			}
-			loadSettings = setTimeout(function () {
-				console.log("Timer finito!")
-			}, 5000);
+			loadSettings = setTimeout(testEfficency, 5000);
 		},{ deep: true })
 		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
