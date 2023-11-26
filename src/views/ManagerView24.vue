@@ -185,6 +185,7 @@ export default {
 		}
 
 		async function testEfficency() {
+			efficency.value = 1;
 			data = JSON.stringify({
 				days: days.value,
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
