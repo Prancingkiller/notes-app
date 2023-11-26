@@ -69,10 +69,10 @@
 			</div>
 		</div>
 		<p>Minimum time between shifts (in hours): <span><input type="number"
-					v-model="configuration.options.minTimeBetweenShifts"></span></p>
+					v-model="configuration.minTimeBetweenShifts"></span></p>
 		<p>Allow double turns (even if not strictly needed):<input type="checkbox"
-				v-model="configuration.options.allowDoubleShifts"></p>
-		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.options.baseShift"></p>
+				v-model="configuration.allowDoubleShifts"></p>
+		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.baseShift"></p>
 		<div style="display:flex;flex-direction:row;justify-content: center;">
 			<div v-for="(day, i) in days" :key="i">
 				{{ day }}
@@ -131,11 +131,9 @@ export default {
 		var loadSettings = -1;
 		const efficency = ref<number|string|null>(null);
 		const configuration = ref({
-			options:{
-				minTimeBetweenShifts: 2,
-				allowDoubleShifts: true,
-				baseShift: 3
-			},
+			minTimeBetweenShifts: 2,
+			allowDoubleShifts: true,
+			baseShift: 3,
 			slots: { Lun: [{ slotN: null, required: null }], Mar: [{ slotN: null, required: null }], Mer: [{ slotN: null, required: null }], Gio: [{ slotN: null, required: null }], Ven: [{ slotN: null, required: null }], Sab: [{ slotN: null, required: null }], Dom: [{ slotN: null, required: null }] },
 			openings: {},
 		});
@@ -171,9 +169,9 @@ export default {
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: configuration.value.slots,
 				workers: workers.value,
-				minTimeBetweenShifts: (configuration.value.options.minTimeBetweenShifts * 4),
-				allowDoubles: configuration.value.options.allowDoubleShifts,
-				baseShift: configuration.value.options.baseShift,
+				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
+				allowDoubles: configuration.value.allowDoubleShifts,
+				baseShift: configuration.value.baseShift,
 				testEfficency: true,
 				openings: configuration.value.openings
 			})
@@ -186,9 +184,9 @@ export default {
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: configuration.value.slots,
 				workers: workers.value,
-				minTimeBetweenShifts: (configuration.value.options.minTimeBetweenShifts * 4),
-				allowDoubles: configuration.value.options.allowDoubleShifts,
-				baseShift: configuration.value.options.baseShift,
+				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
+				allowDoubles: configuration.value.allowDoubleShifts,
+				baseShift: configuration.value.baseShift,
 				testEfficency: false,
 				openings: configuration.value.openings
 			})

@@ -1,17 +1,17 @@
 <template>
     <button class="btn btn-primary" @click="openModal">
-        {{ userGroup.user_group_name }}
+        {{ data.name }}
     </button>
 
     <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Opzioni per gruppo: {{ userGroup.user_group_name }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Opzioni per gruppo: {{ data.name }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         @click="closeModal"></button>
                 </div>
-                <div class="modal-body" v-if="data">
+                <div class="modal-body">
                     <div class="notesForm">
                         <div style="display:flex;flex-direction: column;">
                             <div class="p-4">
@@ -75,47 +75,57 @@
 </template>
 <script>
 import directorMethods from '../api/resources/directorMethods.js'
-import ManagerMethods from "@/api/resources/ManagerMethods";
 import { ref, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
 export default {
     props: {
         userGroup: {
-            id:Number,
-            user_group_name:String
-            // type: {
-            //     user_group: Number,
-            //     options: {
-            //         allowDoubleShifts: Boolean,
-            //         baseShift: Number,
-            //         minTimeBetweenShifts: Number,
-            //         chiusura: String,
-            //         apertura: String,
-            //         slots: Object,
-            //         openings: Object
-            //     }
-            // }
+            type: {
+                user_group: Number,
+                options: {
+                    allowDoubleShifts: Boolean,
+                    baseShift: Number,
+                    minTimeBetweenShifts: Number,
+                    chiusura: String,
+                    apertura: String,
+                    slots: Object,
+                    openings: Object
+                }
+            }
         }
     },
     emits: ['inFocus', 'submit'],
     setup(props, ctx) {
         const modalRef = ref(null);
-        const data = ref(null);
         var modal = Modal;
+        const data = ref(props.userGroup);
         const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
-
+        if (data.value.user_group == 0) {
+            data.value.name = "Crew"
+        }
+        if (data.value.user_group == 1) {
+            data.value.name = "Cafè"
+        }
+        if (data.value.user_group == 2) {
+            data.value.name = "Drive"
+        }
+        if (data.value.user_group == 3) {
+            data.value.name = "Hostess"
+        }
+        if (data.value.user_group == 4) {
+            data.value.name = "Manager"
+        }
+        if (data.value.user_group == 5) {
+            data.value.name = "Direttore"
+        }
         function openModal() {
             modal.show()
         }
         function closeModal() {
             modal.hide()
         }
-        onMounted(async () => {
-            // console.log(props.userGroup.id)
+        onMounted(() => {
             modal = new Modal(modalRef.value);
-            data.value = await ManagerMethods.loadOptions(props.userGroup.id);
-            data.value.user_group = props.userGroup.id;
-            console.log(data.value)
         })
         async function saveOptions() {
             let obj = [data.value];

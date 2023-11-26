@@ -7,10 +7,10 @@
     </div>
     <div>
         <div class="m-4" v-if="content == 'generalOptions'" style="display:flex;flex-direction: row;justify-content: center;">
-            <BaseOptions v-for="(set, i) in groups" :key="i" :userGroup="set" @submit="getOptions()"></BaseOptions>
+            <BaseOptions v-for="(set, i) in options" :key="i" :userGroup="set" @submit="getOptions()"></BaseOptions>
         </div>
         <div class="m-4" v-if="content == 'resourcesOptions'" style="display:flex;flex-direction: row;justify-content: center;">
-            <BaseResources v-for="(set, i) in groups" :key="i" :userGroup="set" @submit="getResources()"></BaseResources>
+            <BaseResources v-for="(set, i) in resources" :key="i" :userGroup="set" @submit="getResources()"></BaseResources>
         </div>
     </div>
 </template>
@@ -20,8 +20,6 @@ import { useRouter } from 'vue-router'
 import BaseOptions from '../components/BaseOptions.vue'
 import BaseResources from '../components/BaseResources.vue'
 import directorMethods from '../api/resources/directorMethods.js'
-import ManagerMethods from "@/api/resources/ManagerMethods";
-
 export default {
     setup() {
         const router = useRouter();
@@ -29,44 +27,35 @@ export default {
         const options = ref([]);
         const resources = ref([]);
 
-        const groups = ref([]);
-        onMounted(async ()=>{
-            let result = await ManagerMethods.loadGroups();
-            groups.value = result;
+        async function getOptions() {
+            options.value = await directorMethods.getAllOptions();
+        }
+        async function getResources() {
+            let res = await directorMethods.getAllWorkers();
+            res.forEach((element,i)=>{
+                let group = element.user_group;
+                options.value.forEach(e=>{
+                    if(parseInt(e.user_group) == group){
+                        res[i].rules = e;
+                    }
+                })
+            })
+			resources.value = res;
+            console.log(resources.value)
+		}
+
+        onMounted(async () => {
+           await getOptions();
+            getResources();
         })
-
-
-
-        // async function getOptions() {
-        //     options.value = await directorMethods.getAllOptions();
-        // }
-        // async function getResources() {
-        //     let res = await directorMethods.getAllWorkers();
-        //     res.forEach((element,i)=>{
-        //         let group = element.user_group;
-        //         options.value.forEach(e=>{
-        //             if(parseInt(e.user_group) == group){
-        //                 res[i].rules = e;
-        //             }
-        //         })
-        //     })
-		// 	resources.value = res;
-        //     console.log(resources.value)
-		// }
-
-        // onMounted(async () => {
-        //    await getOptions();
-        //     getResources();
-        // })
 
         function setContent(data) {
             content.value = data;
-            // console.log(options.value);
+            console.log(options.value);
         }
 
         return {
-            // content, router, options, setContent, getOptions, resources
-            content,groups,router,setContent
+            content, router, options, setContent, getOptions, resources
         }
     },
     components: {
