@@ -196,7 +196,7 @@ export default {
 				testEfficency: true,
 				openings: configuration.value.openings
 			})
-			let result = await ManagerMethods.makeShift(data);
+			let result = await ManagerMethods.makeShiftV3(data);
 			efficency.value = average(result);
 		}
 		async function makeShift() {
@@ -488,8 +488,8 @@ export default {
 		watch(()=>[configuration.value,workers.value], async () => {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
-				loadSettings = setTimeout(testEfficency, 5000);
 			}
+			loadSettings = setTimeout(testEfficency, 5000);
 		})
 		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
