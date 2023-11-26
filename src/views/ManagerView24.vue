@@ -9,25 +9,6 @@
 		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
 
 	</vue-cal>
-	<!-- <div class="row" style="display:none">
-		<div v-for="(day,i) in daysTest" :key="i" class="col">
-		<draggable
-		class="list-group"
-		:list="day"
-		group="people"
-		itemKey="start"
-		>
-		
-			<div v-for="(slot,i) in day" :key="i" style="border:solid">
-				<p>Worker ID: {{ slot.workerId }}</p>
-				<p>Start: <span><input type="time" v-model="slot.start"></span></p>
-				<p>Finish: <span><input type="time" v-model="slot.end"></span></p>
-			</div>
-
-		
-		</draggable>
-	</div>
-	</div> -->
 	<div ref="tableResult" class="tableResult" style="display:none"></div>
 
 	<h1 @click="showOptions">Options:</h1>
@@ -85,18 +66,6 @@
 						<input type="time" v-model="slot.finish">
 					</div>
 				</div>
-				<!-- <div>Mar <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mar"
-						:value="slot"><span @click="toggleAll(ii, 'Mar')">All</span></div>
-				<div>Mer <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Mer"
-						:value="slot"><span @click="toggleAll(ii, 'Mer')">All</span></div>
-				<div>Gio <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Gio"
-						:value="slot"><span @click="toggleAll(ii, 'Gio')">All</span></div>
-				<div>Ven <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Ven"
-						:value="slot"><span @click="toggleAll(ii, 'Ven')">All</span></div>
-				<div>Sab <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Sab"
-						:value="slot"><span @click="toggleAll(ii, 'Sab')">All</span></div>
-				<div>Dom <input v-for="(slot, i) in fullTest" :key="i" type="checkbox" v-model="worker.SlotDays.Dom"
-						:value="slot"><span @click="toggleAll(ii, 'Dom')">All</span></div> -->
 			</div>
 		</div>
 		<p>Minimum time between shifts (in hours): <span><input type="number"
@@ -119,11 +88,14 @@
 		</div>
 
 	</div>
+	<div style="position:fixed;bottom:5px;right:5px">
+		<p>{{ efficency }}</p>
+	</div>
 </template>
 <script lang="ts">
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
-import { ref, computed, onBeforeMount, onMounted } from "vue"
+import { ref, computed, onBeforeMount, watch } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
@@ -138,17 +110,9 @@ declare global {
 Date.prototype.addDays = function (d: number) { return new Date(this.valueOf() + 864E5 * d); };
 export default {
 	setup() {
-		var full = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
-		const fullTest = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]);
-
 		const workers = ref<workersData>([
 			{ showDays: false, name: "user", label: "user", id: 0, hours: 0, SlotDays: { Lun: [{ start: "", finish: "" }], Mar: [{ start: "", finish: "" }], Mer: [{ start: "", finish: "" }], Gio: [{ start: "", finish: "" }], Ven: [{ start: "", finish: "" }], Sab: [{ start: "", finish: "" }], Dom: [{ start: "", finish: "" }] } },
 		]);
-
-		const slotsWeekend = ref([{ slotN: 1, required: 2 }, { slotN: 2, required: 2 }, { slotN: 3, required: 3 }, { slotN: 4, required: 4 }, { slotN: 5, required: 4 }, { slotN: 6, required: 4 }, { slotN: 7, required: 4 }, { slotN: 8, required: 4 }, { slotN: 9, required: 4 }, { slotN: 10, required: 4 }, { slotN: 11, required: 4 }, { slotN: 12, required: 4 }, { slotN: 13, required: 5 }, { slotN: 14, required: 5 }, { slotN: 15, required: 5 }, { slotN: 16, required: 5 }, { slotN: 17, required: 7 }, { slotN: 18, required: 7 }, { slotN: 19, required: 7 }, { slotN: 20, required: 8 }, { slotN: 21, required: 8 }, { slotN: 22, required: 9 }, { slotN: 23, required: 9 }, { slotN: 24, required: 9 }, { slotN: 25, required: 9 }, { slotN: 26, required: 8 }, { slotN: 27, required: 8 }, { slotN: 28, required: 7 }, { slotN: 29, required: 7 }, { slotN: 30, required: 6 }, { slotN: 31, required: 6 }, { slotN: 32, required: 6 }, { slotN: 33, required: 6 }, { slotN: 34, required: 6 }, { slotN: 35, required: 6 }, { slotN: 36, required: 6 }, { slotN: 37, required: 7 }, { slotN: 38, required: 7 }, { slotN: 39, required: 7 }, { slotN: 40, required: 8 }, { slotN: 41, required: 8 }, { slotN: 42, required: 9 }, { slotN: 43, required: 9 }, { slotN: 44, required: 8 }, { slotN: 45, required: 8 }, { slotN: 46, required: 8 }, { slotN: 47, required: 8 }, { slotN: 48, required: 8 }, { slotN: 49, required: 8 }, { slotN: 50, required: 7 }, { slotN: 51, required: 7 }, { slotN: 52, required: 6 }, { slotN: 53, required: 6 }, { slotN: 54, required: 5 }]);
-		const slotsNormal = ref([{ slotN: 1, required: 1 }, { slotN: 2, required: 1 }, { slotN: 3, required: 1 }, { slotN: 4, required: 1 }, { slotN: 5, required: 2 }, { slotN: 6, required: 2 }, { slotN: 7, required: 2 }, { slotN: 8, required: 3 }, { slotN: 9, required: 3 }, { slotN: 10, required: 3 }, { slotN: 11, required: 3 }, { slotN: 12, required: 3 }, { slotN: 13, required: 4 }, { slotN: 14, required: 4 }, { slotN: 15, required: 4 }, { slotN: 16, required: 4 }, { slotN: 17, required: 6 }, { slotN: 18, required: 6 }, { slotN: 19, required: 6 }, { slotN: 20, required: 7 }, { slotN: 21, required: 7 }, { slotN: 22, required: 8 }, { slotN: 23, required: 8 }, { slotN: 24, required: 8 }, { slotN: 25, required: 8 }, { slotN: 26, required: 7 }, { slotN: 27, required: 7 }, { slotN: 28, required: 6 }, { slotN: 29, required: 6 }, { slotN: 30, required: 5 }, { slotN: 31, required: 5 }, { slotN: 32, required: 4 }, { slotN: 33, required: 4 }, { slotN: 34, required: 5 }, { slotN: 35, required: 5 }, { slotN: 36, required: 5 }, { slotN: 37, required: 6 }, { slotN: 38, required: 6 }, { slotN: 39, required: 6 }, { slotN: 40, required: 7 }, { slotN: 41, required: 7 }, { slotN: 42, required: 8 }, { slotN: 43, required: 8 }, { slotN: 44, required: 7 }, { slotN: 45, required: 7 }, { slotN: 46, required: 7 }, { slotN: 47, required: 7 }, { slotN: 48, required: 7 }, { slotN: 49, required: 7 }, { slotN: 50, required: 6 }, { slotN: 51, required: 6 }, { slotN: 52, required: 5 }, { slotN: 53, required: 5 }, { slotN: 54, required: 4 }]);
-
-		const slots = ref({ Lun: slotsNormal.value, Mar: slotsNormal.value, Mer: slotsNormal.value, Gio: slotsNormal.value, Ven: slotsNormal.value, Sab: slotsWeekend.value, Dom: slotsWeekend.value });
 		const days = ref(["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]);
 
 		const tableResult = ref<HTMLDivElement>();
@@ -156,7 +120,6 @@ export default {
 		const tempEvents = ref<eventPHP[]>([]);
 		var data;
 		const disabledViews = ["years", "year", "month", "week"];
-		const minEventWidth = 0;
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth() + 1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
@@ -164,7 +127,9 @@ export default {
 		const highlights = ref({});
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
-		const calendarRanges = { apertura: 0, chiusura: 1000 }
+		const calendarRanges = { apertura: 0, chiusura: 1000 };
+		var loadSettings = -1;
+		const efficency = ref<Number|null>(null);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -172,7 +137,6 @@ export default {
 			slots: { Lun: [{ slotN: null, required: null }], Mar: [{ slotN: null, required: null }], Mer: [{ slotN: null, required: null }], Gio: [{ slotN: null, required: null }], Ven: [{ slotN: null, required: null }], Sab: [{ slotN: null, required: null }], Dom: [{ slotN: null, required: null }] },
 			openings: {},
 		});
-		const longestDay = ref(null);
 
 		onBeforeMount(async () => {
 			const route = useRoute();
@@ -223,15 +187,17 @@ export default {
 		async function testEfficency() {
 			data = JSON.stringify({
 				days: days.value,
+				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: configuration.value.slots,
 				workers: workers.value,
 				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
 				allowDoubles: configuration.value.allowDoubleShifts,
 				baseShift: configuration.value.baseShift,
-				testEfficency: true
+				testEfficency: true,
+				openings: configuration.value.openings
 			})
 			let result = await ManagerMethods.makeShift(data);
-			console.log(result);
+			efficency.value = average(result);
 		}
 		async function makeShift() {
 			data = JSON.stringify({
@@ -353,8 +319,8 @@ export default {
 				if (element.eventId == e.event.eventId) {
 					// console.log("DA");
 					// console.log(element)
-					element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", {day: "2-digit",}) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-					element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", {day: "2-digit",}) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+					element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+					element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
 					element.split = e.event.split;
 					element.workerId = e.event.split.toString();
 					// console.log("A");
@@ -373,7 +339,7 @@ export default {
 				selectedYear.value = e.endDate.getFullYear();
 				await loadEvents();
 			}
-			else{
+			else {
 				await renderSplits();
 			}
 			// console.log(e.endDate.toISOString().split('T')[0]);
@@ -406,7 +372,7 @@ export default {
 			let aperture: {}[] = [];
 			let chiusure: {}[] = [];
 			for (const key in configuration.value.openings) {
-				configuration.value.openings[key].forEach(op=>{
+				configuration.value.openings[key].forEach(op => {
 					aperture.push(op.apertura);
 					chiusure.push(op.chiusura);
 				})
@@ -505,33 +471,38 @@ export default {
 					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'deficitMany', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
-				else if(required == 0) {
+				else if (required == 0) {
 					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'perfect', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
-				else if(required == -1){
+				else if (required == -1) {
 					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'oneMore', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
-				else if(required < -1){
+				else if (required < -1) {
 					let obj = { from: (parseInt(slotStartString.split(":")[0])) * 60 + parseInt(slotStartString.split(":")[1]), to: parseInt((slotFinishString.split(":")[0])) * 60 + parseInt(slotFinishString.split(":")[1]), class: 'manyMore', required: required }
 					highlights.value[dayNumber].push(obj)
 				}
 			})
-			// console.log(highlights.value);
-		}
+		};
+		watch([() => configuration.value, () => workers.value], async () => {
+			if (loadSettings != -1) {
+				clearTimeout(loadSettings);
+				loadSettings = setTimeout(testEfficency, 5000);
+			}
+		});
+		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) };
+
 
 		return {
-			shift, workers, slots, days, makeShift, full, calendarRanges, tempEvents,
-			tableResult, fullTest, options, showOptions, daysTest, configuration,
-			disabledViews, minEventWidth, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents
+			shift, workers, days, makeShift, calendarRanges, tempEvents,
+			tableResult, options, showOptions, daysTest, configuration,
+			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
+			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency
 		}
 	},
 	components: {
-		//draggable: VueDraggableNext,
 		VueCal
-
 	}
 }
 </script>
@@ -539,15 +510,19 @@ export default {
 .deficit {
 	background-color: rgba(255, 0, 0, 0.11);
 }
+
 .deficitMany {
 	background-color: rgba(85, 0, 0, 0.11);
 }
+
 .perfect {
 	background-color: rgba(0, 128, 0, 0.233);
 }
+
 .oneMore {
 	background-color: rgba(1, 74, 1, 0.233);
 }
+
 .manyMore {
 	background-color: rgba(0, 42, 0, 0.233);
 }
