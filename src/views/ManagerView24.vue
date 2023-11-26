@@ -140,32 +140,10 @@ export default {
 
 		onBeforeMount(async () => {
 			const route = useRoute();
-			let type;
-			switch (route.params.resource) {
-				case 'crew':
-					type = 0
-					break;
-				case 'cafe':
-					type = 1
-					break;
-				case 'drive':
-					type = 2
-					break;
-				case 'hostess':
-					type = 3
-					break;
-				case 'manager':
-					type = 4
-					break;
-				default:
-					type = 0
-			}
+			let type = route.params.resource ;
 			loadOptions(type);
 			loadWokersData(type);
 		})
-		// async function init() {
-
-		// }
 
 		async function loadOptions(type) {
 			let data = await ManagerMethods.loadOptions(type);
