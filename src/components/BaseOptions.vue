@@ -11,7 +11,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         @click="closeModal"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" v-if="data">
                     <div class="notesForm">
                         <div style="display:flex;flex-direction: column;">
                             <div class="p-4">
@@ -27,7 +27,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Pausa minima tra turni (h)</td>
-                                            <!-- <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
+                                            <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
                                         </tr>
                                         <tr>
                                             <td>Turno minimo (h)</td>
@@ -35,12 +35,12 @@
                                         </tr>
                                         <tr>
                                             <td>Abilita doppi turni</td>
-                                            <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td> -->
+                                            <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <div style="display:flex;flex-direction: row;justify-content: center;">
+                            <div style="display:flex;flex-direction: row;justify-content: center;">
                                 <div v-for="(day, i) in days" :key="i" style="display:flex;flex-direction: column" class="m-3">
                                     {{ day }}<br>
                                     <div v-for="(opening,i) in data.openings[day]" :key="i">
@@ -62,7 +62,7 @@
                                         </tr>
                                     </table>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ export default {
     emits: ['inFocus', 'submit'],
     setup(props, ctx) {
         const modalRef = ref(null);
-        const data = ref([]);
+        const data = ref(null);
         var modal = Modal;
         const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
 
@@ -111,10 +111,10 @@ export default {
             modal.hide()
         }
         onMounted(async () => {
-            console.log(props.userGroup.id)
+            // console.log(props.userGroup.id)
             modal = new Modal(modalRef.value);
             data.value = await ManagerMethods.loadOptions(props.userGroup.id)
-            console.log(data.value)
+            // console.log(data.value)
         })
         async function saveOptions() {
             let obj = [data.value];
