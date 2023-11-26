@@ -485,7 +485,7 @@ export default {
 				}
 			})
 		}
-		watch([() => configuration.value, () => workers.value], async () => {
+		watch(()=>[configuration.value,workers.value], async () => {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
 				loadSettings = setTimeout(testEfficency, 5000);
