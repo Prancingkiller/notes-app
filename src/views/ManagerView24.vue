@@ -485,11 +485,13 @@ export default {
 				}
 			})
 		}
-		watch(()=>[configuration.value,workers.value], async () => {
+		watch(() => [configuration.value, workers.value], async () => {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
 			}
-			loadSettings = setTimeout(testEfficency, 5000);
+			loadSettings = setTimeout(function () {
+				console.log("Timer finito!")
+			}, 5000);
 		})
 		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
