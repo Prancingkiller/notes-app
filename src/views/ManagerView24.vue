@@ -129,7 +129,7 @@ export default {
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
-		const efficency = ref<number | null>(null);
+		const efficency = ref<number | null>(0);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
