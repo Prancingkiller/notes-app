@@ -131,9 +131,11 @@ export default {
 		var loadSettings = -1;
 		const efficency = ref<number|string|null>(null);
 		const configuration = ref({
-			minTimeBetweenShifts: 2,
-			allowDoubleShifts: true,
-			baseShift: 3,
+			options:{
+				minTimeBetweenShifts: 2,
+				allowDoubleShifts: true,
+				baseShift: 3
+			},
 			slots: { Lun: [{ slotN: null, required: null }], Mar: [{ slotN: null, required: null }], Mer: [{ slotN: null, required: null }], Gio: [{ slotN: null, required: null }], Ven: [{ slotN: null, required: null }], Sab: [{ slotN: null, required: null }], Dom: [{ slotN: null, required: null }] },
 			openings: {},
 		});
@@ -169,9 +171,9 @@ export default {
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: configuration.value.slots,
 				workers: workers.value,
-				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
-				allowDoubles: configuration.value.allowDoubleShifts,
-				baseShift: configuration.value.baseShift,
+				minTimeBetweenShifts: (configuration.value.options.minTimeBetweenShifts * 4),
+				allowDoubles: configuration.value.options.allowDoubleShifts,
+				baseShift: configuration.value.options.baseShift,
 				testEfficency: true,
 				openings: configuration.value.openings
 			})
@@ -184,9 +186,9 @@ export default {
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
 				slots: configuration.value.slots,
 				workers: workers.value,
-				minTimeBetweenShifts: (configuration.value.minTimeBetweenShifts * 4),
-				allowDoubles: configuration.value.allowDoubleShifts,
-				baseShift: configuration.value.baseShift,
+				minTimeBetweenShifts: (configuration.value.options.minTimeBetweenShifts * 4),
+				allowDoubles: configuration.value.options.allowDoubleShifts,
+				baseShift: configuration.value.options.baseShift,
 				testEfficency: false,
 				openings: configuration.value.openings
 			})
