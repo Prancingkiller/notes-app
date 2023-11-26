@@ -129,7 +129,7 @@ export default {
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
-		const efficency = ref<Number|null>(null);
+		const efficency = ref<Number | null>(null);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -484,14 +484,14 @@ export default {
 					highlights.value[dayNumber].push(obj)
 				}
 			})
-		};
+		}
 		watch([() => configuration.value, () => workers.value], async () => {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
 				loadSettings = setTimeout(testEfficency, 5000);
 			}
-		});
-		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) };
+		})
+		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
 
 		return {
