@@ -196,8 +196,7 @@ export default {
 				testEfficency: true,
 				openings: configuration.value.openings
 			})
-			let result:number[] = await ManagerMethods.makeShiftV3(data);
-			efficency.value = average(result);
+			efficency.value = await ManagerMethods.makeShiftV3(data);
 		}
 		async function makeShift() {
 			data = JSON.stringify({
