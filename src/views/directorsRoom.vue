@@ -66,7 +66,7 @@ export default {
 
         return {
             // content, router, options, setContent, getOptions, resources
-            content,groups,router
+            content,groups,router,setContent
         }
     },
     components: {
