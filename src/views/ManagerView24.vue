@@ -129,7 +129,7 @@ export default {
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
-		const efficency = ref<Number | null>(null);
+		const efficency = ref<number | null>(null);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -196,7 +196,7 @@ export default {
 				testEfficency: true,
 				openings: configuration.value.openings
 			})
-			let result = await ManagerMethods.makeShiftV3(data);
+			let result:number[] = await ManagerMethods.makeShiftV3(data);
 			efficency.value = average(result);
 		}
 		async function makeShift() {
@@ -491,7 +491,7 @@ export default {
 			}
 			loadSettings = setTimeout(testEfficency, 5000);
 		},{ deep: true })
-		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
+		function average(arr:number[]) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
 
 		return {
