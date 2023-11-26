@@ -8,7 +8,7 @@
 </template>
 <script>
 import { useRouter } from 'vue-router'
-import { onMounted } from "vue"
+import { onMounted,ref } from "vue"
 import ManagerMethods from "@/api/resources/ManagerMethods";
 export default{
     setup(){
