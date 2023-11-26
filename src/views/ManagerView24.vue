@@ -69,10 +69,10 @@
 			</div>
 		</div>
 		<p>Minimum time between shifts (in hours): <span><input type="number"
-					v-model="configuration.minTimeBetweenShifts"></span></p>
+					v-model="configuration.options.minTimeBetweenShifts"></span></p>
 		<p>Allow double turns (even if not strictly needed):<input type="checkbox"
-				v-model="configuration.allowDoubleShifts"></p>
-		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.baseShift"></p>
+				v-model="configuration.options.allowDoubleShifts"></p>
+		<p>Minimum shift assignable (in hours): <input type="number" min="3" max="8" v-model="configuration.options.baseShift"></p>
 		<div style="display:flex;flex-direction:row;justify-content: center;">
 			<div v-for="(day, i) in days" :key="i">
 				{{ day }}

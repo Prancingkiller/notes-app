@@ -204,7 +204,7 @@ export default {
 
 		async function loadOptions(type) {
 			let data = await ManagerMethods.loadOptions(type);
-			configuration.value = data;
+			// configuration.value = data;
 			getLongestDay();
 		}
 
