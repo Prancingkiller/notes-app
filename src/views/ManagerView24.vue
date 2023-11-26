@@ -89,7 +89,7 @@
 
 	</div>
 	<div style="position:fixed;bottom:5px;right:5px">
-		<p>{{ efficency }}</p>
+		<p>Efficenza: {{ efficency }}</p>
 	</div>
 </template>
 <script lang="ts">
@@ -129,7 +129,7 @@ export default {
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
-		const efficency = ref<number | null>(0);
+		const efficency = ref<number|string|null>(null);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -185,7 +185,7 @@ export default {
 		}
 
 		async function testEfficency() {
-			efficency.value = 1;
+			efficency.value = "in corso...";
 			data = JSON.stringify({
 				days: days.value,
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
