@@ -27,15 +27,15 @@
                                     <tbody>
                                         <tr>
                                             <td>Pausa minima tra turni (h)</td>
-                                            <td><input type="number" v-model="data.minTimeBetweenShifts"></td>
+                                            <td><input type="number" v-model="data.options.minTimeBetweenShifts"></td>
                                         </tr>
                                         <tr>
                                             <td>Turno minimo (h)</td>
-                                            <td><input type="number" v-model="data.baseShift"></td>
+                                            <td><input type="number" v-model="data.options.baseShift"></td>
                                         </tr>
                                         <tr>
                                             <td>Abilita doppi turni</td>
-                                            <td><input type="checkbox" v-model="data.allowDoubleShifts"></td>
+                                            <td><input type="checkbox" v-model="data.options.allowDoubleShifts"></td>
                                         </tr>
                                     </tbody>
                                 </table>

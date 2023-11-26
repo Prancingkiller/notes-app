@@ -128,7 +128,7 @@ export default {
             method: 'GET',
         });
         const result = await response.json();
-        const returns = {allowDoubleShifts:false,minTimeBetweenShifts:0,baseShift:0,slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]},
+        const returns = {options:{allowDoubleShifts:false,minTimeBetweenShifts:0,baseShift:0},slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]},
         openings:[]
     };
         result.forEach(element=>{
@@ -140,7 +140,12 @@ export default {
                     element.value = false;
                 }
             }
-            returns[element.option_name]=element.value;
+            if(element.option_name == "allowDoubleShifts" || element.option_name == "baseShift" || element.option_name == "minTimeBetweenShifts"){
+                returns.options[element.option_name]=element.value
+            }
+            else{
+                returns[element.option_name]=element.value;
+            }
         })
         return returns;
     },
