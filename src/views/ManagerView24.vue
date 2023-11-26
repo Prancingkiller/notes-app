@@ -492,7 +492,7 @@ export default {
 			loadSettings = setTimeout(function () {
 				console.log("Timer finito!")
 			}, 5000);
-		})
+		},{ deep: true })
 		function average(arr) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
 
