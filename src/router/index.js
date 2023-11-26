@@ -4,6 +4,7 @@ import NotesView from '../views/NotesView.vue'
 import CalendarView from '../views/CalendarView.vue'
 import ManagerView from '../views/ManagerView.vue'
 import ManagerView24 from '../views/ManagerView24.vue'
+import ManagerViewV3 from '../views/ManagerViewV3.vue'
 import profileView from '../views/profileView.vue'
 import crewRoom from '../views/crewRoom.vue'
 import directorsRoom from '../views/directorsRoom.vue'
@@ -53,7 +54,7 @@ const routes = [
   {
     path: '/planner/:resource',
     name: 'planner',
-    component: ManagerView,
+    component: ManagerViewV3,
     // beforeEnter: (to, from) => {
     //   if(checkLog()){
     //     return true;
