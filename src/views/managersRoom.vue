@@ -14,8 +14,8 @@ export default{
     setup(){
         const router = useRouter();
         const groups = ref([]);
-        onMounted(()=>{
-            let result = ManagerMethods.loadGroups();
+        onMounted(async ()=>{
+            let result = await ManagerMethods.loadGroups();
             groups.value = result;
         })
 
