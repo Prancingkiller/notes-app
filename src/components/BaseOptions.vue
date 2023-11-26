@@ -114,7 +114,7 @@ export default {
             // console.log(props.userGroup.id)
             modal = new Modal(modalRef.value);
             data.value = await ManagerMethods.loadOptions(props.userGroup.id)
-            // console.log(data.value)
+            console.log(data.value)
         })
         async function saveOptions() {
             let obj = [data.value];
