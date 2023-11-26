@@ -88,7 +88,7 @@
 		</div>
 
 	</div>
-	<div style="position:fixed;bottom:5px;right:5px">
+	<div v-if="efficency" style="position:fixed;bottom:5px;right:5px">
 		<p>Efficenza: {{ efficency }}</p>
 	</div>
 </template>
