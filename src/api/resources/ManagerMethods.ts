@@ -62,7 +62,7 @@ type ApiResponse = {
 export default {
     name: "ManagerMethods",
     async makeShiftV3<TResponse>(data: toSend): Promise<TResponse> {
-        const response = await fetch(APISettings.baseURL + "/shiftsV3.php", {
+        const response = await fetch(APISettings.baseURL + "/shiftsV4.php", {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
