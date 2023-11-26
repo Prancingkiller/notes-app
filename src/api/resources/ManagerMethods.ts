@@ -153,6 +153,15 @@ export default {
         });
         const result = await response.json();
         return result;
+    },
+    async loadGroups(){
+        const response = await fetch(APISettings.baseURL + "/getGroups", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+        });
+        const result = await response.json();
+        return result;
     }
 
 }
