@@ -35,10 +35,10 @@ export default {
                 let exists = false;
                 console.log("ricerco "+groupId+" in");
                 console.log(groups.value);
-                groups.value.forEach(actualGroup=>{
+                groups.value.every(actualGroup=>{
                     if(actualGroup.id == groupId){
                         exists = true;
-                        break;
+                        return false;
                     }
                 })
                 if(!exists){
