@@ -46,6 +46,7 @@ export default {
                     allOptions.splice(i, 1);
                 }
             }) 
+            options.value = allOptions;
         }
         async function getResources() {
             let res = await directorMethods.getAllWorkers();
