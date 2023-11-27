@@ -6,10 +6,12 @@
         <button class="btn btn-primary" @click="setContent('resourcesOptions')">Resources Manager</button>
     </div>
     <div>
-        <div class="m-4" v-if="content == 'generalOptions'" style="display:flex;flex-direction: row;justify-content: center;">
+        <div class="m-4" v-if="content == 'generalOptions'"
+            style="display:flex;flex-direction: row;justify-content: center;">
             <BaseOptions v-for="(set, i) in options" :key="i" :userGroup="set" @submit="getOptions()"></BaseOptions>
         </div>
-        <div class="m-4" v-if="content == 'resourcesOptions'" style="display:flex;flex-direction: row;justify-content: center;">
+        <div class="m-4" v-if="content == 'resourcesOptions'"
+            style="display:flex;flex-direction: row;justify-content: center;">
             <BaseResources v-for="(set, i) in resources" :key="i" :userGroup="set" @submit="getResources()"></BaseResources>
         </div>
     </div>
@@ -30,37 +32,47 @@ export default {
         const groups = ref([]);
         async function getOptions() {
             let allOptions = await directorMethods.getAllOptions();
-            allOptions.forEach((element,i)=>{
+            allOptions.forEach((element, i) => {
                 let groupId = element.user_group;
                 let exists = false;
-                console.log("ricerco "+groupId+" in");
-                console.log(groups.value);
-                groups.value.every(actualGroup=>{
-                    if(actualGroup.id == groupId){
-                        console.log("esiste")
+                groups.value.every(actualGroup => {
+                    if (actualGroup.id == groupId) {
                         exists = true;
                         return false;
                     }
                 })
-                if(!exists){
+                if (!exists) {
                     allOptions.splice(i, 1);
                 }
-            }) 
+            })
             options.value = allOptions;
         }
         async function getResources() {
             let res = await directorMethods.getAllWorkers();
-            res.forEach((element,i)=>{
+            res.forEach((element, i) => {
+                let groupId = element.user_group;
+                let exists = false;
+                groups.value.every(actualGroup => {
+                    if (actualGroup.id == groupId) {
+                        exists = true;
+                        return false;
+                    }
+                })
+                if (!exists) {
+                    res.splice(i, 1);
+                }
+            })
+            res.forEach((element, i) => {
                 let group = element.user_group;
-                options.value.forEach(e=>{
-                    if(parseInt(e.user_group) == group){
+                options.value.forEach(e => {
+                    if (parseInt(e.user_group) == group) {
                         res[i].rules = e;
                     }
                 })
             })
-			resources.value = res;
+            resources.value = res;
             console.log(resources.value)
-		}
+        }
 
         onMounted(async () => {
             groups.value = await ManagerMethods.loadGroups();
@@ -79,7 +91,7 @@ export default {
         }
     },
     components: {
-        BaseOptions,BaseResources
+        BaseOptions, BaseResources
     },
 }
 </script>
