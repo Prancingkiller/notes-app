@@ -33,9 +33,12 @@ export default {
             allOptions.forEach((element,i)=>{
                 let groupId = element.user_group;
                 let exists = false;
+                console.log("ricerco "+groupId+" in");
+                console.log(groups.value);
                 groups.value.forEach(actualGroup=>{
                     if(actualGroup.id == groupId){
                         exists = true;
+                        break;
                     }
                 })
                 if(!exists){
