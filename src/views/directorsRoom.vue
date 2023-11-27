@@ -37,6 +37,7 @@ export default {
                 console.log(groups.value);
                 groups.value.every(actualGroup=>{
                     if(actualGroup.id == groupId){
+                        console.log("esiste")
                         exists = true;
                         return false;
                     }
