@@ -35,10 +35,9 @@ export default {
             allOptions.forEach((element, i) => {
                 let groupId = element.user_group;
                 let exists = false;
-                groups.value.every(actualGroup => {
+                groups.value.forEach(actualGroup => {
                     if (actualGroup.id == groupId) {
                         exists = true;
-                        return false;
                     }
                 })
                 if (!exists) {
@@ -52,10 +51,9 @@ export default {
             res.forEach((element, i) => {
                 let groupId = element.user_group;
                 let exists = false;
-                groups.value.every(actualGroup => {
+                groups.value.forEach(actualGroup => {
                     if (actualGroup.id == groupId) {
                         exists = true;
-                        return false;
                     }
                 })
                 if (!exists) {
