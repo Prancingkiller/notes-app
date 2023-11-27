@@ -20,15 +20,28 @@ import { useRouter } from 'vue-router'
 import BaseOptions from '../components/BaseOptions.vue'
 import BaseResources from '../components/BaseResources.vue'
 import directorMethods from '../api/resources/directorMethods.js'
+import ManagerMethods from "@/api/resources/ManagerMethods";
 export default {
     setup() {
         const router = useRouter();
         const content = ref(null);
         const options = ref([]);
         const resources = ref([]);
-
+        const groups = ref([]);
         async function getOptions() {
-            options.value = await directorMethods.getAllOptions();
+            let allOptions = await directorMethods.getAllOptions();
+            allOptions.forEach((element,i)=>{
+                let groupId = element.user_group;
+                let exists = false;
+                groups.value.forEach(actualGroup=>{
+                    if(actualGroup.id == groupId){
+                        exists = true;
+                    }
+                })
+                if(!exists){
+                    allOptions.splice(i, 1);
+                }
+            }) 
         }
         async function getResources() {
             let res = await directorMethods.getAllWorkers();
@@ -45,8 +58,10 @@ export default {
 		}
 
         onMounted(async () => {
-           await getOptions();
-            getResources();
+            groups.value = await ManagerMethods.loadGroups();
+            await getOptions();
+            await getResources();
+
         })
 
         function setContent(data) {
