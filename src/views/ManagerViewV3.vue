@@ -1,12 +1,18 @@
 <template>
+	<div class="external-event" v-for="(item, i) in baseDrag" :key="i" draggable="true"
+		@dragstart="onEventDragStart($event, item)">
+		({{ item.duration ? `${item.duration} min` : 'no duration' }})
+	</div>
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
-	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
+	<button class="btn btn-warning" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 editable-events
 		overlapEventStartOnly :split-days="workers" :special-hours="highlights" :min-split-width=70 locale="it"
 		:overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
-		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
+		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()"
+		:on-event-create="onEventCreate"
+		>
 
 	</vue-cal>
 	<div ref="tableResult" class="tableResult" style="display:none"></div>
@@ -93,14 +99,14 @@
 	</div>
 </template>
 <script lang="ts">
-import WorkersMethods from "@/api/resources/WorkersMethods"
-import ManagerMethods from "@/api/resources/ManagerMethods";
+import MethodsDev from "@/api/resources/ManagerMethodDev";
 import { ref, computed, onBeforeMount, watch } from "vue"
 import { useRoute } from 'vue-router'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import type { workersData } from '../types/workers'
 import type { shiftsData, eventPHP } from '../types/shifts'
+import { end } from "@popperjs/core";
 
 declare global {
 	interface Date {
@@ -129,7 +135,8 @@ export default {
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
-		const efficency = ref<number|string|null>(null);
+		const efficency = ref<number | string | null>(null);
+		const baseDrag = ref([{ duration: 0 }]);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -140,19 +147,20 @@ export default {
 
 		onBeforeMount(async () => {
 			const route = useRoute();
-			let type = route.params.resource ;
+			let type = route.params.resource;
 			loadOptions(type);
 			loadWokersData(type);
 		})
 
 		async function loadOptions(type) {
-			let data = await ManagerMethods.loadOptions(type);
+			let data = await MethodsDev.loadOptions(type);
 			configuration.value = data;
 			getLongestDay();
+			baseDrag.value[0].duration = configuration.value.baseShift * 60
 		}
 
 		async function loadWokersData(type) {
-			data = await WorkersMethods.getWorkers(type);
+			data = await MethodsDev.getWorkers(type);
 			workers.value = data;
 			renderSplits();
 		}
@@ -175,7 +183,7 @@ export default {
 				testEfficency: true,
 				openings: configuration.value.openings
 			})
-			let result:{data:{efficency:number}} = await ManagerMethods.makeShiftV3(data);
+			let result: { data: { efficency: number } } = await MethodsDev.makeShiftV3(data);
 			efficency.value = result.data.efficency
 		}
 		async function makeShift() {
@@ -190,7 +198,7 @@ export default {
 				testEfficency: false,
 				openings: configuration.value.openings
 			})
-			shift.value = await ManagerMethods.makeShiftV3(data)
+			shift.value = await MethodsDev.makeShiftV3(data)
 			var year = "2023";
 			var month = "10";
 			var day = "15";
@@ -280,14 +288,14 @@ export default {
 				data.push({
 					id: 0,
 					date: datePost,
-					date_start: datePost+" "+startTime,
-					date_finish: datePostE+" "+endTime,
+					date_start: datePost + " " + startTime,
+					date_finish: datePostE + " " + endTime,
 					time_start: startTime,
 					time_finish: endTime,
 					userId: workerId
 				})
 			})
-			if (await ManagerMethods.postEvent(data) == false) {
+			if (await MethodsDev.postEvent(data) == false) {
 				console.log("error!");
 			}
 			else {
@@ -297,19 +305,24 @@ export default {
 			}
 		}
 		function updateEvent(e: any) {
-			daysTest.value.forEach(element => {
-				if (element.eventId == e.event.eventId) {
-					// console.log("DA");
-					// console.log(element)
-					element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-					element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-					element.split = e.event.split;
-					element.workerId = e.event.split.toString();
-					// console.log("A");
-					// console.log(element)
-				}
-			})
-			renderSplits();
+			let doable = true;
+			console.log("Controllo se posso modificare " + e);
+			if (doable) {
+				daysTest.value.forEach(element => {
+					if (element.eventId == e.event.eventId) {
+						// console.log("DA");
+						// console.log(element)
+						element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+						element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+						element.split = e.event.split;
+						element.workerId = e.event.split.toString();
+						// console.log("A");
+						// console.log(element)
+					}
+				})
+				renderSplits();
+			}
+			return false;
 		}
 		async function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
@@ -387,7 +400,7 @@ export default {
 		async function loadEvents() {
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await ManagerMethods.loadEvents(month, year);
+			let result = await MethodsDev.loadEvents(month, year);
 			daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
 		}
@@ -471,16 +484,27 @@ export default {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
 			}
-			loadSettings = setTimeout(testEfficency, 5000);
-		},{ deep: true })
-		function average(arr:number[]) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
+			// loadSettings = setTimeout(testEfficency, 5000);
+		}, { deep: true })
+		function average(arr: number[]) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
+		function onEventDragStart(e, draggable) {
+			// Passing the event's data to Vue Cal through the DataTransfer object.
+			e.dataTransfer.setData('event', JSON.stringify(draggable))
+			e.dataTransfer.setData('cursor-grab-at', e.offsetY)
+		}
+		function onEventCreate(e){
+			console.log("CREATO")
+			console.log(e)
+			return e
+		}
 
 		return {
 			shift, workers, days, makeShift, calendarRanges, tempEvents,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency
+			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,
+			baseDrag,onEventDragStart,onEventCreate
 		}
 	},
 	components: {
