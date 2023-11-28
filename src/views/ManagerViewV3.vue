@@ -138,7 +138,7 @@ export default {
 		const efficency = ref<number | string | null>(null);
 		const baseDrag = ref([{ duration: 0 }]);
 		const configuration = ref({
-			minTimeBetweenShifts: 3,
+			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
 			baseShift: 3,
 			slots: { Lun: [{ slotN: null, required: null }], Mar: [{ slotN: null, required: null }], Mer: [{ slotN: null, required: null }], Gio: [{ slotN: null, required: null }], Ven: [{ slotN: null, required: null }], Sab: [{ slotN: null, required: null }], Dom: [{ slotN: null, required: null }] },
