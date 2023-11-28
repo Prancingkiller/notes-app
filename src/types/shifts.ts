@@ -1,6 +1,8 @@
 type shiftType = {
     id: 0,
 	date: string,
+    date_start?: string,
+    date_finish?: string,
 	time_start: string,
 	time_finish: string,
 	userId: number
