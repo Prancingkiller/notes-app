@@ -105,7 +105,7 @@ const update = request =>
 self.addEventListener('fetch', evt => {
   var type = evt.request.method;
   evt.respondWith(
-    fromNetwork(evt.request, 10000)
+    fromNetwork(evt.request, 20000)
       .catch(() => fromCache(evt.request).then(console.log("da cache")))
   );
   if (type == "GET") {
