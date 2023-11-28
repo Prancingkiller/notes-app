@@ -52,8 +52,8 @@ const routes = [
     },
   },
   {
-    path: '/planner/:resource',
-    name: 'planner',
+    path: '/dev/:resource',
+    name: 'dev',
     component: ManagerViewV3,
     // beforeEnter: (to, from) => {
     //   if(checkLog()){

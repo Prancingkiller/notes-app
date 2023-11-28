@@ -272,6 +272,7 @@ export default {
 			tempEvents.value.forEach(element => {
 				var fullDateStart = new Date(element.start)
 				var fullDateFinish = new Date(element.end)
+				var datePostE = fullDateFinish.getFullYear() + "-" + String(fullDateFinish.getMonth() + 1).padStart(2, "0") + "-" + fullDateFinish.getDate()
 				var datePost = fullDateStart.getFullYear() + "-" + String(fullDateStart.getMonth() + 1).padStart(2, "0") + "-" + fullDateStart.getDate()
 				var workerId = element.split;
 				var startTime = String(fullDateStart.getHours()).padStart(2, "0") + ":" + String(fullDateStart.getMinutes()).padStart(2, "0");
@@ -279,6 +280,8 @@ export default {
 				data.push({
 					id: 0,
 					date: datePost,
+					date_start: datePost+" "+startTime,
+					date_finish: datePostE+" "+endTime,
 					time_start: startTime,
 					time_finish: endTime,
 					userId: workerId
