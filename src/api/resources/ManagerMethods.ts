@@ -65,6 +65,7 @@ export default {
         const response = await fetch(APISettings.baseURL + "/shiftsV4.php", {
             method: "POST",
             mode: "cors",
+            credentials: 'include',
             cache: "no-store",
             headers: {
                 //'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
