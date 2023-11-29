@@ -13,7 +13,8 @@ type eventFromPHP = {
     start:string,
     end:string,
     split:number,
-    class:String
+    class:String,
+    _eid?:String
 }
 
 type shiftsType = shiftType[];
