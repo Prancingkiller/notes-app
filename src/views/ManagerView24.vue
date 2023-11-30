@@ -471,7 +471,7 @@ export default {
 			if (loadSettings != -1) {
 				clearTimeout(loadSettings);
 			}
-			loadSettings = setTimeout(testEfficency, 5000);
+			// loadSettings = setTimeout(testEfficency, 5000);
 		},{ deep: true })
 		function average(arr:number[]) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
