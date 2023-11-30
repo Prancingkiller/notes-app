@@ -11,8 +11,7 @@
 		:special-hours="highlights" :min-split-width=70 locale="it" active-view="day" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
 		:drag-to-create-event="false" @event-change="changeEvent($event)" @event-delete="deleteEvent($event)"
-		:on-event-dblclick="selectEvent"
-		>
+		:on-event-dblclick="selectEvent">
 
 	</vue-cal>
 	<div ref="tableResult" class="tableResult" style="display:none"></div>
@@ -380,7 +379,7 @@ export default {
 		async function loadEvents() {
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await MethodsDev.loadEvents(month, year);
+			let result = await MethodsDev.loadEvents(month, year, selectedDay.value.toLocaleDateString());
 			daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
 		}
@@ -542,8 +541,8 @@ export default {
 			}
 		}
 		function checkShift(e) {
-			let doable = true;
-			workers.value.forEach(worker=>{
+			let doable = false;
+			workers.value.forEach(worker => {
 			})
 			if (doable) {
 				return true;
@@ -552,12 +551,12 @@ export default {
 				return false;
 			}
 		}
-		function selectEvent(event){
+		function selectEvent(event) {
 			daysTest.value.forEach(element => {
-						if (element.eventId == event.eventId) {
-							console.log(element)
-						}
-						})
+				if (element.eventId == event.eventId) {
+					console.log(element)
+				}
+			})
 		}
 		return {
 			shift, workers, days, makeShift, calendarRanges, tempEvents,

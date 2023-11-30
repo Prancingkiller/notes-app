@@ -419,7 +419,7 @@ export default {
 		async function loadEvents(){
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await ManagerMethods.loadEvents(month,year);
+			let result = await ManagerMethods.loadEvents(month,year,selectedDay.value.toLocaleDateString());
 			daysTest.value = result.concat(tempEvents.value);
 		}
 

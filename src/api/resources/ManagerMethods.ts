@@ -146,8 +146,8 @@ export default {
         return returns;
     },
 
-    async loadEvents(month,year){
-        const response = await fetch(APISettings.baseURL + "/eventsManager?month="+month+"&year="+year, {
+    async loadEvents(month,year,day){
+        const response = await fetch(APISettings.baseURL + "/eventsManager?month="+month+"&year="+year+"&day"+day, {
             mode: 'cors',
             credentials: 'include',
             method: 'GET',
