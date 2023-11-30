@@ -116,8 +116,9 @@ export default {
     },
 
     async loadOptions(type){
-        const response = await fetch("http://localhost:80/mcOff/options.json", {
+        const response = await fetch("https://notes-api.it/api/test/file?f=options", {
             method: 'GET',
+            mode:"cors"
         });
         const result = await response.json();
         const returns = {allowDoubleShifts:false,minTimeBetweenShifts:0,baseShift:0,slots:{Lun:[{slotN:null,required:null}],Mar:[{slotN:null,required:null}],Mer:[{slotN:null,required:null}],Gio:[{slotN:null,required:null}],Ven:[{slotN:null,required:null}],Sab:[{slotN:null,required:null}],Dom:[{slotN:null,required:null}]},
@@ -138,29 +139,31 @@ export default {
     },
 
     async loadEvents(month,year){
-        const response = await fetch("http://localhost:80/mcOff/eventsManager.json", {
+        const response = await fetch("https://notes-api.it/api/test/file?f=eventsManager", {
             method: 'GET',
+            mode:"cors"
         });
         const result = await response.json();
         return result;
     },
     async loadGroups(){
-        const response = await fetch("http://localhost:80/mcOff/getGroups.json", {
+        const response = await fetch("https://notes-api.it/api/test/getGroups.json", {
             method: 'GET',
         });
         const result = await response.json();
         return result;
     },
     async getWorkers(type) {
-        const response = await fetch("http://localhost:80/mcOff/workersData.json", {
+        const response = await fetch("https://notes-api.it/api/test/file?f=workersData", {
             method: 'GET',
+            mode:"cors"
         });
         const result = await response.json();
         return result;
     },
 
     async getFavouriteSlots() {
-        const response = await fetch("http://localhost:80/mcOff/favourites", {
+        const response = await fetch("https://notes-api.it/api/test/favourites", {
             method: 'GET',
         });
         const result = await response.json();
