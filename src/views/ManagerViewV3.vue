@@ -490,6 +490,7 @@ export default {
 			console.log("DRAGGING")
 		}
 		async function onEventCreate(e) {
+			return false;
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
 				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
