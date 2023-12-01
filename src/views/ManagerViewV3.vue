@@ -491,15 +491,15 @@ export default {
 		}
 		async function onEventCreate(e) {
 			return false;
-			if (await checkShift(e)) {
-				e.class = "temporary-event"
-				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
-				daysTest.value.push(e)
-				return e;
-			}
-			else {
-				return false
-			}
+			// if (await checkShift(e)) {
+			// 	e.class = "temporary-event"
+			// 	e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
+			// 	daysTest.value.push(e)
+			// 	return e;
+			// }
+			// else {
+			// 	return false
+			// }
 		}
 		function deleteEvent(e) {
 			daysTest.value.forEach((element, i) => {
@@ -510,7 +510,7 @@ export default {
 			console.log(e)
 		}
 		async function changeEvent(e) {
-			if (e) {
+			if (e.originalEvent) {
 				console.log("Funzione change - Controllo se posso modificare " + e.event.eventId);
 				console.log(e)
 				if (await checkShift(e)) {
@@ -539,8 +539,8 @@ export default {
 						}
 					})
 				}
-				renderSplits();
 			}
+			renderSplits();
 		}
 		async function checkShift(e) {
 			let doable = false;
