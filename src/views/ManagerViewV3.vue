@@ -106,6 +106,7 @@ import 'vue-cal/dist/vuecal.css'
 import type { workersData } from '../types/workers'
 import type { shiftsData, eventPHP } from '../types/shifts'
 import { end } from "@popperjs/core";
+import ManagerMethodDev from "@/api/resources/ManagerMethodDev";
 
 declare global {
 	interface Date {
@@ -540,16 +541,14 @@ export default {
 				renderSplits();
 			}
 		}
-		function checkShift(e) {
+		async function checkShift(e) {
 			let doable = false;
-			workers.value.forEach(worker => {
-			})
-			if (doable) {
-				return true;
+			let data = {
+				options:configuration.value
 			}
-			else {
-				return false;
-			}
+			const res:boolean = await ManagerMethodDev.canWork(data);
+			doable = res;
+			return doable;
 		}
 		function selectEvent(event) {
 			daysTest.value.forEach(element => {
