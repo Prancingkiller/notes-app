@@ -490,16 +490,16 @@ export default {
 			console.log("DRAGGING")
 		}
 		async function onEventCreate(e) {
-			return false;
-			// if (await checkShift(e)) {
-			// 	e.class = "temporary-event"
-			// 	e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
-			// 	daysTest.value.push(e)
-			// 	return e;
-			// }
-			// else {
-			// 	return false
-			// }
+			// return false;
+			if (await checkShift(e)) {
+				e.class = "temporary-event"
+				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
+				daysTest.value.push(e)
+				return e;
+			}
+			else {
+				return false
+			}
 		}
 		function deleteEvent(e) {
 			daysTest.value.forEach((element, i) => {
