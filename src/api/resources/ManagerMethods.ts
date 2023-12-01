@@ -164,7 +164,7 @@ export default {
         const result = await response.json();
         return result;
     },
-    async canWork<TResponse>(data): Promise<TResponse> {
+    async canWork(data)  {
         const response = await fetch(APISettings.baseURL + "/canWork", {
             method: "POST",
             mode: "cors",
@@ -175,8 +175,13 @@ export default {
             },
             body: JSON.stringify(data)
         })
-        const result = await response.json();
-        return result.status;
+        if (response.ok) {
+            const result = await response.json();
+            return result.status;
+        }
+        else {
+            return false;
+        }
     }
 
 }
