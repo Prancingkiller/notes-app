@@ -163,6 +163,20 @@ export default {
         });
         const result = await response.json();
         return result;
+    },
+    async canWork<TResponse>(data): Promise<TResponse> {
+        const response = await fetch(APISettings.baseURL + "/canWork", {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                //'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Trusted': 'yes'
+            },
+            body: JSON.stringify(data)
+        })
+        const result = await response.json();
+        return result.status;
     }
 
 }
