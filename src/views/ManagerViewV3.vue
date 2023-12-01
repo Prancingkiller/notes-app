@@ -133,6 +133,7 @@ export default {
 		const highlights = ref({});
 		const shift = ref<{ data: eventPHP[] }>({ data: [] });
 		const options = ref(false);
+		const deleteEventFunction = null;
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
 		const efficency = ref<number | string | null>(null);
@@ -489,8 +490,8 @@ export default {
 			e.dataTransfer.setData('cursor-grab-at', e.offsetY)
 			console.log("DRAGGING")
 		}
-		async function onEventCreate(e) {
-			// return false;
+		async function onEventCreate(e,deleteEventFunction) {
+			deleteEventFunction.value = deleteEventFunction;
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
 				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
@@ -498,7 +499,7 @@ export default {
 				return e;
 			}
 			else {
-				return false
+				deleteEventFunction.value()
 			}
 		}
 		function deleteEvent(e) {
