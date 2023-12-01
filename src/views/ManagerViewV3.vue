@@ -496,6 +496,7 @@ export default {
 				e.class = "temporary-event"
 				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
 				daysTest.value.push(e)
+				renderSplits();
 				return e;
 			}
 			else {
