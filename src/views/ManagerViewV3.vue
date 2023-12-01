@@ -544,7 +544,9 @@ export default {
 		async function checkShift(e) {
 			let doable = false;
 			let data = {
-				options:configuration.value
+				options:configuration.value,
+				tempEvents: tempEvents.value,
+				eventInfo: e
 			}
 			const res:boolean = await ManagerMethodDev.canWork(data);
 			doable = res;
