@@ -510,7 +510,7 @@ export default {
 			console.log(e)
 		}
 		async function changeEvent(e) {
-			if (e.originalEvent) {
+			if (e.originalEvent && e.originalEvent.start) {
 				console.log("Funzione change - Controllo se posso modificare " + e.event.eventId);
 				console.log(e)
 				if (await checkShift(e)) {
