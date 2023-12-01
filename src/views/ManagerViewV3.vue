@@ -489,8 +489,8 @@ export default {
 			e.dataTransfer.setData('cursor-grab-at', e.offsetY)
 			console.log("DRAGGING")
 		}
-		function onEventCreate(e) {
-			if (checkShift(e)) {
+		async function onEventCreate(e) {
+			if (await checkShift(e)) {
 				e.class = "temporary-event"
 				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
 				daysTest.value.push(e)
@@ -508,11 +508,11 @@ export default {
 			})
 			console.log(e)
 		}
-		function changeEvent(e) {
+		async function changeEvent(e) {
 			if (e) {
 				console.log("Funzione change - Controllo se posso modificare " + e.event.eventId);
 				console.log(e)
-				if (checkShift(e)) {
+				if (await checkShift(e)) {
 					daysTest.value.forEach(element => {
 						if (element.eventId == e.event.eventId) {
 							element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
