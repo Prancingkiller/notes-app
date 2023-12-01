@@ -489,7 +489,7 @@ export default {
 			e.dataTransfer.setData('cursor-grab-at', e.offsetY)
 			console.log("DRAGGING")
 		}
-		async function onEventCreate(e) {
+		function onEventCreate(e) {
 			return false;
 			// if (await checkShift(e)) {
 			// 	e.class = "temporary-event"
