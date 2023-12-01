@@ -139,7 +139,7 @@ export default {
     },
 
     async loadEvents(month,year,date){
-        const response = await fetch("https://notes-api.it/api/test/file?f=eventsManager?day="+date, {
+        const response = await fetch("https://notes-api.it/api/test/file?f=eventsManager&day="+date, {
             method: 'GET',
             mode:"cors"
         });
