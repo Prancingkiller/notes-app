@@ -515,7 +515,8 @@ export default {
 				workers:workers.value,
 				options:configuration.value,
 				tempEvents: daysTest.value,
-				eventInfo: e
+				eventInfo: e,
+				startingDate: selectedMonday.value.toISOString().split('T')[0]
 			}
 			const res:boolean = await ManagerMethodDev.canWork(data);
 			doable = res;
