@@ -209,41 +209,6 @@ export default {
 
 				var inner = shift.value.data[1][worker];
 				for (const propp in inner) {
-					// if (prop == "Lun") {
-					// 	year = selectedMonday.value.getFullYear().toString()
-					// 	month = (selectedMonday.value.getMonth()+1).toString()
-					// 	day = selectedMonday.value.getDate().toString()
-					// }
-					// else if (prop == "Mar") {
-					// 	year = selectedMonday.value.addDays(1).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(1).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(1).getDate().toString()
-					// }
-					// else if (prop == "Mer") {
-					// 	year = selectedMonday.value.addDays(2).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(2).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(2).getDate().toString()
-					// }
-					// else if (prop == "Gio") {
-					// 	year = selectedMonday.value.addDays(3).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(3).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(3).getDate().toString()
-					// }
-					// else if (prop == "Ven") {
-					// 	year = selectedMonday.value.addDays(4).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(4).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(4).getDate().toString()
-					// }
-					// else if (prop == "Sab") {
-					// 	year = selectedMonday.value.addDays(5).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(5).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(5).getDate().toString()
-					// }
-					// else if (prop == "Dom") {
-					// 	year = selectedMonday.value.addDays(6).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(6).getDate().toString()
-					// }
 					console.log(shift.value.data[1][worker][propp].start + "-" + shift.value.data[1][worker][propp].finish)
 					var shiftTest: eventPHP = {
 						eventId: 0,
@@ -547,8 +512,9 @@ export default {
 		async function checkShift(e) {
 			let doable = false;
 			let data = {
+				workers:workers.value,
 				options:configuration.value,
-				tempEvents: tempEvents.value,
+				tempEvents: daysTest.value,
 				eventInfo: e
 			}
 			const res:boolean = await ManagerMethodDev.canWork(data);
