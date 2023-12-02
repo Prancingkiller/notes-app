@@ -181,6 +181,7 @@ export default {
             body: JSON.stringify(data)
         })
         const result = await response.json();
+        alert(result.errors);
         return result.status;
     }
 
