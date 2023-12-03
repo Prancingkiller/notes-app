@@ -176,7 +176,9 @@ export default {
             body: JSON.stringify(data)
         })
         const result = await response.json();
-        alert(result.errors);
+        if(result.errors.length>0){
+            alert(result.errors);
+        }
         return result.status;
     }
 
