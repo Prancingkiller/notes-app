@@ -187,6 +187,7 @@ export default {
 			efficency.value = result.data.efficency
 		}
 		async function makeShift() {
+			isLoading.value = true;
 			data = JSON.stringify({
 				days: days.value,
 				startingDate: selectedMonday.value.toISOString().split('T')[0],
@@ -271,6 +272,7 @@ export default {
 			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
 			daysTest.value = daysTest.value.concat(tempEvents.value);
 			renderSplits();
+			isLoading.value = false;
 		}
 		function debugShift() {
 			console.log(daysTest.value)
@@ -389,11 +391,13 @@ export default {
 			return datum / 1000;
 		}
 		async function loadEvents() {
+			isLoading.value = true;
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
 			let result = await ManagerMethods.loadEvents(month, year, selectedDay.value.toLocaleDateString());
 			daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
+			isLoading.value = false;
 		}
 		function renderSplits() {
 			// splits.value = [];
