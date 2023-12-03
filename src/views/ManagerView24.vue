@@ -3,10 +3,11 @@
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
-		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 editable-events
-		overlapEventStartOnly :split-days="workers" :special-hours="highlights" :min-split-width=70 locale="it"
-		:overlapsPerTimeStep=true @event-drop="updateEvent(($event))" active-view="day"
-		@event-duration-change="updateEvent($event)" @view-change="updateSelectedDay($event)" @ready="loadEvents()">
+		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
+		:special-hours="highlights" :min-split-width=70 locale="it" active-view="day" editable-events
+		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
+		:drag-to-create-event="false" @event-change="changeEvent($event)" @event-delete="deleteEvent($event)"
+		:on-event-dblclick="selectEvent">
 
 	</vue-cal>
 	<div ref="tableResult" class="tableResult" style="display:none"></div>
@@ -129,6 +130,7 @@ export default {
 		const options = ref(false);
 		const calendarRanges = { apertura: 0, chiusura: 1000 };
 		var loadSettings = -1;
+		const baseDrag = ref([{ duration: 0 }]);
 		const efficency = ref<number|string|null>(null);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
@@ -149,6 +151,7 @@ export default {
 			let data = await ManagerMethods.loadOptions(type);
 			configuration.value = data;
 			getLongestDay();
+			baseDrag.value[0].duration = configuration.value.baseShift * 60
 		}
 
 		async function loadWokersData(type) {
@@ -296,21 +299,17 @@ export default {
 				loadEvents();
 			}
 		}
-		function updateEvent(e: any) {
-			daysTest.value.forEach(element => {
-				if (element.eventId == e.event.eventId) {
-					// console.log("DA");
-					// console.log(element)
-					element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-					element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-					element.split = e.event.split;
-					element.workerId = e.event.split.toString();
-					// console.log("A");
-					// console.log(element)
-				}
-			})
-			renderSplits();
-		}
+		// function updateEvent(e: any) {
+		// 	daysTest.value.forEach(element => {
+		// 		if (element.eventId == e.event.eventId) {
+		// 			element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+		// 			element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+		// 			element.split = e.event.split;
+		// 			element.workerId = e.event.split.toString();
+		// 		}
+		// 	})
+		// 	renderSplits();
+		// }
 		async function updateSelectedDay(e: any) {
 			selectedDay.value = e.endDate;
 			// console.log("selected month:"+selectedMonth.value);
@@ -475,12 +474,108 @@ export default {
 		},{ deep: true })
 		function average(arr:number[]) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
+		function updateEvent(e: any) {
+			let doable = true;
+			console.log("Controllo se posso modificare " + e);
+			if (doable) {
+				daysTest.value.forEach(element => {
+					if (element.eventId == e.event.eventId) {
+						element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+						element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+						element.split = e.event.split;
+						element.workerId = e.event.split.toString();
+					}
+				})
+				renderSplits();
+			}
+		}
+		function onEventDragStart(e, draggable) {
+			// Passing the event's data to Vue Cal through the DataTransfer object.
+			e.dataTransfer.setData('event', JSON.stringify(draggable))
+			e.dataTransfer.setData('cursor-grab-at', e.offsetY)
+			console.log("DRAGGING")
+		}
+		async function onEventCreate(e,deleteEventFunction) {
+			deleteEventFunction.value = deleteEventFunction;
+			if (await checkShift(e)) {
+				e.class = "temporary-event"
+				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
+				daysTest.value.push(e)
+				renderSplits();
+				return e;
+			}
+			else {
+				deleteEventFunction.value()
+			}
+		}
+		function deleteEvent(e) {
+			daysTest.value.forEach((element, i) => {
+				if (element.eventId == e.eventId) {
+					daysTest.value.splice(i, 1);
+				}
+			})
+			console.log(e)
+		}
+		async function changeEvent(e) {
+			if (e.originalEvent && e.originalEvent.start) {
+				console.log("Funzione change - Controllo se posso modificare " + e.event.eventId);
+				console.log(e)
+				if (await checkShift(e)) {
+					daysTest.value.forEach(element => {
+						if (element.eventId == e.event.eventId) {
+							element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
+							element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.end.getMinutes()).padStart(2, "0")
+							element.split = e.event.split;
+							element.workerId = e.event.split;
+							element._eid = e.event._eid;
+							console.log("cambio")
+						}
+					})
+				}
+				else {
+					daysTest.value.forEach(element => {
+						if (element.eventId == e.originalEvent.eventId) {
+							// let origS = new Date(e.originalEvent.start);
+							// let origE = new Date(e.originalEvent.end);
+							// element.start = origS.getFullYear() + "-" + String(origS.getMonth() + 1).padStart(2, "0") + "-" + origS.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(origS.getHours()).padStart(2, "0") + ":" + String(origS.getMinutes()).padStart(2, "0")
+							// element.end = origE.getFullYear() + "-" + String(origE.getMonth() + 1).padStart(2, "0") + "-" + origE.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(origE.getHours()).padStart(2, "0") + ":" + String(origE.getMinutes()).padStart(2, "0")
+							// element.split = e.originalEvent.split;
+							// element.workerId = e.originalEvent.split;
+							element._eid = e.originalEvent._eid;
+							console.log("cambio non fattibile, ritorno a " + element.start + "-" + element.end)
+						}
+					})
+				}
+			}
+			renderSplits();
+		}
+		async function checkShift(e) {
+			let doable = false;
+			let data = {
+				workers:workers.value,
+				options:configuration.value,
+				tempEvents: daysTest.value,
+				eventInfo: e,
+				startingDate: selectedMonday.value.toISOString().split('T')[0]
+			}
+			const res:boolean = await ManagerMethods.canWork(data);
+			doable = res;
+			return doable;
+		}
+		function selectEvent(event) {
+			daysTest.value.forEach(element => {
+				if (element.eventId == event.eventId) {
+					console.log(element)
+				}
+			})
+		}
 
 		return {
 			shift, workers, days, makeShift, calendarRanges, tempEvents,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency
+			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,
+			baseDrag, onEventDragStart, onEventCreate, deleteEvent, changeEvent, selectEvent
 		}
 	},
 	components: {
