@@ -1,13 +1,13 @@
 <template>
 	<loading :active="isLoading" :can-cancel="true" :on-cancel="onCancel" :is-full-page="fullPage"></loading>
-	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
+	<button class="btn btn-primary" :disabled="tempEvents.length > 1 || activeView !='day'" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal 
 	class=""
 	:selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
-		:special-hours="highlights" :min-split-width=70 locale="it" active-view="day" editable-events
+		:special-hours="highlights" :min-split-width=70 locale="it" :active-view="activeView" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
 		:drag-to-create-event="false" @event-change="changeEvent($event)" @event-delete="deleteEvent($event)"
 		:on-event-dblclick="selectEvent">
@@ -126,6 +126,7 @@ export default {
 		const tempEvents = ref<eventPHP[]>([]);
 		var data;
 		const disabledViews = ["years", "year", "week"];
+		const activeView = ref("day");
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth() + 1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
@@ -211,41 +212,6 @@ export default {
 
 				var inner = shift.value.data[1][worker];
 				for (const propp in inner) {
-					// if (prop == "Lun") {
-					// 	year = selectedMonday.value.getFullYear().toString()
-					// 	month = (selectedMonday.value.getMonth()+1).toString()
-					// 	day = selectedMonday.value.getDate().toString()
-					// }
-					// else if (prop == "Mar") {
-					// 	year = selectedMonday.value.addDays(1).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(1).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(1).getDate().toString()
-					// }
-					// else if (prop == "Mer") {
-					// 	year = selectedMonday.value.addDays(2).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(2).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(2).getDate().toString()
-					// }
-					// else if (prop == "Gio") {
-					// 	year = selectedMonday.value.addDays(3).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(3).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(3).getDate().toString()
-					// }
-					// else if (prop == "Ven") {
-					// 	year = selectedMonday.value.addDays(4).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(4).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(4).getDate().toString()
-					// }
-					// else if (prop == "Sab") {
-					// 	year = selectedMonday.value.addDays(5).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(5).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(5).getDate().toString()
-					// }
-					// else if (prop == "Dom") {
-					// 	year = selectedMonday.value.addDays(6).getFullYear().toString()
-					// 	month = (selectedMonday.value.addDays(6).getMonth()+1).toString()
-					// 	day = selectedMonday.value.addDays(6).getDate().toString()
-					// }
 					console.log(shift.value.data[1][worker][propp].start + "-" + shift.value.data[1][worker][propp].finish)
 					var shiftTest: eventPHP = {
 						eventId: 0,
@@ -265,11 +231,9 @@ export default {
 					else {
 						shiftTest.end = shift.value.data[1][worker][propp].finish;
 					}
-					//shiftTest.title= 'Worker: '+worker,
 					shiftTest.split = parseInt(worker),
 						tempEvents.value.push(shiftTest)
 				}
-				// }
 			}
 			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
 			daysTest.value = daysTest.value.concat(tempEvents.value);
@@ -308,21 +272,10 @@ export default {
 				loadEvents();
 			}
 		}
-		// function updateEvent(e: any) {
-		// 	daysTest.value.forEach(element => {
-		// 		if (element.eventId == e.event.eventId) {
-		// 			element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-		// 			element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-		// 			element.split = e.event.split;
-		// 			element.workerId = e.event.split.toString();
-		// 		}
-		// 	})
-		// 	renderSplits();
-		// }
+
 		async function updateSelectedDay(e: any) {
+			activeView.value = e.view
 			selectedDay.value = e.endDate;
-			// console.log("selected month:"+selectedMonth.value);
-			// console.log("month in view:"+parseInt(e.endDate.getMonth())+1);
 			let month = parseInt(e.endDate.getMonth()) + 1;
 			if (selectedMonth.value != month) {
 				selectedMonth.value = e.endDate.getMonth() + 1;
@@ -332,7 +285,6 @@ export default {
 			else {
 				await renderSplits();
 			}
-			// console.log(e.endDate.toISOString().split('T')[0]);
 		}
 		function togglePanel(index: number) {
 			workers.value[index].showDays = !workers.value[index].showDays;
@@ -588,7 +540,7 @@ export default {
 		}
 
 		return {
-			shift, workers, days, makeShift, calendarRanges, tempEvents,
+			shift, workers, days, makeShift, calendarRanges, tempEvents,activeView,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,

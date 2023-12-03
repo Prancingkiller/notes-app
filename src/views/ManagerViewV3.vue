@@ -1,17 +1,18 @@
 <template>
+	{{ activeView }}
 	<loading :active="isLoading" :can-cancel="true" :on-cancel="onCancel" :is-full-page="fullPage"></loading>
 	<div class="external-event" v-for="(item, i) in baseDrag" :key="i" draggable="true"
 		@dragstart="onEventDragStart($event, item)">
 		({{ item.duration ? `${item.duration} min` : 'no duration' }})
 	</div>
-	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
+	<button class="btn btn-primary" :disabled="tempEvents.length > 1 || activeView !='day'" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal  
 	class=""
 	:selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
-		:special-hours="highlights" :min-split-width=70 locale="it" active-view="day" editable-events
+		:special-hours="highlights" :min-split-width=70 locale="it" :active-view="activeView" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
 		:drag-to-create-event="false" @event-change="changeEvent($event)" @event-delete="deleteEvent($event)"
 		:on-event-dblclick="selectEvent">
@@ -144,6 +145,7 @@ export default {
 		const baseDrag = ref([{ duration: 0 }]);
 		const isLoading = ref(false);
 		const fullPage = ref(true);
+		const activeView = ref("day");
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -277,6 +279,7 @@ export default {
 			}
 		}
 		async function updateSelectedDay(e: any) {
+			activeView.value = e.view
 			selectedDay.value = e.endDate;
 			// console.log("selected month:"+selectedMonth.value);
 			// console.log("month in view:"+parseInt(e.endDate.getMonth())+1);
@@ -542,7 +545,7 @@ export default {
 			isLoading.value = false;
 		}
 		return {
-			shift, workers, days, makeShift, calendarRanges, tempEvents,
+			shift, workers, days, makeShift, calendarRanges, tempEvents,activeView,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,
