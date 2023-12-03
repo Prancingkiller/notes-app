@@ -555,6 +555,7 @@ export default {
 			renderSplits();
 		}
 		async function checkShift(e) {
+			isLoading.value = true;
 			let doable = false;
 			let data = {
 				workers: workers.value,
@@ -565,6 +566,7 @@ export default {
 			}
 			const res: boolean = await ManagerMethods.canWork(data);
 			doable = res;
+			isLoading.value = false;
 			return doable;
 		}
 		function selectEvent(event) {
