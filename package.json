@@ -24,7 +24,8 @@
     "vue-cal": "^4.8.1",
     "vue-class-component": "^8.0.0-0",
     "vue-draggable-next": "^2.1.1",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue3-loading-overlay": "^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

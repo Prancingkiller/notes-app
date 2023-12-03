@@ -1,4 +1,5 @@
 <template>
+	<loading :active="isLoading" :can-cancel="true" :on-cancel="onCancel" :is-full-page="fullPage"></loading>
 	<div class="external-event" v-for="(item, i) in baseDrag" :key="i" draggable="true"
 		@dragstart="onEventDragStart($event, item)">
 		({{ item.duration ? `${item.duration} min` : 'no duration' }})
@@ -107,6 +108,8 @@ import type { workersData } from '../types/workers'
 import type { shiftsData, eventPHP } from '../types/shifts'
 import { end } from "@popperjs/core";
 import ManagerMethodDev from "@/api/resources/ManagerMethodDev";
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 declare global {
 	interface Date {
@@ -138,6 +141,8 @@ export default {
 		var loadSettings = -1;
 		const efficency = ref<number | string | null>(null);
 		const baseDrag = ref([{ duration: 0 }]);
+		const isLoading = ref(false);
+		const fullPage = ref(true);
 		const configuration = ref({
 			minTimeBetweenShifts: 2,
 			allowDoubleShifts: true,
@@ -455,7 +460,7 @@ export default {
 			e.dataTransfer.setData('cursor-grab-at', e.offsetY)
 			console.log("DRAGGING")
 		}
-		async function onEventCreate(e,deleteEventFunction) {
+		async function onEventCreate(e, deleteEventFunction) {
 			deleteEventFunction.value = deleteEventFunction;
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
@@ -510,16 +515,18 @@ export default {
 			renderSplits();
 		}
 		async function checkShift(e) {
+			isLoading.value = true;
 			let doable = false;
 			let data = {
-				workers:workers.value,
-				options:configuration.value,
+				workers: workers.value,
+				options: configuration.value,
 				tempEvents: daysTest.value,
 				eventInfo: e,
 				startingDate: selectedMonday.value.toISOString().split('T')[0]
 			}
-			const res:boolean = await ManagerMethodDev.canWork(data);
+			const res: boolean = await ManagerMethodDev.canWork(data);
 			doable = res;
+			isLoading.value = false;
 			return doable;
 		}
 		function selectEvent(event) {
@@ -529,16 +536,21 @@ export default {
 				}
 			})
 		}
+		function onCancel() {
+			console.log('User cancelled the loader.');
+			isLoading.value = false;
+		}
 		return {
 			shift, workers, days, makeShift, calendarRanges, tempEvents,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,
-			baseDrag, onEventDragStart, onEventCreate, deleteEvent, changeEvent, selectEvent
+			baseDrag, onEventDragStart, onEventCreate, deleteEvent, changeEvent, selectEvent,
+			onCancel,isLoading,fullPage
 		}
 	},
 	components: {
-		VueCal
+		VueCal, Loading
 	}
 }
 </script>
