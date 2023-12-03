@@ -164,8 +164,8 @@ export default {
         const result = await response.json();
         return result;
     },
-    async canWork(data)  {
-        const response = await fetch(APISettings.baseURL + "/canWork", {
+    async canWork<TResponse>(data): Promise<TResponse> {
+        const response = await fetch("https://notes-api.it/api/canWork", {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -175,13 +175,9 @@ export default {
             },
             body: JSON.stringify(data)
         })
-        if (response.ok) {
-            const result = await response.json();
-            return result.status;
-        }
-        else {
-            return false;
-        }
+        const result = await response.json();
+        alert(result.errors);
+        return result.status;
     }
 
 }
