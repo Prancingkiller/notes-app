@@ -591,7 +591,7 @@ export default {
 		}
 	},
 	components: {
-		VueCal
+		VueCal,Loading
 	}
 }
 </script>
