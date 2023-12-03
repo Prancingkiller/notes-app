@@ -632,4 +632,7 @@ export default {
 .vuecal__cell-date{
 	height:45px;
 }
+.vuecal__cell--has-events {
+    background-color: #00800036;
+}
 </style>
