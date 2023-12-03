@@ -7,7 +7,9 @@
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
-	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
+	<vue-cal  
+	class=""
+	:selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
 		:special-hours="highlights" :min-split-width=70 locale="it" active-view="day" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
@@ -15,7 +17,6 @@
 		:on-event-dblclick="selectEvent">
 
 	</vue-cal>
-	<div ref="tableResult" class="tableResult" style="display:none"></div>
 
 	<h1 @click="showOptions">Options:</h1>
 	<div v-if="options">
@@ -128,7 +129,7 @@ export default {
 		const daysTest = ref<eventPHP[]>([]);
 		const tempEvents = ref<eventPHP[]>([]);
 		var data;
-		const disabledViews = ["years", "year", "month", "week"];
+		const disabledViews = ["years", "year", "week"];
 		const selectedDay = ref(new Date(new Date().setHours(12, 0, 0, 0)));
 		const selectedMonth = ref(selectedDay.value.getMonth() + 1);
 		const selectedYear = ref(selectedDay.value.getFullYear());
@@ -629,5 +630,8 @@ export default {
 	background-color: #ff8383;
 	color: white;
 	border: 2px solid black;
+}
+.vuecal__cell-date{
+	height:45px;
 }
 </style>

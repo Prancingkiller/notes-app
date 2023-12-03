@@ -3,7 +3,9 @@
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1" @click="makeShift">Genera Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
-	<vue-cal :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
+	<vue-cal 
+	class=""
+	:selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
 		:special-hours="highlights" :min-split-width=70 locale="it" active-view="day" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
@@ -674,5 +676,8 @@ export default {
 	background-color: #ff8383;
 	color: white;
 	border: 2px solid black;
+}
+.vuecal__cell-date{
+	height:45px;
 }
 </style>
