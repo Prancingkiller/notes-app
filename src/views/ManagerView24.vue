@@ -348,7 +348,7 @@ export default {
 			isLoading.value = true;
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await ManagerMethods.loadEvents(month, year, selectedDay.value.toLocaleDateString());
+			let result = await ManagerMethods.loadEvents(month, year, selectedDay.value.toLocaleDateString().replaceAll("/","-"));
 			daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
 			isLoading.value = false;
