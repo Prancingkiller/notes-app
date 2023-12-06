@@ -530,7 +530,7 @@ export default {
 		function selectEvent(event) {
 			daysTest.value.forEach(element => {
 				if (element.eventId == event.eventId) {
-					console.log(element)
+					console.log(event)
 				}
 			})
 		}
