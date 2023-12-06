@@ -355,7 +355,7 @@ export default {
 		async function loadEvents() {
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await MethodsDev.loadEvents(month, year, selectedDay.value.toLocaleDateString());
+			let result = await MethodsDev.loadEvents(month, year, selectedDay.value.toLocaleDateString().replace("/","-"));
 			daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
 		}
