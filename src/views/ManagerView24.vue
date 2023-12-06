@@ -481,6 +481,12 @@ export default {
 		}
 		async function changeEvent(e) {
 			if (e.originalEvent && e.originalEvent.start) {
+				daysTest.value.forEach(element => {
+						if (element.eventId == e.event.eventId) {
+							let a = new Date(element.end);
+							e.originalEvent.end = a.toISOString();
+						}
+					})
 				console.log("Funzione change - Controllo se posso modificare " + e.event.eventId);
 				console.log(e)
 				if (await checkShift(e)) {
