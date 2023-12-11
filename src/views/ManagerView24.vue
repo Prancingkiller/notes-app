@@ -508,6 +508,7 @@ export default {
 		}
 		async function onEventCreate(e, deleteEventFunction) {
 			console.log("LANCIO CREATE EVENT")
+			console.log(e);
 			deleteEventFunction.value = deleteEventFunction;
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
@@ -522,7 +523,7 @@ export default {
 		}
 		function deleteEvent(e) {
 			daysTest.value.forEach((element, i) => {
-				if (element._eid == e._eid) {
+				if (element.eventId == e.eventId) {
 					daysTest.value.splice(i, 1);
 				}
 			})
