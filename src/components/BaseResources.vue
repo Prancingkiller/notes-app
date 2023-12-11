@@ -20,7 +20,8 @@
                                 <div><p>Email</p><input  type="text" v-model="worker.email"></div>
                                 <div><p>Password</p><input  type="text" v-model="worker.password"></div>
                             </div>
-                            <p>Soddisfazione: {{ worker.fairness }}</p><button @click="togglePanel(ii)">Pannello
+                            <p>Soddisfazione: {{ worker.fairness }}</p>
+                            <button @click="togglePanel(ii)" class="btn btn-primary">Pannello
                                 orari</button>
                             <div v-if="worker.showDays">
                                 <div>Lun
