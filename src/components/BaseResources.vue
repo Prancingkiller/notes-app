@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="notesForm" style="display:flex;flex-direction: row;flex-wrap: wrap;">
                         <div class="border" style="width:350px;" v-for="(worker, ii) in data.workers" :key="worker.id">
-                            <p v-if="worker.id != 0">{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
+                            <p v-if="worker.id != 0">{{ worker.name }}<span> - Ore: <input type="range" min="0" max="40" v-model="worker.hours"></span></p>
                             <div v-else>
                                 Nome<input  type="text" v-model="worker.name">
                                 Email<input  type="text" v-model="worker.password">
