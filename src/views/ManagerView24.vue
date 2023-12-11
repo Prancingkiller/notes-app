@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		</div>
-		<div v-for="(worker, ii) in workers" :key="worker.id">
+		<!-- <div v-for="(worker, ii) in workers" :key="worker.id">
 			<p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
 			<button @click="togglePanel(ii)">Pannello orari</button>
 			<div v-if="worker.showDays">
@@ -129,7 +129,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<p>Minimum time between shifts (in hours): <span><input type="number"
 					v-model="configuration.minTimeBetweenShifts"></span></p>
 		<p>Allow double turns (even if not strictly needed):<input type="checkbox"
