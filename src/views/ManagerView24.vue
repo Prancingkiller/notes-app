@@ -582,6 +582,7 @@ export default {
 			}
 			else{
 				console.log("NO CHANGE FUNCTION")
+				console.log(e);
 			}
 			renderSplits();
 		}
