@@ -170,7 +170,7 @@ export default {
                 }
             }
             for (const day in data.value.rules.openings) {
-                data.value.rules.openings.forEach(element=>{
+                data.value.rules.openings[day].forEach(element=>{
                     element.id = 0;
                     element.start = element.apertura;
                     element.finish = element.chiusura;
