@@ -16,9 +16,9 @@
                         <div class="border" style="width:350px;" v-for="(worker, ii) in data.workers" :key="worker.id">
                             <p v-if="worker.id != 0">{{ worker.name }}<span> - Ore: <input type="range" min="0" max="40" v-model="worker.hours"></span></p>
                             <div v-else>
-                                Nome<input  type="text" v-model="worker.name">
-                                Email<input  type="text" v-model="worker.password">
-                                Password<input  type="text" v-model="worker.email">
+                                <div><p>Nome</p><input  type="text" v-model="worker.name"></div>
+                                <div><p>Email</p><input  type="text" v-model="worker.email"></div>
+                                <div><p>Password</p><input  type="text" v-model="worker.password"></div>
                             </div>
                             <p>Soddisfazione: {{ worker.fairness }}</p><button @click="togglePanel(ii)">Pannello
                                 orari</button>
