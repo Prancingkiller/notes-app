@@ -528,7 +528,7 @@ export default {
 					daysTest.value.splice(i, 1);
 				}
 			})
-			console.log(e)
+			renderSplits();
 		}
 		async function changeEvent(e) {
 			console.log("LANCIO CHANGE EVENT")
