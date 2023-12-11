@@ -1,11 +1,10 @@
 <template>
 	<loading :active="isLoading" :can-cancel="true" :on-cancel="onCancel" :is-full-page="fullPage"></loading>
-	<button class="btn btn-primary" :disabled="tempEvents.length > 1 || activeView !='day'" @click="makeShift">Genera Turni</button>
+	<button class="btn btn-primary" :disabled="tempEvents.length > 1 || activeView != 'day'" @click="makeShift">Genera
+		Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
-	<vue-cal 
-	class=""
-	:selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
+	<vue-cal class="" :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
 		:special-hours="highlights" :min-split-width=70 locale="it" :active-view="activeView" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
@@ -24,6 +23,65 @@
 		<input type="checkbox" v-model="days" value="Ven">
 		<input type="checkbox" v-model="days" value="Sab">
 		<input type="checkbox" v-model="days" value="Dom">
+		<div class="notesForm" style="display:flex;flex-direction: row;flex-wrap: wrap;">
+			<div class="border p-3" style="width:350px;" v-for="(worker, ii) in workers" :key="worker.id">
+				<p>{{ worker.name }}<span> - Ore: {{ worker.hours }} <input type="range" min="0"
+							max="40" v-model="worker.hours"></span></p>
+				<button @click="togglePanel(ii)" class="btn btn-primary">Pannello
+					orari</button>
+				<div v-if="worker.showDays">
+					<div>Lun
+						<div v-for="(slot, i) in worker.SlotDays.Lun" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Lun')">Add</button>
+					</div>
+					<div>Mar
+						<div v-for="(slot, i) in worker.SlotDays.Mar" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Mar')">Add</button>
+					</div>
+					<div>Mer
+						<div v-for="(slot, i) in worker.SlotDays.Mer" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Mer')">Add</button>
+					</div>
+					<div>Gio
+						<div v-for="(slot, i) in worker.SlotDays.Gio" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Gio')">Add</button>
+					</div>
+					<div>Ven
+						<div v-for="(slot, i) in worker.SlotDays.Ven" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Ven')">Add</button>
+					</div>
+					<div>Sab
+						<div v-for="(slot, i) in worker.SlotDays.Sab" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Sab')">Add</button>
+					</div>
+					<div>Dom
+						<div v-for="(slot, i) in worker.SlotDays.Dom" :key="i">
+							<input type="time" v-model="slot.start">
+							<input type="time" v-model="slot.finish">
+						</div>
+						<button @click="addSlotDay(ii, 'Dom')">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div v-for="(worker, ii) in workers" :key="worker.id">
 			<p>{{ worker.name }}<span> - Ore: <input type="number" v-model="worker.hours"></span></p>
 			<button @click="togglePanel(ii)">Pannello orari</button>
@@ -348,7 +406,7 @@ export default {
 			isLoading.value = true;
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
-			let result = await ManagerMethods.loadEvents(month, year, selectedDay.value.toLocaleDateString().replaceAll("/","-"));
+			let result = await ManagerMethods.loadEvents(month, year, selectedDay.value.toLocaleDateString().replaceAll("/", "-"));
 			daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
 			isLoading.value = false;
@@ -482,11 +540,11 @@ export default {
 		async function changeEvent(e) {
 			if (e.originalEvent && e.originalEvent.start) {
 				daysTest.value.forEach(element => {
-						if (element.eventId == e.event.eventId) {
-							let a = new Date(element.end);
-							e.originalEvent.end = a.toISOString();
-						}
-					})
+					if (element.eventId == e.event.eventId) {
+						let a = new Date(element.end);
+						e.originalEvent.end = a.toISOString();
+					}
+				})
 				console.log("Funzione change - Controllo se posso modificare " + e.event.eventId);
 				console.log(e)
 				if (await checkShift(e)) {
@@ -544,18 +602,27 @@ export default {
 			console.log('User cancelled the loader.');
 			isLoading.value = false;
 		}
+		function addSlotDay(index,day){
+            let obj={
+                id:0,
+                start:"00:00",
+                finish:"00:00"
+            }
+            workers.value[index].SlotDays[day].push(obj);
+        }
 
 		return {
-			shift, workers, days, makeShift, calendarRanges, tempEvents,activeView,
+			shift, workers, days, makeShift, calendarRanges, tempEvents, activeView,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
 			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,
 			baseDrag, onEventDragStart, onEventCreate, deleteEvent, changeEvent, selectEvent,
-			onCancel, isLoading, fullPage
+			onCancel, isLoading, fullPage,
+			addSlotDay
 		}
 	},
 	components: {
-		VueCal,Loading
+		VueCal, Loading
 	}
 }
 </script>
@@ -635,10 +702,11 @@ export default {
 	color: white;
 	border: 2px solid black;
 }
-.vuecal__cell-date{
-	height:45px;
+
+.vuecal__cell-date {
+	height: 45px;
 }
+
 .vuecal__cell--has-events {
-    background-color: #00800036;
-}
-</style>
+	background-color: #00800036;
+}</style>
