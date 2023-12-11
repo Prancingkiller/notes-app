@@ -583,10 +583,12 @@ export default {
 			else if(e.originalEvent){
 				console.log("CHANGE FUNCTION")
 				console.log(e);
+				deleteEvent(e);
 			}
 			else{
 				console.log("NO CHANGE FUNCTION")
 				console.log(e);
+				deleteEvent(e);
 			}
 			renderSplits();
 		}
