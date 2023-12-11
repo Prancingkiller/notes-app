@@ -580,6 +580,10 @@ export default {
 					})
 				}
 			}
+			else if(e.originalEvent){
+				console.log("CHANGE FUNCTION")
+				console.log(e);
+			}
 			else{
 				console.log("NO CHANGE FUNCTION")
 				console.log(e);
