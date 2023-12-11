@@ -1,5 +1,10 @@
 <template>
 	<loading :active="isLoading" :can-cancel="true" :on-cancel="onCancel" :is-full-page="fullPage"></loading>
+	<div class="external-event" v-for="(item, i) in baseDrag" :key="i" draggable="true"
+		@dragstart="onEventDragStart($event, item)">
+		<button>Crea Turno Base (trascina)</button>
+		<!-- ({{ item.duration ? `${item.duration} min` : 'no duration' }}) -->
+	</div>
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1 || activeView != 'day'" @click="makeShift">Genera
 		Turni</button>
 	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
