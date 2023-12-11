@@ -543,8 +543,8 @@ export default {
 			console.log(e)
 		}
 		async function changeEvent(e) {
-			console.log("CHANGE FUNCTION")
 			if (e.originalEvent && e.originalEvent.start) {
+				console.log("CHANGE FUNCTION")
 				daysTest.value.forEach(element => {
 					if (element.eventId == e.event.eventId) {
 						let a = new Date(element.end);
@@ -579,6 +579,9 @@ export default {
 						}
 					})
 				}
+			}
+			else{
+				console.log("NO CHANGE FUNCTION")
 			}
 			renderSplits();
 		}
