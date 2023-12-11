@@ -581,6 +581,8 @@ export default {
 			renderSplits();
 		}
 		async function checkShift(e) {
+			console.log("LANCIO CHECK")
+			console.log(e)
 			isLoading.value = true;
 			let doable = false;
 			let data = {
