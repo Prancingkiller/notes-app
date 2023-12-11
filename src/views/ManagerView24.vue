@@ -500,21 +500,6 @@ export default {
 		}, { deep: true })
 		function average(arr: number[]) { return (arr.reduce((p, c) => p + c, 0) / arr.length) }
 
-		function updateEvent(e: any) {
-			let doable = true;
-			console.log("Controllo se posso modificare " + e);
-			if (doable) {
-				daysTest.value.forEach(element => {
-					if (element.eventId == e.event.eventId) {
-						element.start = e.event.start.getFullYear() + "-" + String(e.event.start.getMonth() + 1).padStart(2, "0") + "-" + e.event.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.start.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-						element.end = e.event.end.getFullYear() + "-" + String(e.event.end.getMonth() + 1).padStart(2, "0") + "-" + e.event.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.event.end.getHours()).padStart(2, "0") + ":" + String(e.event.start.getMinutes()).padStart(2, "0")
-						element.split = e.event.split;
-						element.workerId = e.event.split.toString();
-					}
-				})
-				renderSplits();
-			}
-		}
 		function onEventDragStart(e, draggable) {
 			// Passing the event's data to Vue Cal through the DataTransfer object.
 			e.dataTransfer.setData('event', JSON.stringify(draggable))
@@ -522,6 +507,7 @@ export default {
 			console.log("DRAGGING")
 		}
 		async function onEventCreate(e, deleteEventFunction) {
+			console.log("LANCIO CREATE EVENT")
 			deleteEventFunction.value = deleteEventFunction;
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
@@ -543,6 +529,7 @@ export default {
 			console.log(e)
 		}
 		async function changeEvent(e) {
+			console.log("LANCIO CHANGE EVENT")
 			if (e.originalEvent && e.originalEvent.start) {
 				console.log("CHANGE FUNCTION")
 				daysTest.value.forEach(element => {
@@ -631,7 +618,7 @@ export default {
 			shift, workers, days, makeShift, calendarRanges, tempEvents, activeView,
 			tableResult, options, showOptions, daysTest, configuration,
 			disabledViews, selectedDay, updateSelectedDay, selectedMonday, splits, highlights,
-			debugShift, postShift, updateEvent, togglePanel, toggleAll, loadEvents, efficency,
+			debugShift, postShift, togglePanel, toggleAll, loadEvents, efficency,
 			baseDrag, onEventDragStart, onEventCreate, deleteEvent, changeEvent, selectEvent,
 			onCancel, isLoading, fullPage,
 			addSlotDay
