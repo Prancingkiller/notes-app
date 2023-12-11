@@ -142,7 +142,8 @@ export default {
         }
 
         function addResource() {
-            console.log(data.value.rules.value);
+            console.log(data.value.rules);
+            console.log(data.value.rules.openings);
             // let obj = {
             //     showDays: false,
             //     name: "",
