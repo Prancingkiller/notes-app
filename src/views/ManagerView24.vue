@@ -525,7 +525,7 @@ export default {
 			deleteEventFunction.value = deleteEventFunction;
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
-				e.eventId = daysTest.value[daysTest.value.length - 1].eventId + 1;
+				e.eventId = 0;
 				daysTest.value.push(e)
 				renderSplits();
 				return e;
@@ -543,6 +543,7 @@ export default {
 			console.log(e)
 		}
 		async function changeEvent(e) {
+			console.log("CHANGE FUNCTION")
 			if (e.originalEvent && e.originalEvent.start) {
 				daysTest.value.forEach(element => {
 					if (element.eventId == e.event.eventId) {
