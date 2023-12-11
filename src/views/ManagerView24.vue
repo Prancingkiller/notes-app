@@ -7,7 +7,7 @@
 	</div>
 	<button class="btn btn-primary" :disabled="tempEvents.length > 1 || activeView != 'day'" @click="makeShift">Genera
 		Turni</button>
-	<button class="btn btn-warning" :disabled="tempEvents.length == 0" @click="debugShift">Debug Turni</button>
+	<button class="btn btn-warning" :disabled="daysTest.length == 0" @click="debugShift">Debug Turni</button>
 	<button class="btn btn-success" :disabled="tempEvents.length == 0" @click="postShift">Pubblica Turni</button>
 	<vue-cal class="" :selected-date="selectedDay" :timeFrom="calendarRanges.apertura" :timeTo="calendarRanges.chiusura"
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
