@@ -511,6 +511,8 @@ export default {
 			console.log(e);
 			deleteEventFunction.value = deleteEventFunction;
 			await new Promise(r => setTimeout(r, 1000));
+			e.start = e.start.getFullYear() + "-" + String(e.start.getMonth() + 1).padStart(2, "0") + "-" + e.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.start.getHours()).padStart(2, "0") + ":" + String(e.start.getMinutes()).padStart(2, "0")
+			e.end = e.end.getFullYear() + "-" + String(e.end.getMonth() + 1).padStart(2, "0") + "-" + e.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.end.getHours()).padStart(2, "0") + ":" + String(e.end.getMinutes()).padStart(2, "0")				
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
 				e.eventId = 0;
