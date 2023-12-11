@@ -142,33 +142,34 @@ export default {
         }
 
         function addResource() {
-            let obj = {
-                showDays: false,
-                name: "",
-                password:"",
-                email:"",
-                label: "",
-                id: 0,
-                user_group: data.value.user_group,
-                hours: 0,
-                SlotDays: {
-                    Lun: [{start: data.value.rules.openings.Lun.apertura,finish: data.value.rules.openings.Lun.chiusura,}
-                    ],
-                    Mar: [{start: data.value.rules.openings.Mar.apertura,finish: data.value.rules.openings.Mar.chiusura,}
-                    ],
-                    Mer: [{start: data.value.rules.openings.Mer.apertura,finish: data.value.rules.openings.Mer.chiusura,}
-                    ],
-                    Gio: [{start: data.value.rules.openings.Gio.apertura,finish: data.value.rules.openings.Gio.chiusura,}
-                    ],
-                    Ven: [{start: data.value.rules.openings.Ven.apertura,finish: data.value.rules.openings.Ven.chiusura,}
-                    ],
-                    Sab: [{start: data.value.rules.openings.Sab.apertura,finish: data.value.rules.openings.Sab.chiusura,}
-                    ],
-                    Dom: [{start: data.value.rules.openings.Dom.apertura,finish: data.value.rules.openings.Dom.chiusura,}
-                    ]
-                }
-            }
-            data.value.workers.push(obj);
+            console.log(data.value);
+            // let obj = {
+            //     showDays: false,
+            //     name: "",
+            //     password:"",
+            //     email:"",
+            //     label: "",
+            //     id: 0,
+            //     user_group: data.value.user_group,
+            //     hours: 0,
+            //     SlotDays: {
+            //         Lun: [{start: data.value.rules.openings.Lun.apertura,finish: data.value.rules.openings.Lun.chiusura,}
+            //         ],
+            //         Mar: [{start: data.value.rules.openings.Mar.apertura,finish: data.value.rules.openings.Mar.chiusura,}
+            //         ],
+            //         Mer: [{start: data.value.rules.openings.Mer.apertura,finish: data.value.rules.openings.Mer.chiusura,}
+            //         ],
+            //         Gio: [{start: data.value.rules.openings.Gio.apertura,finish: data.value.rules.openings.Gio.chiusura,}
+            //         ],
+            //         Ven: [{start: data.value.rules.openings.Ven.apertura,finish: data.value.rules.openings.Ven.chiusura,}
+            //         ],
+            //         Sab: [{start: data.value.rules.openings.Sab.apertura,finish: data.value.rules.openings.Sab.chiusura,}
+            //         ],
+            //         Dom: [{start: data.value.rules.openings.Dom.apertura,finish: data.value.rules.openings.Dom.chiusura,}
+            //         ]
+            //     }
+            // }
+            // data.value.workers.push(obj);
         }
         async function updateWorkers(){
             let obj = data.value;
