@@ -507,6 +507,7 @@ export default {
 			console.log("DRAGGING")
 		}
 		async function onEventCreate(e, deleteEventFunction) {
+			isLoading.value = true;
 			console.log("LANCIO CREATE EVENT")
 			console.log(e);
 			deleteEventFunction.value = deleteEventFunction;
