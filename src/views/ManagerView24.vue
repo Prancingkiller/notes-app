@@ -13,7 +13,7 @@
 		:disableViews="disabledViews" :events="daysTest" :sticky-split-labels=true :snapToTime=15 :split-days="workers"
 		:special-hours="highlights" :min-split-width=70 locale="it" :active-view="activeView" editable-events
 		@view-change="updateSelectedDay($event)" @ready="loadEvents()" :on-event-create="onEventCreate"
-		:drag-to-create-event="false" @event-change="changeEvent($event)" @event-delete="deleteEvent($event)"
+		:drag-to-create-event="false"  @event-delete="deleteEvent($event)"
 		:on-event-dblclick="selectEvent">
 
 	</vue-cal>
