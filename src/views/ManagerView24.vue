@@ -522,7 +522,7 @@ export default {
 		}
 		function deleteEvent(e) {
 			daysTest.value.forEach((element, i) => {
-				if (element.eventId == e.eventId) {
+				if (element._eid == e._eid) {
 					daysTest.value.splice(i, 1);
 				}
 			})
