@@ -514,8 +514,8 @@ export default {
 			if (await checkShift(e)) {
 				e.class = "temporary-event"
 				e.eventId = 0;
-				e.start = e.event.start.getFullYear() + "-" + String(e.start.getMonth() + 1).padStart(2, "0") + "-" + e.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.start.getHours()).padStart(2, "0") + ":" + String(e.start.getMinutes()).padStart(2, "0")
-				e.end = e.event.end.getFullYear() + "-" + String(e.end.getMonth() + 1).padStart(2, "0") + "-" + e.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.end.getHours()).padStart(2, "0") + ":" + String(e.end.getMinutes()).padStart(2, "0")		
+				e.start = e.start.getFullYear() + "-" + String(e.start.getMonth() + 1).padStart(2, "0") + "-" + e.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.start.getHours()).padStart(2, "0") + ":" + String(e.start.getMinutes()).padStart(2, "0")
+				e.end = e.end.getFullYear() + "-" + String(e.end.getMonth() + 1).padStart(2, "0") + "-" + e.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.end.getHours()).padStart(2, "0") + ":" + String(e.end.getMinutes()).padStart(2, "0")		
 				daysTest.value.push(e)
 				renderSplits();
 				return e;
