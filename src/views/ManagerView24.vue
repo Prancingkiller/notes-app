@@ -185,7 +185,10 @@ export default {
 		const days = ref(["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]);
 
 		const tableResult = ref<HTMLDivElement>();
-		const daysTest = ref<eventPHP[]>([]);
+		const existingEvents = ref<eventPHP[]>([]);
+		const daysTest = computed(()=>{
+			return existingEvents.value.concat(tempEvents.value)
+		})
 		const tempEvents = ref<eventPHP[]>([]);
 		var data;
 		const disabledViews = ["years", "year", "week"];
@@ -299,7 +302,7 @@ export default {
 				}
 			}
 			tempEvents.value.sort((a, b) => (a.start > b.start) ? 1 : -1);
-			daysTest.value = daysTest.value.concat(tempEvents.value);
+			// daysTest.value = daysTest.value.concat(tempEvents.value);
 			renderSplits();
 			isLoading.value = false;
 		}
@@ -412,7 +415,8 @@ export default {
 			let month = selectedMonth.value;
 			let year = selectedYear.value;
 			let result = await ManagerMethods.loadEvents(month, year, selectedDay.value.toLocaleDateString().replaceAll("/", "-"));
-			daysTest.value = result.concat(tempEvents.value);
+			existingEvents.value = result;
+			// daysTest.value = result.concat(tempEvents.value);
 			renderSplits();
 			isLoading.value = false;
 		}
@@ -517,7 +521,7 @@ export default {
 				e.eventId = e._eid;
 				e.start = e.start.getFullYear() + "-" + String(e.start.getMonth() + 1).padStart(2, "0") + "-" + e.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.start.getHours()).padStart(2, "0") + ":" + String(e.start.getMinutes()).padStart(2, "0")
 				e.end = e.end.getFullYear() + "-" + String(e.end.getMonth() + 1).padStart(2, "0") + "-" + e.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.end.getHours()).padStart(2, "0") + ":" + String(e.end.getMinutes()).padStart(2, "0")		
-				daysTest.value.push(e)
+				tempEvents.value.push(e)
 				renderSplits();
 				return e;
 			}
