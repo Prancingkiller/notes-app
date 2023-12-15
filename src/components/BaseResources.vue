@@ -216,7 +216,7 @@ export default {
         }
 
         function deleteGroup(){
-            console.log(props.user_group)
+            console.log(props.userGroup)
         }
 
         return {
