@@ -13,6 +13,7 @@
         <div class="m-4" v-if="content == 'resourcesOptions'"
             style="display:flex;flex-direction: row;justify-content: center;">
             <BaseResources v-for="(set, i) in resources" :key="i" :userGroup="set" @submit="getResources()"></BaseResources>
+            <BaseButtonModal :modalRef="addGroup" label="Add New Group"></BaseButtonModal>
         </div>
     </div>
 </template>
@@ -82,6 +83,10 @@ export default {
         function setContent(data) {
             content.value = data;
             console.log(options.value);
+        }
+
+        function addGroup(){
+            groups.value.push({})
         }
 
         return {
