@@ -26,11 +26,10 @@ import { ref, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
 export default {
     props: {
-        modalRef:String,
         label:String
     },
     setup(props){
-        const modalRef = ref(props.modalRef);
+        const modalRef = ref(null);
         var modal = Modal;
         onMounted(() => {
             modal = new Modal(modalRef.value);

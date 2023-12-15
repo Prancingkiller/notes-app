@@ -22,6 +22,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseOptions from '../components/BaseOptions.vue'
 import BaseResources from '../components/BaseResources.vue'
+import BaseButtonModal from '../components/BaseButtonModal.vue'
 import directorMethods from '../api/resources/directorMethods.js'
 import ManagerMethods from "@/api/resources/ManagerMethods";
 export default {
@@ -94,7 +95,7 @@ export default {
         }
     },
     components: {
-        BaseOptions, BaseResources
+        BaseOptions, BaseResources,BaseButtonModal
     },
 }
 </script>
