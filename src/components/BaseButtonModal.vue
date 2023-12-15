@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="notesForm" style="display:flex;flex-direction: row;flex-wrap: wrap;">
-                        
+                        <input type="text" v-model="data.name">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -31,6 +31,7 @@ export default {
     setup(props){
         const modalRef = ref(null);
         var modal = Modal;
+        const data = ref({id:0,name:""});
         onMounted(() => {
             modal = new Modal(modalRef.value);
         })
@@ -44,7 +45,7 @@ export default {
 
         }
         return{
-            modalRef,openModal,closeModal,addGroup
+            modalRef,openModal,closeModal,addGroup,data
         }
     }
 }
