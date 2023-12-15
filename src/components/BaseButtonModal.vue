@@ -1,7 +1,7 @@
 <template>
     <button class="btn btn-primary" @click="openModal">{{ label }}</button>
 
-    <div class="modal fade" tabindex="-1" aria-hidden="true" :ref="modalRef">
+    <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
