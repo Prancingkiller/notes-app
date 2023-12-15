@@ -30,8 +30,8 @@
 		<input type="checkbox" v-model="days" value="Dom">
 		<div class="notesForm" style="display:flex;flex-direction: row;flex-wrap: wrap;">
 			<div class="border p-3" style="width:350px;" v-for="(worker, ii) in workers" :key="worker.id">
-				<p>{{ worker.name }}<span> - Ore: {{ worker.hours }} <input type="range" min="0"
-							max="40" v-model="worker.hours"></span></p>
+				<p>{{ worker.name }}<span> - Ore: {{ worker.hours }} <input type="range" min="0" max="40"
+							v-model="worker.hours"></span></p>
 				<button @click="togglePanel(ii)" class="btn btn-primary">Pannello
 					orari</button>
 				<div v-if="worker.showDays">
@@ -186,7 +186,7 @@ export default {
 
 		const tableResult = ref<HTMLDivElement>();
 		const existingEvents = ref<eventPHP[]>([]);
-		const daysTest = computed(()=>{
+		const daysTest = computed(() => {
 			return existingEvents.value.concat(tempEvents.value)
 		})
 		const tempEvents = ref<eventPHP[]>([]);
@@ -520,7 +520,7 @@ export default {
 				e.class = "temporary-event"
 				e.eventId = e._eid;
 				e.start = e.start.getFullYear() + "-" + String(e.start.getMonth() + 1).padStart(2, "0") + "-" + e.start.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.start.getHours()).padStart(2, "0") + ":" + String(e.start.getMinutes()).padStart(2, "0")
-				e.end = e.end.getFullYear() + "-" + String(e.end.getMonth() + 1).padStart(2, "0") + "-" + e.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.end.getHours()).padStart(2, "0") + ":" + String(e.end.getMinutes()).padStart(2, "0")		
+				e.end = e.end.getFullYear() + "-" + String(e.end.getMonth() + 1).padStart(2, "0") + "-" + e.end.toLocaleDateString("it-IT", { day: "2-digit", }) + " " + String(e.end.getHours()).padStart(2, "0") + ":" + String(e.end.getMinutes()).padStart(2, "0")
 				tempEvents.value.push(e)
 				renderSplits();
 				return e;
@@ -530,11 +530,20 @@ export default {
 			}
 		}
 		function deleteEvent(e) {
-			daysTest.value.forEach((element, i) => {
-				if (element.eventId == e.eventId) {
-					daysTest.value.splice(i, 1);
-				}
-			})
+			if (e.class = "temporary-event") {
+				tempEvents.value.forEach((element, i) => {
+					if (element.eventId == e.eventId) {
+						tempEvents.value.splice(i, 1);
+					}
+				})
+			}
+			if (e.class = "future-event") {
+				existingEvents.value.forEach((element, i) => {
+					if (element.eventId == e.eventId) {
+						existingEvents.value.splice(i, 1);
+					}
+				})
+			}
 			renderSplits();
 		}
 		async function changeEvent(e) {
@@ -616,14 +625,14 @@ export default {
 			console.log('User cancelled the loader.');
 			isLoading.value = false;
 		}
-		function addSlotDay(index,day){
-            let obj={
-                id:0,
-                start:"00:00",
-                finish:"00:00"
-            }
-            workers.value[index].SlotDays[day].push(obj);
-        }
+		function addSlotDay(index, day) {
+			let obj = {
+				id: 0,
+				start: "00:00",
+				finish: "00:00"
+			}
+			workers.value[index].SlotDays[day].push(obj);
+		}
 
 		return {
 			shift, workers, days, makeShift, calendarRanges, tempEvents, activeView,
@@ -723,4 +732,5 @@ export default {
 
 .vuecal__cell--has-events {
 	background-color: #00800036;
-}</style>
+}
+</style>
