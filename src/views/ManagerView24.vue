@@ -530,14 +530,14 @@ export default {
 			}
 		}
 		function deleteEvent(e) {
-			if (e.class = "temporary-event") {
+			if (e.class == "temporary-event") {
 				tempEvents.value.forEach((element, i) => {
 					if (element.eventId == e.eventId) {
 						tempEvents.value.splice(i, 1);
 					}
 				})
 			}
-			if (e.class = "future-event") {
+			if (e.class == "future-event") {
 				existingEvents.value.forEach((element, i) => {
 					if (element.eventId == e.eventId) {
 						existingEvents.value.splice(i, 1);
