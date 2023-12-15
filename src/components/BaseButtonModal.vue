@@ -1,8 +1,8 @@
 <template>
-    <button class="btn btn-primary" @click="openModal">{{ label }}</button>
+    <button class="btn btn-secondary" @click="openModal">{{ label }}</button>
 
     <div class="modal fade" tabindex="-1" aria-hidden="true" ref="modalRef">
-        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Aggiungi Gruppo: {{ data.name }}</h5>
@@ -42,7 +42,7 @@ export default {
             modal.hide()
         }
         function addGroup(){
-            console.log(data)
+            console.log(data.value)
         }
         return{
             modalRef,openModal,closeModal,addGroup,data
