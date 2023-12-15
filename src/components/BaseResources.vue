@@ -80,6 +80,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-danger" @click="deleteGroup()">Elimina Gruppo</button>
                     <button type="button" class="btn btn-success" @click="updateWorkers()">Salva</button>
                 </div>
             </div>
@@ -214,8 +215,13 @@ export default {
             data.value.workers[index].SlotDays[day].push(obj);
         }
 
+        function deleteGroup(){
+            console.log(props.user_group)
+        }
+
         return {
-            data, openModal, closeModal, modalRef, togglePanel, addResource,updateWorkers,deleteWorker,addSlotDay
+            data, openModal, closeModal, modalRef, togglePanel, addResource,updateWorkers,deleteWorker,addSlotDay,
+            deleteGroup
         }
     }
 }
