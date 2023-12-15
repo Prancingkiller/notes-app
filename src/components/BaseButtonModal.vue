@@ -42,7 +42,7 @@ export default {
             modal.hide()
         }
         function addGroup(){
-
+            console.log(data)
         }
         return{
             modalRef,openModal,closeModal,addGroup,data
