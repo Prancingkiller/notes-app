@@ -35,7 +35,7 @@ import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm.vue"
 import { useRouter } from 'vue-router'
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 interface SyncManager {
 	getTags(): Promise<string[]>;
@@ -99,7 +99,7 @@ export default {
 
 		const app = initializeApp(firebaseConfig);
 		const messaging = getMessaging(app);
-		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s'})
+		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 			.then((currentToken) => {
 				if (currentToken) {
 					console.log("token received: " + currentToken)
@@ -123,12 +123,17 @@ export default {
 				}
 			})
 		}
-			return {
-				toEdit,
-			}
-		}
+		onMessage(messaging, (payload) => {
+			console.log('Message received. ', payload);
+			// ...
+		});
 
+		return {
+			toEdit,
+		}
 	}
+
+}
 </script>
 <style>
 #app {
