@@ -5,7 +5,7 @@ const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
 import { initializeApp } from "firebase/app";
 import { getMessaging } from "firebase/messaging/sw";
-import { onBackgroundMessage } from "firebase/messaging/sw";
+import { onBackgroundMessage,onMessage } from "firebase/messaging/sw";
 
 const cacheFiles = [
   '/',
@@ -279,15 +279,15 @@ const messaging = getMessaging(app);
 //     notificationOptions);
 // });
 
-// onMessage(messaging, (payload) => {
-//   console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
-//   // Customize notification here
-//   const notificationTitle = 'Foreground Message Title';
-//   const notificationOptions = {
-//     body: 'Foreground Message body.',
-//     icon: '/firebase-logo.png'
-//   };
+onMessage(messaging, (payload) => {
+  console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
+  // Customize notification here
+  const notificationTitle = 'Foreground Message Title';
+  const notificationOptions = {
+    body: 'Foreground Message body.',
+    icon: '/firebase-logo.png'
+  };
 
-//   self.registration.showNotification(notificationTitle,
-//     notificationOptions);
-// });
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
+});
