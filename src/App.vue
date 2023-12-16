@@ -128,7 +128,7 @@ export default {
 			// Customize notification here
 			const notificationTitle = 'Background Message Title';
 			const notificationOptions = {
-				body: 'Background Message body.',
+				body: payload.notification?.body,
 				icon: '/firebase-logo.png'
 			};
 			const notification = new Notification(notificationTitle, notificationOptions);
