@@ -54,7 +54,7 @@ export default {
 		LoginForm
 	},
 	setup() {
-		const tokenFirebase = ref("");
+		const tokenFirebase = ref("loading");
 		const router = useRouter();
 		function registerSyncP() {
 			if (localStorage.getItem("logged")) {
