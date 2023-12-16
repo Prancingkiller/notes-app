@@ -129,8 +129,7 @@ self.addEventListener('sync', function (event) {
 });
 
 self.addEventListener('message', function (data) {
-  console.log(event.data)
-  if (data.type = "notification") {
+  if (data.type == "notification") {
     showNotification(data.payload)
   }
 })
