@@ -99,6 +99,7 @@ export default {
 
 		const app = initializeApp(firebaseConfig);
 		const messaging = getMessaging(app);
+		requestPermission();
 		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 			.then((currentToken) => {
 				if (currentToken) {
