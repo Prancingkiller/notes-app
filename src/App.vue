@@ -136,12 +136,15 @@ export default {
 					type:"notification",
 					payload:payload
 				}
-				payload.notification?.title
 				navigator.serviceWorker.controller?.postMessage(data)
 			}
 		});
 		function testNotification(){
-			const notification = new Notification("TEST", {body:"test"});
+			let data = {
+					type:"notification",
+					payload:{title:"title",body:"body"}
+				}
+				navigator.serviceWorker.controller?.postMessage(data)
 		}
 		return {
 			toEdit, requestPermission, tokenFirebase,testNotification
