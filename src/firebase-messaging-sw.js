@@ -252,7 +252,18 @@ function removeData(syncData) {
   }
 }
 
-const messaging = getMessaging();
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDVOywAzrenIOUt44Y3saRYTiZpvBQdTmQ",
+  authDomain: "shifts-app-8ce5c.firebaseapp.com",
+  projectId: "shifts-app-8ce5c",
+  storageBucket: "shifts-app-8ce5c.appspot.com",
+  messagingSenderId: "796717147654",
+  appId: "1:796717147654:web:fb39f7a21c3e1733ff8587",
+  measurementId: "G-BH5ZWGE1EB"
+};
+
+const messaging = getMessaging(firebaseConfig);
 onBackgroundMessage(messaging, (payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
