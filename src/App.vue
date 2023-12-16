@@ -126,6 +126,7 @@ export default {
 		async function requestPermission() {
 			console.log('Requesting permission...');
 			let permission = await Notification.requestPermission()
+			alert(permission);
 			if (permission === 'granted') {
 				console.log('Notification permission granted.');
 			}
