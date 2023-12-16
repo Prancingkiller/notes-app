@@ -5,7 +5,7 @@ const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
 import { initializeApp } from "firebase/app";
 import { getMessaging } from "firebase/messaging/sw";
-import { onBackgroundMessage,onMessage } from "firebase/messaging/sw";
+import { onBackgroundMessage } from "firebase/messaging/sw";
 // import { onMessage } from "firebase/messaging";
 
 const cacheFiles = [
@@ -128,8 +128,11 @@ self.addEventListener('sync', function (event) {
   }
 });
 
-self.addEventListener('message', function (event) {
+self.addEventListener('message', function (data) {
   console.log(event.data)
+  if (data.type = "notification") {
+    showNotification(data.payload)
+  }
 })
 
 async function backgroundSync() {
@@ -268,30 +271,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 onBackgroundMessage(messaging, (payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // Customize notification here
+  showNotification(payload);
+});
+
+
+
+function showNotification(payload) {
   let notificationTitle = "Title";
   if (payload.notification?.title) {
     notificationTitle = payload.notification?.title
   }
-  const notificationOptions = {
+  let notificationOptions = {
     body: payload.notification?.body,
     icon: '/firebase-logo.png'
   };
-
   self.registration.showNotification(notificationTitle,
     notificationOptions);
-});
-
-onMessage(messaging, (payload) => {
-    let notificationTitle = "Title";
-    if (payload.notification?.title) {
-      notificationTitle = payload.notification?.title
-    }
-    let notificationOptions = {
-      body: payload.notification?.body,
-      icon: '/firebase-logo.png'
-    };
-    self.registration.showNotification(notificationTitle,
-      notificationOptions);
-});
+}
