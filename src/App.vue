@@ -33,7 +33,7 @@
 	<button @click="requestPermission">Notification</button>
 </template>
 <script lang="ts">
-import { ref,onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import LoginForm from "./components/LoginForm.vue"
 import { useRouter } from 'vue-router'
 import { initializeApp } from "firebase/app";
@@ -136,21 +136,23 @@ export default {
 			// })
 		}
 		onMessage(messaging, (payload) => {
-			console.log('[firebase-messaging-sw.js] Received background message ', payload);
-			// Customize notification here
-			let notificationTitle = "Title";
-			if (payload.notification?.title) {
-				notificationTitle = payload.notification?.title
+			if (Notification.permission === "granted") {
+				console.log('[firebase-messaging-sw.js] Received background message ', payload);
+				// Customize notification here
+				let notificationTitle = "Title";
+				if (payload.notification?.title) {
+					notificationTitle = payload.notification?.title
+				}
+				let notificationOptions = {
+					body: payload.notification?.body,
+					icon: '/firebase-logo.png'
+				};
+				const notification = new Notification(notificationTitle, notificationOptions);
 			}
-			let notificationOptions = {
-				body: payload.notification?.body,
-				icon: '/firebase-logo.png'
-			};
-			const notification = new Notification(notificationTitle, notificationOptions);
 		});
 
 		return {
-			toEdit, requestPermission,tokenFirebase
+			toEdit, requestPermission, tokenFirebase
 		}
 	}
 
