@@ -30,7 +30,7 @@
 	</nav>
 	<router-view />
 	{{ tokenFirebase }}
-	<button @click="testNotification">Notification</button>
+	<button @click="askNotificationPermission">Notification</button>
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
@@ -121,16 +121,27 @@ export default {
 				});
 		}
 		else if (Notification.permission == "default") {
-			requestPermission();
+			askNotificationPermission();
 		}
-		async function requestPermission() {
-			console.log('Requesting permission...');
-			let permission = await Notification.requestPermission()
-			alert(permission);
-			if (permission === 'granted') {
-				console.log('Notification permission granted.');
-			}
-		}
+		function askNotificationPermission() {
+    return new Promise((resolve, reject) => {
+      if (checkNotificationPromise()) {
+        Notification.requestPermission().then(resolve)
+      } else {
+        Notification.requestPermission(resolve)
+      }
+    })
+  }
+
+  function checkNotificationPromise() {
+    try {
+      Notification.requestPermission().then();
+    } catch(e) {
+      return false;
+    }
+
+    return true;
+  }
 		onMessage(messaging, (payload) => {
 			if (Notification.permission === "granted") {
 				let data = {
@@ -148,7 +159,7 @@ export default {
 				navigator.serviceWorker.controller?.postMessage(data)
 		}
 		return {
-			toEdit, requestPermission, tokenFirebase,testNotification
+			toEdit, askNotificationPermission, tokenFirebase,testNotification
 		}
 	}
 
