@@ -100,39 +100,43 @@ export default {
 
 		const app = initializeApp(firebaseConfig);
 		const messaging = getMessaging(app);
-		if(Notification.permission=="granted"){
+		if (Notification.permission == "granted") {
 			getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
-			.then((currentToken) => {
-				if (currentToken) {
-					console.log("token received: " + currentToken)
-					// Send the token to your server and update the UI if necessary
+				.then((currentToken) => {
+					if (currentToken) {
+						console.log("token received: " + currentToken)
+						// Send the token to your server and update the UI if necessary
+						// ...
+					} else {
+						// Show permission request UI
+						console.log('No registration token available. Request permission to generate one.');
+						// ...
+					}
+				}).catch((err) => {
+					console.log('An error occurred while retrieving token. ', err);
 					// ...
-				} else {
-					// Show permission request UI
-					console.log('No registration token available. Request permission to generate one.');
-					// ...
-				}
-			}).catch((err) => {
-				console.log('An error occurred while retrieving token. ', err);
-				// ...
-			});
+				});
 		}
-		else if(Notification.permission=="default"){
+		else if (Notification.permission == "default") {
 			requestPermission();
 		}
-		function requestPermission() {
+		async function requestPermission() {
 			console.log('Requesting permission...');
-			Notification.requestPermission().then((permission) => {
-				if (permission === 'granted') {
-					console.log('Notification permission granted.');
-				}
-			})
+			let permission = await Notification.requestPermission()
+			if (permission === 'granted') {
+				console.log('Notification permission granted.');
+			}
+			// Notification.requestPermission().then((permission) => {
+			// 	if (permission === 'granted') {
+			// 		console.log('Notification permission granted.');
+			// 	}
+			// })
 		}
 		onMessage(messaging, (payload) => {
 			console.log('[firebase-messaging-sw.js] Received background message ', payload);
 			// Customize notification here
 			let notificationTitle = "Title";
-			if(payload.notification?.title){
+			if (payload.notification?.title) {
 				notificationTitle = payload.notification?.title
 			}
 			let notificationOptions = {
@@ -143,7 +147,7 @@ export default {
 		});
 
 		return {
-			toEdit,requestPermission
+			toEdit, requestPermission
 		}
 	}
 
