@@ -102,11 +102,12 @@ export default {
 		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 			.then((currentToken) => {
 				if (currentToken) {
-					console.log("token received: "+currentToken)
+					console.log("token received: " + currentToken)
 					// Send the token to your server and update the UI if necessary
 					// ...
 				} else {
 					// Show permission request UI
+					requestPermission()
 					console.log('No registration token available. Request permission to generate one.');
 					// ...
 				}
@@ -114,13 +115,19 @@ export default {
 				console.log('An error occurred while retrieving token. ', err);
 				// ...
 			});
-
-		return {
-			toEdit,
+		function requestPermission() {
+			console.log('Requesting permission...');
+			Notification.requestPermission().then((permission) => {
+				if (permission === 'granted') {
+					console.log('Notification permission granted.');
+				}
+			})
+			return {
+				toEdit,
+			}
 		}
-	}
 
-}
+	}
 </script>
 <style>
 #app {
