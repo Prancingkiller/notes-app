@@ -21,7 +21,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 import { ref, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
 export default {

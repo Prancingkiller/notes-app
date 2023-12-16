@@ -34,7 +34,8 @@
 import { onMounted } from 'vue'
 import LoginForm from "./components/LoginForm.vue"
 import { useRouter } from 'vue-router'
-
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken } from "firebase/messaging";
 
 interface SyncManager {
 	getTags(): Promise<string[]>;
@@ -46,8 +47,8 @@ declare global {
 		readonly sync: SyncManager;
 	}
 }
-	export default{
-	components:{
+export default {
+	components: {
 		LoginForm
 	},
 	setup() {
@@ -77,16 +78,44 @@ declare global {
 			} else {
 				console.error('Background sync not supported');
 				navigator.serviceWorker.ready.then(() => {
-						//navigator.serviceWorker.controller.postMessage("pushOffline")
+					//navigator.serviceWorker.controller.postMessage("pushOffline")
 				})
 			}
 		}
 		onMounted(handlerSync);
-		function toEdit(){
-			router.push({ name: 'profile'});
+		function toEdit() {
+			router.push({ name: 'profile' });
 		}
 
-		return{
+		const firebaseConfig = {
+			apiKey: "AIzaSyDVOywAzrenIOUt44Y3saRYTiZpvBQdTmQ",
+			authDomain: "shifts-app-8ce5c.firebaseapp.com",
+			projectId: "shifts-app-8ce5c",
+			storageBucket: "shifts-app-8ce5c.appspot.com",
+			messagingSenderId: "796717147654",
+			appId: "1:796717147654:web:fb39f7a21c3e1733ff8587",
+			measurementId: "G-BH5ZWGE1EB"
+		};
+
+		const app = initializeApp(firebaseConfig);
+		const messaging = getMessaging(app);
+		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
+			.then((currentToken) => {
+				if (currentToken) {
+					console.log("token received: "+currentToken)
+					// Send the token to your server and update the UI if necessary
+					// ...
+				} else {
+					// Show permission request UI
+					console.log('No registration token available. Request permission to generate one.');
+					// ...
+				}
+			}).catch((err) => {
+				console.log('An error occurred while retrieving token. ', err);
+				// ...
+			});
+
+		return {
 			toEdit,
 		}
 	}
