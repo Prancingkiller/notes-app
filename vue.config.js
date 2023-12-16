@@ -5,8 +5,7 @@ module.exports = {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
-      swSrc: '/src/sw.js',
-      swDest: '/src/firebase-messaging-sw.js',
+      swSrc: '/src/firebase-messaging-sw.js',
       // ...other Workbox options...
     },
   },
