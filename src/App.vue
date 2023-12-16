@@ -130,19 +130,19 @@ export default {
 				console.log('Notification permission granted.');
 			}
 		}
-		onMessage(messaging, (payload) => {
-			if (Notification.permission === "granted") {
-				let notificationTitle = "Title";
-				if (payload.notification?.title) {
-					notificationTitle = payload.notification?.title
-				}
-				let notificationOptions = {
-					body: payload.notification?.body,
-					icon: '/firebase-logo.png'
-				};
-				const notification = new Notification(notificationTitle, notificationOptions);
-			}
-		});
+		// onMessage(messaging, (payload) => {
+		// 	if (Notification.permission === "granted") {
+		// 		let notificationTitle = "Title";
+		// 		if (payload.notification?.title) {
+		// 			notificationTitle = payload.notification?.title
+		// 		}
+		// 		let notificationOptions = {
+		// 			body: payload.notification?.body,
+		// 			icon: '/firebase-logo.png'
+		// 		};
+		// 		const notification = new Notification(notificationTitle, notificationOptions);
+		// 	}
+		// });
 		function testNotification(){
 			const notification = new Notification("TEST", {body:"test"});
 		}

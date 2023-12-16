@@ -282,3 +282,16 @@ onBackgroundMessage(messaging, (payload) => {
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
+onMessage(messaging, (payload) => {
+    let notificationTitle = "Title";
+    if (payload.notification?.title) {
+      notificationTitle = payload.notification?.title
+    }
+    let notificationOptions = {
+      body: payload.notification?.body,
+      icon: '/firebase-logo.png'
+    };
+    self.registration.showNotification(notificationTitle,
+      notificationOptions);
+});
