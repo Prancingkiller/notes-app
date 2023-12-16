@@ -122,6 +122,7 @@ export default {
 					console.log('Notification permission granted.');
 				}
 			})
+		}
 			return {
 				toEdit,
 			}
