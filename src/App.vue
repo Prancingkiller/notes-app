@@ -99,7 +99,7 @@ export default {
 
 		const app = initializeApp(firebaseConfig);
 		const messaging = getMessaging(app);
-		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
+		getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1'})
 			.then((currentToken) => {
 				if (currentToken) {
 					console.log("token received: " + currentToken)
