@@ -3,6 +3,7 @@ self.__WB_MANIFEST
 const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
+import { initializeApp } from "firebase/app";
 import { getMessaging } from "firebase/messaging/sw";
 import { onBackgroundMessage } from "firebase/messaging/sw";
 
@@ -263,7 +264,8 @@ const firebaseConfig = {
   measurementId: "G-BH5ZWGE1EB"
 };
 
-const messaging = getMessaging(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 onBackgroundMessage(messaging, (payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
