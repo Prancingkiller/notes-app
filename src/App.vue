@@ -30,7 +30,7 @@
 	</nav>
 	<router-view />
 	{{ tokenFirebase }}
-	<button @click="requestPermission">Notification</button>
+	<button @click="testNotification">Notification</button>
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
@@ -143,9 +143,11 @@ export default {
 				const notification = new Notification(notificationTitle, notificationOptions);
 			}
 		});
-
+		function testNotification(){
+			const notification = new Notification("TEST", {body:"test"});
+		}
 		return {
-			toEdit, requestPermission, tokenFirebase
+			toEdit, requestPermission, tokenFirebase,testNotification
 		}
 	}
 
