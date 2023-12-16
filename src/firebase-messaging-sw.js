@@ -3,6 +3,9 @@ self.__WB_MANIFEST
 const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
+import { getMessaging } from "firebase/messaging/sw";
+import { onBackgroundMessage } from "firebase/messaging/sw";
+
 const cacheFiles = [
   '/',
   'index.html'
@@ -248,3 +251,17 @@ function removeData(syncData) {
     console.log("Backend sync request responded (delete)");
   }
 }
+
+const messaging = getMessaging();
+onBackgroundMessage(messaging, (payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: '/firebase-logo.png'
+  };
+
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
+});
