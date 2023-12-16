@@ -29,10 +29,11 @@
 		</div>
 	</nav>
 	<router-view />
+	{{ tokenFirebase }}
 	<button @click="requestPermission">Notification</button>
 </template>
 <script lang="ts">
-import { onMounted } from 'vue'
+import { ref,onMounted } from 'vue'
 import LoginForm from "./components/LoginForm.vue"
 import { useRouter } from 'vue-router'
 import { initializeApp } from "firebase/app";
@@ -53,6 +54,7 @@ export default {
 		LoginForm
 	},
 	setup() {
+		const tokenFirebase = ref("");
 		const router = useRouter();
 		function registerSyncP() {
 			if (localStorage.getItem("logged")) {
@@ -104,6 +106,7 @@ export default {
 			getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 				.then((currentToken) => {
 					if (currentToken) {
+						tokenFirebase.value = currentToken
 						console.log("token received: " + currentToken)
 						// Send the token to your server and update the UI if necessary
 						// ...
@@ -147,7 +150,7 @@ export default {
 		});
 
 		return {
-			toEdit, requestPermission
+			toEdit, requestPermission,tokenFirebase
 		}
 	}
 
