@@ -276,6 +276,6 @@ onBackgroundMessage(messaging, (payload) => {
     icon: '/firebase-logo.png'
   };
 
-  self.registration.hideNotification();
-
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
 });
