@@ -4,9 +4,9 @@ const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
 import { initializeApp } from "firebase/app";
-import { getMessaging,onMessage } from "firebase/messaging/sw";
+import { getMessaging } from "firebase/messaging/sw";
 import { onBackgroundMessage } from "firebase/messaging/sw";
-
+import { onMessage } from "firebase/messaging";
 const cacheFiles = [
   '/',
   'index.html'
