@@ -136,6 +136,7 @@ export default {
 					type:"notification",
 					payload:payload
 				}
+				payload.notification?.title
 				navigator.serviceWorker.controller?.postMessage(data)
 			}
 		});
