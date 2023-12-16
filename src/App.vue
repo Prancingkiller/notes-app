@@ -129,16 +129,9 @@ export default {
 			if (permission === 'granted') {
 				console.log('Notification permission granted.');
 			}
-			// Notification.requestPermission().then((permission) => {
-			// 	if (permission === 'granted') {
-			// 		console.log('Notification permission granted.');
-			// 	}
-			// })
 		}
 		onMessage(messaging, (payload) => {
 			if (Notification.permission === "granted") {
-				console.log('[firebase-messaging-sw.js] Received background message ', payload);
-				// Customize notification here
 				let notificationTitle = "Title";
 				if (payload.notification?.title) {
 					notificationTitle = payload.notification?.title
