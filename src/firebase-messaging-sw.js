@@ -266,28 +266,28 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
-onBackgroundMessage(messaging, (payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // Customize notification here
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
-  };
+// onBackgroundMessage(messaging, (payload) => {
+//   console.log('[firebase-messaging-sw.js] Received background message ', payload);
+//   // Customize notification here
+//   const notificationTitle = 'Background Message Title';
+//   const notificationOptions = {
+//     body: 'Background Message body.',
+//     icon: '/firebase-logo.png'
+//   };
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
-});
+//   self.registration.showNotification(notificationTitle,
+//     notificationOptions);
+// });
 
-onMessage(messaging, (payload) => {
-  console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
-  // Customize notification here
-  const notificationTitle = 'Foreground Message Title';
-  const notificationOptions = {
-    body: 'Foreground Message body.',
-    icon: '/firebase-logo.png'
-  };
+// onMessage(messaging, (payload) => {
+//   console.log('[firebase-messaging-sw.js] Received foreground message ', payload);
+//   // Customize notification here
+//   const notificationTitle = 'Foreground Message Title';
+//   const notificationOptions = {
+//     body: 'Foreground Message body.',
+//     icon: '/firebase-logo.png'
+//   };
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
-});
+//   self.registration.showNotification(notificationTitle,
+//     notificationOptions);
+// });
