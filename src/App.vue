@@ -100,11 +100,10 @@ export default {
 			measurementId: "G-BH5ZWGE1EB"
 		};
 
-		const app = initializeApp(firebaseConfig);
-		const messaging = getMessaging(app);
-
 		async function registerPush() {
 			await navigator.serviceWorker.ready;
+			const app = initializeApp(firebaseConfig);
+			const messaging = getMessaging(app);
 			getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 				.then((currentToken) => {
 					if (currentToken) {
