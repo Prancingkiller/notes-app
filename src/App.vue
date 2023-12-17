@@ -30,7 +30,7 @@
 	</nav>
 	<router-view />
 	<!-- {{ tokenFirebase }} -->
-	<button class="btn-btn-primary" style="position:fixed;left:0px;bottom:0px" @click="enableNotification">Enable Notification</button>
+	<button class="btn btn-primary" style="position:fixed;left:0px;bottom:0px" @click="enableNotification">Enable Notification</button>
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
