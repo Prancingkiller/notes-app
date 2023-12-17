@@ -29,7 +29,7 @@
 		</div>
 	</nav>
 	<router-view />
-	<!-- {{ tokenFirebase }} -->
+	{{ tokenFirebase }}
 	<button class="btn btn-primary" style="position:fixed;left:0px;bottom:0px" @click="enableNotification">Enable Notification</button>
 </template>
 <script lang="ts">
