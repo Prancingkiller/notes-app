@@ -120,6 +120,7 @@ export default {
 					// ...
 				});
 			onMessage(messaging, (payload) => {
+				console.log(payload)
 				if (Notification.permission === "granted") {
 					let data = {
 						type: "notification",
