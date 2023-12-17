@@ -29,8 +29,8 @@
 		</div>
 	</nav>
 	<router-view />
-	<!-- {{ tokenFirebase }}
-	<button @click="askNotificationPermission">Notification</button> -->
+	<!-- {{ tokenFirebase }} -->
+	<button @click="enableNotification">Enable Notification</button>
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
@@ -102,29 +102,25 @@ export default {
 
 		const app = initializeApp(firebaseConfig);
 		const messaging = getMessaging(app);
-		// alert(Notification.permission);
-		navigator.serviceWorker.ready.then(function (reg) {
-			if (Notification.permission == "granted") {
-				getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
-					.then((currentToken) => {
-						if (currentToken) {
-							tokenFirebase.value = currentToken
-							console.log("token received: " + currentToken)
-							// Send the token to your server and update the UI if necessary
-							// ...
-						} else {
-							// Show permission request UI
-							console.log('No registration token available. Request permission to generate one.');
-							// ...
-						}
-					}).catch((err) => {
-						console.log('An error occurred while retrieving token. ', err);
+
+		async function registerPush() {
+			await navigator.serviceWorker.ready;
+			getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
+				.then((currentToken) => {
+					if (currentToken) {
+						tokenFirebase.value = currentToken
+						console.log("token received: " + currentToken)
+						// Send the token to your server and update the UI if necessary
 						// ...
-					});
-			}
-			else if (Notification.permission == "default") {
-				askNotificationPermission();
-			}
+					} else {
+						// Show permission request UI
+						console.log('No registration token available. Request permission to generate one.');
+						// ...
+					}
+				}).catch((err) => {
+					console.log('An error occurred while retrieving token. ', err);
+					// ...
+				});
 			onMessage(messaging, (payload) => {
 				if (Notification.permission === "granted") {
 					let data = {
@@ -134,7 +130,8 @@ export default {
 					navigator.serviceWorker.controller?.postMessage(data)
 				}
 			});
-		})
+		}
+
 		function askNotificationPermission() {
 			return new Promise((resolve, reject) => {
 				if (checkNotificationPromise()) {
@@ -161,8 +158,16 @@ export default {
 			}
 			navigator.serviceWorker.controller?.postMessage(data)
 		}
+		async function enableNotification() {
+			if (Notification.permission != "granted") {
+				await askNotificationPermission();
+			}
+			else {
+
+			}
+		}
 		return {
-			toEdit, askNotificationPermission, tokenFirebase, testNotification
+			toEdit, askNotificationPermission, tokenFirebase, testNotification, enableNotification
 		}
 	}
 
