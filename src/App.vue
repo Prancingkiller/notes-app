@@ -29,9 +29,9 @@
 		</div>
 	</nav>
 	<router-view />
-	{{ tokenFirebase }}
+	<!-- {{ tokenFirebase }}
 	<button class="btn btn-primary" style="position:fixed;left:0px;bottom:0px" @click="enableNotification">Enable
-		Notification</button>
+		Notification</button> -->
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
@@ -111,7 +111,7 @@ export default {
 						console.log("token received: " + currentToken)
 						// Send the token to your server and update the UI if necessary
 
-						const response = await fetch("https://notes-api.it/api/subscribeNot", {
+						await fetch("https://notes-api.it/api/subscribeNot", {
 							mode: 'cors',
 							credentials: 'include',
 							method: 'POST',
