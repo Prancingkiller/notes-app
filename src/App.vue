@@ -30,7 +30,8 @@
 	</nav>
 	<router-view />
 	{{ tokenFirebase }}
-	<button class="btn btn-primary" style="position:fixed;left:0px;bottom:0px" @click="enableNotification">Enable Notification</button>
+	<button class="btn btn-primary" style="position:fixed;left:0px;bottom:0px" @click="enableNotification">Enable
+		Notification</button>
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
@@ -103,13 +104,23 @@ export default {
 		const messaging = getMessaging(app);
 		async function registerPush() {
 			const registration = await navigator.serviceWorker.ready;
-			await getToken(messaging, {serviceWorkerRegistration: registration, vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
-				.then((currentToken) => {
+			await getToken(messaging, { serviceWorkerRegistration: registration, vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
+				.then(async (currentToken) => {
 					if (currentToken) {
 						tokenFirebase.value = currentToken
 						console.log("token received: " + currentToken)
 						// Send the token to your server and update the UI if necessary
-						// ...
+
+						const response = await fetch("https://notes-api.it/api/subscribeNot", {
+							mode: 'cors',
+							credentials: 'include',
+							method: 'POST',
+							headers: {
+								'Trusted': 'yes'
+							},
+							body: JSON.stringify(currentToken)
+						})
+
 					} else {
 						// Show permission request UI
 						console.log('No registration token available. Request permission to generate one.');
@@ -121,15 +132,15 @@ export default {
 				});
 		}
 		onMessage(messaging, (payload) => {
-				console.log(payload)
-				if (Notification.permission === "granted") {
-					let data = {
-						type: "notification",
-						payload: payload
-					}
-					navigator.serviceWorker.controller?.postMessage(data)
+			console.log(payload)
+			if (Notification.permission === "granted") {
+				let data = {
+					type: "notification",
+					payload: payload
 				}
-			});
+				navigator.serviceWorker.controller?.postMessage(data)
+			}
+		});
 		function askNotificationPermission() {
 			return new Promise((resolve, reject) => {
 				if (checkNotificationPromise()) {
@@ -161,7 +172,7 @@ export default {
 				await askNotificationPermission();
 				enableNotification();
 			}
-			else{
+			else {
 				registerPush();
 			}
 		}
