@@ -125,6 +125,15 @@ export default {
 			else if (Notification.permission == "default") {
 				askNotificationPermission();
 			}
+			onMessage(messaging, (payload) => {
+				if (Notification.permission === "granted") {
+					let data = {
+						type: "notification",
+						payload: payload
+					}
+					navigator.serviceWorker.controller?.postMessage(data)
+				}
+			});
 		})
 		function askNotificationPermission() {
 			return new Promise((resolve, reject) => {
@@ -145,15 +154,6 @@ export default {
 
 			return true;
 		}
-		onMessage(messaging, (payload) => {
-			if (Notification.permission === "granted") {
-				let data = {
-					type: "notification",
-					payload: payload
-				}
-				navigator.serviceWorker.controller?.postMessage(data)
-			}
-		});
 		function testNotification() {
 			let data = {
 				type: "notification",
