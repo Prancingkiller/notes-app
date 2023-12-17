@@ -104,7 +104,7 @@ export default {
 			await navigator.serviceWorker.ready;
 			const app = initializeApp(firebaseConfig);
 			const messaging = getMessaging(app);
-			getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
+			await getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 				.then((currentToken) => {
 					if (currentToken) {
 						tokenFirebase.value = currentToken
