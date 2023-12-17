@@ -103,6 +103,7 @@ export default {
 		const app = initializeApp(firebaseConfig);
 		const messaging = getMessaging(app);
 		if (Notification.permission == "granted") {
+			alert("a");
 			getToken(messaging, { vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 				.then((currentToken) => {
 					if (currentToken) {
@@ -124,42 +125,42 @@ export default {
 			askNotificationPermission();
 		}
 		function askNotificationPermission() {
-    return new Promise((resolve, reject) => {
-      if (checkNotificationPromise()) {
-        Notification.requestPermission().then(resolve)
-      } else {
-        Notification.requestPermission(resolve)
-      }
-    })
-  }
+			return new Promise((resolve, reject) => {
+				if (checkNotificationPromise()) {
+					Notification.requestPermission().then(resolve)
+				} else {
+					Notification.requestPermission(resolve)
+				}
+			})
+		}
 
-  function checkNotificationPromise() {
-    try {
-      Notification.requestPermission().then();
-    } catch(e) {
-      return false;
-    }
+		function checkNotificationPromise() {
+			try {
+				Notification.requestPermission().then();
+			} catch (e) {
+				return false;
+			}
 
-    return true;
-  }
+			return true;
+		}
 		onMessage(messaging, (payload) => {
 			if (Notification.permission === "granted") {
 				let data = {
-					type:"notification",
-					payload:payload
+					type: "notification",
+					payload: payload
 				}
 				navigator.serviceWorker.controller?.postMessage(data)
 			}
 		});
-		function testNotification(){
+		function testNotification() {
 			let data = {
-					type:"notification",
-					payload:{title:"title",body:"body"}
-				}
-				navigator.serviceWorker.controller?.postMessage(data)
+				type: "notification",
+				payload: { title: "title", body: "body" }
+			}
+			navigator.serviceWorker.controller?.postMessage(data)
 		}
 		return {
-			toEdit, askNotificationPermission, tokenFirebase,testNotification
+			toEdit, askNotificationPermission, tokenFirebase, testNotification
 		}
 	}
 
