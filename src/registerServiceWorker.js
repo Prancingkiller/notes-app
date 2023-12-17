@@ -4,7 +4,7 @@ import { register } from 'register-service-worker'
 
 if (process.env.NODE_ENV === 'production') {
   register(`firebase-messaging-sw.js`, {
-    scope:"/",
+    scope:"./",
     ready () {
       console.log(
         'App is being served from cache by a service worker.\n' +
