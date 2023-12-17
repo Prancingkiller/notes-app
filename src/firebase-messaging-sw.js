@@ -283,7 +283,8 @@ function showNotification(payload) {
   }
   let notificationOptions = {
     body: payload.notification?.body,
-    icon: '/firebase-logo.png'
+    icon: '/firebase-logo.png',
+    tag:payload.notification?.tag,
   };
   self.registration.showNotification(notificationTitle,
     notificationOptions);
