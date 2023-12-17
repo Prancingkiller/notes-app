@@ -119,7 +119,8 @@ export default {
 					console.log('An error occurred while retrieving token. ', err);
 					// ...
 				});
-			onMessage(messaging, (payload) => {
+		}
+		onMessage(messaging, (payload) => {
 				console.log(payload)
 				if (Notification.permission === "granted") {
 					let data = {
@@ -129,8 +130,6 @@ export default {
 					navigator.serviceWorker.controller?.postMessage(data)
 				}
 			});
-		}
-
 		function askNotificationPermission() {
 			return new Promise((resolve, reject) => {
 				if (checkNotificationPromise()) {
