@@ -9,4 +9,6 @@ module.exports = {
       // ...other Workbox options...
     },
   },
+
+  publicPath: '/app'
 }
