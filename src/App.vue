@@ -161,9 +161,10 @@ export default {
 		async function enableNotification() {
 			if (Notification.permission != "granted") {
 				await askNotificationPermission();
+				enableNotification();
 			}
-			else {
-
+			else{
+				registerPush();
 			}
 		}
 		return {
