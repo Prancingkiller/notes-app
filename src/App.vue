@@ -29,8 +29,8 @@
 		</div>
 	</nav>
 	<router-view />
-	{{ tokenFirebase }}
-	<button @click="askNotificationPermission">Notification</button>
+	<!-- {{ tokenFirebase }}
+	<button @click="askNotificationPermission">Notification</button> -->
 </template>
 <script lang="ts">
 import { ref, onMounted } from 'vue'
