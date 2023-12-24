@@ -50,6 +50,9 @@ import BaseInput from "../components/BaseInput.vue"
 import WorkersMethods from "@/api/resources/WorkersMethods"
 import ManagerMethods from "@/api/resources/ManagerMethods";
 import { ref, onMounted } from "vue"
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+
 export default {
     components: {
         BaseInput
