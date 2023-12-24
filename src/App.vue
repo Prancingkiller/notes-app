@@ -107,7 +107,8 @@ export default {
 			await getToken(messaging, { serviceWorkerRegistration: registration, vapidKey: 'BEwUVtwADSiAOmfEIFnn_za5k_XhnFSj6bXmtQjPHoRi7DFMA46dcRE6dHxNeL47TUQ6aBBbtlmCZvmXJELF-1s' })
 				.then(async (currentToken) => {
 					if (currentToken) {
-						tokenFirebase.value = currentToken
+						tokenFirebase.value = currentToken;
+						localStorage.setItem("tokenFirebase",currentToken);
 						console.log("token received: " + currentToken)
 						// Send the token to your server and update the UI if necessary
 
