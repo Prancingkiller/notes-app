@@ -112,6 +112,8 @@ export default {
             appId: "1:796717147654:web:fb39f7a21c3e1733ff8587",
             measurementId: "G-BH5ZWGE1EB"
         };
+        const app = initializeApp(firebaseConfig);
+		const messaging = getMessaging(app);
         const tokenFirebase = ref(localStorage.getItem("tokenFirebase"));
         async function registerPush() {
             const registration = await navigator.serviceWorker.ready;
