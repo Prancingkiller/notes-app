@@ -271,7 +271,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 onBackgroundMessage(messaging, (payload) => {
-  // showNotification(payload);
+  showNotification(payload);
 });
 
 
