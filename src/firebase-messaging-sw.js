@@ -284,7 +284,8 @@ function showNotification(payload) {
   let notificationOptions = {
     body: payload.notification?.body,
     icon: '/firebase-logo.png',
-    tag:payload.data.tag
+    tag:payload.data.tag,
+    vibrate:payload.data.vibrate
   };
   self.registration.showNotification(notificationTitle,
     notificationOptions);
