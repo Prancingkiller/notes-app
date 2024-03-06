@@ -1,8 +1,4 @@
 # notes pwa
-
-I'm implementing on this app an automatic work shifts generator, you can test it if you go on the "managers room"->Crew planner, if you click on the button "make shift" on top, the api will be called and the returned planning will be posted on the calendar under, you can change the options below, each worker has a set of hours he will be available to work each day and an amount of hours that will be assigned. Other options about the planning are listed below, the tables at the bottom specify how many workers will need to be assigned to each "slot" on each day, the generator will use all this data to generate the shifts.
-
-Old description:
 It's a simple multi-user PWA for storing notes and create events on a calendar, based on groups of users.<br>
 Vue3 PWA with indexeddb for background sync, <br>
 it's hosted here https://whimsical-belekoy-5565ca.netlify.app <br>
@@ -16,6 +12,8 @@ Same thing for the calendar page, you can create events and it should work same 
 The notes page connects to a websocket in order to receive in real time updates, for now the websocket only triggers the fetch call.
 
 Every time you login you receive an http only cookie with a new key that will allow the requests to be verified from the api, you also receive a cookie with a code that will be linked with the user and only the device with that code can login with that user, logging out will un-link the user from that code.
+
+I'm implementing on this app an automatic work shifts generator, you can test it if you go on the "managers room"->Crew planner, if you click on the button "make shift" on top, the api will be called and the returned planning will be posted on the calendar under, you can change the options below, each worker has a set of hours he will be available to work each day and an amount of hours that will be assigned. Other options about the planning are listed below, the tables at the bottom specify how many workers will need to be assigned to each "slot" on each day, the generator will use all this data to generate the shifts.
 
 ## Project setup
 ```
